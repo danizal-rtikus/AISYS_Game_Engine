@@ -6,7 +6,7 @@ export interface StreamOptions {
   model: ModelOption;
   systemPrompt: string;
   history: Array<{ role: 'user' | 'assistant' | 'system'; content: string }>;
-  onChunk: (delta: string, fullText: string) => void;
+  onChunk: (delta: string, fullText: string, isThinking?: boolean) => void;
   onError: (err: Error) => void;
   onFinish: (fullText: string) => void;
   signal?: AbortSignal;
@@ -40,16 +40,12 @@ export async function sendDeepSeekMessage({
     rawUrl = `${rawUrl}/chat/completions`;
   }
 
-  // Prefer reverse proxy in local dev and on Vercel deployment to eliminate browser CORS
-  const isVercelOrLocal =
-    typeof window !== 'undefined' &&
-    (window.location.hostname === 'localhost' ||
-      window.location.hostname === '127.0.0.1' ||
-      window.location.hostname.endsWith('vercel.app') ||
-      window.location.protocol === 'https:');
-
+  // In production (HTTPS / Vercel), call ai.sumopod.com directly because it allows CORS natively (Access-Control-Allow-Origin: *)
+  // Direct HTTPS connection avoids Vercel Edge 15-30s proxy timeouts on long code generation streams!
+  // In local dev, use /api-proxy with fallback to direct rawUrl.
+  const isHttps = typeof window !== 'undefined' && window.location.protocol === 'https:';
   const proxyUrl = rawUrl.replace(/^https?:\/\/[^/]+/, '/api-proxy');
-  const targetUrl = isVercelOrLocal ? proxyUrl : rawUrl;
+  const targetUrl = isHttps ? rawUrl : proxyUrl;
 
   console.info(`[AISYS Stream] Menghubungi model '${model}' via ${targetUrl}...`);
 
@@ -88,8 +84,8 @@ export async function sendDeepSeekMessage({
     } catch (primaryFetchErr: any) {
       if (primaryFetchErr.name === 'AbortError') throw primaryFetchErr;
 
-      // Fallback: if proxy failed or direct failed, attempt alternative
-      const fallbackUrl = targetUrl === proxyUrl ? rawUrl : proxyUrl;
+      // Fallback: if direct failed, try proxy; if proxy failed, try direct
+      const fallbackUrl = targetUrl === rawUrl ? proxyUrl : rawUrl;
       console.warn(`[AISYS Stream] Target utama gagal, mencoba fallback: ${fallbackUrl}`, primaryFetchErr);
 
       response = await fetch(fallbackUrl, {
@@ -131,11 +127,11 @@ export async function sendDeepSeekMessage({
         throw new Error(json.error.message || JSON.stringify(json.error));
       }
       const choice = json.choices?.[0];
-      const text = choice?.message?.content || choice?.message?.reasoning_content || choice?.text || '';
+      const text = choice?.message?.content || choice?.text || '';
       if (!text.trim()) {
         throw new Error('Mesin AI merespon dengan data kosong. Periksa kuota token atau ganti model.');
       }
-      onChunk(text, text);
+      onChunk(text, text, false);
       onFinish(text);
       return;
     }
@@ -192,12 +188,13 @@ export async function sendDeepSeekMessage({
           const delta = choice?.delta?.content ?? choice?.delta?.text ?? choice?.text ?? '';
           const reasoning = choice?.delta?.reasoning_content ?? '';
 
-          // Prefer content; if only reasoning is returned initially, accumulate it
-          const token = delta || (fullText === '' ? reasoning : '');
-
-          if (token) {
-            fullText += token;
-            onChunk(token, fullText);
+          // 1. If delta (actual content) is arriving: accumulate it and clear thinking indicator
+          if (delta) {
+            fullText += delta;
+            onChunk(delta, fullText, false);
+          } else if (reasoning && !fullText) {
+            // 2. If reasoning/thinking tokens are arriving before content: notify UI without polluting fullText
+            onChunk('', '', true);
           }
         } catch (e: any) {
           if (e.message && !e.message.includes('JSON')) {
@@ -220,7 +217,7 @@ export async function sendDeepSeekMessage({
             const delta = choice?.delta?.content ?? choice?.delta?.text ?? choice?.text ?? '';
             if (delta) {
               fullText += delta;
-              onChunk(delta, fullText);
+              onChunk(delta, fullText, false);
             }
           } catch (e: any) {
             if (e.message && !e.message.includes('JSON')) throw e;
@@ -229,10 +226,10 @@ export async function sendDeepSeekMessage({
       }
     }
 
-    // If stream ended with 0 tokens, fail explicitly so user gets clear actionable feedback
+    // If stream ended with 0 content tokens, fail explicitly so user gets clear actionable feedback
     if (!fullText.trim()) {
       throw new Error(
-        'Mesin AI tidak mengembalikan respon teks. Kemungkinan kuota akun SumoPod habis, token dibatasi, atau model sedang sibuk. Silakan coba pilih model lain (deepseek-flash) atau periksa dashboard SumoPod.'
+        'Mesin AI tidak mengembalikan kode/teks respon. Silakan coba kirim ulang atau beralih ke model deepseek-flash di menu Settings.'
       );
     }
 

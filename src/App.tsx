@@ -265,7 +265,7 @@ export function App() {
       systemPrompt: settings.systemPrompt,
       history: apiHistory,
       signal: abortControllerRef.current.signal,
-      onChunk: (_delta, fullText) => {
+      onChunk: (_delta, fullText, isThinking) => {
         const parsed = extractHtmlFromStream(fullText);
 
         setMessages((prev) =>
@@ -277,6 +277,7 @@ export function App() {
                 extractedCode: parsed.code || undefined,
                 codeLineCount: parsed.lineCount,
                 isStreaming: true,
+                isThinking: Boolean(isThinking && !fullText),
               };
             }
             return m;

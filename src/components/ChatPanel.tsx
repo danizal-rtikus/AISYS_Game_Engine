@@ -155,6 +155,11 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                   <div>
                     {msg.content ? (
                       <MarkdownRenderer content={msg.content} />
+                    ) : msg.isThinking ? (
+                      <span className="inline-flex items-center gap-1.5 text-[#F6821F] font-mono text-[11px] animate-pulse">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#F6821F] animate-ping" />
+                        Sedang merancang arsitektur & mekanisme game...
+                      </span>
                     ) : msg.isStreaming && !msg.extractedCode ? (
                       <span className="inline-flex items-center gap-1.5 text-slate-400 font-mono text-[11px]">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#F6821F] animate-ping" />

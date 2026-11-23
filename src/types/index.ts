@@ -12,6 +12,7 @@ export interface Message {
   extractedCode?: string;
   codeLineCount?: number;
   isStreaming?: boolean;
+  isThinking?: boolean;
 }
 
 export interface GameVersion {
