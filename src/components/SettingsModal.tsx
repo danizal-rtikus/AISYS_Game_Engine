@@ -117,29 +117,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
-                onClick={() => setModel('deepseek-v4-flash')}
-                className={`p-3 rounded-md border text-left transition-colors flex flex-col justify-between ${
-                  model === 'deepseek-v4-flash'
-                    ? 'border-[#F6821F] bg-[#F6821F]/5 ring-1 ring-[#F6821F]'
-                    : 'border-slate-200 dark:border-[#282B33] bg-white dark:bg-[#0B0C0E] hover:border-slate-300 dark:hover:border-slate-700'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono font-semibold text-xs">deepseek-v4-flash</span>
-                    {model === 'deepseek-v4-flash' && <Check className="w-3.5 h-3.5 text-[#F6821F]" />}
-                  </div>
-                  <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1">
-                    Direkomendasikan • Kepatuhan instruksi optimal untuk game kompleks.
-                  </p>
-                </div>
-                <div className="mt-2 text-[10px] font-mono text-[#F6821F]">
-                  1.0M Context • Default
-                </div>
-              </button>
-
-              <button
-                type="button"
                 onClick={() => setModel('deepseek-flash')}
                 className={`p-3 rounded-md border text-left transition-colors flex flex-col justify-between ${
                   model === 'deepseek-flash'
@@ -153,11 +130,34 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     {model === 'deepseek-flash' && <Check className="w-3.5 h-3.5 text-[#F6821F]" />}
                   </div>
                   <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1">
-                    Alternatif cepat • Latensi sangat rendah untuk eksperimen ringan.
+                    Direkomendasikan • Generasi kode instan, stabil, tanpa jeda penalaran.
+                  </p>
+                </div>
+                <div className="mt-2 text-[10px] font-mono text-[#F6821F]">
+                  1.0M Context • Default Cepat
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setModel('deepseek-v4-flash')}
+                className={`p-3 rounded-md border text-left transition-colors flex flex-col justify-between ${
+                  model === 'deepseek-v4-flash'
+                    ? 'border-[#F6821F] bg-[#F6821F]/5 ring-1 ring-[#F6821F]'
+                    : 'border-slate-200 dark:border-[#282B33] bg-white dark:bg-[#0B0C0E] hover:border-slate-300 dark:hover:border-slate-700'
+                }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono font-semibold text-xs">deepseek-v4-flash</span>
+                    {model === 'deepseek-v4-flash' && <Check className="w-3.5 h-3.5 text-[#F6821F]" />}
+                  </div>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1">
+                    Penalaran mendalam • Analisis arsitektur & fisika matematis.
                   </p>
                 </div>
                 <div className="mt-2 text-[10px] font-mono text-slate-400">
-                  1.0M Context • Cadangan
+                  1.0M Context • Reasoning
                 </div>
               </button>
             </div>

@@ -12,17 +12,9 @@ export interface StreamOptions {
   signal?: AbortSignal;
 }
 
-export async function sendDeepSeekMessage({
-  apiKey,
-  baseUrl,
-  model,
-  systemPrompt,
-  history,
-  onChunk,
-  onError,
-  onFinish,
-  signal,
-}: StreamOptions): Promise<void> {
+export async function sendDeepSeekMessage(options: StreamOptions): Promise<void> {
+  const { apiKey, baseUrl, model, systemPrompt, history, onChunk, onError, onFinish, signal } = options;
+
   if (!apiKey || apiKey.trim() === '') {
     onError(new Error('API Key belum diisi. Silakan masukkan API Key di menu Settings (kanan atas).'));
     return;
@@ -65,7 +57,7 @@ export async function sendDeepSeekMessage({
     messages: messages,
     stream: true,
     temperature: 0.7,
-    max_tokens: 8192,
+    max_tokens: 16384,
   };
 
   try {
@@ -127,7 +119,11 @@ export async function sendDeepSeekMessage({
         throw new Error(json.error.message || JSON.stringify(json.error));
       }
       const choice = json.choices?.[0];
-      const text = choice?.message?.content || choice?.text || '';
+      const text =
+        choice?.message?.content ||
+        choice?.message?.reasoning_content ||
+        choice?.text ||
+        '';
       if (!text.trim()) {
         throw new Error('Mesin AI merespon dengan data kosong. Periksa kuota token atau ganti model.');
       }
@@ -143,6 +139,7 @@ export async function sendDeepSeekMessage({
     const reader = response.body.getReader();
     const decoder = new TextDecoder('utf-8');
     let fullText = '';
+    let accumulatedReasoning = '';
     let buffer = '';
 
     while (true) {
@@ -185,16 +182,30 @@ export async function sendDeepSeekMessage({
           }
 
           const choice = parsed.choices?.[0];
-          const delta = choice?.delta?.content ?? choice?.delta?.text ?? choice?.text ?? '';
-          const reasoning = choice?.delta?.reasoning_content ?? '';
+          // Support all possible delta and message formats
+          const delta =
+            choice?.delta?.content ??
+            choice?.delta?.text ??
+            choice?.message?.content ??
+            choice?.text ??
+            '';
+          const reasoning =
+            choice?.delta?.reasoning_content ??
+            choice?.message?.reasoning_content ??
+            '';
 
-          // 1. If delta (actual content) is arriving: accumulate it and clear thinking indicator
+          // Accumulate reasoning
+          if (reasoning) {
+            accumulatedReasoning += reasoning;
+            if (!fullText) {
+              onChunk('', '', true); // Thinking indicator
+            }
+          }
+
+          // Accumulate actual content
           if (delta) {
             fullText += delta;
             onChunk(delta, fullText, false);
-          } else if (reasoning && !fullText) {
-            // 2. If reasoning/thinking tokens are arriving before content: notify UI without polluting fullText
-            onChunk('', '', true);
           }
         } catch (e: any) {
           if (e.message && !e.message.includes('JSON')) {
@@ -214,7 +225,17 @@ export async function sendDeepSeekMessage({
             const parsed = JSON.parse(dataStr);
             if (parsed.error) throw new Error(parsed.error.message);
             const choice = parsed.choices?.[0];
-            const delta = choice?.delta?.content ?? choice?.delta?.text ?? choice?.text ?? '';
+            const delta =
+              choice?.delta?.content ??
+              choice?.delta?.text ??
+              choice?.message?.content ??
+              choice?.text ??
+              '';
+            const reasoning =
+              choice?.delta?.reasoning_content ??
+              choice?.message?.reasoning_content ??
+              '';
+            if (reasoning) accumulatedReasoning += reasoning;
             if (delta) {
               fullText += delta;
               onChunk(delta, fullText, false);
@@ -226,10 +247,26 @@ export async function sendDeepSeekMessage({
       }
     }
 
-    // If stream ended with 0 content tokens, fail explicitly so user gets clear actionable feedback
+    // Fallback 1: If fullText is empty, but accumulatedReasoning has the code/response, use it!
+    if (!fullText.trim() && accumulatedReasoning.trim()) {
+      console.warn('[AISYS Stream] delta.content kosong, menggunakan isi reasoning_content sebagai respon!');
+      fullText = accumulatedReasoning.trim();
+      onChunk(fullText, fullText, false);
+    }
+
+    // Fallback 2: If deepseek-v4-flash returned completely empty response, auto-retry with deepseek-flash!
+    if (!fullText.trim() && model === 'deepseek-v4-flash') {
+      console.warn('[AISYS Stream] deepseek-v4-flash mengembalikan respons kosong. Mencoba auto-retry dengan deepseek-flash...');
+      return sendDeepSeekMessage({
+        ...options,
+        model: 'deepseek-flash',
+      });
+    }
+
+    // If still empty after all fallbacks, report helpful error
     if (!fullText.trim()) {
       throw new Error(
-        'Mesin AI tidak mengembalikan kode/teks respon. Silakan coba kirim ulang atau beralih ke model deepseek-flash di menu Settings.'
+        'Mesin AI tidak mengembalikan kode/teks respon. Silakan coba beralih ke model deepseek-flash di menu Settings atau kirim ulang.'
       );
     }
 
