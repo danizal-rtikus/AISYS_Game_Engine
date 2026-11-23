@@ -15,6 +15,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   settings,
   onSave,
 }) => {
+  const campusKey = ((import.meta.env.VITE_DEFAULT_API_KEY as string) || '').trim();
+  const hasCampusKey = Boolean(campusKey);
+
   const [apiKey, setApiKey] = useState(settings.apiKey);
   const [baseUrl, setBaseUrl] = useState(settings.baseUrl);
   const [model, setModel] = useState<ModelOption>(settings.model);
@@ -67,7 +70,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           {/* API Key */}
           <div className="space-y-1.5">
             <label className="font-medium text-slate-700 dark:text-slate-300 flex items-center justify-between">
-              <span>SumoPod API Key *</span>
+              <span>SumoPod API Key {hasCampusKey ? '(Opsional)' : '*'}</span>
               <span className="text-[10px] text-slate-400">Disimpan di localStorage</span>
             </label>
             <div className="relative">
@@ -75,9 +78,13 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 type={showKey ? 'text' : 'password'}
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
-                placeholder="sm-..."
+                placeholder={
+                  hasCampusKey
+                    ? 'Kunci Default Kampus aktif (isi untuk kunci sendiri)'
+                    : 'sk-...'
+                }
                 className="w-full px-3 py-2 pr-10 rounded-md border border-slate-200 dark:border-[#282B33] bg-white dark:bg-[#0B0C0E] focus:outline-none focus:ring-1 focus:ring-[#F6821F] font-mono text-xs placeholder:text-slate-400"
-                required
+                required={!hasCampusKey}
               />
               <button
                 type="button"
@@ -87,7 +94,13 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 {showKey ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
               </button>
             </div>
-            {!apiKey && (
+            {hasCampusKey && !apiKey && (
+              <p className="text-[11px] text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 mt-1 font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Kunci Kampus Terpasang • Mahasiswa dapat langsung membuat game tanpa mengisi API Key.</span>
+              </p>
+            )}
+            {!hasCampusKey && !apiKey && (
               <p className="text-[11px] text-amber-600 dark:text-amber-400 flex items-center gap-1 mt-1">
                 <AlertCircle className="w-3 h-3 flex-shrink-0" />
                 Masukkan API Key SumoPod Anda untuk mulai membuat game.

@@ -24,6 +24,7 @@ import {
   clearSessionStorage,
   fetchSharedSkill,
   isAdminAuthenticated,
+  getEffectiveApiKey,
 } from './utils/storage';
 import { extractHtmlFromStream, extractGameTitle } from './utils/htmlExtractor';
 import { sendDeepSeekMessage } from './utils/deepseekStream';
@@ -218,7 +219,8 @@ export function App() {
     const text = textToSend || currentInput;
     if (!text.trim() || isStreaming) return;
 
-    if (!settings.apiKey) {
+    const effectiveApiKey = getEffectiveApiKey(settings.apiKey);
+    if (!effectiveApiKey) {
       setIsSettingsOpen(true);
       return;
     }
@@ -259,7 +261,7 @@ export function App() {
       .filter((m) => m.content.length > 0); // Strictly ensure no empty content reaches API
 
     await sendDeepSeekMessage({
-      apiKey: settings.apiKey,
+      apiKey: effectiveApiKey,
       baseUrl: settings.baseUrl,
       model: settings.model,
       systemPrompt: settings.systemPrompt,
@@ -431,7 +433,7 @@ export function App() {
                 onInputChange={setCurrentInput}
                 onSendMessage={handleSendMessage}
                 onStopStreaming={handleStopStreaming}
-                hasApiKey={Boolean(settings.apiKey)}
+                hasApiKey={Boolean(getEffectiveApiKey(settings.apiKey))}
                 onOpenSettings={() => setIsSettingsOpen(true)}
                 onSelectTab={setActiveTab}
               />

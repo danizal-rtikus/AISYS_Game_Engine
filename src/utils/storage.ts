@@ -6,9 +6,19 @@ const MESSAGES_KEY = 'aisys_messages_v1';
 const VERSIONS_KEY = 'aisys_versions_v1';
 const ADMIN_TOKEN_KEY = 'aisys_admin_token';
 
+export const getCampusDefaultApiKey = (): string => {
+  return ((import.meta.env.VITE_DEFAULT_API_KEY as string) || '').trim();
+};
+
+export const getEffectiveApiKey = (customKey?: string): string => {
+  const custom = customKey?.trim() || '';
+  if (custom) return custom;
+  return getCampusDefaultApiKey();
+};
+
 export const DEFAULT_SETTINGS: AppSettings = {
-  apiKey: '',
-  model: 'deepseek-v4-flash',
+  apiKey: getCampusDefaultApiKey(),
+  model: 'deepseek-flash',
   baseUrl: 'https://ai.sumopod.com/v1',
   systemPrompt: DEFAULT_SKILL_PROMPT,
   theme: 'dark',
@@ -26,11 +36,15 @@ export const getStoredSettings = (): AppSettings => {
       baseUrl = baseUrl.replace('api.sumopod.com', 'ai.sumopod.com');
     }
 
+    const customKey = (parsed.apiKey || '').trim();
+    const effectiveKey = customKey || getCampusDefaultApiKey();
+
     return {
       ...DEFAULT_SETTINGS,
       ...parsed,
+      apiKey: effectiveKey,
       baseUrl,
-      model: parsed.model === 'deepseek-flash' ? 'deepseek-flash' : 'deepseek-v4-flash',
+      model: parsed.model === 'deepseek-v4-flash' ? 'deepseek-v4-flash' : 'deepseek-flash',
     };
   } catch {
     return DEFAULT_SETTINGS;
