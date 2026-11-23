@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api-proxy/(.*)",
+      "destination": "https://ai.sumopod.com/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
