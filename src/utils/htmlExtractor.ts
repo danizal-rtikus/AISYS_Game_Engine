@@ -46,19 +46,30 @@ export function extractHtmlFromStream(fullText: string): ExtractorResult {
   }
 
   // Code block is finished!
-  const completeCode = remainingText.substring(0, closingIdx);
+  const completeCode = remainingText.substring(0, closingIdx).trim();
   const afterCode = remainingText.substring(closingIdx + 3).trim();
   const lines = completeCode.split('\n').length;
 
   const combinedDisplayText = [beforeCode, afterCode].filter(Boolean).join('\n\n');
 
+  // Verify that code is truly complete and not cut off mid-file
+  const hasHtmlEnd = /<\/html\s*>/i.test(completeCode) || /<\/script\s*>\s*<\/body\s*>/i.test(completeCode);
+
   return {
     displayText: combinedDisplayText,
-    code: completeCode.trim(),
+    code: completeCode,
     isWritingCode: false,
-    isComplete: true,
+    isComplete: hasHtmlEnd,
     lineCount: lines,
   };
+}
+
+/**
+ * Checks whether code is complete enough to safely execute in the iframe without syntax truncation
+ */
+export function isGameCodePlayable(code: string | null | undefined): boolean {
+  if (!code || code.trim().length < 80) return false;
+  return /<\/html\s*>/i.test(code) || /<\/body\s*>/i.test(code) || /<\/script\s*>/i.test(code);
 }
 
 /**

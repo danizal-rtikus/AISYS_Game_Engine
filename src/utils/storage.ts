@@ -39,13 +39,26 @@ export const getStoredSettings = (): AppSettings => {
     const customKey = (parsed.apiKey || '').trim();
     const effectiveKey = customKey || getCampusDefaultApiKey();
 
-    return {
+    // Auto-migrate legacy reasoning model to high-throughput flash to prevent 145-line token truncation
+    let model = parsed.model || 'deepseek-flash';
+    if (model === 'deepseek-v4-flash') {
+      model = 'deepseek-flash';
+    }
+
+    const migratedSettings: AppSettings = {
       ...DEFAULT_SETTINGS,
       ...parsed,
       apiKey: effectiveKey,
       baseUrl,
-      model: parsed.model === 'deepseek-v4-flash' ? 'deepseek-v4-flash' : 'deepseek-flash',
+      model: model as any,
     };
+
+    // Resave if migrated
+    if (parsed.model === 'deepseek-v4-flash') {
+      saveStoredSettings(migratedSettings);
+    }
+
+    return migratedSettings;
   } catch {
     return DEFAULT_SETTINGS;
   }

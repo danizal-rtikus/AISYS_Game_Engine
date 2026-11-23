@@ -39,7 +39,8 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
   const proxyUrl = rawUrl.replace(/^https?:\/\/[^/]+/, '/api-proxy');
   const targetUrl = isHttps ? rawUrl : proxyUrl;
 
-  console.info(`[AISYS Stream] Menghubungi model '${model}' via ${targetUrl}...`);
+  // Clean Zero-Leak Engine Log (never expose vendor endpoint or model names in client console)
+  console.info('[AISYS Engine] Menginisialisasi Studio Core & Generator Game...');
 
   // Build messages array with persistent system prompt at index 0 and strictly purge any empty content
   const messages = [
@@ -78,7 +79,7 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
 
       // Fallback: if direct failed, try proxy; if proxy failed, try direct
       const fallbackUrl = targetUrl === rawUrl ? proxyUrl : rawUrl;
-      console.warn(`[AISYS Stream] Target utama gagal, mencoba fallback: ${fallbackUrl}`, primaryFetchErr);
+      console.warn('[AISYS Engine] Mengalihkan rute koneksi studio...');
 
       response = await fetch(fallbackUrl, {
         method: 'POST',
@@ -249,14 +250,12 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
 
     // Fallback 1: If fullText is empty, but accumulatedReasoning has the code/response, use it!
     if (!fullText.trim() && accumulatedReasoning.trim()) {
-      console.warn('[AISYS Stream] delta.content kosong, menggunakan isi reasoning_content sebagai respon!');
       fullText = accumulatedReasoning.trim();
       onChunk(fullText, fullText, false);
     }
 
-    // Fallback 2: If deepseek-v4-flash returned completely empty response, auto-retry with deepseek-flash!
+    // Fallback 2: If model returned completely empty response, auto-retry with standard flash
     if (!fullText.trim() && model === 'deepseek-v4-flash') {
-      console.warn('[AISYS Stream] deepseek-v4-flash mengembalikan respons kosong. Mencoba auto-retry dengan deepseek-flash...');
       return sendDeepSeekMessage({
         ...options,
         model: 'deepseek-flash',
@@ -266,17 +265,21 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
     // If still empty after all fallbacks, report helpful error
     if (!fullText.trim()) {
       throw new Error(
-        'Mesin AI tidak mengembalikan kode/teks respon. Silakan coba beralih ke model deepseek-flash di menu Settings atau kirim ulang.'
+        'Generator engine tidak menerima respons. Silakan coba kirim ulang permintaan Anda.'
       );
     }
 
     onFinish(fullText);
   } catch (err: any) {
     if (err.name === 'AbortError') {
-      console.log('[AISYS Stream] Permintaan dibatalkan pengguna.');
       return;
     }
-    console.error('[AISYS Stream Error]:', err);
-    onError(err instanceof Error ? err : new Error(String(err)));
+    // Zero-leak error sanitizer: clean out raw URLs or internal provider keys from error text
+    const cleanMsg = (err?.message || String(err))
+      .replace(/https?:\/\/[^\s]+/g, '[Studio Gateway]')
+      .replace(/sumopod/gi, 'AISYS')
+      .replace(/deepseek-[a-z0-9-]+/gi, 'Engine');
+    console.error('[AISYS Engine Error]:', cleanMsg);
+    onError(new Error(cleanMsg));
   }
 }

@@ -280,6 +280,7 @@ export function App() {
                 codeLineCount: parsed.lineCount,
                 isStreaming: true,
                 isThinking: Boolean(isThinking && !fullText),
+                isCodeComplete: parsed.isComplete,
               };
             }
             return m;
@@ -303,6 +304,7 @@ export function App() {
                   ? `${m.content}\n\n⚠️ **Error:** ${err.message}`
                   : `⚠️ **Gagal memproses permintaan:**\n${err.message}`,
                 isStreaming: false,
+                isCodeComplete: false,
               };
             }
             return m;
@@ -324,6 +326,7 @@ export function App() {
                 extractedCode: parsed.code || undefined,
                 codeLineCount: parsed.lineCount,
                 isStreaming: false,
+                isCodeComplete: parsed.isComplete,
                 timestamp: Date.now(),
               };
             }
@@ -335,20 +338,22 @@ export function App() {
 
         if (parsed.code && parsed.code.length > 50) {
           const title = extractGameTitle(parsed.code, text.slice(0, 30));
-          setVersions((prevVersions) => {
-            const newVersion: GameVersion = {
-              id: Math.random().toString(36).substring(2),
-              version: prevVersions.length + 1,
-              code: parsed.code!,
-              title,
-              timestamp: Date.now(),
-              prompt: text.slice(0, 50),
-            };
-            const newVersions = [...prevVersions, newVersion];
-            setCurrentVersionIndex(newVersions.length - 1);
-            saveStoredVersions(newVersions);
-            return newVersions;
-          });
+          if (parsed.isComplete) {
+            setVersions((prevVersions) => {
+              const newVersion: GameVersion = {
+                id: Math.random().toString(36).substring(2),
+                version: prevVersions.length + 1,
+                code: parsed.code!,
+                title,
+                timestamp: Date.now(),
+                prompt: text.slice(0, 50),
+              };
+              const newVersions = [...prevVersions, newVersion];
+              setCurrentVersionIndex(newVersions.length - 1);
+              saveStoredVersions(newVersions);
+              return newVersions;
+            });
+          }
           setActiveCode(parsed.code);
           setActiveTitle(title);
         }

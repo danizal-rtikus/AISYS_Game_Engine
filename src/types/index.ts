@@ -13,6 +13,7 @@ export interface Message {
   codeLineCount?: number;
   isStreaming?: boolean;
   isThinking?: boolean;
+  isCodeComplete?: boolean;
 }
 
 export interface GameVersion {
