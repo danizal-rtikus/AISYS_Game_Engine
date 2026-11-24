@@ -344,11 +344,12 @@ export function App() {
           return updated;
         });
       },
-      onFinish: async (initialFullText, finishReason) => {
+      onFinish: async (initialFullText, diagnostic) => {
         let accumulatedText = initialFullText;
         let parsed = extractHtmlFromStream(accumulatedText);
         let continuationCount = 0;
         const MAX_CONTINUATIONS = 2;
+        let finalDiagnostic = diagnostic;
 
         // Auto-continuation loop:
         // If code was actively written but got truncated before </html> (or finish_reason was 'length')
@@ -361,7 +362,7 @@ export function App() {
           !abortControllerRef.current?.signal.aborted
         ) {
           continuationCount++;
-          console.info(`[AISYS Engine] Kode terpotong di baris ${parsed.lineCount}. Menyambungkan bagian ${continuationCount + 1}...`);
+          console.info(`[AISYS Diagnostic] Kode terpotong di baris ${parsed.lineCount} (finish_reason: ${diagnostic.finishReason}). Menyambungkan bagian ${continuationCount + 1}...`);
 
           // Update UI to show continuation in progress
           setMessages((prev) =>
@@ -429,7 +430,8 @@ export function App() {
               onError: (continuationErr) => {
                 console.warn('[AISYS Engine] Gagal menyambungkan kode lanjutan:', continuationErr);
               },
-              onFinish: (finalContinuation) => {
+              onFinish: (finalContinuation, contDiag) => {
+                finalDiagnostic = contDiag;
                 const rawChunk = finalContinuation
                   .replace(/^```(?:html|javascript|js)?\s*\n?/i, '')
                   .replace(/```\s*$/i, '');
@@ -445,6 +447,18 @@ export function App() {
 
         setIsStreaming(false);
         const finalParsed = extractHtmlFromStream(accumulatedText);
+
+        // Post diagnostic log to Studio In-Game Console Viewer
+        const diagLogText = `[Gateway Diagnostic] finish_reason: "${finalDiagnostic.finishReason || 'null'}" | completion_tokens: ${finalDiagnostic.completionTokens ?? 'N/A'} | total_tokens: ${finalDiagnostic.totalTokens ?? 'N/A'} | durasi: ${(finalDiagnostic.durationMs / 1000).toFixed(1)}s | baris: ${finalParsed.lineCount}`;
+        setLogs((prev) => [
+          ...prev.slice(-200),
+          {
+            id: Math.random().toString(36).substring(2),
+            type: finalParsed.isComplete ? 'info' : 'warn',
+            message: diagLogText,
+            timestamp: Date.now(),
+          },
+        ]);
 
         setMessages((prev) => {
           const updated = prev.map((m) => {
@@ -462,6 +476,7 @@ export function App() {
                 codeLineCount: finalParsed.lineCount,
                 isStreaming: false,
                 isCodeComplete: finalParsed.isComplete,
+                diagnostic: finalDiagnostic,
                 timestamp: Date.now(),
               };
             }

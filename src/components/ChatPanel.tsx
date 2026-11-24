@@ -222,76 +222,114 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                           : msg.isCodeComplete
                           ? 'border-emerald-500/20 bg-emerald-500/5 dark:bg-emerald-950/20 text-slate-700 dark:text-slate-300'
                           : 'border-amber-500/30 bg-amber-500/5 text-slate-700 dark:text-slate-300'
-                      } flex items-center justify-between gap-2`}
+                      } flex flex-col gap-2`}
                     >
-                      <div className="flex items-center gap-2">
-                        <div
-                          className={`w-6 h-6 rounded flex items-center justify-center flex-shrink-0 ${
-                            msg.isStreaming
-                              ? 'bg-[#F6821F]/10 text-[#F6821F]'
-                              : msg.isCodeComplete
-                              ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
-                              : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
-                          }`}
-                        >
-                          <Code className="w-3.5 h-3.5" />
-                        </div>
-                        <div>
-                          <div className="font-semibold text-[11px] flex items-center gap-1.5">
-                            {msg.isStreaming ? (
-                              <>
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#F6821F] animate-ping" />
-                                <span className="text-[#F6821F]">
-                                  Menyusun kode HTML5... ({msg.codeLineCount || 0} baris)
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2">
+                          <div
+                            className={`w-6 h-6 rounded flex items-center justify-center flex-shrink-0 ${
+                              msg.isStreaming
+                                ? 'bg-[#F6821F]/10 text-[#F6821F]'
+                                : msg.isCodeComplete
+                                ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                                : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
+                            }`}
+                          >
+                            <Code className="w-3.5 h-3.5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold text-[11px] flex items-center gap-1.5">
+                              {msg.isStreaming ? (
+                                <>
+                                  <span className="w-1.5 h-1.5 rounded-full bg-[#F6821F] animate-ping" />
+                                  <span className="text-[#F6821F]">
+                                    Menyusun kode HTML5... ({msg.codeLineCount || 0} baris)
+                                  </span>
+                                </>
+                              ) : msg.isCodeComplete ? (
+                                <span className="text-emerald-600 dark:text-emerald-400">
+                                  Kode game HTML5 siap ({msg.codeLineCount || 0} baris)
                                 </span>
-                              </>
-                            ) : msg.isCodeComplete ? (
-                              <span className="text-emerald-600 dark:text-emerald-400">
-                                Kode game HTML5 siap ({msg.codeLineCount || 0} baris)
-                              </span>
-                            ) : (
-                              <span className="text-amber-600 dark:text-amber-400">
-                                ⚠️ Kode game terpotong ({msg.codeLineCount || 0} baris)
-                              </span>
-                            )}
-                          </div>
-                          <div className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">
-                            {msg.isStreaming
-                              ? 'Dialirkan langsung ke Panel Preview kanan'
-                              : msg.isCodeComplete
-                              ? 'Siap dimainkan via Canvas 2D & Web Audio'
-                              : 'Terhenti sebelum penutup </html>. Klik lanjutkan di samping.'}
+                              ) : (
+                                <span className="text-amber-600 dark:text-amber-400">
+                                  ⚠️ Kode game terpotong ({msg.codeLineCount || 0} baris)
+                                </span>
+                              )}
+                            </div>
+                            <div className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">
+                              {msg.isStreaming
+                                ? 'Dialirkan langsung ke Panel Preview kanan'
+                                : msg.isCodeComplete
+                                ? 'Siap dimainkan via Canvas 2D & Web Audio'
+                                : 'Terhenti sebelum penutup </html>. Klik lanjutkan di samping.'}
+                            </div>
                           </div>
                         </div>
+
+                        {msg.isCodeComplete ? (
+                          <button
+                            onClick={() => onSelectTab('preview')}
+                            className="flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium bg-emerald-600 hover:bg-emerald-700 text-white transition-colors flex-shrink-0 shadow-sm"
+                          >
+                            <span>Mainkan</span>
+                            <ArrowRight className="w-3 h-3" />
+                          </button>
+                        ) : msg.isStreaming ? (
+                          <button
+                            onClick={() => onSelectTab('code')}
+                            className="flex items-center gap-1 px-2 py-1 rounded text-[11px] font-medium border border-slate-300 dark:border-[#282B33] bg-white dark:bg-[#1C1E24] hover:bg-slate-100 dark:hover:bg-[#282B33] text-slate-700 dark:text-slate-300 transition-colors flex-shrink-0"
+                          >
+                            <span>Lihat Alur</span>
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() =>
+                              onSendMessage(
+                                `Kode game sebelumnya belum lengkap (di baris ${msg.codeLineCount || 0}). Tolong buatkan kode game HTML5 Canvas 2D yang utuh, padat (400-650 baris), dan lengkap dari <!DOCTYPE html> sampai penutup </html> dalam satu blok \`\`\`html tanpa terpotong dan tanpa placeholder titik-titik.`
+                              )
+                            }
+                            className="flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium bg-[#F6821F] hover:bg-[#E66E0A] text-white transition-colors flex-shrink-0 shadow-sm"
+                          >
+                            <span>Lanjutkan</span>
+                            <ArrowRight className="w-3 h-3" />
+                          </button>
+                        )}
                       </div>
 
-                      {msg.isCodeComplete ? (
-                        <button
-                          onClick={() => onSelectTab('preview')}
-                          className="flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium bg-emerald-600 hover:bg-emerald-700 text-white transition-colors flex-shrink-0 shadow-sm"
-                        >
-                          <span>Mainkan</span>
-                          <ArrowRight className="w-3 h-3" />
-                        </button>
-                      ) : msg.isStreaming ? (
-                        <button
-                          onClick={() => onSelectTab('code')}
-                          className="flex items-center gap-1 px-2 py-1 rounded text-[11px] font-medium border border-slate-300 dark:border-[#282B33] bg-white dark:bg-[#1C1E24] hover:bg-slate-100 dark:hover:bg-[#282B33] text-slate-700 dark:text-slate-300 transition-colors flex-shrink-0"
-                        >
-                          <span>Lihat Alur</span>
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() =>
-                            onSendMessage(
-                              `Kode game sebelumnya belum lengkap (di baris ${msg.codeLineCount || 0}). Tolong buatkan kode game HTML5 Canvas 2D yang utuh, padat (400-650 baris), dan lengkap dari <!DOCTYPE html> sampai penutup </html> dalam satu blok \`\`\`html tanpa terpotong dan tanpa placeholder titik-titik.`
-                            )
-                          }
-                          className="flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium bg-[#F6821F] hover:bg-[#E66E0A] text-white transition-colors flex-shrink-0 shadow-sm"
-                        >
-                          <span>Lanjutkan</span>
-                          <ArrowRight className="w-3 h-3" />
-                        </button>
+                      {/* Diagnostic Telemetry Bar */}
+                      {msg.diagnostic && (
+                        <div className="pt-2 border-t border-slate-200/60 dark:border-[#282B33]/60 font-mono text-[10px] text-slate-500 dark:text-slate-400 flex flex-wrap gap-x-3 gap-y-0.5">
+                          <span>
+                            finish_reason:{' '}
+                            <strong
+                              className={
+                                msg.diagnostic.finishReason === 'length'
+                                  ? 'text-rose-500 dark:text-rose-400'
+                                  : msg.diagnostic.finishReason === 'stop'
+                                  ? 'text-emerald-500 dark:text-emerald-400'
+                                  : 'text-amber-500'
+                              }
+                            >
+                              {msg.diagnostic.finishReason ? `"${msg.diagnostic.finishReason}"` : 'null (koneksi putus)'}
+                            </strong>
+                          </span>
+                          {msg.diagnostic.completionTokens !== undefined && (
+                            <span>
+                              completion_tokens: <strong>{msg.diagnostic.completionTokens}</strong>
+                            </span>
+                          )}
+                          {msg.diagnostic.totalTokens !== undefined && (
+                            <span>
+                              total_tokens: <strong>{msg.diagnostic.totalTokens}</strong>
+                            </span>
+                          )}
+                          <span>
+                            durasi: <strong>{(msg.diagnostic.durationMs / 1000).toFixed(1)}s</strong>
+                          </span>
+                          <span>
+                            baris: <strong>{msg.codeLineCount || msg.diagnostic.lineCount}</strong>
+                          </span>
+                        </div>
                       )}
                     </div>
                   )}

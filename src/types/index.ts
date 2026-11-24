@@ -4,6 +4,16 @@ export type ViewportMode = 'desktop' | 'mobile';
 
 export type ActiveTab = 'preview' | 'code' | 'console';
 
+export interface DiagnosticInfo {
+  finishReason: string | null;
+  completionTokens?: number;
+  promptTokens?: number;
+  totalTokens?: number;
+  durationMs: number;
+  lineCount: number;
+  charCount: number;
+}
+
 export interface Message {
   id: string;
   role: 'user' | 'assistant' | 'system';
@@ -14,6 +24,7 @@ export interface Message {
   isStreaming?: boolean;
   isThinking?: boolean;
   isCodeComplete?: boolean;
+  diagnostic?: DiagnosticInfo;
 }
 
 export interface GameVersion {

@@ -1,4 +1,4 @@
-import { ModelOption } from '../types';
+import { ModelOption, DiagnosticInfo } from '../types';
 
 export interface StreamOptions {
   apiKey: string;
@@ -8,7 +8,7 @@ export interface StreamOptions {
   history: Array<{ role: 'user' | 'assistant' | 'system'; content: string }>;
   onChunk: (delta: string, fullText: string, isThinking?: boolean) => void;
   onError: (err: Error) => void;
-  onFinish: (fullText: string, finishReason?: string | null) => void;
+  onFinish: (fullText: string, diagnostic: DiagnosticInfo) => void;
   signal?: AbortSignal;
 }
 
@@ -57,9 +57,13 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
     model: model,
     messages: messages,
     stream: true,
+    stream_options: { include_usage: true },
     temperature: 0.7,
     max_tokens: 16384,
   };
+
+  const startTime = performance.now();
+  let usageInfo: { completion_tokens?: number; prompt_tokens?: number; total_tokens?: number } | null = null;
 
   try {
     let response: Response;
@@ -128,8 +132,18 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
       if (!text.trim()) {
         throw new Error('Mesin AI merespon dengan data kosong. Periksa kuota token atau ganti model.');
       }
+      const durationMs = Math.round(performance.now() - startTime);
+      const diagnostic: DiagnosticInfo = {
+        finishReason: choice?.finish_reason || 'stop',
+        completionTokens: json.usage?.completion_tokens,
+        promptTokens: json.usage?.prompt_tokens,
+        totalTokens: json.usage?.total_tokens,
+        durationMs,
+        lineCount: text.split('\n').length,
+        charCount: text.length,
+      };
       onChunk(text, text, false);
-      onFinish(text, choice?.finish_reason || 'stop');
+      onFinish(text, diagnostic);
       return;
     }
 
@@ -183,6 +197,11 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
             throw new Error(parsed.error.message || JSON.stringify(parsed.error));
           }
 
+          // Capture usage metrics if gateway provides stream_options usage
+          if (parsed.usage) {
+            usageInfo = parsed.usage;
+          }
+
           const choice = parsed.choices?.[0];
           if (choice?.finish_reason) {
             lastFinishReason = choice.finish_reason;
@@ -229,7 +248,12 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
           try {
             const parsed = JSON.parse(dataStr);
             if (parsed.error) throw new Error(parsed.error.message);
-            const choice = parsed.choices?.[0];
+            // Capture usage metrics if gateway provides stream_options usage
+          if (parsed.usage) {
+            usageInfo = parsed.usage;
+          }
+
+          const choice = parsed.choices?.[0];
           if (choice?.finish_reason) {
             lastFinishReason = choice.finish_reason;
           }
@@ -276,7 +300,18 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
       );
     }
 
-    onFinish(fullText, lastFinishReason);
+    const durationMs = Math.round(performance.now() - startTime);
+    const diagnostic: DiagnosticInfo = {
+      finishReason: lastFinishReason,
+      completionTokens: usageInfo?.completion_tokens,
+      promptTokens: usageInfo?.prompt_tokens,
+      totalTokens: usageInfo?.total_tokens,
+      durationMs,
+      lineCount: fullText.split('\n').length,
+      charCount: fullText.length,
+    };
+    console.info('[AISYS Diagnostic Metrics]:', diagnostic);
+    onFinish(fullText, diagnostic);
   } catch (err: any) {
     if (err.name === 'AbortError') {
       return;
