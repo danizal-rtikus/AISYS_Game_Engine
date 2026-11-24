@@ -315,14 +315,15 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                           </span>
                           {msg.diagnostic.completionTokens !== undefined && (
                             <span>
-                              completion_tokens: <strong>{msg.diagnostic.completionTokens}</strong>
+                              tokens: <strong>{msg.diagnostic.completionTokens}</strong>
                             </span>
                           )}
-                          {msg.diagnostic.totalTokens !== undefined && (
-                            <span>
-                              total_tokens: <strong>{msg.diagnostic.totalTokens}</strong>
-                            </span>
-                          )}
+                          <span>
+                            content: <strong>{msg.diagnostic.contentChars ?? 0} char</strong>
+                          </span>
+                          <span>
+                            reasoning: <strong>{msg.diagnostic.reasoningChars ?? 0} char</strong>
+                          </span>
                           <span>
                             durasi: <strong>{(msg.diagnostic.durationMs / 1000).toFixed(1)}s</strong>
                           </span>

@@ -15,16 +15,20 @@ export function isGameCodePlayable(code: string | null | undefined): boolean {
 
   const trimmed = code.trim();
 
-  // 1. Must have opening and closing HTML tags
-  const hasHtml = /<html[^>]*>/i.test(trimmed) && /<\/html\s*>/i.test(trimmed);
-  const hasScript = /<script[^>]*>/i.test(trimmed) && /<\/script\s*>/i.test(trimmed);
-  if (!hasHtml || !hasScript) return false;
+  // 1. Must start with <!DOCTYPE html> or <html
+  const startsWithHtml = /^(?:<!DOCTYPE\s+html|<html)/i.test(trimmed);
+  if (!startsWithHtml) return false;
 
-  // 2. Must have at least 50 lines of code for a real interactive game
+  // 2. Must have closing tag </html> or END_OF_GAME marker
+  const hasHtmlClose = /<\/html\s*>/i.test(trimmed) || /<!--\s*END_OF_GAME\s*-->/i.test(trimmed);
+  const hasScript = /<script[^>]*>/i.test(trimmed) && /<\/script\s*>/i.test(trimmed);
+  if (!hasHtmlClose || !hasScript) return false;
+
+  // 3. Must have at least 50 lines of code for a real interactive game
   const lines = trimmed.split('\n');
   if (lines.length < 50) return false;
 
-  // 3. Inspect script content for forbidden placeholder syntax errors
+  // 4. Inspect script content for forbidden placeholder syntax errors
   const scriptMatch = trimmed.match(/<script[^>]*>([\s\S]*?)<\/script\s*>/i);
   if (scriptMatch && scriptMatch[1]) {
     const scriptContent = scriptMatch[1].trim();
@@ -48,16 +52,25 @@ export function isGameCodePlayable(code: string | null | undefined): boolean {
 /**
  * Parses raw AI response text to separate conversational text
  * from HTML single-file game code.
- * Supports multi-block stitching (assembling split HTML + JS snippets into a unified file)
- * and prevents raw code leaks into the chat bubble.
+ *
+ * STRICT RULE: Only code blocks starting with <!DOCTYPE html or <html are accepted as game code.
+ * Draft snippets like `const PATH = [...]` or `function updatePhysics()` written in
+ * chain-of-thought are strictly ignored and NOT extracted as game code.
  */
 export function extractHtmlFromStream(fullText: string): ExtractorResult {
-  const codeStartMatch = fullText.match(/```(?:html|HTML)?\s*\n?/);
+  // Search for code block containing <!DOCTYPE html or <html
+  const streamingHtmlStart = fullText.match(/```(?:html|HTML)?\s*\n\s*(?:<!DOCTYPE\s+html|<html)/i);
 
-  if (!codeStartMatch || codeStartMatch.index === undefined) {
-    // No code block detected yet
+  if (!streamingHtmlStart || streamingHtmlStart.index === undefined) {
+    // No valid HTML document block detected yet!
+    // Filter out draft code snippets and monologue residue from displayText
+    const cleanDisplayText = fullText
+      .replace(/```(?:js|javascript)?\s*\n[\s\S]*?```/gi, '')
+      .replace(/(?:Wait\s*—|Wait:|Hmm|Actually simpler|Let me write|Now build|Upgrade:|Modernize:|Sell:)[\s\S]*?(?=\n\n|\n[A-Z]|$)/gi, '')
+      .trim();
+
     return {
-      displayText: fullText,
+      displayText: cleanDisplayText || fullText,
       code: null,
       isWritingCode: false,
       isComplete: false,
@@ -65,16 +78,19 @@ export function extractHtmlFromStream(fullText: string): ExtractorResult {
     };
   }
 
-  const startIdx = codeStartMatch.index;
-  const codeContentStart = startIdx + codeStartMatch[0].length;
+  const startIdx = streamingHtmlStart.index;
   const beforeCode = fullText.substring(0, startIdx).trim();
 
-  // Look for closing ``` of the HTML block
+  // Find where the code content begins (right after ```html\n)
+  const headerMatch = fullText.substring(startIdx).match(/^```(?:html|HTML)?\s*\n?/i);
+  const codeContentStart = startIdx + (headerMatch ? headerMatch[0].length : 0);
   const remainingText = fullText.substring(codeContentStart);
+
+  // Look for closing ``` of this HTML block
   const closingIdx = remainingText.indexOf('```');
 
   if (closingIdx === -1) {
-    // Still actively streaming the initial code block
+    // Still actively streaming the HTML code block!
     const rawCode = remainingText;
     const lines = rawCode.split('\n').length;
     return {
@@ -86,7 +102,7 @@ export function extractHtmlFromStream(fullText: string): ExtractorResult {
     };
   }
 
-  // Initial code block is finished
+  // HTML code block has closed
   let completeCode = remainingText.substring(0, closingIdx).trim();
   let afterCode = remainingText.substring(closingIdx + 3).trim();
 
@@ -112,13 +128,11 @@ export function extractHtmlFromStream(fullText: string): ExtractorResult {
     if (jsBlocks.length > 0) {
       const unifiedJs = jsBlocks.join('\n\n');
       if (completeCode.includes('</script>')) {
-        // Replace existing placeholder inside <script> with stitched JS
         completeCode = completeCode.replace(
           /<script[^>]*>[\s\S]*?<\/script\s*>/i,
           `<script>\n'use strict';\n\n${unifiedJs}\n</script>`
         );
       } else if (completeCode.includes('</body>')) {
-        // Insert <script> before </body>
         completeCode = completeCode.replace(
           /<\/body\s*>/i,
           `<script>\n'use strict';\n\n${unifiedJs}\n</script>\n</body>`
@@ -129,10 +143,9 @@ export function extractHtmlFromStream(fullText: string): ExtractorResult {
 
   // Anti-Code-Leak: Remove any standalone code blocks or chain-of-thought dumps from afterCode
   // so the chat bubble only displays clean conversational text
-  let cleanAfterCode = afterCode
+  const cleanAfterCode = afterCode
     .replace(/```(?:html|js|javascript)?\s*\n[\s\S]*?```/gi, '')
-    // Also remove English thinking monologues if model leaked reasoning into content
-    .replace(/(?:Now the JS|Touch buttons|Audio|Draw|Let me write it|Key: avoid|Now, another check|Check reachability|Now let me double check)[\s\S]*?(?=\n\n|\n[A-Z]|$)/gi, '')
+    .replace(/(?:Now the JS|Touch buttons|Audio|Draw|Let me write it|Key: avoid|Now, another check|Check reachability|Now let me double check|Wait\s*—|Wait:)[\s\S]*?(?=\n\n|\n[A-Z]|$)/gi, '')
     .trim();
 
   const combinedDisplayText = [beforeCode, cleanAfterCode].filter(Boolean).join('\n\n');

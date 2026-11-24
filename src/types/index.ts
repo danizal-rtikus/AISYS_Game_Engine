@@ -12,6 +12,8 @@ export interface DiagnosticInfo {
   durationMs: number;
   lineCount: number;
   charCount: number;
+  reasoningChars: number;
+  contentChars: number;
 }
 
 export interface Message {

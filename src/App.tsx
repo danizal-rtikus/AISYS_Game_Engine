@@ -280,7 +280,7 @@ export function App() {
         if (isRepairIntent && !m.content.includes('<!DOCTYPE html>')) {
           return {
             role: m.role,
-            content: `${m.content.trim()}\n\n(PENTING: Dilarang menggunakan placeholder '...' atau elipsis. Dilarang memecah kode menjadi blok terpisah. Langsung berikan SELURUH kode game HTML5 Canvas 2D padat 400-650 baris yang LENGKAP dan UTUH dari <!DOCTYPE html> sampai penutup </html> dalam SATU blok \`\`\`html.)`,
+            content: `${m.content.trim()}\n\n(PENTING: Dilarang menulis monolog berpikir atau draf kode! Langsung berikan SELURUH kode game HTML5 Canvas 2D padat 400-650 baris yang LENGKAP dan UTUH dari <!DOCTYPE html> sampai penutup </html>\\n<!-- END_OF_GAME --> dalam SATU blok \`\`\`html.)`,
           };
         }
 
@@ -449,7 +449,7 @@ export function App() {
         const finalParsed = extractHtmlFromStream(accumulatedText);
 
         // Post diagnostic log to Studio In-Game Console Viewer
-        const diagLogText = `[Gateway Diagnostic] finish_reason: "${finalDiagnostic.finishReason || 'null'}" | completion_tokens: ${finalDiagnostic.completionTokens ?? 'N/A'} | total_tokens: ${finalDiagnostic.totalTokens ?? 'N/A'} | durasi: ${(finalDiagnostic.durationMs / 1000).toFixed(1)}s | baris: ${finalParsed.lineCount}`;
+        const diagLogText = `[Gateway Diagnostic] finish_reason: "${finalDiagnostic.finishReason || 'null'}" | tokens: ${finalDiagnostic.completionTokens ?? 'N/A'} | content: ${finalDiagnostic.contentChars ?? 0}c | reasoning: ${finalDiagnostic.reasoningChars ?? 0}c | durasi: ${(finalDiagnostic.durationMs / 1000).toFixed(1)}s | baris: ${finalParsed.lineCount}`;
         setLogs((prev) => [
           ...prev.slice(-200),
           {

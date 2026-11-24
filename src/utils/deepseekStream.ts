@@ -53,17 +53,20 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
       })),
   ];
 
-  const payload = {
+  const payload: Record<string, any> = {
     model: model,
     messages: messages,
     stream: true,
     stream_options: { include_usage: true },
     temperature: 0.7,
     max_tokens: 16384,
+    thinking: { type: 'disabled' },
   };
 
   const startTime = performance.now();
   let usageInfo: { completion_tokens?: number; prompt_tokens?: number; total_tokens?: number } | null = null;
+  let reasoningChars = 0;
+  let contentChars = 0;
 
   try {
     let response: Response;
@@ -86,6 +89,21 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
       console.warn('[AISYS Engine] Mengalihkan rute koneksi studio...');
 
       response = await fetch(fallbackUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${apiKey.trim()}`,
+        },
+        body: JSON.stringify(payload),
+        signal,
+      });
+    }
+
+    // Resilience: If gateway rejects the 'thinking' parameter with 400 Bad Request, auto-retry without it
+    if (!response.ok && response.status === 400 && payload.thinking) {
+      console.warn('[AISYS Engine] Gateway menolak parameter thinking, mencoba ulang tanpa parameter tersebut...');
+      delete payload.thinking;
+      response = await fetch(targetUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -141,6 +159,8 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
         durationMs,
         lineCount: text.split('\n').length,
         charCount: text.length,
+        reasoningChars: 0,
+        contentChars: text.length,
       };
       onChunk(text, text, false);
       onFinish(text, diagnostic);
@@ -220,6 +240,7 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
 
           // Accumulate reasoning
           if (reasoning) {
+            reasoningChars += reasoning.length;
             accumulatedReasoning += reasoning;
             if (!fullText) {
               onChunk('', '', true); // Thinking indicator
@@ -228,6 +249,7 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
 
           // Accumulate actual content
           if (delta) {
+            contentChars += delta.length;
             fullText += delta;
             onChunk(delta, fullText, false);
           }
@@ -267,8 +289,12 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
               choice?.delta?.reasoning_content ??
               choice?.message?.reasoning_content ??
               '';
-            if (reasoning) accumulatedReasoning += reasoning;
+            if (reasoning) {
+              reasoningChars += reasoning.length;
+              accumulatedReasoning += reasoning;
+            }
             if (delta) {
+              contentChars += delta.length;
               fullText += delta;
               onChunk(delta, fullText, false);
             }
@@ -309,6 +335,8 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
       durationMs,
       lineCount: fullText.split('\n').length,
       charCount: fullText.length,
+      reasoningChars,
+      contentChars,
     };
     console.info('[AISYS Diagnostic Metrics]:', diagnostic);
     onFinish(fullText, diagnostic);
