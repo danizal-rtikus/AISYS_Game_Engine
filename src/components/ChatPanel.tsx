@@ -1,5 +1,19 @@
 import React, { useRef, useEffect } from 'react';
-import { Send, Square, Sparkles, Gamepad2, Compass, Layers, AlertCircle, Code, ArrowRight, GraduationCap } from 'lucide-react';
+import {
+  Send,
+  Square,
+  Sparkles,
+  Gamepad2,
+  Compass,
+  Layers,
+  AlertCircle,
+  Code,
+  ArrowRight,
+  Music,
+  Target,
+  Shield,
+  Crosshair,
+} from 'lucide-react';
 import { Message } from '../types';
 import { MarkdownRenderer } from './MarkdownRenderer';
 
@@ -17,28 +31,40 @@ interface ChatPanelProps {
 
 const QUICK_STARTERS = [
   {
-    title: '2D Scrolling Platformer',
+    title: '2D Platformer',
     desc: 'Lompat rintangan, gravitasi presisi & koin (Arcade / Edukasi).',
-    prompt: 'Saya ingin membuat game 2D Scrolling Platformer. Mari kita rancang mekanik dan temanya (bisa arcade atau bertema edukasi).',
+    prompt: 'Saya ingin membuat game 2D Platformer. Mari kita diskusikan konsep dan temanya.',
     icon: Gamepad2,
   },
   {
-    title: 'Top-Down Space Shooter',
+    title: 'Top-Down Shooter',
     desc: 'Navigasi 8 arah, tembak laser & wave survival (Aksi / Edukasi).',
-    prompt: 'Saya ingin membuat game Top-Down Space Shooter dengan kontrol WASD/Mouse dan laser blaster.',
-    icon: Compass,
+    prompt: 'Saya ingin membuat game Top-Down Shooter dengan kontrol WASD/Mouse dan gelombang musuh.',
+    icon: Crosshair,
   },
   {
-    title: 'Neon Puzzle Grid',
-    desc: 'Papan ubin logika warna neon & kalkulasi combo (Logika / Edukasi).',
-    prompt: 'Saya ingin membuat game Neon Puzzle Grid berbasis giliran dengan reaksi berantai.',
+    title: 'Physics / Slingshot',
+    desc: 'Ketapel tarik-lepas ala Angry Birds & fisika penghancuran balok.',
+    prompt: 'Saya ingin membuat game Physics / Slingshot dengan trayektori parabola dan rintangan balok.',
+    icon: Target,
+  },
+  {
+    title: 'Tower Defense',
+    desc: 'Strategi penempatan menara penjaga & gelombang creeps.',
+    prompt: 'Saya ingin membuat game Tower Defense strategi penempatan menara dan rute musuh.',
+    icon: Shield,
+  },
+  {
+    title: 'Rhythm / Music',
+    desc: 'Sinkronisasi ketukan beat, not musik jatuh & tempo audio.',
+    prompt: 'Saya ingin membuat game Rhythm / Music berbasis ketukan ritme audio sintetis.',
+    icon: Music,
+  },
+  {
+    title: 'Puzzle Grid',
+    desc: 'Papan ubin logika warna, match-3 & kalkulasi reaksi berantai.',
+    prompt: 'Saya ingin membuat game Puzzle Grid berbasis giliran dengan reaksi berantai.',
     icon: Layers,
-  },
-  {
-    title: 'Endless Runner / Dodger',
-    desc: 'Refleks cepat menghindari rintangan & skor combo (Refleks / Edukasi).',
-    prompt: 'Saya ingin membuat game Endless Runner dengan kecepatan dinamis dan rintangan menantang.',
-    icon: Sparkles,
   },
 ];
 

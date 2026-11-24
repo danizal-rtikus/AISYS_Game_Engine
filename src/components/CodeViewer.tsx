@@ -60,20 +60,23 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ code, gameTitle }) => {
         </div>
       </div>
 
-      {/* Code Text Body with Line Numbers */}
-      <div className="flex-1 overflow-auto p-4 leading-relaxed">
-        <pre className="text-slate-800 dark:text-slate-200">
-          <code>
-            {lines.map((line, idx) => (
-              <div key={idx} className="table-row">
-                <span className="table-cell pr-4 text-right select-none text-slate-400 dark:text-slate-600 text-[11px] w-10">
-                  {idx + 1}
-                </span>
-                <span className="table-cell whitespace-pre">{line}</span>
-              </div>
-            ))}
-          </code>
-        </pre>
+      {/* Code Text Body with Responsive Line Numbers & Wrapping */}
+      <div className="flex-1 overflow-auto p-2 sm:p-4 leading-relaxed font-mono text-[11px] sm:text-xs">
+        <div className="w-full inline-block min-w-full">
+          {lines.map((line, idx) => (
+            <div
+              key={idx}
+              className="flex items-start hover:bg-slate-100/60 dark:hover:bg-[#1C1E24]/60 rounded px-1 py-0.5 transition-colors group"
+            >
+              <span className="w-9 sm:w-12 pr-3 text-right select-none text-slate-400 dark:text-slate-600 text-[10px] sm:text-[11px] flex-shrink-0 font-mono group-hover:text-slate-500">
+                {idx + 1}
+              </span>
+              <span className="flex-1 whitespace-pre-wrap break-all sm:break-normal font-mono text-slate-800 dark:text-slate-200 selection:bg-[#F6821F]/20">
+                {line || ' '}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

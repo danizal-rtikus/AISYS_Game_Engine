@@ -345,9 +345,15 @@ export function App() {
         setMessages((prev) => {
           const updated = prev.map((m) => {
             if (m.id === assistantId) {
+              const safeContent = parsed.displayText?.trim()
+                ? parsed.displayText.trim()
+                : parsed.code
+                ? 'Game HTML5 berhasil dirancang dan disintesis ke Panel Sandbox.'
+                : fullText || m.content;
+
               return {
                 ...m,
-                content: parsed.displayText || fullText || m.content,
+                content: safeContent,
                 extractedCode: parsed.code || undefined,
                 codeLineCount: parsed.lineCount,
                 isStreaming: false,

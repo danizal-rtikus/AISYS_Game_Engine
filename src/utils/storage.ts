@@ -45,16 +45,23 @@ export const getStoredSettings = (): AppSettings => {
       model = 'deepseek-flash';
     }
 
+    // Auto-update system prompt if user is using default skill prompt or older 4-genre version
+    let systemPrompt = parsed.systemPrompt || DEFAULT_SKILL_PROMPT;
+    if (systemPrompt.includes('AISYS menyiapkan 4 genre') || !systemPrompt.includes('Rhythm / Music')) {
+      systemPrompt = DEFAULT_SKILL_PROMPT;
+    }
+
     const migratedSettings: AppSettings = {
       ...DEFAULT_SETTINGS,
       ...parsed,
       apiKey: effectiveKey,
       baseUrl,
       model: model as any,
+      systemPrompt,
     };
 
     // Resave if migrated
-    if (parsed.model === 'deepseek-v4-flash') {
+    if (parsed.model === 'deepseek-v4-flash' || parsed.systemPrompt !== systemPrompt) {
       saveStoredSettings(migratedSettings);
     }
 
