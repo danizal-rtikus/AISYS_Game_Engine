@@ -252,12 +252,37 @@ export function App() {
     const apiHistory = updatedMessages
       .slice(0, -1) // Exclude the newly added empty in-flight assistant placeholder
       .filter((m) => m.id !== 'welcome-init')
-      .map((m) => ({
-        role: m.role,
-        content: m.role === 'assistant' && m.extractedCode
-          ? `${m.content ? m.content.trim() + '\n\n' : ''}\`\`\`html\n${m.extractedCode}\n\`\`\``
-          : m.content.trim(),
-      }))
+      .map((m) => {
+        if (m.role === 'assistant') {
+          // If code was complete, include it in history.
+          // If code was INCOMPLETE (e.g. truncated at line 145 or 15), do NOT inject the broken code into prompt history!
+          // Injecting broken code confuses the model, triggers deep reasoning loops, and burns token limits!
+          if (m.extractedCode && m.isCodeComplete) {
+            return {
+              role: m.role,
+              content: `${m.content ? m.content.trim() + '\n\n' : ''}\`\`\`html\n${m.extractedCode}\n\`\`\``,
+            };
+          }
+          return {
+            role: m.role,
+            content: m.content ? m.content.trim() : 'Perancangan mekanik game.',
+          };
+        }
+
+        // If user prompt asks to repair or fix broken code, append strict completion directive
+        const isRepairIntent = /(perbaiki|belum\s*melihat|terpotong|tidak\s*selesai|layar\s*hitam|benerin|fix|lanjutkan)/i.test(m.content);
+        if (isRepairIntent && !m.content.includes('<!DOCTYPE html>')) {
+          return {
+            role: m.role,
+            content: `${m.content.trim()}\n\n(PENTING: Jangan menulis analisis panjang. Langsung berikan SELURUH kode game HTML5 mandiri yang LENGKAP dan UTUH dari <!DOCTYPE html> sampai penutup </html> dalam satu blok \`\`\`html.)`,
+          };
+        }
+
+        return {
+          role: m.role,
+          content: m.content.trim(),
+        };
+      })
       .filter((m) => m.content.length > 0); // Strictly ensure no empty content reaches API
 
     await sendDeepSeekMessage({

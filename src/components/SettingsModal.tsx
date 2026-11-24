@@ -130,11 +130,11 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     {model === 'deepseek-flash' && <Check className="w-3.5 h-3.5 text-[#F6821F]" />}
                   </div>
                   <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1">
-                    Direkomendasikan • Generasi kode instan, stabil, tanpa jeda penalaran.
+                    Utama (Sangat Direkomendasikan) • Menghasilkan 100% kode game HTML5 utuh tanpa jeda berpikir.
                   </p>
                 </div>
                 <div className="mt-2 text-[10px] font-mono text-[#F6821F]">
-                  1.0M Context • Default Cepat
+                  1.0M Context • Bebas Potongan Kode
                 </div>
               </button>
 
@@ -152,12 +152,12 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     <span className="font-mono font-semibold text-xs">deepseek-v4-flash</span>
                     {model === 'deepseek-v4-flash' && <Check className="w-3.5 h-3.5 text-[#F6821F]" />}
                   </div>
-                  <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1">
-                    Penalaran mendalam • Analisis arsitektur & fisika matematis.
+                  <p className="text-[10px] text-amber-600 dark:text-amber-400 mt-1">
+                    Eksperimental (Reasoning) • Memakan banyak token untuk berpikir internal; berisiko memotong kode panjang.
                   </p>
                 </div>
-                <div className="mt-2 text-[10px] font-mono text-slate-400">
-                  1.0M Context • Reasoning
+                <div className="mt-2 text-[10px] font-mono text-amber-500">
+                  Reasoning Model • Uji Coba Saja
                 </div>
               </button>
             </div>
