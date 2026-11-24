@@ -449,7 +449,7 @@ export function App() {
         const finalParsed = extractHtmlFromStream(accumulatedText);
 
         // Post diagnostic log to Studio In-Game Console Viewer
-        const diagLogText = `[Gateway Diagnostic] finish_reason: "${finalDiagnostic.finishReason || 'null'}" | tokens: ${finalDiagnostic.completionTokens ?? 'N/A'} | content: ${finalDiagnostic.contentChars ?? 0}c | reasoning: ${finalDiagnostic.reasoningChars ?? 0}c | thinking: ${finalDiagnostic.thinkingParam || 'N/A'} | durasi: ${(finalDiagnostic.durationMs / 1000).toFixed(1)}s | baris: ${finalParsed.code ? finalParsed.lineCount : 0}`;
+        const diagLogText = `[Gateway Diagnostic] finish_reason: "${finalDiagnostic.finishReason || 'null'}" | tokens: ${finalDiagnostic.completionTokens ?? 'N/A'} | content: ${finalDiagnostic.contentChars ?? 0}c | reasoning: ${finalDiagnostic.reasoningChars ?? 0}c | effort: ${finalDiagnostic.effort || 'none'} | durasi: ${(finalDiagnostic.durationMs / 1000).toFixed(1)}s | baris: ${finalParsed.code ? finalParsed.lineCount : 0}`;
         setLogs((prev) => [
           ...prev.slice(-200),
           {

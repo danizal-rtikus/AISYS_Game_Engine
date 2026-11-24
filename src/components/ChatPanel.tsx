@@ -324,20 +324,9 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                           <span>
                             reasoning: <strong>{msg.diagnostic.reasoningChars ?? 0} char</strong>
                           </span>
-                          {msg.diagnostic.thinkingParam && (
-                            <span>
-                              thinking:{' '}
-                              <strong
-                                className={
-                                  msg.diagnostic.thinkingParam.includes('rejected')
-                                    ? 'text-amber-500'
-                                    : 'text-slate-700 dark:text-slate-300'
-                                }
-                              >
-                                {msg.diagnostic.thinkingParam}
-                              </strong>
-                            </span>
-                          )}
+                          <span>
+                            effort: <strong className="text-emerald-500 dark:text-emerald-400">{msg.diagnostic.effort || 'none'}</strong>
+                          </span>
                           <span>
                             durasi: <strong>{(msg.diagnostic.durationMs / 1000).toFixed(1)}s</strong>
                           </span>

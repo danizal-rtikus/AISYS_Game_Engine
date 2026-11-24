@@ -53,16 +53,13 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
       })),
   ];
 
-  let thinkingStatus = 'sent (disabled + none)';
-
   const payload: Record<string, any> = {
     model: model,
     messages: messages,
     stream: true,
     stream_options: { include_usage: true },
-    temperature: 0.3,
+    temperature: 0.4,
     max_tokens: 32768,
-    thinking: { type: 'disabled' },
     reasoning_effort: 'none',
   };
 
@@ -92,23 +89,6 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
       console.warn('[AISYS Engine] Mengalihkan rute koneksi studio...');
 
       response = await fetch(fallbackUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${apiKey.trim()}`,
-        },
-        body: JSON.stringify(payload),
-        signal,
-      });
-    }
-
-    // Resilience: If gateway rejects the 'thinking' parameter with 400 Bad Request, auto-retry without it
-    if (!response.ok && response.status === 400 && (payload.thinking || payload.reasoning_effort)) {
-      console.warn('[AISYS Engine] Gateway menolak parameter thinking/reasoning_effort, mencoba ulang tanpa parameter tersebut...');
-      thinkingStatus = 'rejected-400 (retried without thinking)';
-      delete payload.thinking;
-      delete payload.reasoning_effort;
-      response = await fetch(targetUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -166,7 +146,7 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
         charCount: text.length,
         reasoningChars: 0,
         contentChars: text.length,
-        thinkingParam: thinkingStatus,
+        effort: payload.reasoning_effort,
       };
       onChunk(text, text, false);
       onFinish(text, diagnostic);
@@ -343,7 +323,7 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
       charCount: fullText.length,
       reasoningChars,
       contentChars,
-      thinkingParam: thinkingStatus,
+      effort: payload.reasoning_effort,
     };
     console.info('[AISYS Diagnostic Metrics]:', diagnostic);
     onFinish(fullText, diagnostic);
