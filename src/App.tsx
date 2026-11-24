@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Header } from './components/Header';
 import { ChatPanel } from './components/ChatPanel';
 import { PreviewPanel } from './components/PreviewPanel';
-import { SettingsModal } from './components/SettingsModal';
 import { SkillModal } from './components/SkillModal';
 import { AdminLoginModal } from './components/AdminLoginModal';
 import { LandingPage } from './components/LandingPage';
@@ -76,7 +75,6 @@ export function App() {
   const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
 
   // Modals
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isSkillOpen, setIsSkillOpen] = useState(false);
 
   // Split-screen Resizable Divider (percentage of left panel)
@@ -221,7 +219,15 @@ export function App() {
 
     const effectiveApiKey = getEffectiveApiKey(settings.apiKey);
     if (!effectiveApiKey) {
-      setIsSettingsOpen(true);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Math.random().toString(36).substring(2),
+          role: 'assistant',
+          content: '⚠️ Kunci API Kampus belum diisi di Environment Vercel (`VITE_DEFAULT_API_KEY`). Silakan hubungi admin studio.',
+          timestamp: Date.now(),
+        },
+      ]);
       return;
     }
 
@@ -450,7 +456,6 @@ export function App() {
             onToggleTheme={handleToggleTheme}
             onNewChat={handleNewChat}
             onOpenSkillModal={handleOpenSkillClick}
-            onOpenSettingsModal={() => setIsSettingsOpen(true)}
             onGoHome={() => setCurrentView('landing')}
             isAdmin={isAdmin}
           />
@@ -469,8 +474,6 @@ export function App() {
                 onInputChange={setCurrentInput}
                 onSendMessage={handleSendMessage}
                 onStopStreaming={handleStopStreaming}
-                hasApiKey={Boolean(getEffectiveApiKey(settings.apiKey))}
-                onOpenSettings={() => setIsSettingsOpen(true)}
                 onSelectTab={setActiveTab}
               />
             </div>
@@ -509,13 +512,6 @@ export function App() {
       )}
 
       {/* Modals */}
-      <SettingsModal
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-        settings={settings}
-        onSave={handleSaveSettings}
-      />
-
       <SkillModal
         isOpen={isSkillOpen}
         onClose={() => setIsSkillOpen(false)}

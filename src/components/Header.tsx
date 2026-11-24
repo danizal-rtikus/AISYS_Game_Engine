@@ -10,7 +10,6 @@ interface HeaderProps {
   onToggleTheme: () => void;
   onNewChat: () => void;
   onOpenSkillModal: () => void;
-  onOpenSettingsModal: () => void;
   onGoHome: () => void;
   isAdmin: boolean;
 }
@@ -23,7 +22,6 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleTheme,
   onNewChat,
   onOpenSkillModal,
-  onOpenSettingsModal,
   onGoHome,
   isAdmin,
 }) => {
@@ -193,16 +191,6 @@ export const Header: React.FC<HeaderProps> = ({
         >
           {isAdmin ? <ShieldCheck className="w-3.5 h-3.5" /> : <Sliders className="w-3.5 h-3.5" />}
           <span className="hidden xl:inline">Skill</span>
-        </button>
-
-        {/* Settings */}
-        <button
-          onClick={onOpenSettingsModal}
-          className="flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-[#F6821F] hover:bg-[#E66E0A] text-white transition-colors shadow-sm"
-          title="Pengaturan API Key"
-        >
-          <Key className="w-3.5 h-3.5" />
-          <span className="hidden md:inline">Settings</span>
         </button>
       </div>
     </header>
