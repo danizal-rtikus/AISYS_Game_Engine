@@ -280,7 +280,7 @@ export function App() {
         if (isRepairIntent && !m.content.includes('<!DOCTYPE html>')) {
           return {
             role: m.role,
-            content: `${m.content.trim()}\n\n(PENTING: Jangan menulis analisis panjang. Langsung berikan SELURUH kode game HTML5 mandiri yang LENGKAP dan UTUH dari <!DOCTYPE html> sampai penutup </html> dalam satu blok \`\`\`html.)`,
+            content: `${m.content.trim()}\n\n(PENTING: Dilarang menggunakan placeholder '...' atau elipsis. Dilarang memecah kode menjadi blok terpisah. Langsung berikan SELURUH kode game HTML5 Canvas 2D padat 400-650 baris yang LENGKAP dan UTUH dari <!DOCTYPE html> sampai penutup </html> dalam SATU blok \`\`\`html.)`,
           };
         }
 
@@ -344,26 +344,124 @@ export function App() {
           return updated;
         });
       },
-      onFinish: (fullText) => {
+      onFinish: async (initialFullText, finishReason) => {
+        let accumulatedText = initialFullText;
+        let parsed = extractHtmlFromStream(accumulatedText);
+        let continuationCount = 0;
+        const MAX_CONTINUATIONS = 2;
+
+        // Auto-continuation loop:
+        // If code was actively written but got truncated before </html> (or finish_reason was 'length')
+        // and we have substantial code (> 40 lines), automatically ask AI to continue!
+        while (
+          parsed.code &&
+          !parsed.isComplete &&
+          parsed.lineCount >= 40 &&
+          continuationCount < MAX_CONTINUATIONS &&
+          !abortControllerRef.current?.signal.aborted
+        ) {
+          continuationCount++;
+          console.info(`[AISYS Engine] Kode terpotong di baris ${parsed.lineCount}. Menyambungkan bagian ${continuationCount + 1}...`);
+
+          // Update UI to show continuation in progress
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === assistantId
+                ? {
+                    ...m,
+                    content:
+                      (parsed.displayText ? parsed.displayText.trim() + '\n\n' : '') +
+                      `🔄 *Menyambungkan kode game lanjutan (bagian ${continuationCount + 1})...*`,
+                    isStreaming: true,
+                  }
+                : m
+            )
+          );
+
+          // Get last 200 characters of the current code to give exact context
+          const lastSnippet = parsed.code.slice(-200);
+          const continuationMessages = [
+            ...apiHistory,
+            {
+              role: 'assistant' as const,
+              content: `\`\`\`html\n${parsed.code}`,
+            },
+            {
+              role: 'user' as const,
+              content: `Kode game HTML5 terputus di baris ${parsed.lineCount}. Tolong lanjutkan kode PERSIS dari titik terakhir berikut tanpa mengulang dari awal, tanpa salam, dan tanpa penjelasan. Selesaikan sampai penutup </script></body></html>:\n\n\`\`\`javascript\n${lastSnippet}\n\`\`\``,
+            },
+          ];
+
+          try {
+            await sendDeepSeekMessage({
+              apiKey: effectiveApiKey,
+              baseUrl: settings.baseUrl,
+              model: settings.model,
+              systemPrompt: settings.systemPrompt,
+              history: continuationMessages,
+              signal: abortControllerRef.current?.signal,
+              onChunk: (_delta, fullContinuation) => {
+                const rawChunk = fullContinuation
+                  .replace(/^```(?:html|javascript|js)?\s*\n?/i, '')
+                  .replace(/```\s*$/i, '');
+
+                const tentativeCode = parsed.code + (rawChunk.startsWith('\n') ? '' : '\n') + rawChunk;
+                const tentativeParsed = extractHtmlFromStream(`\`\`\`html\n${tentativeCode}\n\`\`\``);
+
+                setMessages((prev) =>
+                  prev.map((m) =>
+                    m.id === assistantId
+                      ? {
+                          ...m,
+                          extractedCode: tentativeParsed.code || tentativeCode,
+                          codeLineCount: tentativeParsed.lineCount,
+                          isStreaming: true,
+                          isCodeComplete: tentativeParsed.isComplete,
+                        }
+                      : m
+                  )
+                );
+
+                if (tentativeParsed.code) {
+                  setActiveCode(tentativeParsed.code);
+                }
+              },
+              onError: (continuationErr) => {
+                console.warn('[AISYS Engine] Gagal menyambungkan kode lanjutan:', continuationErr);
+              },
+              onFinish: (finalContinuation) => {
+                const rawChunk = finalContinuation
+                  .replace(/^```(?:html|javascript|js)?\s*\n?/i, '')
+                  .replace(/```\s*$/i, '');
+                const stitchedCode = parsed.code + (rawChunk.startsWith('\n') ? '' : '\n') + rawChunk;
+                accumulatedText = `\`\`\`html\n${stitchedCode}\n\`\`\``;
+                parsed = extractHtmlFromStream(accumulatedText);
+              },
+            });
+          } catch {
+            break;
+          }
+        }
+
         setIsStreaming(false);
-        const parsed = extractHtmlFromStream(fullText);
+        const finalParsed = extractHtmlFromStream(accumulatedText);
 
         setMessages((prev) => {
           const updated = prev.map((m) => {
             if (m.id === assistantId) {
-              const safeContent = parsed.displayText?.trim()
-                ? parsed.displayText.trim()
-                : parsed.code
+              const safeContent = finalParsed.displayText?.trim()
+                ? finalParsed.displayText.trim()
+                : finalParsed.code
                 ? 'Game HTML5 berhasil dirancang dan disintesis ke Panel Sandbox.'
-                : fullText || m.content;
+                : accumulatedText || m.content;
 
               return {
                 ...m,
                 content: safeContent,
-                extractedCode: parsed.code || undefined,
-                codeLineCount: parsed.lineCount,
+                extractedCode: finalParsed.code || undefined,
+                codeLineCount: finalParsed.lineCount,
                 isStreaming: false,
-                isCodeComplete: parsed.isComplete,
+                isCodeComplete: finalParsed.isComplete,
                 timestamp: Date.now(),
               };
             }
@@ -373,14 +471,14 @@ export function App() {
           return updated;
         });
 
-        if (parsed.code && parsed.code.length > 50) {
-          const title = extractGameTitle(parsed.code, text.slice(0, 30));
-          if (parsed.isComplete) {
+        if (finalParsed.code && finalParsed.code.length > 50) {
+          const title = extractGameTitle(finalParsed.code, text.slice(0, 30));
+          if (finalParsed.isComplete) {
             setVersions((prevVersions) => {
               const newVersion: GameVersion = {
                 id: Math.random().toString(36).substring(2),
                 version: prevVersions.length + 1,
-                code: parsed.code!,
+                code: finalParsed.code!,
                 title,
                 timestamp: Date.now(),
                 prompt: text.slice(0, 50),
@@ -391,7 +489,7 @@ export function App() {
               return newVersions;
             });
           }
-          setActiveCode(parsed.code);
+          setActiveCode(finalParsed.code);
           setActiveTitle(title);
         }
       },

@@ -8,7 +8,7 @@ export interface StreamOptions {
   history: Array<{ role: 'user' | 'assistant' | 'system'; content: string }>;
   onChunk: (delta: string, fullText: string, isThinking?: boolean) => void;
   onError: (err: Error) => void;
-  onFinish: (fullText: string) => void;
+  onFinish: (fullText: string, finishReason?: string | null) => void;
   signal?: AbortSignal;
 }
 
@@ -129,7 +129,7 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
         throw new Error('Mesin AI merespon dengan data kosong. Periksa kuota token atau ganti model.');
       }
       onChunk(text, text, false);
-      onFinish(text);
+      onFinish(text, choice?.finish_reason || 'stop');
       return;
     }
 
@@ -142,6 +142,7 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
     let fullText = '';
     let accumulatedReasoning = '';
     let buffer = '';
+    let lastFinishReason: string | null = null;
 
     while (true) {
       const { done, value } = await reader.read();
@@ -183,6 +184,9 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
           }
 
           const choice = parsed.choices?.[0];
+          if (choice?.finish_reason) {
+            lastFinishReason = choice.finish_reason;
+          }
           // Support all possible delta and message formats
           const delta =
             choice?.delta?.content ??
@@ -226,6 +230,9 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
             const parsed = JSON.parse(dataStr);
             if (parsed.error) throw new Error(parsed.error.message);
             const choice = parsed.choices?.[0];
+          if (choice?.finish_reason) {
+            lastFinishReason = choice.finish_reason;
+          }
             const delta =
               choice?.delta?.content ??
               choice?.delta?.text ??
@@ -269,7 +276,7 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
       );
     }
 
-    onFinish(fullText);
+    onFinish(fullText, lastFinishReason);
   } catch (err: any) {
     if (err.name === 'AbortError') {
       return;

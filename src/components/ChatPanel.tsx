@@ -284,7 +284,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                         <button
                           onClick={() =>
                             onSendMessage(
-                              `Kode game sebelumnya terpotong di baris ${msg.codeLineCount}. Tolong lanjutkan dan hasilkan kode game HTML5 yang lengkap dan utuh dari awal sampai penutup </html>.`
+                              `Kode game sebelumnya belum lengkap (di baris ${msg.codeLineCount || 0}). Tolong buatkan kode game HTML5 Canvas 2D yang utuh, padat (400-650 baris), dan lengkap dari <!DOCTYPE html> sampai penutup </html> dalam satu blok \`\`\`html tanpa terpotong dan tanpa placeholder titik-titik.`
                             )
                           }
                           className="flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium bg-[#F6821F] hover:bg-[#E66E0A] text-white transition-colors flex-shrink-0 shadow-sm"

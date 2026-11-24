@@ -7,8 +7,49 @@ export interface ExtractorResult {
 }
 
 /**
+ * Checks whether code is complete, valid, and safe enough to execute in the iframe
+ * without syntax truncation or unfulfilled placeholders.
+ */
+export function isGameCodePlayable(code: string | null | undefined): boolean {
+  if (!code || code.trim().length < 350) return false;
+
+  const trimmed = code.trim();
+
+  // 1. Must have opening and closing HTML tags
+  const hasHtml = /<html[^>]*>/i.test(trimmed) && /<\/html\s*>/i.test(trimmed);
+  const hasScript = /<script[^>]*>/i.test(trimmed) && /<\/script\s*>/i.test(trimmed);
+  if (!hasHtml || !hasScript) return false;
+
+  // 2. Must have at least 50 lines of code for a real interactive game
+  const lines = trimmed.split('\n');
+  if (lines.length < 50) return false;
+
+  // 3. Inspect script content for forbidden placeholder syntax errors
+  const scriptMatch = trimmed.match(/<script[^>]*>([\s\S]*?)<\/script\s*>/i);
+  if (scriptMatch && scriptMatch[1]) {
+    const scriptContent = scriptMatch[1].trim();
+
+    // If script is too short (< 150 chars), it's just a stub/skeleton
+    if (scriptContent.length < 150) return false;
+
+    // Check for lone placeholder tokens like '...', '// ...', or '/* ... */' on a line
+    const hasLoneEllipsis = /^\s*(\.{3,}|\/\/\s*\.{3,}|\/\*\s*\.{3,}\s*\*\/)\s*$/m.test(scriptContent);
+    if (hasLoneEllipsis) return false;
+
+    // Check for obvious unfinished string or unfinished function at the very end
+    if (scriptContent.endsWith('function') || scriptContent.endsWith('const') || scriptContent.endsWith('let')) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+/**
  * Parses raw AI response text to separate conversational text
  * from HTML single-file game code.
+ * Supports multi-block stitching (assembling split HTML + JS snippets into a unified file)
+ * and prevents raw code leaks into the chat bubble.
  */
 export function extractHtmlFromStream(fullText: string): ExtractorResult {
   const codeStartMatch = fullText.match(/```(?:html|HTML)?\s*\n?/);
@@ -28,12 +69,12 @@ export function extractHtmlFromStream(fullText: string): ExtractorResult {
   const codeContentStart = startIdx + codeStartMatch[0].length;
   const beforeCode = fullText.substring(0, startIdx).trim();
 
-  // Look for closing ```
+  // Look for closing ``` of the HTML block
   const remainingText = fullText.substring(codeContentStart);
   const closingIdx = remainingText.indexOf('```');
 
   if (closingIdx === -1) {
-    // Still actively streaming code
+    // Still actively streaming the initial code block
     const rawCode = remainingText;
     const lines = rawCode.split('\n').length;
     return {
@@ -45,31 +86,66 @@ export function extractHtmlFromStream(fullText: string): ExtractorResult {
     };
   }
 
-  // Code block is finished!
-  const completeCode = remainingText.substring(0, closingIdx).trim();
-  const afterCode = remainingText.substring(closingIdx + 3).trim();
+  // Initial code block is finished
+  let completeCode = remainingText.substring(0, closingIdx).trim();
+  let afterCode = remainingText.substring(closingIdx + 3).trim();
+
+  // Multi-Block Stitching:
+  // If the initial HTML block has placeholders (e.g., '...') or a very short <script>,
+  // check if the model provided subsequent ```js or ```javascript blocks in afterCode.
+  const scriptMatch = completeCode.match(/<script[^>]*>([\s\S]*?)<\/script\s*>/i);
+  const isScriptPlaceholder =
+    !scriptMatch ||
+    scriptMatch[1].trim().length < 120 ||
+    /^\s*(\.{3,}|\/\/\s*\.{3,}|\/\*\s*\.{3,}\s*\*\/)\s*$/m.test(scriptMatch[1]);
+
+  if (isScriptPlaceholder && afterCode) {
+    const jsBlocks: string[] = [];
+    const jsRegex = /```(?:js|javascript)?\s*\n([\s\S]*?)```/gi;
+    let jsMatch;
+    while ((jsMatch = jsRegex.exec(afterCode)) !== null) {
+      if (jsMatch[1]?.trim()) {
+        jsBlocks.push(jsMatch[1].trim());
+      }
+    }
+
+    if (jsBlocks.length > 0) {
+      const unifiedJs = jsBlocks.join('\n\n');
+      if (completeCode.includes('</script>')) {
+        // Replace existing placeholder inside <script> with stitched JS
+        completeCode = completeCode.replace(
+          /<script[^>]*>[\s\S]*?<\/script\s*>/i,
+          `<script>\n'use strict';\n\n${unifiedJs}\n</script>`
+        );
+      } else if (completeCode.includes('</body>')) {
+        // Insert <script> before </body>
+        completeCode = completeCode.replace(
+          /<\/body\s*>/i,
+          `<script>\n'use strict';\n\n${unifiedJs}\n</script>\n</body>`
+        );
+      }
+    }
+  }
+
+  // Anti-Code-Leak: Remove any standalone code blocks or chain-of-thought dumps from afterCode
+  // so the chat bubble only displays clean conversational text
+  let cleanAfterCode = afterCode
+    .replace(/```(?:html|js|javascript)?\s*\n[\s\S]*?```/gi, '')
+    // Also remove English thinking monologues if model leaked reasoning into content
+    .replace(/(?:Now the JS|Touch buttons|Audio|Draw|Let me write it|Key: avoid|Now, another check|Check reachability|Now let me double check)[\s\S]*?(?=\n\n|\n[A-Z]|$)/gi, '')
+    .trim();
+
+  const combinedDisplayText = [beforeCode, cleanAfterCode].filter(Boolean).join('\n\n');
   const lines = completeCode.split('\n').length;
-
-  const combinedDisplayText = [beforeCode, afterCode].filter(Boolean).join('\n\n');
-
-  // Verify that code is truly complete and not cut off mid-file
-  const hasHtmlEnd = /<\/html\s*>/i.test(completeCode) || /<\/script\s*>\s*<\/body\s*>/i.test(completeCode);
+  const isPlayable = isGameCodePlayable(completeCode);
 
   return {
     displayText: combinedDisplayText,
     code: completeCode,
     isWritingCode: false,
-    isComplete: hasHtmlEnd,
+    isComplete: isPlayable,
     lineCount: lines,
   };
-}
-
-/**
- * Checks whether code is complete enough to safely execute in the iframe without syntax truncation
- */
-export function isGameCodePlayable(code: string | null | undefined): boolean {
-  if (!code || code.trim().length < 80) return false;
-  return /<\/html\s*>/i.test(code) || /<\/body\s*>/i.test(code) || /<\/script\s*>/i.test(code);
 }
 
 /**
