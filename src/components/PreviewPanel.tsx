@@ -342,13 +342,13 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
               <button
                 onClick={() =>
                   onFixWithAI(
-                    `Kode game HTML5 sebelumnya terpotong di baris ${codeLineCount}. Tolong buatkan ulang kode game HTML5 yang lengkap, mandiri, dan utuh dari <!DOCTYPE html> sampai penutup </html> tanpa terpotong.`
+                    `Tolong buatkan ulang seluruh kode game HTML5 Canvas 2D yang utuh, padat (400-650 baris), dan lengkap dari <!DOCTYPE html> sampai penutup </html>\n<!-- END_OF_GAME --> dalam satu blok \`\`\`html tanpa monolog berpikir dan tanpa draf kode.`
                   )
                 }
                 className="flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#F6821F] hover:bg-[#E66E0A] text-white text-xs font-medium transition-colors shadow-sm"
               >
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>Lanjutkan / Buat Ulang Kode Utuh</span>
+                <span>Buat Ulang Kode Utuh</span>
               </button>
             </div>
           ) : isPlayable ? (

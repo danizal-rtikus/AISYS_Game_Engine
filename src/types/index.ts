@@ -14,6 +14,7 @@ export interface DiagnosticInfo {
   charCount: number;
   reasoningChars: number;
   contentChars: number;
+  thinkingParam?: string;
 }
 
 export interface Message {

@@ -285,12 +285,12 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                           <button
                             onClick={() =>
                               onSendMessage(
-                                `Kode game sebelumnya belum lengkap (di baris ${msg.codeLineCount || 0}). Tolong buatkan kode game HTML5 Canvas 2D yang utuh, padat (400-650 baris), dan lengkap dari <!DOCTYPE html> sampai penutup </html> dalam satu blok \`\`\`html tanpa terpotong dan tanpa placeholder titik-titik.`
+                                `Tolong buatkan ulang seluruh kode game HTML5 Canvas 2D yang utuh, padat (400-650 baris), dan lengkap dari <!DOCTYPE html> sampai penutup </html>\n<!-- END_OF_GAME --> dalam satu blok \`\`\`html tanpa monolog berpikir dan tanpa draf kode.`
                               )
                             }
                             className="flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium bg-[#F6821F] hover:bg-[#E66E0A] text-white transition-colors flex-shrink-0 shadow-sm"
                           >
-                            <span>Lanjutkan</span>
+                            <span>Buat Ulang Kode Utuh</span>
                             <ArrowRight className="w-3 h-3" />
                           </button>
                         )}
@@ -324,11 +324,25 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                           <span>
                             reasoning: <strong>{msg.diagnostic.reasoningChars ?? 0} char</strong>
                           </span>
+                          {msg.diagnostic.thinkingParam && (
+                            <span>
+                              thinking:{' '}
+                              <strong
+                                className={
+                                  msg.diagnostic.thinkingParam.includes('rejected')
+                                    ? 'text-amber-500'
+                                    : 'text-slate-700 dark:text-slate-300'
+                                }
+                              >
+                                {msg.diagnostic.thinkingParam}
+                              </strong>
+                            </span>
+                          )}
                           <span>
                             durasi: <strong>{(msg.diagnostic.durationMs / 1000).toFixed(1)}s</strong>
                           </span>
                           <span>
-                            baris: <strong>{msg.codeLineCount || msg.diagnostic.lineCount}</strong>
+                            baris: <strong>{msg.extractedCode ? (msg.codeLineCount || 0) : 0}</strong>
                           </span>
                         </div>
                       )}

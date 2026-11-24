@@ -53,14 +53,17 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
       })),
   ];
 
+  let thinkingStatus = 'sent (disabled + none)';
+
   const payload: Record<string, any> = {
     model: model,
     messages: messages,
     stream: true,
     stream_options: { include_usage: true },
-    temperature: 0.7,
-    max_tokens: 16384,
+    temperature: 0.3,
+    max_tokens: 32768,
     thinking: { type: 'disabled' },
+    reasoning_effort: 'none',
   };
 
   const startTime = performance.now();
@@ -100,9 +103,11 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
     }
 
     // Resilience: If gateway rejects the 'thinking' parameter with 400 Bad Request, auto-retry without it
-    if (!response.ok && response.status === 400 && payload.thinking) {
-      console.warn('[AISYS Engine] Gateway menolak parameter thinking, mencoba ulang tanpa parameter tersebut...');
+    if (!response.ok && response.status === 400 && (payload.thinking || payload.reasoning_effort)) {
+      console.warn('[AISYS Engine] Gateway menolak parameter thinking/reasoning_effort, mencoba ulang tanpa parameter tersebut...');
+      thinkingStatus = 'rejected-400 (retried without thinking)';
       delete payload.thinking;
+      delete payload.reasoning_effort;
       response = await fetch(targetUrl, {
         method: 'POST',
         headers: {
@@ -161,6 +166,7 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
         charCount: text.length,
         reasoningChars: 0,
         contentChars: text.length,
+        thinkingParam: thinkingStatus,
       };
       onChunk(text, text, false);
       onFinish(text, diagnostic);
@@ -337,6 +343,7 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
       charCount: fullText.length,
       reasoningChars,
       contentChars,
+      thinkingParam: thinkingStatus,
     };
     console.info('[AISYS Diagnostic Metrics]:', diagnostic);
     onFinish(fullText, diagnostic);

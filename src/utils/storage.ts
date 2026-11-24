@@ -29,7 +29,7 @@ export const getStoredSettings = (): AppSettings => {
     const raw = localStorage.getItem(SETTINGS_KEY);
     if (!raw) return DEFAULT_SETTINGS;
     const parsed = JSON.parse(raw);
-    
+
     // Auto-fix if user has old invalid domain api.sumopod.com
     let baseUrl = parsed.baseUrl || DEFAULT_SETTINGS.baseUrl;
     if (baseUrl.includes('api.sumopod.com')) {
