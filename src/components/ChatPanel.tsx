@@ -199,6 +199,40 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                     )}
                   </div>
 
+                  {/* Quick Blueprint / PRD Review Decision Bar */}
+                  {!msg.isStreaming &&
+                    !msg.extractedCode &&
+                    msg.role === 'assistant' &&
+                    (msg.content.includes('GAME BLUEPRINT') ||
+                      msg.content.includes('PRD') ||
+                      msg.content.toLowerCase().includes('blueprint')) && (
+                      <div className="mt-3 pt-2.5 border-t border-slate-200/80 dark:border-[#282B33] flex flex-wrap gap-1.5 items-center">
+                        <button
+                          onClick={() => onSendMessage('Lanjut, buatkan kode game sekarang!')}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#F6821F] hover:bg-[#E66E0A] text-white text-[11px] font-medium transition-colors shadow-sm"
+                        >
+                          <Sparkles className="w-3.5 h-3.5" />
+                          <span>🚀 Lanjut & Buat Game Sekarang</span>
+                        </button>
+                        <button
+                          onClick={() => {
+                            onInputChange('Tolong sesuaikan gaya visualnya menjadi: ');
+                          }}
+                          className="flex items-center gap-1 px-2.5 py-1.5 rounded-md border border-slate-200 dark:border-[#282B33] bg-slate-50 dark:bg-[#1C1E24] hover:bg-slate-100 dark:hover:bg-[#282B33] text-slate-700 dark:text-slate-300 text-[11px] transition-colors"
+                        >
+                          <span>🎨 Ubah Visual</span>
+                        </button>
+                        <button
+                          onClick={() => {
+                            onInputChange('Tolong ubah mekanik atau objektifnya menjadi: ');
+                          }}
+                          className="flex items-center gap-1 px-2.5 py-1.5 rounded-md border border-slate-200 dark:border-[#282B33] bg-slate-50 dark:bg-[#1C1E24] hover:bg-slate-100 dark:hover:bg-[#282B33] text-slate-700 dark:text-slate-300 text-[11px] transition-colors"
+                        >
+                          <span>⚙️ Ubah Mekanik</span>
+                        </button>
+                      </div>
+                    )}
+
                   {/* Smart Code Status Card (Streaming / Complete / Incomplete) */}
                   {(msg.extractedCode || (msg.isStreaming && msg.codeLineCount && msg.codeLineCount > 0)) && (
                     <div

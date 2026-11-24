@@ -45,9 +45,9 @@ export const getStoredSettings = (): AppSettings => {
       model = 'deepseek-flash';
     }
 
-    // Auto-update system prompt if user is using default skill prompt or older version without strict single question rule
+    // Auto-update system prompt if user is using default skill prompt or older version without PRD blueprint review
     let systemPrompt = parsed.systemPrompt || DEFAULT_SKILL_PROMPT;
-    if (systemPrompt.includes('AISYS menyiapkan 4 genre') || !systemPrompt.includes('Strict Single Question Rule')) {
+    if (systemPrompt.includes('AISYS menyiapkan 4 genre') || !systemPrompt.includes('Sesi 6: Presentasi PRD')) {
       systemPrompt = DEFAULT_SKILL_PROMPT;
     }
 
