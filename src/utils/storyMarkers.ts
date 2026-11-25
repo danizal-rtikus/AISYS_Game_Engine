@@ -64,12 +64,37 @@ export function parseMarkers(text: string): ParsedMarkers {
   return { clean, step, options, facts };
 }
 
+const GENRES = [
+  'Endless Runner', '2D Platformer', 'Top-Down Shooter', 'Puzzle Grid', 'Rhythm / Music',
+  'Physics / Slingshot', 'Tower Defense', 'Idle / Tycoon', 'Dungeon Crawler',
+];
+
+/** Genre named in a user message, matched loosely ("platformer", "tower defense", "rhythm"...). */
+function genreIn(text: string): string | null {
+  const t = text.toLowerCase();
+  for (const g of GENRES) {
+    const words = g.toLowerCase().split(/\s*\/\s*|\s+/).filter((w) => w.length > 2 && w !== 'top-down');
+    const main = g.toLowerCase().split(' / ')[0];
+    if (t.includes(main) || words.some((w) => w.length >= 6 && t.includes(w))) return g;
+  }
+  return null;
+}
+
 /** Story facts collected over the whole conversation (a later answer for the same key wins). */
 export function collectStory(messages: Message[]): StoryFact[] {
   const map = new Map<string, string>();
   for (const msg of messages) {
     if (msg.role !== 'assistant' || !msg.content) continue;
     for (const f of parseMarkers(msg.content).facts) map.set(f.key, f.value);
+  }
+  // Fallback: the model sometimes skips [[CERITA: Genre = ...]]; take the genre from the student's
+  // own answer instead, so the story card never misses it once other facts exist.
+  if (!map.has('Genre') && map.size > 0) {
+    for (const msg of messages) {
+      if (msg.role !== 'user' || !msg.content) continue;
+      const g = genreIn(msg.content);
+      if (g) { map.set('Genre', g); break; }
+    }
   }
   const ordered = STORY_KEYS.filter((k) => map.has(k)).map((k) => ({ key: k, value: map.get(k)! }));
   const extra = [...map.keys()].filter((k) => !STORY_KEYS.includes(k)).map((k) => ({ key: k, value: map.get(k)! }));

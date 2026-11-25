@@ -373,6 +373,12 @@ Diuji di Chromium (panel browser Studio, terlihat di layar) dengan halaman uji s
 - Kekurangan yang terlihat: satu langkah tidak menulis `[[CERITA: Genre = ...]]` (kartu cerita kehilangan Genre); materi di game Platformer dangkal (platform hanya berlabel "Energi Kinetik/Potensial"); biaya input sekitar **100 ribu token per percakapan** (sekitar 2,3× v3.0), jadi prompt caching makin penting.
 - Belum diuji: uji dengan siswa sungguhan (durasi nyata ≤ 15 menit), ponsel asli, dan evaluasi model yang lebih besar.
 
+**Perbaikan lanjutan (branch `fix/story-polish`, prompt v4.1):**
+- Kartu cerita mengambil genre dari jawaban siswa bila AI lupa menulis `[[CERITA: Genre = ...]]` (diuji pada transkrip run5 dan 8 variasi penulisan genre).
+- SESI 7B kini punya bagian **MEKANIK BELAJAR**: objek game membawa contoh konkret (bukan nama kategori), bank soal minimal 8 contoh dengan penjelasan, umpan balik saat salah, target menang terkait materi, satu contoh jebakan dari miskonsepsi, plus contoh penerapan untuk 8 genre Beta.
+- run6 (`scripts/eval/results/run6-v41/`, percakapan Platformer yang sama dengan run5): game kini memakai bank 10 contoh konkret ("Bola menggelinding", "Buku di atas rak tinggi", ...) dengan penjelasan yang muncul saat benar/salah, dan memanggil `AISYS.end` untuk menang dan kalah. **Temuan konten:** contoh jebakan "Benda diam di lantai" diberi jawaban "kinetik" (salah; penjelasannya sendiri bertentangan). Prompt v4.1 lalu ditambah aturan bahwa contoh jebakan harus punya satu jawaban benar yang jelas dan bank soal diperiksa ulang; aturan tambahan ini belum diuji ulang. Tinjauan dosen tetap wajib.
+- Harness: deteksi `AISYS.end` kini menerima pemanggilan dengan ternary (`AISYS.end(win ? "menang" : "kalah")`); run5 ternyata juga memanggil keduanya.
+
 ---
 
 ## Lampiran A: Prompt Sesi 7 (siap tempel ke `defaultSkill.ts`)

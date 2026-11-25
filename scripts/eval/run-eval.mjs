@@ -234,7 +234,9 @@ function measure(code) {
     } else {
       r.story = { ok: false, problem: 'tidak ada <script id="aisys-story">' };
     }
-    r.callsEnd = /AISYS\.end\(\s*["']menang["']/.test(code) && /AISYS\.end\(\s*["']kalah["']/.test(code);
+    // AISYS.end may be called with literals or a ternary (AISYS.end(win ? "menang" : "kalah"))
+    const endCalls = [...code.matchAll(/AISYS\.end\(([^)]*)\)/g)].map((m) => m[1]).join(' ');
+    r.callsEnd = /["']menang["']/.test(endCalls) && /["']kalah["']/.test(endCalls);
     return r;
   }
   r.mode = 'manifest';
