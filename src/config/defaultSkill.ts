@@ -2,7 +2,7 @@
  * Default System Prompt / Skill Configuration for AISYS Game Studio
  * Skill: aisys-html5-game-builder
  * Target Engine: AISYS Engine Core (DeepSeek via SumoPod)
- * Prompt version: 4.1 (Studio Cerita: 11-step story-first flow for SMA students, casual tone, learning
+ * Prompt version: 4.2 (Studio Cerita: 11-step story-first flow for SMA students, casual tone, learning
  * material mandatory, story data for the prolog/ending shell; Endless Runner via manifest SESI 7A,
  * other genres via HTML Beta SESI 7B). UI markers: [[LANGKAH]], [[PILIHAN]], [[CERITA]]. Keep public/skill-config.json
  * in sync: the app loads that file at startup and it overrides this constant.
@@ -341,12 +341,21 @@ Contoh penerapan per genre:
 - **Puzzle Grid:** ubin berisi contoh; cocokkan atau kelompokkan ubin yang segolongan.
 - **Rhythm / Music:** not yang jatuh membawa contoh; tekan jalur sesuai golongannya.
 - **Physics / Slingshot:** target yang dilempar berisi contoh; kenai hanya yang sesuai pertanyaan di layar.
-- **Tower Defense:** setiap jenis menara hanya efektif melawan musuh dengan golongan contoh tertentu.
+- **Tower Defense:** musuh membawa contoh; menara hanya menyerang musuh yang golongannya cocok dengan jenis menara. Pemain memasang atau mengganti jenis menara di slot yang berada di samping jalur; musuh yang lolos ke tujuan mengurangi nyawa. Menara tidak pernah mengurangi nyawa sendiri.
 - **Idle / Tycoon:** upgrade dibuka dengan menjawab benar soal tentang contoh.
 - **Dungeon Crawler:** pintu atau peti terbuka dengan memilih contoh yang benar.
 - **DILARANG menulis monolog berpikir, catatan internal, atau draf kode** ("Let me write...", "Hmm", "Actually simpler:", potongan kode sebelum/sesudah blok).
 - **Ukuran kode 400-650 baris.** Pakai perulangan, fungsi generator, atau array konfigurasi ringkas; jangan meng-hardcode ratusan baris koordinat.
 - **Satu blok tunggal tanpa placeholder.** HTML, CSS di \`<style>\`, dan JavaScript di \`<script>\` menyatu dalam satu blok \`\`\`html. DILARANG memakai \`...\`, \`// rest of code\`, atau \`/* tulis logika di sini */\`.
+
+### ATURAN TEKNIS WAJIB (dari bug yang pernah terjadi di game Beta)
+1. **Satu ruang koordinat logis 960×540.** Semua posisi (jalur, slot, platform, musuh, tombol, HUD) ditulis dalam ruang ini. Saat menggambar, pakai \`ctx.setTransform(skala, 0, 0, skala, offsetX, offsetY)\` hasil perhitungan resize. Saat membaca klik atau sentuhan, ubah koordinat layar ke ruang logis dengan rumus kebalikannya. Jangan mencampur ukuran piksel kanvas dengan koordinat logis.
+2. **Semua tempat aksi harus bisa mengenai sasaran.** Slot menara, posisi meriam, area tembak, dan sejenisnya harus berada dalam jangkauan jalur atau sasaran: jarak terdekat ke jalur **lebih kecil dari jangkauan dikurangi 10 piksel**. Hitung jarak setiap slot sebelum menulis koordinatnya.
+3. **Satu penilaian per objek.** Setelah sebuah objek dinilai benar atau salah, hapus objek itu atau tandai sudah dinilai. Nyawa hanya berkurang **sekali** per kesalahan, tidak setiap frame.
+4. **Pilihan bisa diubah.** Pemain bisa mengganti atau membongkar pilihannya (misal klik menara yang sudah ada untuk mengganti jenisnya).
+5. **Teks tidak bertumpuk.** Label di atas objek maksimal sekitar 24 huruf; teks lengkap tampil di panel info saat objek disentuh atau paling dekat. Beri jarak muncul yang cukup agar label tidak saling menimpa, dan beri HUD area sendiri yang tidak tertutup objek.
+6. **Game harus bisa dimenangkan.** Sebelum menulis kode, telusuri satu permainan dari awal sampai target menang: setiap aksi yang dijelaskan di layar harus memberi efek yang terlihat, dan target menang harus bisa dicapai.
+7. **Aturan kategori Langkah 7 juga berlaku di sini.** Nama kategori sesuai sifat contohnya, jangan mencampur peristiwa dengan benda, pakai istilah baku, dan semua teks berbahasa Indonesia.
 
 ### Standar Teknis & Estetika Visual (wajib untuk SESI 7B)
 1. **Satu berkas mandiri:** seluruh HTML, CSS, dan JavaScript dalam satu berkas .html yang jalan via \`file://\` tanpa server.
@@ -362,7 +371,18 @@ export const GAME_REGENERATE_REQUEST =
 
 /** Directive appended to user messages that ask to fix or continue a broken game. */
 export const GAME_REPAIR_DIRECTIVE =
-  '(PENTING: Dilarang menulis monolog berpikir atau draf kode! Langsung berikan game yang LENGKAP dalam tepat SATU blok kode. Endless Runner: blok ```js berisi AISYS.defineGame({ ... }); diakhiri // END_OF_MANIFEST. Genre lain: blok ```html dari <!DOCTYPE html> sampai </html> lalu <!-- END_OF_GAME -->.)';
+  '(PENTING, MODE PERBAIKAN: pesan di atas adalah laporan masalah tentang game terakhir. Jangan memberi tips bermain. Baca kode game terakhir, cari penyebabnya (periksa juga ATURAN TEKNIS WAJIB: ruang koordinat 960x540, jangkauan slot/sasaran, satu penilaian per objek, pilihan bisa diubah, teks tidak bertumpuk, game bisa dimenangkan, aturan kategori). Tulis 1-2 kalimat santai tentang penyebabnya, lalu berikan game yang LENGKAP dan sudah diperbaiki dalam tepat SATU blok kode, tanpa monolog atau draf. Endless Runner: blok ```js berisi AISYS.defineGame({ ... }); diakhiri // END_OF_MANIFEST. Genre lain: blok ```html dari <!DOCTYPE html> sampai </html> lalu <!-- END_OF_GAME -->. Data cerita tetap disertakan.)';
+
+/**
+ * True when a student message reports a problem with a game they are playing ("tidak terjadi apa-apa",
+ * "tidak bisa", "macet", "teks bertumpuk"...). Only used once a game exists, so design-stage answers such
+ * as "aku tidak bisa memilih" do not trigger a rebuild.
+ */
+export function isGameComplaint(text: string): boolean {
+  return /(perbaiki|benerin|betulin|\bfix\b|\bbug\b|error|eror|tidak\s*(ter)?jadi\s*apa|gak\s*(ter)?jadi\s*apa|ga\s*(ter)?jadi\s*apa|nggak\s*(ter)?jadi\s*apa|(tidak|gak|ga|nggak|enggak)\s*(bisa|berfungsi|jalan|muncul|bergerak|menyerang|nembak|merespon|respon|kena|hancur|nyala)|macet|nge-?lag|\bhang\b|freeze|diam\s*saja|diem\s*aja|bertumpuk|menumpuk|numpuk|tumpang\s*tindih|terpotong|kepotong|layar\s*(hitam|kosong|putih)|mustahil|rusak|aneh|belum\s*melihat|tidak\s*selesai|lanjutkan)/i.test(
+    text
+  );
+}
 
 export interface SkillPreset {
   id: string;

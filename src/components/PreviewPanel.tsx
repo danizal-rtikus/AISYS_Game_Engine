@@ -241,7 +241,43 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
     // Full-HTML game (Beta genres, SESI 7B): inject the bridges (preview only) and the story shell
     // (preview and export) right after <head>, so AISYS.end() exists before the game's scripts run.
     // Match tags with attributes too (e.g. <html lang="id">); prepending before <!DOCTYPE> would force quirks mode.
-    const injected = `${withBridge ? `${errorBridgeScript}${bridgeScript}` : ''}${storyScript}`;
+    // Preview only: light automatic check for Beta games (no validator/selfTest exists for them).
+    // It cannot prove the game is winnable; it catches crashes, blank canvases and missing story/ending hooks.
+    const betaCheckScript = `<script>
+(function () {
+  if (!window.parent || window.parent === window) return;
+  var errs = [];
+  addEventListener('error', function (e) { errs.push(String(e.message).slice(0, 160)); });
+  addEventListener('unhandledrejection', function (e) { errs.push('rejection: ' + String(e.reason).slice(0, 140)); });
+  addEventListener('load', function () {
+    setTimeout(function () {
+      var checks = [];
+      checks.push({ id: 'tanpa error', pass: errs.length === 0, detail: errs.length ? errs.slice(0, 3).join(' | ') : 'tidak ada error saat dimuat' });
+      var cs = Array.prototype.slice.call(document.querySelectorAll('canvas'));
+      cs.sort(function (a, b) { return b.width * b.height - a.width * a.height; });
+      var c = cs[0], colors = 0;
+      if (c && c.width && c.height) {
+        try {
+          var d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data, seen = {};
+          var step = Math.max(4, Math.floor(d.length / 4 / 4000) * 4);
+          for (var i = 0; i < d.length; i += step) seen[(d[i] >> 4) + ',' + (d[i + 1] >> 4) + ',' + (d[i + 2] >> 4)] = 1;
+          colors = Object.keys(seen).length;
+        } catch (e) { colors = -1; }
+      }
+      checks.push({ id: 'kanvas tergambar', pass: colors >= 8, detail: c ? (colors < 0 ? 'kanvas tidak bisa dibaca' : colors + ' warna') : 'tidak ada <canvas>' });
+      var storyOk = false, el = document.getElementById('aisys-story');
+      try { var s = el && JSON.parse(el.textContent || ''); storyOk = !!(s && s.prolog && s.prolog.length && s.ending); } catch (e) {}
+      checks.push({ id: 'data cerita', pass: storyOk, detail: storyOk ? 'prolog dan ending ada' : 'JSON cerita tidak ada atau tidak valid' });
+      var src = document.documentElement.innerHTML;
+      var endOk = /AISYS\\.end\\(/.test(src) && /["']menang["']/.test(src) && /["']kalah["']/.test(src);
+      checks.push({ id: 'sinyal ending', pass: endOk, detail: endOk ? 'AISYS.end menang dan kalah' : 'AISYS.end("menang"/"kalah") tidak ditemukan' });
+      var ok = checks.every(function (k) { return k.pass; });
+      parent.postMessage({ type: 'aisys:betacheck', ok: ok, checks: checks }, '*');
+    }, 2500);
+  });
+})();
+</script>`;
+    const injected = `${withBridge ? `${errorBridgeScript}${bridgeScript}${betaCheckScript}` : ''}${storyScript}`;
     if (/<head[^>]*>/i.test(trimmed)) {
       return trimmed.replace(/<head[^>]*>/i, (tag) => `${tag}${injected}`);
     } else if (/<html[^>]*>/i.test(trimmed)) {

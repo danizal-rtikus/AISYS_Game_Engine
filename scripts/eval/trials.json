@@ -1,5 +1,5 @@
 {
-  "_note": "Lampiran B: 5 topik x 4 variasi (2 mudah, 1 miskonsepsi eksplisit, 1 arcade) + 2 PRD jebakan. Jawaban pengguna disimulasikan per sesi; PRD tetap dihasilkan model lewat alur Sesi 1-6. Varian holdout (ditambah setelah run1): topik yang tidak dipakai sebagai contoh di prompt v2.1, untuk menguji aturan kategori tanpa bias. Varian beta (prompt v3.0): genre selain Endless Runner, dibuat dalam mode HTML (SESI 7B); s4 = aksi spesial. Varian story (prompt v4.0): 11 jawaban desain Studio Cerita (answers), termasuk satu jawaban Acak.",
+  "_note": "Lampiran B: 5 topik x 4 variasi (2 mudah, 1 miskonsepsi eksplisit, 1 arcade) + 2 PRD jebakan. Jawaban pengguna disimulasikan per sesi; PRD tetap dihasilkan model lewat alur Sesi 1-6. Varian holdout (ditambah setelah run1): topik yang tidak dipakai sebagai contoh di prompt v2.1, untuk menguji aturan kategori tanpa bias. Varian beta (prompt v3.0): genre selain Endless Runner, dibuat dalam mode HTML (SESI 7B); s4 = aksi spesial. Varian story (prompt v4.0): 11 jawaban desain Studio Cerita (answers), termasuk satu jawaban Acak. story-tower (prompt v4.2): meniru game Tower Defense yang dilaporkan pengguna, plus keluhan setelah game jadi.",
   "trials": [
     {
       "id": "ling-mudah-1",
@@ -277,6 +277,27 @@
         "B",
         "Sudah, mantap"
       ]
+    },
+    {
+      "id": "story-tower",
+      "genre": "Tower Defense",
+      "topic": "biologi",
+      "variant": "story-beta",
+      "expected": {},
+      "answers": [
+        "Tower Defense",
+        "Kapten Raka, siswa SMA jenius dengan drone pintar",
+        "Kota Neon di masa depan",
+        "Melindungi bunga raksasa di tengah kota",
+        "Gerombolan bug digital",
+        "Biologi: bagian-bagian bunga dan fungsinya dalam penyerbukan",
+        "A",
+        "Ternyata bug digital itu dulunya serangga penyerbuk yang tersesat",
+        "B",
+        "A",
+        "Sudah oke"
+      ],
+      "complaint": "saya sudah pasang Putik, Benang Sari dan Mahkota tapi tidak terjadi apa-apa"
     }
   ]
 }

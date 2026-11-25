@@ -1,0 +1,369 @@
+{
+  "id": "story-platformer",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo kak, aku mau bikin game!",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 187,
+        "prompt_tokens": 8585,
+        "total_tokens": 8772,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 4399,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 1,
+        "options": 3,
+        "facts": [],
+        "words": 76
+      }
+    },
+    {
+      "user": "2D Platformer",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 151,
+        "prompt_tokens": 8779,
+        "total_tokens": 8930,
+        "prompt_tokens_details": {
+          "cached_tokens": 8448
+        }
+      },
+      "ms": 3923,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 2,
+        "options": 3,
+        "facts": [
+          "Genre"
+        ],
+        "words": 41
+      }
+    },
+    {
+      "user": "Rani, siswi SMA yang bisa mengendalikan gravitasi",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 151,
+        "prompt_tokens": 8948,
+        "total_tokens": 9099,
+        "prompt_tokens_details": {
+          "cached_tokens": 8704
+        }
+      },
+      "ms": 5674,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 3,
+        "options": 3,
+        "facts": [
+          "Pahlawan"
+        ],
+        "words": 43
+      }
+    },
+    {
+      "user": "Laboratorium sekolah di masa depan",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 143,
+        "prompt_tokens": 9108,
+        "total_tokens": 9251,
+        "prompt_tokens_details": {
+          "cached_tokens": 8704
+        }
+      },
+      "ms": 3034,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 4,
+        "options": 3,
+        "facts": [
+          "Dunia"
+        ],
+        "words": 38
+      }
+    },
+    {
+      "user": "Mengembalikan reaktor energi yang dicuri",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 137,
+        "prompt_tokens": 9265,
+        "total_tokens": 9402,
+        "prompt_tokens_details": {
+          "cached_tokens": 8960
+        }
+      },
+      "ms": 3366,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 5,
+        "options": 3,
+        "facts": [
+          "Misi"
+        ],
+        "words": 34
+      }
+    },
+    {
+      "user": "Profesor Entropi dan drone-dronenya",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 164,
+        "prompt_tokens": 9416,
+        "total_tokens": 9580,
+        "prompt_tokens_details": {
+          "cached_tokens": 9216
+        }
+      },
+      "ms": 7413,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 6,
+        "options": 3,
+        "facts": [
+          "Lawan"
+        ],
+        "words": 51
+      }
+    },
+    {
+      "user": "Fisika: energi kinetik dan energi potensial",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 150,
+        "prompt_tokens": 9595,
+        "total_tokens": 9745,
+        "prompt_tokens_details": {
+          "cached_tokens": 9216
+        }
+      },
+      "ms": 3830,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 7,
+        "options": 3,
+        "facts": [
+          "Materi"
+        ],
+        "words": 39
+      }
+    },
+    {
+      "user": "B",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 147,
+        "prompt_tokens": 9749,
+        "total_tokens": 9896,
+        "prompt_tokens_details": {
+          "cached_tokens": 9472
+        }
+      },
+      "ms": 2989,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 8,
+        "options": 3,
+        "facts": [
+          "Mekanik"
+        ],
+        "words": 41
+      }
+    },
+    {
+      "user": "Ternyata Profesor Entropi adalah guru fisika Rani sendiri",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 138,
+        "prompt_tokens": 9914,
+        "total_tokens": 10052,
+        "prompt_tokens_details": {
+          "cached_tokens": 9728
+        }
+      },
+      "ms": 3390,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 9,
+        "options": 3,
+        "facts": [
+          "Twist"
+        ],
+        "words": 41
+      }
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 150,
+        "prompt_tokens": 10056,
+        "total_tokens": 10206,
+        "prompt_tokens_details": {
+          "cached_tokens": 9728
+        }
+      },
+      "ms": 6174,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 10,
+        "options": 3,
+        "facts": [
+          "Visual"
+        ],
+        "words": 45
+      }
+    },
+    {
+      "user": "B",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 528,
+        "prompt_tokens": 10210,
+        "total_tokens": 10738,
+        "prompt_tokens_details": {
+          "cached_tokens": 9984
+        }
+      },
+      "ms": 10511,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 11,
+        "options": 3,
+        "facts": [
+          "Ending"
+        ],
+        "words": 211
+      }
+    },
+    {
+      "user": "Sudah, mantap",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 6893,
+        "prompt_tokens": 10746,
+        "total_tokens": 17639,
+        "prompt_tokens_details": {
+          "cached_tokens": 9984
+        }
+      },
+      "ms": 52937,
+      "reasoningChars": 0,
+      "markers": {
+        "step": null,
+        "options": 0,
+        "facts": [],
+        "words": 2394
+      }
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo kak, aku mau bikin game!"
+    },
+    {
+      "role": "assistant",
+      "content": "Halo juga! 🎮 Senang kamu datang! Hari ini kita bakal bikin game edukasi buatanmu sendiri bareng AI, cuma sekitar 15 menit. Seru banget!\n\nKita mulai dari yang paling seru dulu ya: **mau bikin game genre apa?** Ada 9 pilihan nih:\n- **Endless Runner** (stabil, paling aman buat pemula) 🏃\n- 2D Platformer, Top-Down Shooter, Puzzle Grid, Rhythm, Physics, Tower Defense, Idle/Tycoon, Dungeon Crawler (semua Beta)\n\nPilih salah satu, atau tulis idemu sendiri, atau tekan 🎲 Acak!\n\n[[LANGKAH: 1/11 | Genre]]\n[[PILIHAN: Endless Runner | 2D Platformer | Puzzle Grid]]"
+    },
+    {
+      "role": "user",
+      "content": "2D Platformer"
+    },
+    {
+      "role": "assistant",
+      "content": "Wih, pilihan keren! 🏃‍♂️ 2D Platformer itu seru banget—pemain lompat-lompat sambil belajar. Jadi kita bakal bikin game platformer edukasi buatanmu!\n\nSekarang, **siapa tokoh utama yang bakal jadi pahlawan di game kamu?** Bebas juga kalau mau tulis sendiri atau tekan 🎲 Acak!\n\n[[LANGKAH: 2/11 | Pahlawan]]\n[[PILIHAN: Kucing ninja lincah | Robot penjelajah | Siswa SMA berkekuatan rahasia]]\n[[CERITA: Genre = 2D Platformer]]"
+    },
+    {
+      "role": "user",
+      "content": "Rani, siswi SMA yang bisa mengendalikan gravitasi"
+    },
+    {
+      "role": "assistant",
+      "content": "Keren banget! 🔥 Rani, siswi SMA yang bisa membalik gravitasi—itu ide yang bikin platformer jadi unik, karena dia bisa melompat ke tempat yang nggak mungkin dijangkau orang biasa!\n\nSekarang, **di mana petualangan Rani terjadi?** Pilih atau tulis duniamu sendiri, atau tekan 🎲 Acak!\n\n[[LANGKAH: 3/11 | Dunia]]\n[[PILIHAN: Kota masa depan melayang | Laboratorium fisika raksasa | Hutan ajaib terbalik]]\n[[CERITA: Pahlawan = Rani, siswi SMA pengendali gravitasi]]"
+    },
+    {
+      "role": "user",
+      "content": "Laboratorium sekolah di masa depan"
+    },
+    {
+      "role": "assistant",
+      "content": "Mantap! 🧪 Jadi Rani berpetualang di laboratorium sekolah masa depan yang penuh alat canggih dan lorong-lorong aneh—tempat sempurna buat kekuatan gravitasinya!\n\nSekarang, **apa misi yang harus Rani capai di sana?** Pilih atau tulis sendiri, atau tekan 🎲 Acak!\n\n[[LANGKAH: 4/11 | Misi]]\n[[PILIHAN: Selamatkan teman yang terjebak | Kumpulkan data eksperimen | Matikan reaktor yang kacau]]\n[[CERITA: Dunia = Laboratorium sekolah masa depan]]"
+    },
+    {
+      "role": "user",
+      "content": "Mengembalikan reaktor energi yang dicuri"
+    },
+    {
+      "role": "assistant",
+      "content": "Keren! ⚡ Jadi Rani harus mengembalikan reaktor energi yang dicuri supaya laboratorium sekolahnya nggak mati total—misi yang bikin deg-degan!\n\nSekarang, **siapa atau apa yang menghalangi Rani?** Pilih atau tulis sendiri, atau tekan 🎲 Acak!\n\n[[LANGKAH: 5/11 | Lawan]]\n[[PILIHAN: Ilmuwan gila pencuri reaktor | Robot keamanan rusak | Makhluk energi liar]]\n[[CERITA: Misi = Mengembalikan reaktor energi yang dicuri]]"
+    },
+    {
+      "role": "user",
+      "content": "Profesor Entropi dan drone-dronenya"
+    },
+    {
+      "role": "assistant",
+      "content": "Keren banget! 😈 Profesor Entropi dengan pasukan drone-nya—nama yang pas banget buat penjahat di lab fisika, dan drone-dronenya bikin platformer makin menantang!\n\nSekarang bagian penting: **materi pelajaran apa yang mau kamu selipkan?** Aku kasih 3 topik yang cocok sama cerita lab + gravitasi ini, atau tulis sendiri, atau tekan 🎲 Acak!\n\n[[LANGKAH: 6/11 | Materi Pelajaran]]\n[[PILIHAN: Jenis-jenis gaya (fisika) | Perubahan energi | Hukum Newton]]\n[[CERITA: Lawan = Profesor Entropi dan drone-drone]]"
+    },
+    {
+      "role": "user",
+      "content": "Fisika: energi kinetik dan energi potensial"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan cerdas! ⚡ Energi kinetik dan potensial pas banget sama tema gravitasi Rani—jadi belajar sambil main terasa alami!\n\nSekarang, **gimana caranya materi itu jadi inti permainan?** Pilih cara yang paling kamu suka, atau tulis sendiri, atau tekan 🎲 Acak!\n\n[[LANGKAH: 7/11 | Mekanik Belajar]]\n[[PILIHAN: Lompat ke platform berlabel energi yang benar | Kumpulkan benda sesuai jenis energinya | Balik gravitasi untuk menangkap contoh energi]]\n[[CERITA: Materi = Energi kinetik dan potensial]]"
+    },
+    {
+      "role": "user",
+      "content": "B"
+    },
+    {
+      "role": "assistant",
+      "content": "Oke, keren! 🎯 Jadi Rani melompat dan mengumpulkan benda-benda di lab—tapi hanya yang sesuai jenis energi yang diminta. Belajar sambil gerak, mantap!\n\nSekarang, **twist apa yang bikin cerita makin seru di tengah permainan?** Pilih atau tulis sendiri, atau tekan 🎲 Acak!\n\n[[LANGKAH: 8/11 | Twist]]\n[[PILIHAN: Profesor Entropi ternyata ayah Rani | Reaktor mulai meledak | Rani dapat kekuatan baru]]\n[[CERITA: Mekanik = Kumpulkan benda sesuai jenis energi]]"
+    },
+    {
+      "role": "user",
+      "content": "Ternyata Profesor Entropi adalah guru fisika Rani sendiri"
+    },
+    {
+      "role": "assistant",
+      "content": "Wah, plot twist! 😱 Profesor Entropi ternyata guru fisika Rani sendiri—jadi ceritanya bukan sekadar lawan, tapi ada drama personal yang bikin makin seru!\n\nSekarang, **gaya visualnya mau seperti apa?** Pilih yang paling cocok sama lab masa depan, atau tekan 🎲 Acak!\n\n[[LANGKAH: 9/11 | Gaya Visual]]\n[[PILIHAN: Clean Modern & Soft Gradient | Cyberpunk / Neon Glow | Vibrant Cartoon Arcade]]\n[[CERITA: Twist = Profesor Entropi adalah guru fisika Rani]]"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan elegan! ✨ Clean Modern & Soft Gradient pas banget buat lab masa depan yang bersih dan futuristik—warnanya lembut tapi tetap terasa canggih!\n\nTerakhir nih: **ending-nya mau seperti apa?** Ada 3 pasangan ending (menang & kalah), pilih yang paling kamu suka, atau tekan 🎲 Acak!\n\n[[LANGKAH: 10/11 | Ending]]\n[[PILIHAN: Reaktor pulih, guru sadar & berdamai | Reaktor pulih, guru kabur | Reaktor pulih, Rani jadi pahlawan sekolah]]\n[[CERITA: Visual = Clean Modern & Soft Gradient]]"
+    },
+    {
+      "role": "user",
+      "content": "B"
+    },
+    {
+      "role": "assistant",
+      "content": "Oke, dramatis! 🏃‍♂️ Reaktor berhasil pulih, tapi Profesor Entropi kabur—ending yang bikin penasaran dan bisa jadi awal petualangan baru!\n\nSekarang aku rangkum semua idemu jadi **Blueprint Game** ya. Cek dulu, kalau ada yang mau diubah tinggal bilang!\n\n**📋 Blueprint Game**\n\n**Judul:** Gravitasi Rani: Reaktor yang Dicuri\n**Genre:** 2D Platformer (Beta) | **Gaya:** Clean Modern & Soft Gradient\n\n**Prolog:**\n1. 🌟 Rani, siswi SMA dengan kekuatan mengendalikan gravitasi, berlatih di laboratorium sekolah masa depan.\n2. 👾 Suatu hari reaktor energi lab dicuri! Pelakunya Profesor Entropi—yang ternyata guru fisika Rani sendiri.\n3. 🎯 Rani harus melompat dan mengumpulkan benda-benda sesuai jenis energinya untuk memulihkan reaktor.\n\n**Cara bermain & menang:** Rani melompat antar platform mengumpulkan benda. HUD menunjukkan jenis energi yang dicari (kinetik/potensial). Ambil yang cocok = skor, ambil yang salah = nyawa berkurang. Kumpulkan **10 benda benar** untuk menang.\n\n**Materi:** Fisika—Energi Kinetik & Potensial\n- **Tujuan:** Membedakan benda berdasarkan jenis energinya.\n- **Miskonsepsi diuji:** Benda diam di ketinggian dianggap tidak punya energi (padahal punya energi potensial).\n- **Contoh:** \"Bola menggelinding\" (kinetik), \"Batu di atas lemari\" (potensial), \"Air terjun\" (kinetik), dll.\n\n**Ending:**\n- 🏆 Menang: Reaktor pulih, tapi Profesor Entropi kabur—Rani bersumpah akan menyelidiki.\n- 💫 Kalah: Reaktor padam, Rani terjatuh—tapi dia bangkit dan mencoba lagi.\n\nSudah siap dibangun, atau ada yang mau diubah?\n\n[[LANGKAH: 11/11 | Blueprint]]\n[[PILIHAN: Lanjut, bangun game! | Ubah cerita | Ubah materi]]\n[[CERITA: Ending = Reaktor pulih, guru kabur]]"
+    },
+    {
+      "role": "user",
+      "content": "Sudah, mantap"
+    },
+    {
+      "role": "assistant",
+      "content": "Siap! 🚀 Ini game platformer Rani—lompat ke benda yang energinya cocok, kumpulkan 10 yang benar buat memulihkan reaktor!\n\n```html\n<!DOCTYPE html>\n<html lang=\"id\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">\n<title>Gravitasi Rani: Reaktor yang Dicuri</title>\n<script type=\"application/json\" id=\"aisys-story\">\n{\n  \"title\": \"Gravitasi Rani: Reaktor yang Dicuri\",\n  \"hero\": { \"name\": \"Rani\", \"emoji\": \"🧑‍🚀\", \"desc\": \"Siswi SMA yang bisa mengendalikan gravitasi\" },\n  \"world\": { \"name\": \"Laboratorium Sekolah Masa Depan\", \"emoji\": \"🧪\" },\n  \"mood\": { \"from\": \"#1e3a8a\", \"to\": \"#0f766e\" },\n  \"prolog\": [\n    { \"text\": \"Rani, siswi SMA dengan kekuatan mengendalikan gravitasi, berlatih di laboratorium sekolah masa depan yang penuh alat canggih.\", \"emoji\": \"🌟\" },\n    { \"text\": \"Suatu hari reaktor energi lab dicuri! Pelakunya Profesor Entropi—yang ternyata guru fisika Rani sendiri.\", \"emoji\": \"👾\" },\n    { \"text\": \"Bantu Rani melompat dan mengumpulkan benda sesuai jenis energinya untuk memulihkan reaktor.\", \"emoji\": \"🎯\" }\n  ],\n  \"goal\": { \"text\": \"Kumpulkan 10 benda dengan jenis energi yang benar\" },\n  \"ending\": {\n    \"menang\": { \"text\": \"Reaktor pulih dan lab kembali menyala! Tapi Profesor Entropi kabur—Rani bersumpah akan menyelidiki ke mana gurunya pergi.\", \"emoji\": \"🏆\" },\n    \"kalah\": { \"text\": \"Reaktor padam dan Rani terjatuh. Tapi seorang pahlawan sejati selalu bangkit—ayo coba lagi!\", \"emoji\": \"💫\" }\n  }\n}\n</script>\n<style>\n  * { margin: 0; padding: 0; box-sizing: border-box; }\n  html, body { width: 100%; height: 100%; overflow: hidden; background: #0b1020; font-family: 'Segoe UI', system-ui, sans-serif; }\n  #wrap { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }\n  canvas { display: block; background: #0b1020; touch-action: none; }\n  #touch { position: fixed; inset: 0; pointer-events: none; }\n  .btn { position: absolute; pointer-events: auto; width: 68px; height: 68px; border-radius: 50%;\n    background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.35); color: #fff;\n    font-size: 26px; display: flex; align-items: center; justify-content: center; user-select: none;\n    -webkit-user-select: none; backdrop-filter: blur(4px); }\n  .btn:active { background: rgba(255,255,255,0.3); }\n  #bLeft { left: 18px; bottom: 24px; }\n  #bRight { left: 100px; bottom: 24px; }\n  #bJump { right: 24px; bottom: 24px; width: 84px; height: 84px; font-size: 20px; }\n  #mute { position: fixed; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 10px;\n    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.3); color: #fff;\n    font-size: 18px; cursor: pointer; pointer-events: auto; z-index: 10; }\n</style>\n</head>\n<body>\n<div id=\"wrap\"><canvas id=\"cv\"></canvas></div>\n<div id=\"touch\">\n  <div class=\"btn\" id=\"bLeft\">◀</div>\n  <div class=\"btn\" id=\"bRight\">▶</div>\n  <div class=\"btn\" id=\"bJump\">LOMPAT</div>\n</div>\n<button id=\"mute\">🔊</button>\n<script>\n(function(){\n\"use strict\";\nconst W = 960, H = 540;\nconst cv = document.getElementById('cv');\nconst ctx = cv.getContext('2d');\nlet scale = 1, offX = 0, offY = 0;\n\nfunction resize(){\n  const ww = window.innerWidth, wh = window.innerHeight;\n  scale = Math.min(ww / W, wh / H);\n  offX = (ww - W * scale) / 2;\n  offY = (wh - H * scale) / 2;\n  cv.width = ww; cv.height = wh;\n  cv.style.width = ww + 'px'; cv.style.height = wh + 'px';\n}\nwindow.addEventListener('resize', resize);\nresize();\n\n// ---------- AUDIO ----------\nlet audioCtx = null, muted = false;\nfunction unlockAudio(){\n  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }\n  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();\n}\nfunction beep(freq, dur, type, vol){\n  if (!audioCtx || muted) return;\n  const o = audioCtx.createOscillator(), g = audioCtx.createGain();\n  o.type = type || 'sine'; o.frequency.value = freq;\n  g.gain.setValueAtTime(vol || 0.15, audioCtx.currentTime);\n  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);\n  o.connect(g); g.connect(audioCtx.destination);\n  o.start(); o.stop(audioCtx.currentTime + dur);\n}\nfunction sfxCorrect(){ beep(660, 0.12, 'triangle', 0.18); setTimeout(()=>beep(990,0.15,'triangle',0.15),80); }\nfunction sfxWrong(){ beep(180, 0.25, 'sawtooth', 0.15); }\nfunction sfxJump(){ beep(520, 0.1, 'square', 0.1); }\nfunction sfxWin(){ [523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,0.2,'triangle',0.18), i*130)); }\nfunction sfxLose(){ [400,320,240,160].forEach((f,i)=>setTimeout(()=>beep(f,0.25,'sawtooth',0.15), i*150)); }\ndocument.getElementById('mute').addEventListener('click', function(e){\n  e.stopPropagation(); unlockAudio(); muted = !muted;\n  this.textContent = muted ? '🔇' : '🔊';\n});\nwindow.addEventListener('pointerdown', unlockAudio, { once: false });\n\n// ---------- DATA SOAL ----------\n// Setiap contoh punya jawaban benar yang jelas: 'kinetik' atau 'potensial'\nconst BANK = [\n  { teks: \"Bola menggelinding\",       jawab: \"kinetik\",   why: \"Benda bergerak punya energi kinetik.\" },\n  { teks: \"Batu di atas lemari\",      jawab: \"potensial\", why: \"Posisi tinggi menyimpan energi potensial.\" },\n  { teks: \"Air terjun jatuh\",         jawab: \"kinetik\",   why: \"Air yang bergerak cepat punya energi kinetik.\" },\n  { teks: \"Anak panah di busur\",      jawab: \"potensial\", why: \"Busur terentang menyimpan energi potensial elastis.\" },\n  { teks: \"Mobil melaju di jalan\",    jawab: \"kinetik\",   why: \"Massa yang bergerak memiliki energi kinetik.\" },\n  { teks: \"Buah mangga di dahan\",     jawab: \"potensial\", why: \"Ketinggian dari tanah memberi energi potensial.\" },\n  { teks: \"Angin bertiup kencang\",    jawab: \"kinetik\",   why: \"Udara bergerak memiliki energi kinetik.\" },\n  { teks: \"Pegas tertekan\",           jawab: \"potensial\", why: \"Pegas tertekan menyimpan energi potensial elastis.\" },\n  { teks: \"Pelari sedang sprint\",     jawab: \"kinetik\",   why: \"Tubuh yang bergerak punya energi kinetik.\" },\n  { teks: \"Buku di rak atas\",         jawab: \"potensial\", why: \"Benda diam di ketinggian tetap punya energi potensial.\" }\n];\n\n// ---------- STATE ----------\nconst G = {\n  state: 'mulai', // mulai, main, menang, kalah\n  score: 0, nyawa: 3, benar: 0, target: 10,\n  targetEnergi: 'kinetik',\n  waktu: 0, feedback: null, feedbackT: 0,\n  partikel: []\n};\n\nconst player = { x: 120, y: 380, w: 34, h: 46, vx: 0, vy: 0, onGround: false, invuln: 0 };\nconst GRAV = 1800, MOVE = 260, JUMP = 640;\n\n// Platform: {x,y,w,h}\nconst platforms = [\n  { x: 0,   y: 480, w: 960, h: 60 },   // lantai\n  { x: 180, y: 380, w: 150, h: 18 },\n  { x: 420, y: 300, w: 150, h: 18 },\n  { x: 660, y: 380, w: 150, h: 18 },\n  { x: 300, y: 200, w: 140, h: 18 },\n  { x: 600, y: 200, w: 140, h: 18 }\n];\n\nlet items = []; // {x,y,w,h,teks,jawab,why,aktif}\nlet soalPool = [];\n\nfunction shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }\n\nfunction spawnItems(){\n  items = [];\n  soalPool = shuffle(BANK.slice());\n  const spots = [\n    {x: 220, y: 330}, {x: 470, y: 250}, {x: 710, y: 330},\n    {x: 340, y: 150}, {x: 640, y: 150}, {x: 500, y: 430}\n  ];\n  for (let i = 0; i < spots.length; i++){\n    const s = soalPool[i % soalPool.length];\n    items.push({ x: spots[i].x, y: spots[i].y, w: 90, h: 34, teks: s.teks, jawab: s.jawab, why: s.why, aktif: true, bob: Math.random()*6 });\n  }\n}\n\nfunction resetGame(){\n  G.score = 0; G.nyawa = 3; G.benar = 0; G.waktu = 0;\n  G.feedback = null; G.feedbackT = 0; G.partikel = [];\n  G.targetEnergi = 'kinetik';\n  player.x = 120; player.y = 380; player.vx = 0; player.vy = 0; player.invuln = 0;\n  spawnItems();\n  G.state = 'main';\n}\n\n// ---------- INPUT ----------\nconst keys = {};\nwindow.addEventListener('keydown', e => {\n  if (['ArrowLeft','ArrowRight','ArrowUp','Space','KeyA','KeyD','KeyW'].includes(e.code)) e.preventDefault();\n  keys[e.code] = true;\n  if ((e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'KeyW') && G.state === 'mulai') { unlockAudio(); resetGame(); }\n  if (G.state === 'menang' || G.state === 'kalah') {\n    if (e.code === 'Space' || e.code === 'Enter') { unlockAudio(); resetGame(); }\n  }\n});\nwindow.addEventListener('keyup', e => { keys[e.code] = false; });\n\nconst touch = { left: false, right: false, jump: false };\nfunction bindBtn(id, key){\n  const el = document.getElementById(id);\n  const on = e => { e.preventDefault(); unlockAudio(); touch[key] = true;\n    if (G.state === 'mulai') resetGame();\n    else if (G.state === 'menang' || G.state === 'kalah') resetGame(); };\n  const off = e => { e.preventDefault(); touch[key] = false; };\n  el.addEventListener('touchstart', on, {passive:false});\n  el.addEventListener('touchend', off, {passive:false});\n  el.addEventListener('mousedown', on);\n  el.addEventListener('mouseup', off);\n  el.addEventListener('mouseleave', off);\n}\nbindBtn('bLeft','left'); bindBtn('bRight','right'); bindBtn('bJump','jump');\n\n// ---------- LOGIKA ----------\nfunction update(dt){\n  if (G.state !== 'main') return;\n  G.waktu += dt;\n\n  // gerak horizontal\n  let dir = 0;\n  if (keys['ArrowLeft'] || keys['KeyA'] || touch.left) dir -= 1;\n  if (keys['ArrowRight'] || keys['KeyD'] || touch.right) dir += 1;\n  player.vx = dir * MOVE;\n\n  // lompat\n  const jumpPressed = keys['Space'] || keys['ArrowUp'] || keys['KeyW'] || touch.jump;\n  if (jumpPressed && player.onGround){\n    player.vy = -JUMP; player.onGround = false; sfxJump();\n  }\n\n  // fisika\n  player.vy += GRAV * dt;\n  player.x += player.vx * dt;\n  player.y += player.vy * dt;\n\n  // batas kiri-kanan\n  if (player.x < 0) player.x = 0;\n  if (player.x + player.w > W) player.x = W - player.w;\n\n  // tabrakan platform (hanya dari atas)\n  player.onGround = false;\n  for (const p of platforms){\n    if (player.x + player.w > p.x && player.x < p.x + p.w){\n      if (player.vy >= 0 && player.y + player.h <= p.y + 20 && player.y + player.h >= p.y){\n        player.y = p.y - player.h; player.vy = 0; player.onGround = true;\n      }\n    }\n  }\n  // jatuh ke bawah\n  if (player.y > H + 100){\n    player.x = 120; player.y = 380; player.vy = 0;\n    G.nyawa--; sfxWrong();\n    if (G.nyawa <= 0) { G.state = 'kalah'; sfxLose(); if(window.AISYS&&AISYS.end)AISYS.end(\"kalah\"); }\n  }\n\n  if (player.invuln > 0) player.invuln -= dt;\n\n  // tabrakan item\n  for (const it of items){\n    if (!it.aktif) continue;\n    if (player.x + player.w > it.x && player.x < it.x + it.w &&\n        player.y + player.h > it.y && player.y < it.y + it.h){\n      it.aktif = false;\n      if (it.jawab === G.targetEnergi){\n        G.score += 100; G.benar++;\n        G.feedback = { teks: \"BENAR! \" + it.why, warna: \"#22c55e\" };\n        G.feedbackT = 2;\n        sfxCorrect();\n        for (let k=0;k<12;k++) G.partikel.push({x:it.x+it.w/2,y:it.y+it.h/2,vx:(Math.random()-0.5)*300,vy:(Math.random()-0.5)*300,life:0.6,c:'#22c55e'});\n        // ganti target tiap 3 benar\n        if (G.benar % 3 === 0) G.targetEnergi = G.targetEnergi === 'kinetik' ? 'potensial' : 'kinetik';\n        if (G.benar >= G.target){ G.state = 'menang'; sfxWin(); if(window.AISYS&&AISYS.end)AISYS.end(\"menang\"); }\n      } else {\n        G.score = Math.max(0, G.score - 40);\n        G.feedback = { teks: \"SALAH. \" + it.why, warna: \"#ef4444\" };\n        G.feedbackT = 2;\n        sfxWrong();\n        if (player.invuln <= 0){ G.nyawa--; player.invuln = 1.2; }\n        if (G.nyawa <= 0){ G.state = 'kalah'; sfxLose(); if(window.AISYS&&AISYS.end)AISYS.end(\"kalah\"); }\n      }\n    }\n  }\n\n  // respawn item yang habis\n  if (items.every(it => !it.aktif)){\n    spawnItems();\n  }\n\n  // feedback timer\n  if (G.feedbackT > 0){ G.feedbackT -= dt; if (G.feedbackT <= 0) G.feedback = null; }\n\n  // partikel\n  for (const p of G.partikel){ p.x += p.vx*dt; p.y += p.vy*dt; p.vy += 400*dt; p.life -= dt; }\n  G.partikel = G.partikel.filter(p => p.life > 0);\n}\n\n// ---------- GAMBAR ----------\nfunction roundRect(x,y,w,h,r){\n  ctx.beginPath();\n  ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);\n  ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();\n}\n\nfunction drawBackground(){\n  const g = ctx.createLinearGradient(0,0,0,H);\n  g.addColorStop(0, '#1e3a8a'); g.addColorStop(1, '#0f766e');\n  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);\n  // panel lab\n  ctx.globalAlpha = 0.08; ctx.fillStyle = '#fff';\n  for (let i=0;i<8;i++){ roundRect(60+i*110, 60, 80, 120, 10); ctx.fill(); }\n  ctx.globalAlpha = 1;\n  // lampu\n  for (let i=0;i<6;i++){\n    const x = 100 + i*150, y = 40;\n    ctx.fillStyle = 'rgba(255,255,255,0.15)';\n    ctx.beginPath(); ctx.arc(x,y,6,0,Math.PI*2); ctx.fill();\n  }\n}\n\nfunction drawPlatforms(){\n  for (const p of platforms){\n    const g = ctx.createLinearGradient(0,p.y,0,p.y+p.h);\n    g.addColorStop(0,'#38bdf8'); g.addColorStop(1,'#0ea5e9');\n    ctx.fillStyle = g;\n    roundRect(p.x, p.y, p.w, p.h, 8); ctx.fill();\n    ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 2; ctx.stroke();\n  }\n}\n\nfunction drawPlayer(){\n  if (player.invuln > 0 && Math.floor(G.waktu*20)%2===0) return;\n  const cx = player.x + player.w/2, cy = player.y + player.h/2;\n  // aura gravitasi\n  ctx.save();\n  ctx.globalAlpha = 0.25;\n  const gg = ctx.createRadialGradient(cx,cy,4,cx,cy,40);\n  gg.addColorStop(0,'#a78bfa'); gg.addColorStop(1,'rgba(167,139,250,0)');\n  ctx.fillStyle = gg; ctx.beginPath(); ctx.arc(cx,cy,40,0,Math.PI*2); ctx.fill();\n  ctx.restore();\n  // badan\n  ctx.fillStyle = '#a78bfa';\n  roundRect(player.x, player.y, player.w, player.h, 8); ctx.fill();\n  ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();\n  // kepala\n  ctx.fillStyle = '#fde68a';\n  ctx.beginPath(); ctx.arc(cx, player.y+10, 10, 0, Math.PI*2); ctx.fill();\n  // mata\n  ctx.fillStyle = '#1e293b';\n  ctx.beginPath(); ctx.arc(cx-4, player.y+9, 2, 0, Math.PI*2); ctx.fill();\n  ctx.beginPath(); ctx.arc(cx+4, player.y+9, 2, 0, Math.PI*2); ctx.fill();\n}\n\nfunction drawItems(){\n  for (const it of items){\n    if (!it.aktif) continue;\n    const bob = Math.sin(G.waktu*3 + it.bob) * 4;\n    const y = it.y + bob;\n    const g = ctx.createLinearGradient(it.x, y, it.x, y+it.h);\n    g.addColorStop(0,'#fbbf24'); g.addColorStop(1,'#f59e0b');\n    ctx.fillStyle = g;\n    ctx.shadowColor = '#fbbf24'; ctx.shadowBlur = 12;\n    roundRect(it.x, y, it.w, it.h, 8); ctx.fill();\n    ctx.shadowBlur = 0;\n    ctx.strokeStyle = 'rgba(255,255,255,0.6)'; ctx.lineWidth = 1.5; ctx.stroke();\n    ctx.fillStyle = '#1e293b'; ctx.font = 'bold 11px system-ui'; ctx.textAlign = 'center';\n    ctx.fillText(it.teks, it.x + it.w/2, y + it.h/2 + 4);\n  }\n}\n\nfunction drawHUD(){\n  // panel atas\n  ctx.fillStyle = 'rgba(15,23,42,0.6)';\n  roundRect(12, 12, 420, 62, 12); ctx.fill();\n  ctx.textAlign = 'left';\n  ctx.fillStyle = '#fff'; ctx.font = 'bold 16px system-ui';\n  ctx.fillText('Skor: ' + G.score, 26, 36);\n  ctx.fillText('Nyawa: ' + '❤️'.repeat(Math.max(0,G.nyawa)), 26, 60);\n  // target\n  ctx.fillStyle = 'rgba(15,23,42,0.6)';\n  roundRect(W-300, 12, 288, 62, 12); ctx.fill();\n  ctx.textAlign = 'right';\n  ctx.fillStyle = '#fff'; ctx.font = 'bold 14px system-ui';\n  ctx.fillText('Cari benda berenergi:', W-26, 34);\n  const label = G.targetEnergi === 'kinetik' ? 'KINETIK (bergerak)' : 'POTENSIAL (posisi/tinggi)';\n  ctx.fillStyle = G.targetEnergi === 'kinetik' ? '#38bdf8' : '#f472b6';\n  ctx.font = 'bold 18px system-ui';\n  ctx.fillText(label, W-26, 58);\n  // progres\n  ctx.fillStyle = 'rgba(15,23,42,0.6)';\n  roundRect(12, H-52, 260, 40, 10); ctx.fill();\n  ctx.textAlign = 'left'; ctx.fillStyle = '#fff'; ctx.font = 'bold 14px system-ui';\n  ctx.fillText('Benar: ' + G.benar + ' / ' + G.target, 26, H-26);\n  // watermark\n  ctx.globalAlpha = 0.35; ctx.fillStyle = '#fff'; ctx.font = '12px system-ui';\n  ctx.textAlign = 'center'; ctx.fillText('AISYS HTML5 Engine', W/2, H-14);\n  ctx.globalAlpha = 1;\n}\n\nfunction drawFeedback(){\n  if (!G.feedback) return;\n  ctx.globalAlpha = Math.min(1, G.feedbackT);\n  ctx.fillStyle = 'rgba(15,23,42,0.85)';\n  roundRect(W/2-260, H-140, 520, 52, 12); ctx.fill();\n  ctx.fillStyle = G.feedback.warna; ctx.font = 'bold 15px system-ui'; ctx.textAlign = 'center';\n  ctx.fillText(G.feedback.teks, W/2, H-108);\n  ctx.globalAlpha = 1;\n}\n\nfunction drawPartikel(){\n  for (const p of G.partikel){\n    ctx.globalAlpha = Math.max(0, p.life);\n    ctx.fillStyle = p.c;\n    ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI*2); ctx.fill();\n  }\n  ctx.globalAlpha = 1;\n}\n\nfunction drawStart(){\n  ctx.fillStyle = 'rgba(11,16,32,0.85)'; ctx.fillRect(0,0,W,H);\n  ctx.textAlign = 'center';\n  ctx.fillStyle = '#a78bfa'; ctx.font = 'bold 40px system-ui';\n  ctx.fillText('Gravitasi Rani', W/2, 150);\n  ctx.fillStyle = '#fff'; ctx.font = 'bold 20px system-ui';\n  ctx.fillText('Reaktor yang Dicuri', W/2, 185);\n  ctx.fillStyle = '#cbd5e1'; ctx.font = '16px system-ui';\n  ctx.fillText('Lompat ke benda yang energinya COCOK dengan target di kanan atas.', W/2, 250);\n  ctx.fillText('Kinetik = benda bergerak. Potensial = benda di ketinggian/tertekan.', W/2, 278);\n  ctx.fillText('Kumpulkan 10 benda benar. Salah 3x atau jatuh = kalah.', W/2, 306);\n  ctx.fillStyle = '#fbbf24'; ctx.font = 'bold 18px system-ui';\n  ctx.fillText('Tekan SPASI / tombol LOMPAT untuk mulai', W/2, 380);\n  ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.font = '13px system-ui';\n  ctx.fillText('Built with AISYS HTML5 Engine', W/2, 470);\n  ctx.fillText('STIKOM YOS SUDARSO', W/2, 492);\n}\n\nfunction drawEnd(menang){\n  ctx.fillStyle = 'rgba(11,16,32,0.88)'; ctx.fillRect(0,0,W,H);\n  ctx.textAlign = 'center';\n  ctx.fillStyle = menang ? '#22c55e' : '#ef4444';\n  ctx.font = 'bold 44px system-ui';\n  ctx.fillText(menang ? '🏆 REAKTOR PULIH!' : '💫 COBA LAGI!', W/2, 200);\n  ctx.fillStyle = '#fff'; ctx.font = '18px system-ui';\n  ctx.fillText('Skor akhir: ' + G.score + '  |  Benda benar: ' + G.benar, W/2, 260);\n  ctx.fillStyle = '#cbd5e1'; ctx.font = '16px system-ui';\n  ctx.fillText(menang ? 'Profesor Entropi kabur—Rani bersumpah menyelidiki!' : 'Reaktor padam, tapi pahlawan sejati selalu bangkit.', W/2, 300);\n  ctx.fillStyle = '#fbbf24'; ctx.font = 'bold 18px system-ui';\n  ctx.fillText('Tekan SPASI untuk main lagi', W/2, 380);\n  ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.font = '13px system-ui';\n  ctx.fillText('Built with AISYS HTML5 Engine', W/2, 470);\n  ctx.fillText('STIKOM YOS SUDARSO', W/2, 492);\n}\n\nfunction render(){\n  ctx.setTransform(1,0,0,1,0,0);\n  ctx.clearRect(0,0,cv.width,cv.height);\n  ctx.setTransform(scale,0,0,scale,offX,offY);\n  ctx.save();\n  ctx.beginPath(); ctx.rect(0,0,W,H); ctx.clip();\n\n  drawBackground();\n  drawPlatforms();\n  drawItems();\n  drawPlayer();\n  drawPartikel();\n  drawHUD();\n  drawFeedback();\n\n  if (G.state === 'mulai') drawStart();\n  else if (G.state === 'menang') drawEnd(true);\n  else if (G.state === 'kalah') drawEnd(false);\n\n  ctx.restore();\n}\n\n// ---------- LOOP ----------\nlet last = performance.now();\nfunction loop(now){\n  let dt = (now - last) / 1000; last = now;\n  if (dt > 0.05) dt = 0.05;\n  update(dt);\n  render();\n  requestAnimationFrame(loop);\n}\nrequestAnimationFrame(loop);\n\n})();\n</script>\n<!-- END_OF_GAME -->\n</html>\n```\n\nAsumsi penting: aku pakai 10 contoh nyata (bukan nama kategori) supaya kamu sendiri yang menentukan jenis energinya, dan target berganti tiap 3 jawaban benar biar makin seru. Selamat bermain! 🎮"
+    }
+  ]
+}

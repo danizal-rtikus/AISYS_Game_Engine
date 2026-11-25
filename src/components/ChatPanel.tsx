@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
   Send,
   Square,
@@ -19,6 +19,16 @@ import { isManifestCode } from '../utils/htmlExtractor';
 import { parseMarkers, latestStep } from '../utils/storyMarkers';
 
 const RANDOM_ANSWER = '🎲 Acak saja, pilihkan yang paling seru!';
+
+/** Common problems students hit in generated games; each becomes a repair request. */
+const GAME_ISSUES = [
+  'Klik atau tombol tidak berfungsi',
+  'Musuh atau objek tidak bereaksi',
+  'Teks saling bertumpuk',
+  'Tidak bisa menang',
+  'Nyawa habis terlalu cepat',
+  'Materi atau jawabannya salah',
+];
 const BUILD_ANSWER = 'Lanjut, bangun game sekarang!';
 
 interface ChatPanelProps {
@@ -29,6 +39,8 @@ interface ChatPanelProps {
   onSendMessage: (text?: string) => void;
   onStopStreaming: () => void;
   onSelectTab: (tab: 'preview' | 'code') => void;
+  /** Problem found by the automatic Beta check for the game in the preview. */
+  gameWarning?: string | null;
 }
 
 // All 9 genres are buildable: Endless Runner via the engine manifest (stable), others via full HTML (Beta).
@@ -80,6 +92,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
   onSendMessage,
   onStopStreaming,
   onSelectTab,
+  gameWarning = null,
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -107,6 +120,11 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
   };
 
   const step = latestStep(messages);
+  const [issueOpenFor, setIssueOpenFor] = useState<string | null>(null);
+  const lastGameIdx = (() => {
+    for (let i = messages.length - 1; i >= 0; i--) if (messages[i].extractedCode && messages[i].isCodeComplete) return i;
+    return -1;
+  })();
   const lastAssistantIdx = (() => {
     for (let i = messages.length - 1; i >= 0; i--) if (messages[i].role === 'assistant') return i;
     return -1;
@@ -374,6 +392,61 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                           </button>
                         )}
                       </div>
+
+                      {/* Automatic Beta check found a problem → visible warning + one-click repair */}
+                      {gameWarning && msg.isCodeComplete && !msg.isStreaming && !isStreaming && idx === lastGameIdx && (
+                        <div className="p-2 rounded border border-amber-500/40 bg-amber-500/10 text-[11px] text-amber-700 dark:text-amber-300">
+                          <div className="font-semibold">⚠️ Studio menemukan masalah di game ini</div>
+                          <div className="mt-0.5 break-words opacity-90">{gameWarning}</div>
+                          <button
+                            onClick={() =>
+                              onSendMessage(`🔧 Ada masalah di game: Studio menemukan masalah otomatis (${gameWarning.slice(0, 200)}). Tolong perbaiki.`)
+                            }
+                            className="mt-1.5 px-2.5 py-1 rounded bg-[#F6821F] hover:bg-[#E66E0A] text-white text-[11px] font-semibold transition-colors"
+                          >
+                            🔧 Perbaiki otomatis
+                          </button>
+                        </div>
+                      )}
+
+                      {/* "Ada masalah?" quick report (latest finished game only) → repair mode in App */}
+                      {msg.isCodeComplete && !msg.isStreaming && !isStreaming && idx === lastGameIdx && (
+                        <div className="pt-2 border-t border-slate-200/60 dark:border-[#282B33]/60">
+                          {issueOpenFor === msg.id ? (
+                            <div className="flex flex-wrap gap-1.5">
+                              {GAME_ISSUES.map((issue) => (
+                                <button
+                                  key={issue}
+                                  onClick={() => {
+                                    setIssueOpenFor(null);
+                                    onSendMessage(`🔧 Ada masalah di game: ${issue}. Tolong perbaiki.`);
+                                  }}
+                                  className="px-2 py-1 rounded border border-slate-200 dark:border-[#282B33] bg-white dark:bg-[#1C1E24] hover:border-[#F6821F]/60 hover:text-[#F6821F] text-[11px] text-slate-700 dark:text-slate-300 transition-colors"
+                                >
+                                  {issue}
+                                </button>
+                              ))}
+                              <button
+                                onClick={() => {
+                                  setIssueOpenFor(null);
+                                  onInputChange('🔧 Ada masalah di game: ');
+                                  textareaRef.current?.focus();
+                                }}
+                                className="px-2 py-1 rounded border border-dashed border-slate-300 dark:border-[#3A3F4A] text-[11px] text-slate-500 dark:text-slate-400 hover:text-[#F6821F] transition-colors"
+                              >
+                                Lainnya (ketik sendiri)
+                              </button>
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => setIssueOpenFor(msg.id)}
+                              className="text-[11px] font-medium text-slate-500 dark:text-slate-400 hover:text-[#F6821F] transition-colors"
+                            >
+                              🔧 Ada masalah dengan game ini?
+                            </button>
+                          )}
+                        </div>
+                      )}
 
                       {/* Diagnostic Telemetry Bar */}
                       {msg.diagnostic && (

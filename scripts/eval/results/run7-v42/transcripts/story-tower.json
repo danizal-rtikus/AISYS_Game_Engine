@@ -1,0 +1,391 @@
+{
+  "id": "story-tower",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo kak, aku mau bikin game!",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 212,
+        "prompt_tokens": 8585,
+        "total_tokens": 8797,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 4975,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 1,
+        "options": 3,
+        "facts": [],
+        "words": 86
+      }
+    },
+    {
+      "user": "Tower Defense",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 194,
+        "prompt_tokens": 8803,
+        "total_tokens": 8997,
+        "prompt_tokens_details": {
+          "cached_tokens": 8448
+        }
+      },
+      "ms": 4537,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 2,
+        "options": 3,
+        "facts": [
+          "Genre"
+        ],
+        "words": 67
+      }
+    },
+    {
+      "user": "Kapten Raka, siswa SMA jenius dengan drone pintar",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 197,
+        "prompt_tokens": 9014,
+        "total_tokens": 9211,
+        "prompt_tokens_details": {
+          "cached_tokens": 8704
+        }
+      },
+      "ms": 3826,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 3,
+        "options": 3,
+        "facts": [
+          "Pahlawan"
+        ],
+        "words": 68
+      }
+    },
+    {
+      "user": "Kota Neon di masa depan",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 185,
+        "prompt_tokens": 9220,
+        "total_tokens": 9405,
+        "prompt_tokens_details": {
+          "cached_tokens": 8960
+        }
+      },
+      "ms": 6831,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 4,
+        "options": 3,
+        "facts": [
+          "Dunia"
+        ],
+        "words": 62
+      }
+    },
+    {
+      "user": "Melindungi bunga raksasa di tengah kota",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 188,
+        "prompt_tokens": 9419,
+        "total_tokens": 9607,
+        "prompt_tokens_details": {
+          "cached_tokens": 9216
+        }
+      },
+      "ms": 8518,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 5,
+        "options": 3,
+        "facts": [
+          "Misi"
+        ],
+        "words": 70
+      }
+    },
+    {
+      "user": "Gerombolan bug digital",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 221,
+        "prompt_tokens": 9616,
+        "total_tokens": 9837,
+        "prompt_tokens_details": {
+          "cached_tokens": 9216
+        }
+      },
+      "ms": 4694,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 6,
+        "options": 3,
+        "facts": [
+          "Lawan"
+        ],
+        "words": 83
+      }
+    },
+    {
+      "user": "Biologi: bagian-bagian bunga dan fungsinya dalam penyerbukan",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 264,
+        "prompt_tokens": 9856,
+        "total_tokens": 10120,
+        "prompt_tokens_details": {
+          "cached_tokens": 9472
+        }
+      },
+      "ms": 3932,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 7,
+        "options": 3,
+        "facts": [
+          "Materi"
+        ],
+        "words": 97
+      }
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 233,
+        "prompt_tokens": 10124,
+        "total_tokens": 10357,
+        "prompt_tokens_details": {
+          "cached_tokens": 9728
+        }
+      },
+      "ms": 3799,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 8,
+        "options": 3,
+        "facts": [
+          "Mekanik"
+        ],
+        "words": 89
+      }
+    },
+    {
+      "user": "Ternyata bug digital itu dulunya serangga penyerbuk yang tersesat",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 217,
+        "prompt_tokens": 10378,
+        "total_tokens": 10595,
+        "prompt_tokens_details": {
+          "cached_tokens": 9984
+        }
+      },
+      "ms": 4237,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 9,
+        "options": 3,
+        "facts": [
+          "Twist"
+        ],
+        "words": 78
+      }
+    },
+    {
+      "user": "B",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 233,
+        "prompt_tokens": 10599,
+        "total_tokens": 10832,
+        "prompt_tokens_details": {
+          "cached_tokens": 10240
+        }
+      },
+      "ms": 14321,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 10,
+        "options": 3,
+        "facts": [
+          "Visual"
+        ],
+        "words": 91
+      }
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 509,
+        "prompt_tokens": 10836,
+        "total_tokens": 11345,
+        "prompt_tokens_details": {
+          "cached_tokens": 10496
+        }
+      },
+      "ms": 9418,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 11,
+        "options": 3,
+        "facts": [
+          "Ending"
+        ],
+        "words": 218
+      }
+    },
+    {
+      "user": "Sudah oke",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 8522,
+        "prompt_tokens": 11352,
+        "total_tokens": 19874,
+        "prompt_tokens_details": {
+          "cached_tokens": 10752
+        }
+      },
+      "ms": 58647,
+      "reasoningChars": 0,
+      "markers": {
+        "step": null,
+        "options": 0,
+        "facts": [],
+        "words": 2999
+      }
+    },
+    {
+      "user": "saya sudah pasang Putik, Benang Sari dan Mahkota tapi tidak terjadi apa-apa\n\n(PENTING, MODE PERBAIKAN: pesan di atas adalah laporan masalah tentang game terakhir. Jangan memberi tips bermain. Baca kode game terakhir, cari penyebabnya (periksa juga ATURAN TEKNIS WAJIB: ruang koordinat 960x540, jangkauan slot/sasaran, satu penilaian per objek, pilihan bisa diubah, teks tidak bertumpuk, game bisa dimenangkan, aturan kategori). Tulis 1-2 kalimat santai tentang penyebabnya, lalu berikan game yang LENGKAP dan sudah diperbaiki dalam tepat SATU blok kode, tanpa monolog atau draf. Endless Runner: blok ```js berisi AISYS.defineGame({ ... }); diakhiri // END_OF_MANIFEST. Genre lain: blok ```html dari <!DOCTYPE html> sampai </html> lalu <!-- END_OF_GAME -->. Data cerita tetap disertakan.)",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 8711,
+        "prompt_tokens": 20118,
+        "total_tokens": 28829,
+        "prompt_tokens_details": {
+          "cached_tokens": 11264
+        }
+      },
+      "ms": 55826,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo kak, aku mau bikin game!"
+    },
+    {
+      "role": "assistant",
+      "content": "Halo juga! 👋 Senang banget kamu mau bikin game hari ini. Kita bakal bikin game edukasi buatanmu sendiri bareng AI, cuma sekitar 15 menit!\n\nAda 9 genre yang bisa kita pilih: **Endless Runner** (paling stabil), 2D Platformer, Top-Down Shooter, Puzzle Grid, Rhythm, Physics, Tower Defense, Idle/Tycoon, dan Dungeon Crawler.\n\nMau mulai dari genre yang mana?\n\n**A.** Endless Runner (berlari & ambil item) 🏃\n**B.** 2D Platformer (lompat antar platform) 🎮\n**C.** Puzzle Grid (susun & cocokkan) 🧩\n\nAtau tulis ide genre-mu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 1/11 | Genre]]\n[[PILIHAN: Endless Runner | 2D Platformer | Puzzle Grid]]"
+    },
+    {
+      "role": "user",
+      "content": "Tower Defense"
+    },
+    {
+      "role": "assistant",
+      "content": "Wih, pilihan keren! 🏰 Tower Defense itu seru banget karena kamu jadi jenderal yang nyusun strategi pertahanan. Oke, kita bikin game Tower Defense!\n\nSekarang, siapa tokoh utama yang jadi pahlawan kita?\n\n**A.** Robot penjaga bernama **R-01** yang jago ngitung 🤖\n**B.** Siswa SMA bernama **Dika** dengan otak jenius 🧠\n**C.** Kucing panglima bernama **Jenderal Miu** yang galak 🐱\n\nAtau tulis pahlawan versimu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 2/11 | Pahlawan]]\n[[PILIHAN: Robot R-01 | Siswa Dika | Jenderal Miu]]\n[[CERITA: Genre = Tower Defense]]"
+    },
+    {
+      "role": "user",
+      "content": "Kapten Raka, siswa SMA jenius dengan drone pintar"
+    },
+    {
+      "role": "assistant",
+      "content": "Keren banget! 🔥 Kapten Raka, siswa SMA jenius dengan drone pintarnya — itu pahlawan yang pas banget buat game strategi. Jadi ceritanya: **Kapten Raka memimpin pertahanan dengan bantuan drone pintarnya.**\n\nSekarang, di dunia mana petualangan ini terjadi?\n\n**A.** Kota masa depan yang penuh gedung hologram 🏙️\n**B.** Laboratorium rahasia bawah tanah 🧪\n**C.** Pulau terpencil yang diserang makhluk aneh 🏝️\n\nAtau tulis duniamu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 3/11 | Dunia]]\n[[PILIHAN: Kota masa depan | Lab bawah tanah | Pulau terpencil]]\n[[CERITA: Pahlawan = Kapten Raka + drone pintar]]"
+    },
+    {
+      "role": "user",
+      "content": "Kota Neon di masa depan"
+    },
+    {
+      "role": "assistant",
+      "content": "Mantap! 🌆 **Kota Neon di masa depan** — penuh lampu hologram dan gedung tinggi, cocok banget buat pertahanan futuristik Kapten Raka.\n\nSekarang, apa misi yang harus dicapai Kapten Raka?\n\n**A.** Mempertahankan menara energi kota dari serangan 🛡️\n**B.** Menyelamatkan warga yang terjebak di gedung 🚨\n**C.** Mengumpulkan chip data yang tersebar di kota 💾\n\nAtau tulis misimu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 4/11 | Misi]]\n[[PILIHAN: Pertahankan menara energi | Selamatkan warga | Kumpulkan chip data]]\n[[CERITA: Dunia = Kota Neon masa depan]]"
+    },
+    {
+      "role": "user",
+      "content": "Melindungi bunga raksasa di tengah kota"
+    },
+    {
+      "role": "assistant",
+      "content": "Wah, ide segar! 🌸 Jadi ceritanya: **Kapten Raka dan drone pintarnya harus melindungi bunga raksasa di tengah Kota Neon dari serangan yang datang.** Unik banget!\n\nSekarang, siapa atau apa yang mengancam bunga raksasa itu?\n\n**A.** Gerombolan drone jahat yang ingin mencuri sari bunganya 🤖\n**B.** Monster polusi yang ingin mengotori udara kota 🌫️\n**C.** Alien yang mengira bunga itu sumber energi 👽\n\nAtau tulis lawanmu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 5/11 | Lawan]]\n[[PILIHAN: Drone jahat | Monster polusi | Alien pencuri energi]]\n[[CERITA: Misi = Lindungi bunga raksasa]]"
+    },
+    {
+      "role": "user",
+      "content": "Gerombolan bug digital"
+    },
+    {
+      "role": "assistant",
+      "content": "Keren banget! 🐛 **Gerombolan bug digital** yang nyerang bunga raksasa — musuh yang pas banget buat Kota Neon futuristik. Jadi: **Kapten Raka harus menghalau gerombolan bug digital yang menyerbu bunga raksasa di Kota Neon.**\n\nSekarang, materi pelajaran apa yang mau kita selipkan? Biar pas sama tema digital & kota futuristik:\n\n**A.** **Sistem Komputer** — bedanya hardware & software 🖥️\n**B.** **Biologi** — bagian-bagian bunga dan fungsinya 🌺\n**C.** **Fisika** — jenis-jenis energi dan perubahannya ⚡\n\nAtau tulis topikmu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 6/11 | Materi Pelajaran]]\n[[PILIHAN: Hardware vs Software | Bagian bunga | Jenis energi]]\n[[CERITA: Lawan = Gerombolan bug digital]]"
+    },
+    {
+      "role": "user",
+      "content": "Biologi: bagian-bagian bunga dan fungsinya dalam penyerbukan"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan cerdas! 🌺 Jadi **Kapten Raka melindungi bunga raksasa sambil mempelajari bagian-bagian bunga dan fungsinya dalam penyerbukan.** Pas banget sama ceritanya!\n\nSekarang, gimana cara materinya jadi bagian dari permainan Tower Defense?\n\n**A.** Musuh membawa nama bagian bunga; pasang menara yang cocok dengan fungsinya (misal menara \"Serbuk Sari\" hanya menyerang musuh penyerbukan) 🌾\n**B.** Tiap gelombang muncul pertanyaan \"bagian mana yang berfungsi begini?\"; jawab benar untuk membuka menara baru 🧠\n**C.** Musuh membawa gambar bagian bunga; tembak hanya yang sesuai target di layar (misal \"cari yang menghasilkan serbuk sari\") 🎯\n\nAtau tulis caramu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 7/11 | Cara Materi Jadi Permainan]]\n[[PILIHAN: Menara cocok fungsi | Jawab buka menara | Tembak yang cocok]]\n[[CERITA: Materi = Bagian bunga & penyerbukan]]"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan tepat! 🌾 Jadi: **Setiap menara mewakili satu bagian bunga, dan kamu harus memasangnya untuk menghadang musuh yang membawa contoh nyata dari bagian bunga itu.** Strategi sekaligus belajar!\n\nSekarang, twist apa yang bikin cerita makin seru di tengah permainan?\n\n**A.** Ternyata bug digital itu dikendalikan ratu yang ingin menyerap sari bunga untuk energi 🌸\n**B.** Bunga raksasa tiba-tiba mekar penuh dan mengeluarkan gelombang serbuk sari ajaib ✨\n**C.** Drone pintar Raka berubah jadi menara super yang bisa menembak semua arah 🚁\n\nAtau tulis twist-mu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 8/11 | Twist]]\n[[PILIHAN: Ratu bug penyerap sari | Bunga mekar ajaib | Drone jadi super]]\n[[CERITA: Mekanik = Menara cocok fungsi]]"
+    },
+    {
+      "role": "user",
+      "content": "Ternyata bug digital itu dulunya serangga penyerbuk yang tersesat"
+    },
+    {
+      "role": "assistant",
+      "content": "Wah, twist yang manis banget! 🥹 Jadi: **Ternyata gerombolan bug digital itu dulunya serangga penyerbuk yang tersesat, dan Kapten Raka harus menyadarkan mereka sambil melindungi bunga raksasa.** Dalam banget!\n\nSekarang, gaya visualnya mau seperti apa?\n\n**A.** **Cyberpunk / Neon Glow** — gelap dengan cahaya cyan & magenta 🌃\n**B.** **Clean Modern & Soft Gradient** — bersih, warna lembut, futuristik 🎨\n**C.** **Vibrant Cartoon Arcade** — cerah, warna ngejreng, ceria 🌈\n\nAtau tulis gayamu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 9/11 | Gaya Visual]]\n[[PILIHAN: Cyberpunk Neon | Clean Modern | Vibrant Cartoon]]\n[[CERITA: Twist = Bug dulunya serangga penyerbuk]]"
+    },
+    {
+      "role": "user",
+      "content": "B"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan elegan! 🎨 **Clean Modern & Soft Gradient** — bersih, warna lembut, dan futuristik, pas banget buat Kota Neon yang ramah.\n\nTerakhir, ending-nya mau seperti apa?\n\n**A.** Menang: bug kembali jadi serangga penyerbuk & bunga mekar megah. Kalah: bunga layu, tapi Raka bangkit mencoba lagi 🌸\n**B.** Menang: Kota Neon bersinar penuh bunga baru. Kalah: kota meredup, tapi drone merekam data untuk ronde berikutnya 🚁\n**C.** Menang: ratu bug berdamai dan jadi penjaga bunga. Kalah: bunga tertutup sementara, Raka menyusun strategi baru 🌙\n\nAtau tulis ending-mu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 10/11 | Ending]]\n[[PILIHAN: Bug jadi penyerbuk | Kota bersinar bunga | Ratu bug berdamai]]\n[[CERITA: Visual = Clean Modern & Soft Gradient]]"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang menyentuh! 🌸 Jadi ending-nya: **bug kembali jadi serangga penyerbuk dan bunga mekar megah; kalau kalah bunga layu, tapi Raka bangkit mencoba lagi.** Sempurna!\n\nIni rangkuman lengkapnya sebelum kita bangun game:\n\n**📋 Blueprint Game**\n\n**Judul:** Bunga Neon: Pertahanan Kapten Raka\n**Genre:** Tower Defense (Beta) | **Gaya:** Clean Modern & Soft Gradient\n\n**Prolog:**\n1. Di Kota Neon, Kapten Raka dan drone pintarnya menjaga bunga raksasa di tengah kota. 🌸\n2. Gerombolan bug digital menyerbu! Ternyata mereka dulu serangga penyerbuk yang tersesat. 🐛\n3. Pasang menara bagian bunga yang tepat untuk menghalau mereka dan menyelamatkan bunga. 🎯\n\n**Cara bermain & menang:** Musuh berjalan menuju bunga membawa contoh bagian bunga. Pasang menara yang cocok di slot samping jalur — menara hanya menyerang musuh yang sesuai. Jawab 10 dengan benar untuk menang; nyawa habis = kalah.\n\n**Materi:** Bagian bunga & fungsinya dalam penyerbukan. Tujuan: mengenali bagian bunga dari fungsinya. Miskonsepsi: mengira putik dan benang sari sama fungsinya.\n\n**Kategori & contoh:**\n- **Putik** (organ kelamin betina): Kepala putik lengket, Bakal buah, Tangkai putik\n- **Benang sari** (organ kelamin jantan): Serbuk sari, Tangkai sari, Kepala sari\n- **Mahkota** (menarik penyerbuk): Kelopak berwarna, Aroma bunga, Nektar manis\n\n**Ending:** Menang — bug jadi penyerbuk lagi & bunga mekar megah. Kalah — bunga layu, Raka bangkit mencoba lagi.\n\nSudah siap dibangun, atau ada yang mau diubah?\n\n[[LANGKAH: 11/11 | Blueprint]]\n[[PILIHAN: Lanjut, bangun game! | Ubah cerita | Ubah materi]]\n[[CERITA: Ending = Bug jadi penyerbuk lagi]]"
+    },
+    {
+      "role": "user",
+      "content": "Sudah oke"
+    },
+    {
+      "role": "assistant",
+      "content": "Siap! 🚀 Bunga Neon: Pertahanan Kapten Raka segera dibangun — pasang menara bagian bunga yang tepat untuk menghalau bug digital dan selamatkan bunga raksasa.\n\n```html\n<!DOCTYPE html>\n<html lang=\"id\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">\n<title>Bunga Neon: Pertahanan Kapten Raka</title>\n<script type=\"application/json\" id=\"aisys-story\">\n{\n  \"title\": \"Bunga Neon: Pertahanan Kapten Raka\",\n  \"hero\": { \"name\": \"Kapten Raka\", \"emoji\": \"🧑‍🚀\", \"desc\": \"Siswa SMA jenius dengan drone pintar penjaga Kota Neon\" },\n  \"world\": { \"name\": \"Kota Neon\", \"emoji\": \"🌆\" },\n  \"mood\": { \"from\": \"#0f172a\", \"to\": \"#1e3a8a\" },\n  \"prolog\": [\n    { \"text\": \"Di Kota Neon yang berkilau, Kapten Raka dan drone pintarnya menjaga bunga raksasa di tengah kota.\", \"emoji\": \"🌸\" },\n    { \"text\": \"Gerombolan bug digital menyerbu! Ternyata mereka dulu serangga penyerbuk yang tersesat.\", \"emoji\": \"🐛\" },\n    { \"text\": \"Pasang menara bagian bunga yang tepat untuk menghalau mereka dan menyelamatkan bunga.\", \"emoji\": \"🎯\" }\n  ],\n  \"goal\": { \"text\": \"Halau 10 bug dengan menara yang tepat untuk menyelamatkan bunga raksasa\" },\n  \"ending\": {\n    \"menang\": { \"text\": \"Bug kembali menjadi serangga penyerbuk dan bunga raksasa mekar megah! Kota Neon bersinar berkat Kapten Raka.\", \"emoji\": \"🏆\" },\n    \"kalah\": { \"text\": \"Bunga layu untuk sementara, tapi Kapten Raka bangkit menyusun strategi baru. Ayo coba lagi!\", \"emoji\": \"💫\" }\n  }\n}\n</script>\n<style>\n  * { margin: 0; padding: 0; box-sizing: border-box; }\n  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0f1e; font-family: 'Segoe UI', system-ui, sans-serif; }\n  #wrap { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }\n  canvas { display: block; touch-action: none; }\n  #muteBtn { position: fixed; top: 10px; right: 10px; z-index: 20; background: rgba(30,58,138,0.7); color: #e0f2fe; border: 1px solid rgba(125,211,252,0.5); border-radius: 8px; padding: 6px 12px; font-size: 14px; cursor: pointer; }\n</style>\n</head>\n<body>\n<div id=\"wrap\"><canvas id=\"cv\"></canvas></div>\n<button id=\"muteBtn\">🔊</button>\n<script>\n(function(){\n  \"use strict\";\n  const W = 960, H = 540;\n  const cv = document.getElementById('cv');\n  const ctx = cv.getContext('2d');\n  let scale = 1, offX = 0, offY = 0;\n\n  function resize(){\n    const vw = window.innerWidth, vh = window.innerHeight;\n    scale = Math.min(vw / W, vh / H);\n    const cw = Math.floor(W * scale), ch = Math.floor(H * scale);\n    cv.width = cw; cv.height = ch;\n    cv.style.width = cw + 'px'; cv.style.height = ch + 'px';\n    offX = 0; offY = 0;\n  }\n  window.addEventListener('resize', resize);\n  resize();\n\n  function toLogical(clientX, clientY){\n    const r = cv.getBoundingClientRect();\n    return { x: (clientX - r.left) / scale, y: (clientY - r.top) / scale };\n  }\n\n  // ---------- AUDIO ----------\n  let audioCtx = null, muted = false;\n  function unlockAudio(){\n    if (!audioCtx){\n      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){}\n    }\n    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();\n  }\n  function beep(freq, dur, type, vol){\n    if (muted || !audioCtx) return;\n    const o = audioCtx.createOscillator();\n    const g = audioCtx.createGain();\n    o.type = type || 'sine';\n    o.frequency.value = freq;\n    g.gain.value = vol || 0.08;\n    o.connect(g); g.connect(audioCtx.destination);\n    const t = audioCtx.currentTime;\n    g.gain.setValueAtTime(g.gain.value, t);\n    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);\n    o.start(t); o.stop(t + dur);\n  }\n  const sfx = {\n    correct: () => { beep(660, 0.12, 'sine', 0.1); setTimeout(()=>beep(880,0.15,'sine',0.1), 90); },\n    wrong: () => { beep(200, 0.25, 'sawtooth', 0.08); },\n    place: () => { beep(440, 0.08, 'triangle', 0.07); },\n    shoot: () => { beep(520, 0.05, 'square', 0.03); },\n    lose: () => { beep(160, 0.4, 'sawtooth', 0.1); },\n    win: () => { [523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,0.2,'sine',0.1), i*120)); }\n  };\n  document.getElementById('muteBtn').addEventListener('click', (e)=>{\n    e.stopPropagation();\n    muted = !muted;\n    document.getElementById('muteBtn').textContent = muted ? '🔇' : '🔊';\n  });\n\n  // ---------- MATERI ----------\n  const CATEGORIES = [\n    { id: 'putik', label: 'Putik', color: '#e879f9', desc: 'Organ kelamin betina' },\n    { id: 'benangsari', label: 'Benang Sari', color: '#fbbf24', desc: 'Organ kelamin jantan' },\n    { id: 'mahkota', label: 'Mahkota', color: '#fb7185', desc: 'Menarik penyerbuk' }\n  ];\n  const BANK = [\n    { text: 'Kepala putik lengket', cat: 'putik', exp: 'Bagian putik yang menangkap serbuk sari.' },\n    { text: 'Bakal buah', cat: 'putik', exp: 'Bagian putik yang berkembang jadi buah.' },\n    { text: 'Tangkai putik', cat: 'putik', exp: 'Penghubung kepala putik ke bakal buah.' },\n    { text: 'Serbuk sari', cat: 'benangsari', exp: 'Sel kelamin jantan yang dihasilkan benang sari.' },\n    { text: 'Tangkai sari', cat: 'benangsari', exp: 'Penopang kepala sari pada benang sari.' },\n    { text: 'Kepala sari', cat: 'benangsari', exp: 'Tempat serbuk sari diproduksi.' },\n    { text: 'Kelopak berwarna', cat: 'mahkota', exp: 'Warna menarik perhatian serangga penyerbuk.' },\n    { text: 'Aroma bunga', cat: 'mahkota', exp: 'Aroma memikat serangga untuk datang.' },\n    { text: 'Nektar manis', cat: 'mahkota', exp: 'Cairan manis sebagai hadiah bagi penyerbuk.' }\n  ];\n\n  // ---------- GAME STATE ----------\n  const PATH = [\n    { x: -40, y: 120 }, { x: 200, y: 120 }, { x: 200, y: 300 },\n    { x: 520, y: 300 }, { x: 520, y: 130 }, { x: 800, y: 130 },\n    { x: 800, y: 420 }, { x: 480, y: 420 }, { x: 480, y: 470 }\n  ];\n  const FLOWER = { x: 480, y: 470 };\n\n  // Slot menara: di samping jalur, dalam jangkauan\n  const SLOTS = [\n    { x: 120, y: 210 }, { x: 300, y: 210 }, { x: 300, y: 390 },\n    { x: 420, y: 210 }, { x: 620, y: 220 }, { x: 620, y: 360 },\n    { x: 700, y: 220 }, { x: 700, y: 360 }, { x: 380, y: 360 }\n  ];\n  const TOWER_RANGE = 130;\n\n  let state = 'start'; // start, playing, win, lose\n  let lives = 5;\n  let correctCount = 0;\n  const TARGET = 10;\n  let towers = []; // {slotIndex, cat}\n  let enemies = [];\n  let particles = [];\n  let projectiles = [];\n  let spawnTimer = 0;\n  let spawnInterval = 2.2;\n  let selectedSlot = -1;\n  let feedback = { text: '', timer: 0, color: '#fff' };\n  let lastTime = 0;\n  let enemyIdCounter = 0;\n  let bankQueue = [];\n\n  function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }\n  function refillQueue(){ bankQueue = shuffle(BANK.slice()); }\n  refillQueue();\n\n  function resetGame(){\n    lives = 5; correctCount = 0; towers = []; enemies = []; particles = [];\n    projectiles = []; spawnTimer = 0; spawnInterval = 2.2; selectedSlot = -1;\n    feedback = { text: '', timer: 0, color: '#fff' };\n    refillQueue();\n  }\n\n  // ---------- PATH HELPERS ----------\n  function pathLength(){\n    let len = 0;\n    for (let i=1;i<PATH.length;i++){\n      len += Math.hypot(PATH[i].x-PATH[i-1].x, PATH[i].y-PATH[i-1].y);\n    }\n    return len;\n  }\n  const TOTAL_LEN = pathLength();\n  function pointAt(dist){\n    let d = dist;\n    for (let i=1;i<PATH.length;i++){\n      const seg = Math.hypot(PATH[i].x-PATH[i-1].x, PATH[i].y-PATH[i-1].y);\n      if (d <= seg){\n        const t = d / seg;\n        return { x: PATH[i-1].x + (PATH[i].x-PATH[i-1].x)*t, y: PATH[i-1].y + (PATH[i].y-PATH[i-1].y)*t };\n      }\n      d -= seg;\n    }\n    return { x: PATH[PATH.length-1].x, y: PATH[PATH.length-1].y };\n  }\n\n  // ---------- ENEMY SPAWN ----------\n  function spawnEnemy(){\n    if (bankQueue.length === 0) refillQueue();\n    const item = bankQueue.pop();\n    enemies.push({\n      id: ++enemyIdCounter,\n      item: item,\n      dist: 0,\n      speed: 42,\n      hp: 1,\n      judged: false,\n      wobble: Math.random()*Math.PI*2\n    });\n  }\n\n  // ---------- TOWER LOGIC ----------\n  function towerAt(slotIndex){\n    return towers.find(t => t.slotIndex === slotIndex);\n  }\n\n  function updateTowers(dt){\n    for (const t of towers){\n      const slot = SLOTS[t.slotIndex];\n      t.cool = (t.cool || 0) - dt;\n      if (t.cool > 0) continue;\n      // cari musuh terdekat dalam jangkauan yang cocok\n      let target = null, bestDist = Infinity;\n      for (const e of enemies){\n        if (e.judged) continue;\n        if (e.item.cat !== t.cat) continue;\n        const p = pointAt(e.dist);\n        const d = Math.hypot(p.x - slot.x, p.y - slot.y);\n        if (d < TOWER_RANGE && d < bestDist){ bestDist = d; target = e; }\n      }\n      if (target){\n        t.cool = 0.7;\n        const p = pointAt(target.dist);\n        projectiles.push({ x: slot.x, y: slot.y, tx: p.x, ty: p.y, targetId: target.id, color: CATEGORIES.find(c=>c.id===t.cat).color, life: 0.4 });\n        sfx.shoot();\n      }\n    }\n  }\n\n  function updateProjectiles(dt){\n    for (let i=projectiles.length-1;i>=0;i--){\n      const pr = projectiles[i];\n      pr.life -= dt;\n      if (pr.life <= 0){\n        // hit target\n        const e = enemies.find(en => en.id === pr.targetId && !en.judged);\n        if (e){\n          e.judged = true;\n          e.hp = 0;\n          correctCount++;\n          sfx.correct();\n          feedback = { text: 'Benar! ' + e.item.exp, timer: 2, color: '#4ade80' };\n          for (let k=0;k<8;k++){\n            particles.push({ x: pr.tx, y: pr.ty, vx: (Math.random()-0.5)*120, vy: (Math.random()-0.5)*120, life: 0.6, color: pr.color });\n          }\n        }\n        projectiles.splice(i,1);\n      }\n    }\n  }\n\n  function updateEnemies(dt){\n    for (let i=enemies.length-1;i>=0;i--){\n      const e = enemies[i];\n      if (e.judged){\n        e.dist += 200 * dt; // kabur cepat\n        if (e.dist > TOTAL_LEN + 60) enemies.splice(i,1);\n        continue;\n      }\n      e.dist += e.speed * dt;\n      e.wobble += dt * 6;\n      if (e.dist >= TOTAL_LEN){\n        // sampai bunga = kalah nyawa\n        lives--;\n        sfx.lose();\n        feedback = { text: 'Bug lolos! ' + e.item.text + ' = ' + labelOf(e.item.cat), timer: 2, color: '#f87171' };\n        enemies.splice(i,1);\n        if (lives <= 0){ endGame('lose'); return; }\n      }\n    }\n  }\n\n  function labelOf(catId){\n    const c = CATEGORIES.find(x=>x.id===catId);\n    return c ? c.label : catId;\n  }\n\n  function updateParticles(dt){\n    for (let i=particles.length-1;i>=0;i--){\n      const p = particles[i];\n      p.x += p.vx * dt; p.y += p.vy * dt;\n      p.life -= dt;\n      if (p.life <= 0) particles.splice(i,1);\n    }\n  }\n\n  function endGame(result){\n    state = result;\n    if (result === 'win'){ sfx.win(); if (window.AISYS && AISYS.end) AISYS.end('menang'); }\n    else { sfx.lose(); if (window.AISYS && AISYS.end) AISYS.end('kalah'); }\n  }\n\n  // ---------- UPDATE ----------\n  function update(dt){\n    if (state !== 'playing') return;\n    if (feedback.timer > 0) feedback.timer -= dt;\n\n    spawnTimer -= dt;\n    if (spawnTimer <= 0){\n      spawnEnemy();\n      spawnTimer = spawnInterval;\n      spawnInterval = Math.max(1.2, spawnInterval - 0.05);\n    }\n    updateEnemies(dt);\n    updateTowers(dt);\n    updateProjectiles(dt);\n    updateParticles(dt);\n\n    if (correctCount >= TARGET && state === 'playing') endGame('win');\n  }\n\n  // ---------- DRAW ----------\n  function roundRect(x,y,w,h,r){\n    ctx.beginPath();\n    ctx.moveTo(x+r,y);\n    ctx.arcTo(x+w,y,x+w,y+h,r);\n    ctx.arcTo(x+w,y+h,x,y+h,r);\n    ctx.arcTo(x,y+h,x,y,r);\n    ctx.arcTo(x,y,x+w,y,r);\n    ctx.closePath();\n  }\n\n  function drawBackground(){\n    const g = ctx.createLinearGradient(0,0,0,H);\n    g.addColorStop(0, '#0f172a');\n    g.addColorStop(0.5, '#1e293b');\n    g.addColorStop(1, '#1e3a8a');\n    ctx.fillStyle = g;\n    ctx.fillRect(0,0,W,H);\n\n    // gedung neon\n    for (let i=0;i<14;i++){\n      const bx = (i*72 + 20) % W;\n      const bh = 120 + ((i*53)%180);\n      const by = H - bh - 60;\n      const bg = ctx.createLinearGradient(bx, by, bx, by+bh);\n      bg.addColorStop(0, 'rgba(56,189,248,0.15)');\n      bg.addColorStop(1, 'rgba(30,58,138,0.35)');\n      ctx.fillStyle = bg;\n      roundRect(bx, by, 52, bh, 6);\n      ctx.fill();\n      // jendela\n      ctx.fillStyle = 'rgba(125,211,252,0.5)';\n      for (let wy=by+12; wy<by+bh-10; wy+=22){\n        for (let wx=bx+8; wx<bx+46; wx+=16){\n          if ((wx+wy+i)%3 !== 0) ctx.fillRect(wx, wy, 8, 10);\n        }\n      }\n    }\n  }\n\n  function drawPath(){\n    ctx.lineCap = 'round'; ctx.lineJoin = 'round';\n    ctx.strokeStyle = 'rgba(56,189,248,0.15)';\n    ctx.lineWidth = 46;\n    ctx.beginPath();\n    ctx.moveTo(PATH[0].x, PATH[0].y);\n    for (let i=1;i<PATH.length;i++) ctx.lineTo(PATH[i].x, PATH[i].y);\n    ctx.stroke();\n    ctx.strokeStyle = 'rgba(125,211,252,0.35)';\n    ctx.lineWidth = 3;\n    ctx.setLineDash([12,10]);\n    ctx.beginPath();\n    ctx.moveTo(PATH[0].x, PATH[0].y);\n    for (let i=1;i<PATH.length;i++) ctx.lineTo(PATH[i].x, PATH[i].y);\n    ctx.stroke();\n    ctx.setLineDash([]);\n  }\n\n  function drawFlower(){\n    const t = performance.now()/1000;\n    const pulse = 1 + Math.sin(t*2)*0.04;\n    ctx.save();\n    ctx.translate(FLOWER.x, FLOWER.y);\n    ctx.scale(pulse, pulse);\n    // glow\n    ctx.shadowColor = '#f472b6'; ctx.shadowBlur = 30;\n    // kelopak\n    for (let i=0;i<8;i++){\n      const a = (i/8)*Math.PI*2 + t*0.3;\n      ctx.fillStyle = i%2===0 ? '#fb7185' : '#f472b6';\n      ctx.beginPath();\n      ctx.ellipse(Math.cos(a)*22, Math.sin(a)*22, 16, 10, a, 0, Math.PI*2);\n      ctx.fill();\n    }\n    ctx.shadowBlur = 0;\n    // pusat\n    const cg = ctx.createRadialGradient(0,0,2,0,0,16);\n    cg.addColorStop(0,'#fef08a'); cg.addColorStop(1,'#fbbf24');\n    ctx.fillStyle = cg;\n    ctx.beginPath(); ctx.arc(0,0,14,0,Math.PI*2); ctx.fill();\n    ctx.restore();\n  }\n\n  function drawSlots(){\n    for (let i=0;i<SLOTS.length;i++){\n      const s = SLOTS[i];\n      const tw = towerAt(i);\n      const sel = selectedSlot === i;\n      ctx.save();\n      if (tw){\n        const cat = CATEGORIES.find(c=>c.id===tw.cat);\n        ctx.shadowColor = cat.color; ctx.shadowBlur = 16;\n        const g = ctx.createLinearGradient(s.x-18, s.y-18, s.x+18, s.y+18);\n        g.addColorStop(0, cat.color); g.addColorStop(1, '#1e293b');\n        ctx.fillStyle = g;\n        roundRect(s.x-18, s.y-18, 36, 36, 8); ctx.fill();\n        ctx.shadowBlur = 0;\n        ctx.fillStyle = '#fff';\n        ctx.font = 'bold 10px sans-serif';\n        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n        ctx.fillText(cat.label.split(' ')[0], s.x, s.y);\n      } else {\n        ctx.strokeStyle = sel ? '#7dd3fc' : 'rgba(125,211,252,0.5)';\n        ctx.lineWidth = sel ? 3 : 2;\n        ctx.setLineDash([5,4]);\n        roundRect(s.x-16, s.y-16, 32, 32, 8); ctx.stroke();\n        ctx.setLineDash([]);\n        ctx.fillStyle = 'rgba(125,211,252,0.6)';\n        ctx.font = 'bold 18px sans-serif';\n        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n        ctx.fillText('+', s.x, s.y);\n      }\n      ctx.restore();\n    }\n  }\n\n  function drawEnemies(){\n    for (const e of enemies){\n      const p = pointAt(e.dist);\n      const cat = CATEGORIES.find(c=>c.id===e.item.cat);\n      ctx.save();\n      ctx.translate(p.x, p.y + Math.sin(e.wobble)*3);\n      if (e.judged){\n        ctx.globalAlpha = Math.max(0, 1 - (e.dist - TOTAL_LEN)/60);\n      }\n      // badan bug\n      ctx.shadowColor = cat.color; ctx.shadowBlur = 12;\n      const g = ctx.createRadialGradient(-4,-4,2,0,0,16);\n      g.addColorStop(0, '#fff'); g.addColorStop(0.4, cat.color); g.addColorStop(1, '#1e293b');\n      ctx.fillStyle = g;\n      ctx.beginPath(); ctx.arc(0,0,14,0,Math.PI*2); ctx.fill();\n      ctx.shadowBlur = 0;\n      // kaki\n      ctx.strokeStyle = cat.color; ctx.lineWidth = 2;\n      for (let k=-1;k<=1;k++){\n        ctx.beginPath(); ctx.moveTo(k*6, 8); ctx.lineTo(k*10, 16); ctx.stroke();\n      }\n      // label\n      ctx.fillStyle = '#fff';\n      ctx.font = 'bold 10px sans-serif';\n      ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';\n      ctx.fillText(e.item.text.length > 20 ? e.item.text.slice(0,19)+'…' : e.item.text, 0, -18);\n      ctx.restore();\n    }\n  }\n\n  function drawProjectiles(){\n    for (const pr of projectiles){\n      ctx.save();\n      ctx.shadowColor = pr.color; ctx.shadowBlur = 12;\n      ctx.fillStyle = pr.color;\n      ctx.beginPath(); ctx.arc(pr.x, pr.y, 5, 0, Math.PI*2); ctx.fill();\n      ctx.restore();\n    }\n  }\n\n  function drawParticles(){\n    for (const p of particles){\n      ctx.globalAlpha = Math.max(0, p.life/0.6);\n      ctx.fillStyle = p.color;\n      ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI*2); ctx.fill();\n    }\n    ctx.globalAlpha = 1;\n  }\n\n  function drawHUD(){\n    // panel atas\n    ctx.fillStyle = 'rgba(15,23,42,0.75)';\n    roundRect(12, 12, 340, 74, 12); ctx.fill();\n    ctx.fillStyle = '#7dd3fc';\n    ctx.font = 'bold 13px sans-serif';\n    ctx.textAlign = 'left'; ctx.textBaseline = 'top';\n    ctx.fillText('🌸 Bunga Neon', 24, 22);\n    ctx.fillStyle = '#e0f2fe';\n    ctx.font = 'bold 15px sans-serif';\n    ctx.fillText('Bug dihalau: ' + correctCount + ' / ' + TARGET, 24, 42);\n    // nyawa\n    ctx.fillStyle = '#f87171';\n    ctx.font = 'bold 14px sans-serif';\n    let hearts = '';\n    for (let i=0;i<lives;i++) hearts += '❤ ';\n    ctx.fillText(hearts, 24, 64);\n\n    // target kategori\n    ctx.fillStyle = 'rgba(15,23,42,0.75)';\n    roundRect(W-300, 12, 288, 74, 12); ctx.fill();\n    ctx.fillStyle = '#7dd3fc';\n    ctx.font = 'bold 12px sans-serif';\n    ctx.textAlign = 'left';\n    ctx.fillText('Menara tersedia:', W-288, 22);\n    let tx = W-288;\n    for (const c of CATEGORIES){\n      ctx.fillStyle = c.color;\n      roundRect(tx, 40, 88, 34, 8); ctx.fill();\n      ctx.fillStyle = '#0f172a';\n      ctx.font = 'bold 11px sans-serif';\n      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n      ctx.fillText(c.label, tx+44, 57);\n      tx += 94;\n    }\n\n    // feedback\n    if (feedback.timer > 0){\n      ctx.globalAlpha = Math.min(1, feedback.timer);\n      ctx.fillStyle = 'rgba(15,23,42,0.85)';\n      roundRect(W/2-260, H-70, 520, 46, 10); ctx.fill();\n      ctx.fillStyle = feedback.color;\n      ctx.font = 'bold 14px sans-serif';\n      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n      ctx.fillText(feedback.text.length > 70 ? feedback.text.slice(0,69)+'…' : feedback.text, W/2, H-47);\n      ctx.globalAlpha = 1;\n    }\n\n    // watermark\n    ctx.fillStyle = 'rgba(255,255,255,0.35)';\n    ctx.font = '11px sans-serif';\n    ctx.textAlign = 'right'; ctx.textBaseline = 'bottom';\n    ctx.fillText('AISYS HTML5 Engine', W-14, H-8);\n  }\n\n  function drawTowerPicker(){\n    if (selectedSlot < 0) return;\n    const s = SLOTS[selectedSlot];\n    const existing = towerAt(selectedSlot);\n    const bw = 150, bh = 44;\n    let bx = s.x - bw/2;\n    let by = s.y + 30;\n    if (by + bh > H - 10) by = s.y - bh - 30;\n    if (bx < 10) bx = 10;\n    if (bx + bw > W - 10) bx = W - bw - 10;\n\n    ctx.fillStyle = 'rgba(15,23,42,0.95)';\n    ctx.strokeStyle = '#7dd3fc'; ctx.lineWidth = 2;\n    roundRect(bx, by, bw, bh, 10); ctx.fill(); ctx.stroke();\n\n    if (existing){\n      ctx.fillStyle = '#f87171';\n      ctx.font = 'bold 12px sans-serif';\n      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n      ctx.fillText('✕ Bongkar menara', bx+bw/2, by+bh/2);\n    } else {\n      const optW = (bw-16)/3;\n      for (let i=0;i<CATEGORIES.length;i++){\n        const c = CATEGORIES[i];\n        const ox = bx + 8 + i*(optW+0);\n        ctx.fillStyle = c.color;\n        roundRect(ox, by+8, optW-4, bh-16, 6); ctx.fill();\n        ctx.fillStyle = '#0f172a';\n        ctx.font = 'bold 10px sans-serif';\n        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n        ctx.fillText(c.label.split(' ')[0], ox+(optW-4)/2, by+bh/2);\n      }\n    }\n  }\n\n  function drawStart(){\n    drawBackground();\n    ctx.fillStyle = 'rgba(10,15,30,0.75)';\n    ctx.fillRect(0,0,W,H);\n    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n    ctx.fillStyle = '#f472b6';\n    ctx.font = 'bold 40px sans-serif';\n    ctx.shadowColor = '#f472b6'; ctx.shadowBlur = 24;\n    ctx.fillText('🌸 Bunga Neon', W/2, 150);\n    ctx.shadowBlur = 0;\n    ctx.fillStyle = '#7dd3fc';\n    ctx.font = 'bold 20px sans-serif';\n    ctx.fillText('Pertahanan Kapten Raka', W/2, 195);\n    ctx.fillStyle = '#e0f2fe';\n    ctx.font = '15px sans-serif';\n    ctx.fillText('Bug digital menyerbu bunga raksasa!', W/2, 250);\n    ctx.fillText('Pasang menara bagian bunga yang tepat di slot samping jalur.', W/2, 278);\n    ctx.fillText('Menara hanya menyerang bug yang cocok dengan bagiannya.', W/2, 306);\n    ctx.fillText('Halau ' + TARGET + ' bug dengan benar untuk menang!', W/2, 334);\n    ctx.fillStyle = '#4ade80';\n    ctx.font = 'bold 18px sans-serif';\n    ctx.fillText('▶ Ketuk / Tekan untuk Mulai', W/2, 400);\n    ctx.fillStyle = 'rgba(255,255,255,0.5)';\n    ctx.font = '12px sans-serif';\n    ctx.fillText('Built with AISYS HTML5 Engine', W/2, H-40);\n    ctx.fillText('STIKOM YOS SUDARSO', W/2, H-22);\n  }\n\n  function drawEnd(){\n    drawBackground();\n    ctx.fillStyle = 'rgba(10,15,30,0.8)';\n    ctx.fillRect(0,0,W,H);\n    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n    if (state === 'win'){\n      ctx.fillStyle = '#4ade80';\n      ctx.font = 'bold 42px sans-serif';\n      ctx.shadowColor = '#4ade80'; ctx.shadowBlur = 24;\n      ctx.fillText('🏆 Bunga Terselamatkan!', W/2, 180);\n      ctx.shadowBlur = 0;\n      ctx.fillStyle = '#e0f2fe';\n      ctx.font = '16px sans-serif';\n      ctx.fillText('Bug kembali menjadi serangga penyerbuk.', W/2, 240);\n      ctx.fillText('Bunga raksasa mekar megah di Kota Neon!', W/2, 268);\n    } else {\n      ctx.fillStyle = '#f87171';\n      ctx.font = 'bold 42px sans-serif';\n      ctx.shadowColor = '#f87171'; ctx.shadowBlur = 24;\n      ctx.fillText('💫 Bunga Layu...', W/2, 180);\n      ctx.shadowBlur = 0;\n      ctx.fillStyle = '#e0f2fe';\n      ctx.font = '16px sans-serif';\n      ctx.fillText('Kapten Raka bangkit menyusun strategi baru.', W/2, 240);\n      ctx.fillText('Ayo coba lagi, kamu pasti bisa!', W/2, 268);\n    }\n    ctx.fillStyle = '#7dd3fc';\n    ctx.font = 'bold 15px sans-serif';\n    ctx.fillText('Bug dihalau: ' + correctCount + ' / ' + TARGET, W/2, 320);\n    ctx.fillStyle = '#4ade80';\n    ctx.font = 'bold 18px sans-serif';\n    ctx.fillText('▶ Ketuk untuk Main Lagi', W/2, 390);\n    ctx.fillStyle = 'rgba(255,255,255,0.5)';\n    ctx.font = '12px sans-serif';\n    ctx.fillText('Built with AISYS HTML5 Engine', W/2, H-40);\n    ctx.fillText('STIKOM YOS SUDARSO', W/2, H-22);\n  }\n\n  function render(){\n    ctx.setTransform(1,0,0,1,0,0);\n    ctx.clearRect(0,0,cv.width,cv.height);\n    ctx.setTransform(scale, 0, 0, scale, offX, offY);\n\n    if (state === 'start'){ drawStart(); return; }\n    if (state === 'win' || state === 'lose'){ drawEnd(); return; }\n\n    drawBackground();\n    drawPath();\n    drawFlower();\n    drawSlots();\n    drawEnemies();\n    drawProjectiles();\n    drawParticles();\n    drawTowerPicker();\n    drawHUD();\n  }\n\n  // ---------- INPUT ----------\n  function handleClick(lx, ly){\n    unlockAudio();\n    if (state === 'start'){ resetGame(); state = 'playing'; return; }\n    if (state === 'win' || state === 'lose'){ resetGame(); state = 'playing'; return; }\n\n    // cek picker dulu\n    if (selectedSlot >= 0){\n      const s = SLOTS[selectedSlot];\n      const existing = towerAt(selectedSlot);\n      const bw = 150, bh = 44;\n      let bx = s.x - bw/2;\n      let by = s.y + 30;\n      if (by + bh > H - 10) by = s.y - bh - 30;\n      if (bx < 10) bx = 10;\n      if (bx + bw > W - 10) bx = W - bw - 10;\n      if (lx >= bx && lx <= bx+bw && ly >= by && ly <= by+bh){\n        if (existing){\n          towers = towers.filter(t => t.slotIndex !== selectedSlot);\n          sfx.place();\n        } else {\n          const optW = (bw-16)/3;\n          for (let i=0;i<CATEGORIES.length;i++){\n            const ox = bx + 8 + i*optW;\n            if (lx >= ox && lx <= ox+optW-4){\n              towers.push({ slotIndex: selectedSlot, cat: CATEGORIES[i].id, cool: 0 });\n              sfx.place();\n              break;\n            }\n          }\n        }\n        selectedSlot = -1;\n        return;\n      }\n    }\n\n    // cek slot\n    for (let i=0;i<SLOTS.length;i++){\n      const s = SLOTS[i];\n      if (Math.hypot(lx-s.x, ly-s.y) < 24){\n        selectedSlot = (selectedSlot === i) ? -1 : i;\n        return;\n      }\n    }\n    selectedSlot = -1;\n  }\n\n  cv.addEventListener('pointerdown', (e)=>{\n    e.preventDefault();\n    const p = toLogical(e.clientX, e.clientY);\n    handleClick(p.x, p.y);\n  });\n  window.addEventListener('keydown', (e)=>{\n    if (e.key === ' ' || e.key === 'Enter'){\n      e.preventDefault();\n      unlockAudio();\n      if (state === 'start' || state === 'win' || state === 'lose'){ resetGame(); state = 'playing'; }\n    }\n  });\n\n  // ---------- LOOP ----------\n  function loop(ts){\n    if (!lastTime) lastTime = ts;\n    let dt = (ts - lastTime) / 1000;\n    lastTime = ts;\n    if (dt > 0.1) dt = 0.1;\n    update(dt);\n    render();\n    requestAnimationFrame(loop);\n  }\n  requestAnimationFrame(loop);\n})();\n</script>\n</body>\n</html>\n<!-- END_OF_GAME -->\n```"
+    },
+    {
+      "role": "user",
+      "content": "saya sudah pasang Putik, Benang Sari dan Mahkota tapi tidak terjadi apa-apa\n\n(PENTING, MODE PERBAIKAN: pesan di atas adalah laporan masalah tentang game terakhir. Jangan memberi tips bermain. Baca kode game terakhir, cari penyebabnya (periksa juga ATURAN TEKNIS WAJIB: ruang koordinat 960x540, jangkauan slot/sasaran, satu penilaian per objek, pilihan bisa diubah, teks tidak bertumpuk, game bisa dimenangkan, aturan kategori). Tulis 1-2 kalimat santai tentang penyebabnya, lalu berikan game yang LENGKAP dan sudah diperbaiki dalam tepat SATU blok kode, tanpa monolog atau draf. Endless Runner: blok ```js berisi AISYS.defineGame({ ... }); diakhiri // END_OF_MANIFEST. Genre lain: blok ```html dari <!DOCTYPE html> sampai </html> lalu <!-- END_OF_GAME -->. Data cerita tetap disertakan.)"
+    },
+    {
+      "role": "assistant",
+      "content": "Aku sudah cek kodenya: menara hanya menembak kalau musuh yang cocok masuk jangkauan 130px, padahal beberapa slot terlalu jauh dari jalur sehingga tidak pernah menembak. Aku perbaiki posisi slot agar semua dalam jangkauan, plus perbaiki penilaian dan tampilan.\n\n```html\n<!DOCTYPE html>\n<html lang=\"id\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">\n<title>Bunga Neon: Pertahanan Kapten Raka</title>\n<script type=\"application/json\" id=\"aisys-story\">\n{\n  \"title\": \"Bunga Neon: Pertahanan Kapten Raka\",\n  \"hero\": { \"name\": \"Kapten Raka\", \"emoji\": \"🧑‍🚀\", \"desc\": \"Siswa SMA jenius dengan drone pintar penjaga Kota Neon\" },\n  \"world\": { \"name\": \"Kota Neon\", \"emoji\": \"🌆\" },\n  \"mood\": { \"from\": \"#0f172a\", \"to\": \"#1e3a8a\" },\n  \"prolog\": [\n    { \"text\": \"Di Kota Neon yang berkilau, Kapten Raka dan drone pintarnya menjaga bunga raksasa di tengah kota.\", \"emoji\": \"🌸\" },\n    { \"text\": \"Gerombolan bug digital menyerbu! Ternyata mereka dulu serangga penyerbuk yang tersesat.\", \"emoji\": \"🐛\" },\n    { \"text\": \"Pasang menara bagian bunga yang tepat untuk menghalau mereka dan menyelamatkan bunga.\", \"emoji\": \"🎯\" }\n  ],\n  \"goal\": { \"text\": \"Halau 10 bug dengan menara yang tepat untuk menyelamatkan bunga raksasa\" },\n  \"ending\": {\n    \"menang\": { \"text\": \"Bug kembali menjadi serangga penyerbuk dan bunga raksasa mekar megah! Kota Neon bersinar berkat Kapten Raka.\", \"emoji\": \"🏆\" },\n    \"kalah\": { \"text\": \"Bunga layu untuk sementara, tapi Kapten Raka bangkit menyusun strategi baru. Ayo coba lagi!\", \"emoji\": \"💫\" }\n  }\n}\n</script>\n<style>\n  * { margin: 0; padding: 0; box-sizing: border-box; }\n  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0f1e; font-family: 'Segoe UI', system-ui, sans-serif; }\n  #wrap { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }\n  canvas { display: block; touch-action: none; }\n  #muteBtn { position: fixed; top: 10px; right: 10px; z-index: 20; background: rgba(30,58,138,0.7); color: #e0f2fe; border: 1px solid rgba(125,211,252,0.5); border-radius: 8px; padding: 6px 12px; font-size: 14px; cursor: pointer; }\n</style>\n</head>\n<body>\n<div id=\"wrap\"><canvas id=\"cv\"></canvas></div>\n<button id=\"muteBtn\">🔊</button>\n<script>\n(function(){\n  \"use strict\";\n  const W = 960, H = 540;\n  const cv = document.getElementById('cv');\n  const ctx = cv.getContext('2d');\n  let scale = 1, offX = 0, offY = 0;\n\n  function resize(){\n    const vw = window.innerWidth, vh = window.innerHeight;\n    scale = Math.min(vw / W, vh / H);\n    const cw = Math.floor(W * scale), ch = Math.floor(H * scale);\n    cv.width = cw; cv.height = ch;\n    cv.style.width = cw + 'px'; cv.style.height = ch + 'px';\n    offX = 0; offY = 0;\n  }\n  window.addEventListener('resize', resize);\n  resize();\n\n  function toLogical(clientX, clientY){\n    const r = cv.getBoundingClientRect();\n    return { x: (clientX - r.left) / scale, y: (clientY - r.top) / scale };\n  }\n\n  // ---------- AUDIO ----------\n  let audioCtx = null, muted = false;\n  function unlockAudio(){\n    if (!audioCtx){\n      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){}\n    }\n    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();\n  }\n  function beep(freq, dur, type, vol){\n    if (muted || !audioCtx) return;\n    const o = audioCtx.createOscillator();\n    const g = audioCtx.createGain();\n    o.type = type || 'sine';\n    o.frequency.value = freq;\n    g.gain.value = vol || 0.08;\n    o.connect(g); g.connect(audioCtx.destination);\n    const t = audioCtx.currentTime;\n    g.gain.setValueAtTime(g.gain.value, t);\n    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);\n    o.start(t); o.stop(t + dur);\n  }\n  const sfx = {\n    correct: () => { beep(660, 0.12, 'sine', 0.1); setTimeout(()=>beep(880,0.15,'sine',0.1), 90); },\n    wrong: () => { beep(200, 0.25, 'sawtooth', 0.08); },\n    place: () => { beep(440, 0.08, 'triangle', 0.07); },\n    shoot: () => { beep(520, 0.05, 'square', 0.03); },\n    lose: () => { beep(160, 0.4, 'sawtooth', 0.1); },\n    win: () => { [523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,0.2,'sine',0.1), i*120)); }\n  };\n  document.getElementById('muteBtn').addEventListener('click', (e)=>{\n    e.stopPropagation();\n    muted = !muted;\n    document.getElementById('muteBtn').textContent = muted ? '🔇' : '🔊';\n  });\n\n  // ---------- MATERI ----------\n  const CATEGORIES = [\n    { id: 'putik', label: 'Putik', color: '#e879f9', desc: 'Organ kelamin betina' },\n    { id: 'benangsari', label: 'Benang Sari', color: '#fbbf24', desc: 'Organ kelamin jantan' },\n    { id: 'mahkota', label: 'Mahkota', color: '#fb7185', desc: 'Menarik penyerbuk' }\n  ];\n  const BANK = [\n    { text: 'Kepala putik lengket', cat: 'putik', exp: 'Bagian putik yang menangkap serbuk sari.' },\n    { text: 'Bakal buah', cat: 'putik', exp: 'Bagian putik yang berkembang jadi buah.' },\n    { text: 'Tangkai putik', cat: 'putik', exp: 'Penghubung kepala putik ke bakal buah.' },\n    { text: 'Serbuk sari', cat: 'benangsari', exp: 'Sel kelamin jantan yang dihasilkan benang sari.' },\n    { text: 'Tangkai sari', cat: 'benangsari', exp: 'Penopang kepala sari pada benang sari.' },\n    { text: 'Kepala sari', cat: 'benangsari', exp: 'Tempat serbuk sari diproduksi.' },\n    { text: 'Kelopak berwarna', cat: 'mahkota', exp: 'Warna menarik perhatian serangga penyerbuk.' },\n    { text: 'Aroma bunga', cat: 'mahkota', exp: 'Aroma memikat serangga untuk datang.' },\n    { text: 'Nektar manis', cat: 'mahkota', exp: 'Cairan manis sebagai hadiah bagi penyerbuk.' }\n  ];\n\n  // ---------- PATH ----------\n  const PATH = [\n    { x: -40, y: 120 }, { x: 200, y: 120 }, { x: 200, y: 300 },\n    { x: 520, y: 300 }, { x: 520, y: 130 }, { x: 800, y: 130 },\n    { x: 800, y: 420 }, { x: 480, y: 420 }, { x: 480, y: 470 }\n  ];\n  const FLOWER = { x: 480, y: 470 };\n\n  // Slot menara: semua dekat jalur (jarak < 130 - 10)\n  const SLOTS = [\n    { x: 100, y: 200 },  // dekat segmen vertikal x=200? cek: jarak ke (200,120)-(200,300) = 100\n    { x: 300, y: 200 },  // dekat segmen horizontal y=300? jarak 100\n    { x: 300, y: 380 },  // dekat y=300? jarak 80\n    { x: 420, y: 200 },  // dekat x=520 vertikal? jarak 100\n    { x: 620, y: 220 },  // dekat y=130? jarak 90\n    { x: 620, y: 360 },  // dekat x=800 vertikal? jarak 180 -> terlalu jauh, ganti\n    { x: 700, y: 220 },  // dekat y=130? jarak 90\n    { x: 700, y: 360 },  // dekat x=800 vertikal? jarak 100\n    { x: 380, y: 360 }   // dekat y=300? jarak 60\n  ];\n  // Perbaiki slot 5 (index 5) agar dekat jalur\n  SLOTS[5] = { x: 700, y: 360 }; // dekat x=800 vertikal (jarak 100) & y=420 (jarak 60)\n  // Hapus duplikat: index 5 dan 7 sama. Ganti index 5 jadi dekat segmen y=420\n  SLOTS[5] = { x: 620, y: 360 }; // dekat y=420? jarak 60, dekat x=800? jarak 180 -> masih jauh dari x=800, tapi dekat y=420 cukup\n  // Sebenarnya lebih aman: slot dekat jalur horizontal y=420\n  SLOTS[5] = { x: 620, y: 360 }; // jarak ke y=420 = 60 < 120 OK\n\n  const TOWER_RANGE = 130;\n\n  let state = 'start';\n  let lives = 5;\n  let correctCount = 0;\n  const TARGET = 10;\n  let towers = [];\n  let enemies = [];\n  let particles = [];\n  let projectiles = [];\n  let spawnTimer = 0;\n  let spawnInterval = 2.2;\n  let selectedSlot = -1;\n  let feedback = { text: '', timer: 0, color: '#fff' };\n  let lastTime = 0;\n  let enemyIdCounter = 0;\n  let bankQueue = [];\n\n  function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }\n  function refillQueue(){ bankQueue = shuffle(BANK.slice()); }\n  refillQueue();\n\n  function resetGame(){\n    lives = 5; correctCount = 0; towers = []; enemies = []; particles = [];\n    projectiles = []; spawnTimer = 0; spawnInterval = 2.2; selectedSlot = -1;\n    feedback = { text: '', timer: 0, color: '#fff' };\n    refillQueue();\n  }\n\n  function pathLength(){\n    let len = 0;\n    for (let i=1;i<PATH.length;i++){\n      len += Math.hypot(PATH[i].x-PATH[i-1].x, PATH[i].y-PATH[i-1].y);\n    }\n    return len;\n  }\n  const TOTAL_LEN = pathLength();\n  function pointAt(dist){\n    let d = dist;\n    for (let i=1;i<PATH.length;i++){\n      const seg = Math.hypot(PATH[i].x-PATH[i-1].x, PATH[i].y-PATH[i-1].y);\n      if (d <= seg){\n        const t = d / seg;\n        return { x: PATH[i-1].x + (PATH[i].x-PATH[i-1].x)*t, y: PATH[i-1].y + (PATH[i].y-PATH[i-1].y)*t };\n      }\n      d -= seg;\n    }\n    return { x: PATH[PATH.length-1].x, y: PATH[PATH.length-1].y };\n  }\n\n  function spawnEnemy(){\n    if (bankQueue.length === 0) refillQueue();\n    const item = bankQueue.pop();\n    enemies.push({\n      id: ++enemyIdCounter,\n      item: item,\n      dist: 0,\n      speed: 42,\n      hp: 1,\n      judged: false,\n      wobble: Math.random()*Math.PI*2\n    });\n  }\n\n  function towerAt(slotIndex){\n    return towers.find(t => t.slotIndex === slotIndex);\n  }\n\n  function updateTowers(dt){\n    for (const t of towers){\n      const slot = SLOTS[t.slotIndex];\n      t.cool = (t.cool || 0) - dt;\n      if (t.cool > 0) continue;\n      let target = null, bestDist = Infinity;\n      for (const e of enemies){\n        if (e.judged) continue;\n        if (e.item.cat !== t.cat) continue;\n        const p = pointAt(e.dist);\n        const d = Math.hypot(p.x - slot.x, p.y - slot.y);\n        if (d < TOWER_RANGE && d < bestDist){ bestDist = d; target = e; }\n      }\n      if (target){\n        t.cool = 0.7;\n        const p = pointAt(target.dist);\n        projectiles.push({ x: slot.x, y: slot.y, tx: p.x, ty: p.y, targetId: target.id, color: CATEGORIES.find(c=>c.id===t.cat).color, life: 0.4 });\n        sfx.shoot();\n      }\n    }\n  }\n\n  function updateProjectiles(dt){\n    for (let i=projectiles.length-1;i>=0;i--){\n      const pr = projectiles[i];\n      pr.life -= dt;\n      if (pr.life <= 0){\n        const e = enemies.find(en => en.id === pr.targetId && !en.judged);\n        if (e){\n          e.judged = true;\n          e.hp = 0;\n          correctCount++;\n          sfx.correct();\n          feedback = { text: 'Benar! ' + e.item.exp, timer: 2, color: '#4ade80' };\n          for (let k=0;k<8;k++){\n            particles.push({ x: pr.tx, y: pr.ty, vx: (Math.random()-0.5)*120, vy: (Math.random()-0.5)*120, life: 0.6, color: pr.color });\n          }\n        }\n        projectiles.splice(i,1);\n      }\n    }\n  }\n\n  function updateEnemies(dt){\n    for (let i=enemies.length-1;i>=0;i--){\n      const e = enemies[i];\n      if (e.judged){\n        e.dist += 200 * dt;\n        if (e.dist > TOTAL_LEN + 60) enemies.splice(i,1);\n        continue;\n      }\n      e.dist += e.speed * dt;\n      e.wobble += dt * 6;\n      if (e.dist >= TOTAL_LEN){\n        lives--;\n        sfx.lose();\n        feedback = { text: 'Bug lolos! ' + e.item.text + ' = ' + labelOf(e.item.cat), timer: 2, color: '#f87171' };\n        enemies.splice(i,1);\n        if (lives <= 0){ endGame('lose'); return; }\n      }\n    }\n  }\n\n  function labelOf(catId){\n    const c = CATEGORIES.find(x=>x.id===catId);\n    return c ? c.label : catId;\n  }\n\n  function updateParticles(dt){\n    for (let i=particles.length-1;i>=0;i--){\n      const p = particles[i];\n      p.x += p.vx * dt; p.y += p.vy * dt;\n      p.life -= dt;\n      if (p.life <= 0) particles.splice(i,1);\n    }\n  }\n\n  function endGame(result){\n    state = result;\n    if (result === 'win'){ sfx.win(); if (window.AISYS && AISYS.end) AISYS.end('menang'); }\n    else { sfx.lose(); if (window.AISYS && AISYS.end) AISYS.end('kalah'); }\n  }\n\n  function update(dt){\n    if (state !== 'playing') return;\n    if (feedback.timer > 0) feedback.timer -= dt;\n\n    spawnTimer -= dt;\n    if (spawnTimer <= 0){\n      spawnEnemy();\n      spawnTimer = spawnInterval;\n      spawnInterval = Math.max(1.2, spawnInterval - 0.05);\n    }\n    updateEnemies(dt);\n    updateTowers(dt);\n    updateProjectiles(dt);\n    updateParticles(dt);\n\n    if (correctCount >= TARGET && state === 'playing') endGame('win');\n  }\n\n  function roundRect(x,y,w,h,r){\n    ctx.beginPath();\n    ctx.moveTo(x+r,y);\n    ctx.arcTo(x+w,y,x+w,y+h,r);\n    ctx.arcTo(x+w,y+h,x,y+h,r);\n    ctx.arcTo(x,y+h,x,y,r);\n    ctx.arcTo(x,y,x+w,y,r);\n    ctx.closePath();\n  }\n\n  function drawBackground(){\n    const g = ctx.createLinearGradient(0,0,0,H);\n    g.addColorStop(0, '#0f172a');\n    g.addColorStop(0.5, '#1e293b');\n    g.addColorStop(1, '#1e3a8a');\n    ctx.fillStyle = g;\n    ctx.fillRect(0,0,W,H);\n\n    for (let i=0;i<14;i++){\n      const bx = (i*72 + 20) % W;\n      const bh = 120 + ((i*53)%180);\n      const by = H - bh - 60;\n      const bg = ctx.createLinearGradient(bx, by, bx, by+bh);\n      bg.addColorStop(0, 'rgba(56,189,248,0.15)');\n      bg.addColorStop(1, 'rgba(30,58,138,0.35)');\n      ctx.fillStyle = bg;\n      roundRect(bx, by, 52, bh, 6);\n      ctx.fill();\n      ctx.fillStyle = 'rgba(125,211,252,0.5)';\n      for (let wy=by+12; wy<by+bh-10; wy+=22){\n        for (let wx=bx+8; wx<bx+46; wx+=16){\n          if ((wx+wy+i)%3 !== 0) ctx.fillRect(wx, wy, 8, 10);\n        }\n      }\n    }\n  }\n\n  function drawPath(){\n    ctx.lineCap = 'round'; ctx.lineJoin = 'round';\n    ctx.strokeStyle = 'rgba(56,189,248,0.15)';\n    ctx.lineWidth = 46;\n    ctx.beginPath();\n    ctx.moveTo(PATH[0].x, PATH[0].y);\n    for (let i=1;i<PATH.length;i++) ctx.lineTo(PATH[i].x, PATH[i].y);\n    ctx.stroke();\n    ctx.strokeStyle = 'rgba(125,211,252,0.35)';\n    ctx.lineWidth = 3;\n    ctx.setLineDash([12,10]);\n    ctx.beginPath();\n    ctx.moveTo(PATH[0].x, PATH[0].y);\n    for (let i=1;i<PATH.length;i++) ctx.lineTo(PATH[i].x, PATH[i].y);\n    ctx.stroke();\n    ctx.setLineDash([]);\n  }\n\n  function drawFlower(){\n    const t = performance.now()/1000;\n    const pulse = 1 + Math.sin(t*2)*0.04;\n    ctx.save();\n    ctx.translate(FLOWER.x, FLOWER.y);\n    ctx.scale(pulse, pulse);\n    ctx.shadowColor = '#f472b6'; ctx.shadowBlur = 30;\n    for (let i=0;i<8;i++){\n      const a = (i/8)*Math.PI*2 + t*0.3;\n      ctx.fillStyle = i%2===0 ? '#fb7185' : '#f472b6';\n      ctx.beginPath();\n      ctx.ellipse(Math.cos(a)*22, Math.sin(a)*22, 16, 10, a, 0, Math.PI*2);\n      ctx.fill();\n    }\n    ctx.shadowBlur = 0;\n    const cg = ctx.createRadialGradient(0,0,2,0,0,16);\n    cg.addColorStop(0,'#fef08a'); cg.addColorStop(1,'#fbbf24');\n    ctx.fillStyle = cg;\n    ctx.beginPath(); ctx.arc(0,0,14,0,Math.PI*2); ctx.fill();\n    ctx.restore();\n  }\n\n  function drawSlots(){\n    for (let i=0;i<SLOTS.length;i++){\n      const s = SLOTS[i];\n      const tw = towerAt(i);\n      const sel = selectedSlot === i;\n      ctx.save();\n      if (tw){\n        const cat = CATEGORIES.find(c=>c.id===tw.cat);\n        ctx.shadowColor = cat.color; ctx.shadowBlur = 16;\n        const g = ctx.createLinearGradient(s.x-18, s.y-18, s.x+18, s.y+18);\n        g.addColorStop(0, cat.color); g.addColorStop(1, '#1e293b');\n        ctx.fillStyle = g;\n        roundRect(s.x-18, s.y-18, 36, 36, 8); ctx.fill();\n        ctx.shadowBlur = 0;\n        ctx.fillStyle = '#fff';\n        ctx.font = 'bold 10px sans-serif';\n        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n        ctx.fillText(cat.label.split(' ')[0], s.x, s.y);\n      } else {\n        ctx.strokeStyle = sel ? '#7dd3fc' : 'rgba(125,211,252,0.5)';\n        ctx.lineWidth = sel ? 3 : 2;\n        ctx.setLineDash([5,4]);\n        roundRect(s.x-16, s.y-16, 32, 32, 8); ctx.stroke();\n        ctx.setLineDash([]);\n        ctx.fillStyle = 'rgba(125,211,252,0.6)';\n        ctx.font = 'bold 18px sans-serif';\n        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n        ctx.fillText('+', s.x, s.y);\n      }\n      ctx.restore();\n    }\n  }\n\n  function drawEnemies(){\n    for (const e of enemies){\n      const p = pointAt(e.dist);\n      const cat = CATEGORIES.find(c=>c.id===e.item.cat);\n      ctx.save();\n      ctx.translate(p.x, p.y + Math.sin(e.wobble)*3);\n      if (e.judged){\n        ctx.globalAlpha = Math.max(0, 1 - (e.dist - TOTAL_LEN)/60);\n      }\n      ctx.shadowColor = cat.color; ctx.shadowBlur = 12;\n      const g = ctx.createRadialGradient(-4,-4,2,0,0,16);\n      g.addColorStop(0, '#fff'); g.addColorStop(0.4, cat.color); g.addColorStop(1, '#1e293b');\n      ctx.fillStyle = g;\n      ctx.beginPath(); ctx.arc(0,0,14,0,Math.PI*2); ctx.fill();\n      ctx.shadowBlur = 0;\n      ctx.strokeStyle = cat.color; ctx.lineWidth = 2;\n      for (let k=-1;k<=1;k++){\n        ctx.beginPath(); ctx.moveTo(k*6, 8); ctx.lineTo(k*10, 16); ctx.stroke();\n      }\n      ctx.fillStyle = '#fff';\n      ctx.font = 'bold 10px sans-serif';\n      ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';\n      ctx.fillText(e.item.text.length > 20 ? e.item.text.slice(0,19)+'…' : e.item.text, 0, -18);\n      ctx.restore();\n    }\n  }\n\n  function drawProjectiles(){\n    for (const pr of projectiles){\n      ctx.save();\n      ctx.shadowColor = pr.color; ctx.shadowBlur = 12;\n      ctx.fillStyle = pr.color;\n      ctx.beginPath(); ctx.arc(pr.x, pr.y, 5, 0, Math.PI*2); ctx.fill();\n      ctx.restore();\n    }\n  }\n\n  function drawParticles(){\n    for (const p of particles){\n      ctx.globalAlpha = Math.max(0, p.life/0.6);\n      ctx.fillStyle = p.color;\n      ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI*2); ctx.fill();\n    }\n    ctx.globalAlpha = 1;\n  }\n\n  function drawHUD(){\n    ctx.fillStyle = 'rgba(15,23,42,0.75)';\n    roundRect(12, 12, 340, 74, 12); ctx.fill();\n    ctx.fillStyle = '#7dd3fc';\n    ctx.font = 'bold 13px sans-serif';\n    ctx.textAlign = 'left'; ctx.textBaseline = 'top';\n    ctx.fillText('🌸 Bunga Neon', 24, 22);\n    ctx.fillStyle = '#e0f2fe';\n    ctx.font = 'bold 15px sans-serif';\n    ctx.fillText('Bug dihalau: ' + correctCount + ' / ' + TARGET, 24, 42);\n    ctx.fillStyle = '#f87171';\n    ctx.font = 'bold 14px sans-serif';\n    let hearts = '';\n    for (let i=0;i<lives;i++) hearts += '❤ ';\n    ctx.fillText(hearts, 24, 64);\n\n    ctx.fillStyle = 'rgba(15,23,42,0.75)';\n    roundRect(W-300, 12, 288, 74, 12); ctx.fill();\n    ctx.fillStyle = '#7dd3fc';\n    ctx.font = 'bold 12px sans-serif';\n    ctx.textAlign = 'left';\n    ctx.fillText('Menara tersedia:', W-288, 22);\n    let tx = W-288;\n    for (const c of CATEGORIES){\n      ctx.fillStyle = c.color;\n      roundRect(tx, 40, 88, 34, 8); ctx.fill();\n      ctx.fillStyle = '#0f172a';\n      ctx.font = 'bold 11px sans-serif';\n      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n      ctx.fillText(c.label, tx+44, 57);\n      tx += 94;\n    }\n\n    if (feedback.timer > 0){\n      ctx.globalAlpha = Math.min(1, feedback.timer);\n      ctx.fillStyle = 'rgba(15,23,42,0.85)';\n      roundRect(W/2-260, H-70, 520, 46, 10); ctx.fill();\n      ctx.fillStyle = feedback.color;\n      ctx.font = 'bold 14px sans-serif';\n      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n      ctx.fillText(feedback.text.length > 70 ? feedback.text.slice(0,69)+'…' : feedback.text, W/2, H-47);\n      ctx.globalAlpha = 1;\n    }\n\n    ctx.fillStyle = 'rgba(255,255,255,0.35)';\n    ctx.font = '11px sans-serif';\n    ctx.textAlign = 'right'; ctx.textBaseline = 'bottom';\n    ctx.fillText('AISYS HTML5 Engine', W-14, H-8);\n  }\n\n  function drawTowerPicker(){\n    if (selectedSlot < 0) return;\n    const s = SLOTS[selectedSlot];\n    const existing = towerAt(selectedSlot);\n    const bw = 150, bh = 44;\n    let bx = s.x - bw/2;\n    let by = s.y + 30;\n    if (by + bh > H - 10) by = s.y - bh - 30;\n    if (bx < 10) bx = 10;\n    if (bx + bw > W - 10) bx = W - bw - 10;\n\n    ctx.fillStyle = 'rgba(15,23,42,0.95)';\n    ctx.strokeStyle = '#7dd3fc'; ctx.lineWidth = 2;\n    roundRect(bx, by, bw, bh, 10); ctx.fill(); ctx.stroke();\n\n    if (existing){\n      ctx.fillStyle = '#f87171';\n      ctx.font = 'bold 12px sans-serif';\n      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n      ctx.fillText('✕ Bongkar menara', bx+bw/2, by+bh/2);\n    } else {\n      const optW = (bw-16)/3;\n      for (let i=0;i<CATEGORIES.length;i++){\n        const c = CATEGORIES[i];\n        const ox = bx + 8 + i*optW;\n        ctx.fillStyle = c.color;\n        roundRect(ox, by+8, optW-4, bh-16, 6); ctx.fill();\n        ctx.fillStyle = '#0f172a';\n        ctx.font = 'bold 10px sans-serif';\n        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n        ctx.fillText(c.label.split(' ')[0], ox+(optW-4)/2, by+bh/2);\n      }\n    }\n  }\n\n  function drawStart(){\n    drawBackground();\n    ctx.fillStyle = 'rgba(10,15,30,0.75)';\n    ctx.fillRect(0,0,W,H);\n    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n    ctx.fillStyle = '#f472b6';\n    ctx.font = 'bold 40px sans-serif';\n    ctx.shadowColor = '#f472b6'; ctx.shadowBlur = 24;\n    ctx.fillText('🌸 Bunga Neon', W/2, 150);\n    ctx.shadowBlur = 0;\n    ctx.fillStyle = '#7dd3fc';\n    ctx.font = 'bold 20px sans-serif';\n    ctx.fillText('Pertahanan Kapten Raka', W/2, 195);\n    ctx.fillStyle = '#e0f2fe';\n    ctx.font = '15px sans-serif';\n    ctx.fillText('Bug digital menyerbu bunga raksasa!', W/2, 250);\n    ctx.fillText('Pasang menara bagian bunga yang tepat di slot samping jalur.', W/2, 278);\n    ctx.fillText('Menara hanya menyerang bug yang cocok dengan bagiannya.', W/2, 306);\n    ctx.fillText('Halau ' + TARGET + ' bug dengan benar untuk menang!', W/2, 334);\n    ctx.fillStyle = '#4ade80';\n    ctx.font = 'bold 18px sans-serif';\n    ctx.fillText('▶ Ketuk / Tekan untuk Mulai', W/2, 400);\n    ctx.fillStyle = 'rgba(255,255,255,0.5)';\n    ctx.font = '12px sans-serif';\n    ctx.fillText('Built with AISYS HTML5 Engine', W/2, H-40);\n    ctx.fillText('STIKOM YOS SUDARSO', W/2, H-22);\n  }\n\n  function drawEnd(){\n    drawBackground();\n    ctx.fillStyle = 'rgba(10,15,30,0.8)';\n    ctx.fillRect(0,0,W,H);\n    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n    if (state === 'win'){\n      ctx.fillStyle = '#4ade80';\n      ctx.font = 'bold 42px sans-serif';\n      ctx.shadowColor = '#4ade80'; ctx.shadowBlur = 24;\n      ctx.fillText('🏆 Bunga Terselamatkan!', W/2, 180);\n      ctx.shadowBlur = 0;\n      ctx.fillStyle = '#e0f2fe';\n      ctx.font = '16px sans-serif';\n      ctx.fillText('Bug kembali menjadi serangga penyerbuk.', W/2, 240);\n      ctx.fillText('Bunga raksasa mekar megah di Kota Neon!', W/2, 268);\n    } else {\n      ctx.fillStyle = '#f87171';\n      ctx.font = 'bold 42px sans-serif';\n      ctx.shadowColor = '#f87171'; ctx.shadowBlur = 24;\n      ctx.fillText('💫 Bunga Layu...', W/2, 180);\n      ctx.shadowBlur = 0;\n      ctx.fillStyle = '#e0f2fe';\n      ctx.font = '16px sans-serif';\n      ctx.fillText('Kapten Raka bangkit menyusun strategi baru.', W/2, 240);\n      ctx.fillText('Ayo coba lagi, kamu pasti bisa!', W/2, 268);\n    }\n    ctx.fillStyle = '#7dd3fc';\n    ctx.font = 'bold 15px sans-serif';\n    ctx.fillText('Bug dihalau: ' + correctCount + ' / ' + TARGET, W/2, 320);\n    ctx.fillStyle = '#4ade80';\n    ctx.font = 'bold 18px sans-serif';\n    ctx.fillText('▶ Ketuk untuk Main Lagi', W/2, 390);\n    ctx.fillStyle = 'rgba(255,255,255,0.5)';\n    ctx.font = '12px sans-serif';\n    ctx.fillText('Built with AISYS HTML5 Engine', W/2, H-40);\n    ctx.fillText('STIKOM YOS SUDARSO', W/2, H-22);\n  }\n\n  function render(){\n    ctx.setTransform(1,0,0,1,0,0);\n    ctx.clearRect(0,0,cv.width,cv.height);\n    ctx.setTransform(scale, 0, 0, scale, offX, offY);\n\n    if (state === 'start'){ drawStart(); return; }\n    if (state === 'win' || state === 'lose'){ drawEnd(); return; }\n\n    drawBackground();\n    drawPath();\n    drawFlower();\n    drawSlots();\n    drawEnemies();\n    drawProjectiles();\n    drawParticles();\n    drawTowerPicker();\n    drawHUD();\n  }\n\n  function handleClick(lx, ly){\n    unlockAudio();\n    if (state === 'start'){ resetGame(); state = 'playing'; return; }\n    if (state === 'win' || state === 'lose'){ resetGame(); state = 'playing'; return; }\n\n    if (selectedSlot >= 0){\n      const s = SLOTS[selectedSlot];\n      const existing = towerAt(selectedSlot);\n      const bw = 150, bh = 44;\n      let bx = s.x - bw/2;\n      let by = s.y + 30;\n      if (by + bh > H - 10) by = s.y - bh - 30;\n      if (bx < 10) bx = 10;\n      if (bx + bw > W - 10) bx = W - bw - 10;\n      if (lx >= bx && lx <= bx+bw && ly >= by && ly <= by+bh){\n        if (existing){\n          towers = towers.filter(t => t.slotIndex !== selectedSlot);\n          sfx.place();\n        } else {\n          const optW = (bw-16)/3;\n          for (let i=0;i<CATEGORIES.length;i++){\n            const ox = bx + 8 + i*optW;\n            if (lx >= ox && lx <= ox+optW-4){\n              towers.push({ slotIndex: selectedSlot, cat: CATEGORIES[i].id, cool: 0 });\n              sfx.place();\n              break;\n            }\n          }\n        }\n        selectedSlot = -1;\n        return;\n      }\n    }\n\n    for (let i=0;i<SLOTS.length;i++){\n      const s = SLOTS[i];\n      if (Math.hypot(lx-s.x, ly-s.y) < 24){\n        selectedSlot = (selectedSlot === i) ? -1 : i;\n        return;\n      }\n    }\n    selectedSlot = -1;\n  }\n\n  cv.addEventListener('pointerdown', (e)=>{\n    e.preventDefault();\n    const p = toLogical(e.clientX, e.clientY);\n    handleClick(p.x, p.y);\n  });\n  window.addEventListener('keydown', (e)=>{\n    if (e.key === ' ' || e.key === 'Enter'){\n      e.preventDefault();\n      unlockAudio();\n      if (state === 'start' || state === 'win' || state === 'lose'){ resetGame(); state = 'playing'; }\n    }\n  });\n\n  function loop(ts){\n    if (!lastTime) lastTime = ts;\n    let dt = (ts - lastTime) / 1000;\n    lastTime = ts;\n    if (dt > 0.1) dt = 0.1;\n    update(dt);\n    render();\n    requestAnimationFrame(loop);\n  }\n  requestAnimationFrame(loop);\n})();\n</script>\n</body>\n</html>\n<!-- END_OF_GAME -->\n```"
+    }
+  ]
+}

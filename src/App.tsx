@@ -26,7 +26,7 @@ import {
   getEffectiveApiKey,
 } from './utils/storage';
 import { extractHtmlFromStream, extractGameTitle, codeFenceLang } from './utils/htmlExtractor';
-import { GAME_REPAIR_DIRECTIVE } from './config/defaultSkill';
+import { GAME_REPAIR_DIRECTIVE, isGameComplaint } from './config/defaultSkill';
 import { collectStory, latestStep } from './utils/storyMarkers';
 import { sendDeepSeekMessage } from './utils/deepseekStream';
 
@@ -63,6 +63,8 @@ export function App() {
   const [currentVersionIndex, setCurrentVersionIndex] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<ActiveTab>('preview');
   const [logs, setLogs] = useState<ConsoleLogItem[]>([]);
+  // Problem found by the automatic Beta check for the game currently in the preview (shown on the chat card)
+  const [gameWarning, setGameWarning] = useState<string | null>(null);
   const [isStreaming, setIsStreaming] = useState(false);
   const [currentInput, setCurrentInput] = useState('');
   const [activeCode, setActiveCode] = useState<string>('');
@@ -115,6 +117,11 @@ export function App() {
     }
   }, [versions, currentVersionIndex]);
 
+  // A new or different game in the preview invalidates the previous automatic-check warning
+  useEffect(() => {
+    setGameWarning(null);
+  }, [activeCode]);
+
   // In-Game Iframe Console Bridge & Telemetry Listener
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
@@ -152,6 +159,18 @@ export function App() {
           timestamp: Date.now(),
         };
         setLogs((prev) => [...prev.slice(-200), item]);
+      } else if (e.data.type === 'aisys:betacheck') {
+        // Light automatic check of a Beta (full-HTML) game; it cannot prove the game is winnable
+        const checks: any[] = Array.isArray(e.data.checks) ? e.data.checks : [];
+        const failed = checks.filter((c) => !c.pass).map((c) => `${c.id}: ${String(c.detail).slice(0, 200)}`).join(' | ');
+        const item: ConsoleLogItem = {
+          id: Math.random().toString(36).substring(2),
+          type: e.data.ok ? 'log' : 'warn',
+          message: `[Cek Beta] ${e.data.ok ? 'LOLOS ✅' : 'PERLU DICEK ⚠️'}: ${checks.map((c) => `${c.id}=${c.pass ? 'OK' : 'GAGAL'}`).join(', ')}${failed ? ` — ${failed}` : ''}. Cek ini tidak menjamin game bisa dimenangkan; coba mainkan dulu.`,
+          timestamp: Date.now(),
+        };
+        setLogs((prev) => [...prev.slice(-200), item]);
+        setGameWarning(e.data.ok ? null : failed.slice(0, 300));
       } else if (e.data.type === 'aisys:track') {
         const item: ConsoleLogItem = {
           id: Math.random().toString(36).substring(2),
@@ -306,6 +325,15 @@ export function App() {
 
     abortControllerRef.current = new AbortController();
 
+    // A complaint ("tidak terjadi apa-apa", "macet", "teks bertumpuk"...) switches to repair mode, but only
+    // once a game exists, and only for the message being sent now (not for older messages in the history).
+    const gameExists = messages.some((m) => m.role === 'assistant' && m.extractedCode && m.isCodeComplete);
+    const repairNow =
+      gameExists &&
+      isGameComplaint(userMessage.content) &&
+      !userMessage.content.includes('<!DOCTYPE html>') &&
+      !userMessage.content.includes('AISYS.defineGame');
+
     // Prepare History for API: Exclude initial greeting and purge any empty assistant messages
     const apiHistory = updatedMessages
       .slice(0, -1) // Exclude the newly added empty in-flight assistant placeholder
@@ -327,9 +355,8 @@ export function App() {
           };
         }
 
-        // If user prompt asks to repair or fix broken code, append strict completion directive
-        const isRepairIntent = /(perbaiki|belum\s*melihat|terpotong|tidak\s*selesai|layar\s*hitam|benerin|fix|lanjutkan)/i.test(m.content);
-        if (isRepairIntent && !m.content.includes('<!DOCTYPE html>') && !m.content.includes('AISYS.defineGame')) {
+        // Repair mode: append the strict repair directive to the message being sent now
+        if (repairNow && m.id === userMessage.id) {
           return {
             role: m.role,
             content: `${m.content.trim()}\n\n${GAME_REPAIR_DIRECTIVE}`,
@@ -650,6 +677,7 @@ export function App() {
                 onSendMessage={handleSendMessage}
                 onStopStreaming={handleStopStreaming}
                 onSelectTab={setActiveTab}
+                gameWarning={gameWarning}
               />
             </div>
 

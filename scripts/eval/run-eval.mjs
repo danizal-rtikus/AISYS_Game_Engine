@@ -70,6 +70,15 @@ const extractorPath = path.join(OUT, '.htmlExtractor.mjs');
 fs.writeFileSync(extractorPath, extractorJs);
 const { extractHtmlFromStream } = await import(pathToFileURL(extractorPath).href);
 
+// Repair directive exactly as the app appends it to a complaint (src/config/defaultSkill.ts)
+const skillJs = buildSync({
+  entryPoints: [path.join(ROOT, 'src/config/defaultSkill.ts')],
+  bundle: true, format: 'esm', platform: 'node', write: false,
+}).outputFiles[0].text;
+const skillPath = path.join(OUT, '.defaultSkill.mjs');
+fs.writeFileSync(skillPath, skillJs);
+const { GAME_REPAIR_DIRECTIVE, isGameComplaint } = await import(pathToFileURL(skillPath).href);
+
 // ---------------------------------------------------------------- runtime in Node (mock canvas)
 function loadRuntime() {
   const ctx2d = new Proxy({}, {
@@ -343,6 +352,23 @@ async function runTrial(t) {
       result.repair = { finishReason: r2.finishReason, completionTokens: r2.usage.completion_tokens ?? null, ms: r2.ms, isPlayable: ex2.isComplete, measure: ms2, failure: failureSummary(ex2, ms2) };
       result.repairPass = !result.repair.failure;
     }
+
+    // Student complaint after the game is built, sent exactly like the app does (complaint + repair directive)
+    if (t.complaint && (result.firstPass || result.repairPass)) {
+      const detected = isGameComplaint(t.complaint);
+      const content = detected ? `${t.complaint}\n\n${GAME_REPAIR_DIRECTIVE}` : t.complaint;
+      msgs.push({ role: 'user', content });
+      const r3 = await chat(msgs);
+      msgs.push({ role: 'assistant', content: r3.content });
+      turns.push({ user: content, finishReason: r3.finishReason, usage: r3.usage, ms: r3.ms, reasoningChars: r3.reasoningChars });
+      const ex3 = extractHtmlFromStream(r3.content);
+      const ms3 = measure(ex3.isComplete ? ex3.code : null);
+      result.complaint = {
+        text: t.complaint, detectedAsComplaint: detected, gaveNewCode: Boolean(ex3.code), isPlayable: ex3.isComplete,
+        explanation: ex3.displayText.slice(0, 400), ms: r3.ms, completionTokens: r3.usage.completion_tokens ?? null,
+        measure: ms3, failure: ex3.code ? failureSummary(ex3, ms3) : 'tidak ada kode baru (AI hanya menjawab teks)',
+      };
+    }
   }
 
   fs.writeFileSync(path.join(OUT, 'transcripts', `${t.id}.json`), JSON.stringify({ id: t.id, model: MODEL, gen: GEN, turns, messages: msgs }, null, 2));
@@ -397,4 +423,5 @@ async function worker() {
 await Promise.all(Array.from({ length: Math.min(CONCURRENCY, selected.length) }, worker));
 fs.writeFileSync(path.join(OUT, 'meta.json'), JSON.stringify({ ...meta, finishedAt: new Date().toISOString() }, null, 2));
 fs.rmSync(extractorPath, { force: true });
+fs.rmSync(skillPath, { force: true });
 console.log('Done.');
