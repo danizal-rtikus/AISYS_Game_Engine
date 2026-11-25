@@ -25,7 +25,8 @@ import {
   isAdminAuthenticated,
   getEffectiveApiKey,
 } from './utils/storage';
-import { extractHtmlFromStream, extractGameTitle } from './utils/htmlExtractor';
+import { extractHtmlFromStream, extractGameTitle, codeFenceLang } from './utils/htmlExtractor';
+import { MANIFEST_REPAIR_DIRECTIVE } from './config/defaultSkill';
 import { sendDeepSeekMessage } from './utils/deepseekStream';
 
 export const INITIAL_WELCOME_MESSAGE: Message = {
@@ -320,7 +321,7 @@ export function App() {
           if (m.extractedCode && m.isCodeComplete) {
             return {
               role: m.role,
-              content: `${m.content ? m.content.trim() + '\n\n' : ''}\`\`\`html\n${m.extractedCode}\n\`\`\``,
+              content: `${m.content ? m.content.trim() + '\n\n' : ''}\`\`\`${codeFenceLang(m.extractedCode)}\n${m.extractedCode}\n\`\`\``,
             };
           }
           return {
@@ -331,10 +332,10 @@ export function App() {
 
         // If user prompt asks to repair or fix broken code, append strict completion directive
         const isRepairIntent = /(perbaiki|belum\s*melihat|terpotong|tidak\s*selesai|layar\s*hitam|benerin|fix|lanjutkan)/i.test(m.content);
-        if (isRepairIntent && !m.content.includes('<!DOCTYPE html>')) {
+        if (isRepairIntent && !m.content.includes('<!DOCTYPE html>') && !m.content.includes('AISYS.defineGame')) {
           return {
             role: m.role,
-            content: `${m.content.trim()}\n\n(PENTING: Dilarang menulis monolog berpikir atau draf kode! Langsung berikan SELURUH kode game HTML5 Canvas 2D padat 400-650 baris yang LENGKAP dan UTUH dari <!DOCTYPE html> sampai penutup </html>\\n<!-- END_OF_GAME --> dalam SATU blok \`\`\`html.)`,
+            content: `${m.content.trim()}\n\n${MANIFEST_REPAIR_DIRECTIVE}`,
           };
         }
 
@@ -435,15 +436,19 @@ export function App() {
 
           // Get last 200 characters of the current code to give exact context
           const lastSnippet = parsed.code.slice(-200);
+          const fence = codeFenceLang(parsed.code);
+          const closingHint = fence === 'js'
+            ? 'Selesaikan manifest sampai penutup });\n// END_OF_MANIFEST'
+            : 'Selesaikan sampai penutup </script></body></html>';
           const continuationMessages = [
             ...apiHistory,
             {
               role: 'assistant' as const,
-              content: `\`\`\`html\n${parsed.code}`,
+              content: `\`\`\`${fence}\n${parsed.code}`,
             },
             {
               role: 'user' as const,
-              content: `Kode game HTML5 terputus di baris ${parsed.lineCount}. Tolong lanjutkan kode PERSIS dari titik terakhir berikut tanpa mengulang dari awal, tanpa salam, dan tanpa penjelasan. Selesaikan sampai penutup </script></body></html>:\n\n\`\`\`javascript\n${lastSnippet}\n\`\`\``,
+              content: `Kode game terputus di baris ${parsed.lineCount}. Tolong lanjutkan kode PERSIS dari titik terakhir berikut tanpa mengulang dari awal, tanpa salam, dan tanpa penjelasan. ${closingHint}:\n\n\`\`\`javascript\n${lastSnippet}\n\`\`\``,
             },
           ];
 
@@ -461,7 +466,7 @@ export function App() {
                   .replace(/```\s*$/i, '');
 
                 const tentativeCode = parsed.code + (rawChunk.startsWith('\n') ? '' : '\n') + rawChunk;
-                const tentativeParsed = extractHtmlFromStream(`\`\`\`html\n${tentativeCode}\n\`\`\``);
+                const tentativeParsed = extractHtmlFromStream(`\`\`\`${fence}\n${tentativeCode}\n\`\`\``);
 
                 setMessages((prev) =>
                   prev.map((m) =>
@@ -490,7 +495,7 @@ export function App() {
                   .replace(/^```(?:html|javascript|js)?\s*\n?/i, '')
                   .replace(/```\s*$/i, '');
                 const stitchedCode = parsed.code + (rawChunk.startsWith('\n') ? '' : '\n') + rawChunk;
-                accumulatedText = `\`\`\`html\n${stitchedCode}\n\`\`\``;
+                accumulatedText = `\`\`\`${fence}\n${stitchedCode}\n\`\`\``;
                 parsed = extractHtmlFromStream(accumulatedText);
               },
             });

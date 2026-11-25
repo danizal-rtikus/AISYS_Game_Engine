@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { Message } from '../types';
 import { MarkdownRenderer } from './MarkdownRenderer';
+import { MANIFEST_REGENERATE_REQUEST } from '../config/defaultSkill';
 
 interface ChatPanelProps {
   messages: Message[];
@@ -261,7 +262,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                                 ? 'Dialirkan langsung ke Panel Preview kanan'
                                 : msg.isCodeComplete
                                 ? 'Siap dimainkan via Canvas 2D & Web Audio'
-                                : 'Terhenti sebelum penutup </html>. Klik lanjutkan di samping.'}
+                                : 'Terhenti sebelum kode selesai. Klik tombol di samping untuk membuat ulang.'}
                             </div>
                           </div>
                         </div>
@@ -284,9 +285,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                         ) : (
                           <button
                             onClick={() =>
-                              onSendMessage(
-                                `Tolong buatkan ulang seluruh kode game HTML5 Canvas 2D yang utuh, padat (400-650 baris), dan lengkap dari <!DOCTYPE html> sampai penutup </html>\n<!-- END_OF_GAME --> dalam satu blok \`\`\`html tanpa monolog berpikir dan tanpa draf kode.`
-                              )
+                              onSendMessage(MANIFEST_REGENERATE_REQUEST)
                             }
                             className="flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium bg-[#F6821F] hover:bg-[#E66E0A] text-white transition-colors flex-shrink-0 shadow-sm"
                           >

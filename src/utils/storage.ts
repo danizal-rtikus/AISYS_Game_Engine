@@ -45,12 +45,13 @@ export const getStoredSettings = (): AppSettings => {
       model = 'deepseek-flash';
     }
 
-    // Auto-update system prompt if user is using default skill prompt or older version without PRD blueprint review or END_OF_GAME marker
+    // Auto-update system prompt if it predates the PRD blueprint review or the manifest flow
+    // (prompt v2.0: the model writes an AISYS.defineGame manifest ending in END_OF_MANIFEST, not HTML)
     let systemPrompt = parsed.systemPrompt || DEFAULT_SKILL_PROMPT;
     if (
       systemPrompt.includes('AISYS menyiapkan 4 genre') ||
       !systemPrompt.includes('Sesi 6: Presentasi PRD') ||
-      !systemPrompt.includes('END_OF_GAME')
+      !systemPrompt.includes('END_OF_MANIFEST')
     ) {
       systemPrompt = DEFAULT_SKILL_PROMPT;
     }

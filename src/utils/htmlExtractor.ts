@@ -6,6 +6,16 @@ export interface ExtractorResult {
   lineCount: number;
 }
 
+/** True when the code is an AISYS declarative manifest rather than a legacy HTML document. */
+export function isManifestCode(code: string | null | undefined): boolean {
+  return Boolean(code && code.includes('AISYS.defineGame'));
+}
+
+/** Markdown fence language for re-sending code to the model. */
+export function codeFenceLang(code: string): 'js' | 'html' {
+  return isManifestCode(code) ? 'js' : 'html';
+}
+
 /**
  * Checks whether game code is complete and playable.
  * Supports both:
@@ -63,7 +73,9 @@ export function isGameCodePlayable(code: string | null | undefined): boolean {
  */
 export function extractHtmlFromStream(fullText: string): ExtractorResult {
   // Check for AISYS Manifest block first, then Full HTML block
-  const manifestMatch = fullText.match(/```(?:js|javascript)?\s*\n\s*AISYS\.defineGame/i);
+  // A manifest block may start with `// CATATAN: ...` comment lines (required by the Sesi 7 prompt
+  // when a requested feature is not supported), so allow leading line comments before defineGame.
+  const manifestMatch = fullText.match(/```(?:js|javascript)?[ \t\r]*\n(?:[ \t]*\/\/[^\n]*\n|[ \t\r]*\n)*[ \t]*AISYS\.defineGame/i);
   const htmlMatch = fullText.match(/```(?:html|HTML)?\s*\n\s*(?:<!DOCTYPE\s+html|<html)/i);
 
   let activeMatch = null;

@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { ViewportMode, ActiveTab, GameVersion, ConsoleLogItem } from '../types';
 import { isGameCodePlayable } from '../utils/htmlExtractor';
+import { MANIFEST_REGENERATE_REQUEST } from '../config/defaultSkill';
 import { CodeViewer } from './CodeViewer';
 import { ConsoleViewer } from './ConsoleViewer';
 
@@ -469,14 +470,10 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
                 Kode Game Terpotong ({codeLineCount} baris)
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4 leading-relaxed">
-                Pembuatan kode terhenti di baris {codeLineCount} sebelum mencapai penutup &lt;/html&gt;. Klik tombol di bawah untuk meminta AI melanjutkan kode sampai selesai.
+                Pembuatan kode terhenti di baris {codeLineCount} sebelum selesai (penanda akhir tidak ditemukan atau sintaks belum tertutup). Klik tombol di bawah untuk meminta AI membuat ulang manifest game.
               </p>
               <button
-                onClick={() =>
-                  onFixWithAI(
-                    `Tolong buatkan ulang seluruh kode game HTML5 Canvas 2D yang utuh, padat (400-650 baris), dan lengkap dari <!DOCTYPE html> sampai penutup </html>\n<!-- END_OF_GAME --> dalam satu blok \`\`\`html tanpa monolog berpikir dan tanpa draf kode.`
-                  )
-                }
+                onClick={() => onFixWithAI(MANIFEST_REGENERATE_REQUEST)}
                 className="flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#F6821F] hover:bg-[#E66E0A] text-white text-xs font-medium transition-colors shadow-sm"
               >
                 <Sparkles className="w-3.5 h-3.5" />

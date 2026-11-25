@@ -280,7 +280,14 @@ Diuji di Chromium (panel browser Studio, terlihat di layar) dengan halaman uji s
 
 1. **Perbaiki integrasi Studio** (bagian 8, poin 1-6; kode di Lampiran C). Setelah itu uji ulang dengan manifest yang mengandung `</script>`, manifest yang melempar error, dan pastikan `aisys:selftest` muncul di tab Log dengan status benar.
 2. ~~**Verifikasi runtime terbaru**~~ **Selesai 25 Nov 2026.** Cheat-sheet Lampiran A cocok dengan runtime untuk `theme.preset`, `world.layers`, dan `hud` (tidak perlu diubah). Temuan R1-R7 di bagian 8.1. R1, R2, R4, dan R7 sudah diperbaiki; R3, R5, dan R6 masih terbuka (prioritas rendah-sedang).
-3. **Tempel Lampiran A** ke `src/config/defaultSkill.ts` dan `public/skill-config.json`, naikkan versi prompt.
+3. ~~**Tempel Lampiran A**~~ **Selesai 25 Nov 2026 (prompt v2.0).** Atas keputusan pemilik produk, seluruh alur Sesi 1-7 diselaraskan dengan runtime v0.1, bukan hanya Sesi 7:
+   - Sesi 1: genre tetap Endless Runner (8 genre lain "segera hadir"), langsung menanyakan Arcade vs Edukasi + topik. Sesi 2: skema kategori. Sesi 3: 4 preset tema. Sesi 4: tingkat kesulitan (Santai/Normal/Menantang, dipetakan ke `world`, `rules.difficulty`, `player.lives`; Santai memakai batas lebar rintangan pada speed 300). Sesi 5: miskonsepsi target (edukasi) atau judul (arcade). Sesi 6: PRD dengan bagian Konten Belajar. Sesi 7: Lampiran A apa adanya.
+   - Bagian "Standar Teknis HTML" lama (400-650 baris HTML, kontrol sentuh manual, dll.) dihapus karena bertentangan dengan alur manifest.
+   - `public/skill-config.json` dibuat dari string yang sama dengan `DEFAULT_SKILL_PROMPT` (uji bolak-balik identik). **Berkas JSON lama rusak**: diawali backtick liar dan berisi 71 urutan `` \` `` literal hasil salin mentah dari sumber TS, sehingga model melihat ``\`\`\`html`` dengan backslash.
+   - Migrasi `storage.ts`: prompt tersimpan tanpa `END_OF_MANIFEST` diganti prompt bawaan (sebelumnya memeriksa `END_OF_GAME`).
+   - Perintah tetap di aplikasi yang meminta HTML diganti versi manifest: direktif perbaikan (`App.tsx`), tombol "Buat Ulang Kode Utuh" (ChatPanel, PreviewPanel), dan auto-continuation (pagar ```js dan penutup `// END_OF_MANIFEST`). Riwayat yang dikirim ulang ke model memakai pagar ```js untuk manifest.
+   - Ekstraktor: blok manifest yang diawali `// CATATAN: ...` (diwajibkan BATAS FITUR Lampiran A) sebelumnya **tidak terekstrak sama sekali**; sekarang diterima.
+   - Belum diuji: percakapan nyata dengan model (itu langkah 4).
 4. **Jalankan evaluasi 20 percobaan** (Lampiran B) dan catat tabel metrik per percobaan. Laporkan hasilnya apa adanya, termasuk kegagalan.
 5. **Tinjau hasil:** bila kegagalan terpusat di satu jenis, perbaiki prompt; bila validator terlalu sering menolak atau selfTest gagal pada manifest yang wajar, perbaiki runtime. Ulangi 20 percobaan setelah perubahan besar.
 6. Setelah lolos: uji main nyata (5 game terbaik × 3 orang) untuk kalibrasi jendela 120 ms, dan uji di ponsel asli (Android Chrome, iOS Safari).
@@ -316,7 +323,7 @@ Diuji di Chromium (panel browser Studio, terlihat di layar) dengan halaman uji s
 | `src/components/PreviewPanel.tsx` | Iframe sandbox, penyatuan runtime + manifest, templat ekspor, fokus keyboard |
 | `src/App.tsx` | Jembatan pesan iframe, ekspor JSON analitik |
 | `src/components/ChatPanel.tsx` | Kartu status generasi dan tombol "Lanjutkan" |
-| `src/config/defaultSkill.ts` dan `public/skill-config.json` | System prompt (versi 1.8) |
+| `src/config/defaultSkill.ts` dan `public/skill-config.json` | System prompt (versi 2.0, alur manifest). JSON dimuat saat aplikasi dibuka dan menimpa konstanta TS, jadi keduanya harus identik. `defaultSkill.ts` di akar repo adalah salinan lama yang tidak dipakai |
 | `src/utils/storage.ts` | `localStorage` dan migrasi prompt |
 | `public/review/` | Salinan `htmlExtractor.ts`, `PreviewPanel.tsx`, `App.tsx` untuk ditinjau |
 
