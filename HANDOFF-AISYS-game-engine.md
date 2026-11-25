@@ -193,10 +193,10 @@ Bentuk contoh lengkap ada di Lampiran A. Ringkasan rentang:
 | Fitur | Status |
 |---|---|
 | Mekanik inti, validator, selfTest, analitik | Diverifikasi independen |
-| `theme.preset` (`clean-modern`, `neon`, `cartoon`, `retro-pixel`) | **Dilaporkan diimplementasikan agen, belum diverifikasi** (berkas runtime terbaru belum diperiksa) |
-| `theme.palette` (override warna) | Disebut ada, **kunci-kuncinya belum didokumentasikan**; tidak masuk cheat-sheet |
-| `world.layers` (`clouds`, `hills`), `hud` (`score`, `lives`, `combo`, `target`) | Dilaporkan aktif, belum diverifikasi |
-| `learning.objectives` dan `misconceptions` pada ekspor | Dilaporkan ditambahkan, belum diverifikasi |
+| `theme.preset` (`clean-modern`, `neon`, `cartoon`, `retro-pixel`) | **Diverifikasi 25 Nov 2026** (Chromium): 4 preset tampil berbeda; manifest Lampiran A lolos validator tanpa peringatan dan selfTest 9/9 di keempat preset. Cacat: pada `cartoon` ikon mute tidak terlihat (ikon putih di atas `hudBg` putih) dan teks skor kontras rendah |
+| `theme.palette` (override warna) | **Kunci didokumentasikan** di `endless-runner-schema-1.md` §2.7. Override `bg` dan `player` terverifikasi. `hudText` tidak dipakai render. Tidak divalidasi runtime; tetap **tidak** masuk cheat-sheet model |
+| `world.layers` (`clouds`, `hills`), `hud` (`score`, `lives`, `combo`, `target`) | **Diverifikasi**: `layers: ["hills"]` menghilangkan awan; `hud: ["score","target"]` menghilangkan nyawa. Nilai tak dikenal diabaikan tanpa peringatan |
+| `learning.objectives` dan `misconceptions` pada ekspor | **Diverifikasi** lewat klik tombol ekspor di layar Game Over: `aisys:export` memuat keduanya |
 | `rules.correct.combo`, `rules.wrong.lives`, `rules.wrong.combo` | Tidak dipakai runtime; sebaiknya dihapus dari kontrak |
 | Hook `drawPlayer`, `drawEntity`, helper `g.addScore` dll. | **Tidak ada dan tidak akan ditambahkan** (keputusan) |
 | `learning.mode: "sequence"` | Ditunda ke v0.2 |
@@ -249,9 +249,26 @@ Masalah lain yang masih perlu ditangani:
 
 ---
 
+### 8.1 Temuan verifikasi runtime (langkah 2, 25 Nov 2026)
+
+Diuji di Chromium (panel browser Studio, terlihat di layar) dengan halaman uji sementara yang memuat runtime + manifest Lampiran A.
+
+| # | Temuan | Bukti | Dampak |
+|---|---|---|---|
+| R1 | Kata "Sampah" tertanam di runtime: toast "TARGET BARU: Kumpulkan Sampah …", "Total Sampah Dipilah", "Tidak ada kesalahan pemilahan sampah" | `aisys-runtime.js` (3 lokasi) | **Diperbaiki**: teks generik ("Kumpulkan {kategori}!", "Item Dipungut", "Tidak ada kesalahan.") |
+| R2 | Toast "Salah!" dipotong 100 karakter, padahal `explain` boleh 120 | `explain` 104 karakter → toast berakhir "…tanah ser" | **Diperbaiki**: batas toast 200 karakter, kotak toast menyesuaikan jumlah baris; daftar kesalahan di Game Over dibungkus (wrap) di dalam kartu dan memakai label kategori; toast dibersihkan saat Game Over (sebelumnya membeku menutupi tombol ekspor). Diuji: label 32 + `explain` 111 karakter tampil utuh dalam 2 baris |
+| R3 | `theme.hudText` tidak dipakai; skor (`#fbbf24`) dan ikon mute (`#ffffff`) warna tetap | Ikon mute tak terlihat di preset `cartoon` | Sedang (visual), terbuka |
+| R4 | Layar Game Over menulis "Luar biasa! Tidak ada kesalahan…" walau 0 item dipungut | Tangkapan layar, akurasi 0% | **Diperbaiki** bersama R1: 0 item → "Belum ada item yang dipungut." |
+| R5 | Panel Game Over tidak mengikuti preset (warna sama di keempat preset) | Tangkapan layar | Rendah (kosmetik), terbuka |
+| R6 | Pemeriksaan `jump` selfTest gagal pada manifest valid dengan tinggi lompat sangat rendah (H ≈ 33-39 px; apeks terukur 2-4 px di bawah toleransi) | Fuzz 1.449 manifest valid: 3 gagal, semuanya `jump`; hasil sama pada runtime commit `ff66a56` | Rendah: jarang di manifest wajar (pemain bawaan H ≈ 169 px), tapi menjadi negatif palsu. Terbuka |
+| R7 | `restartGame()` mereset `byCategory` tetapi tidak `totalCollected`, `correctCount`, `wrongCount`, `mistakes` | Setelah restart, Game Over menampilkan item dari ronde sebelumnya | **Diperbaiki**: `restartGame()` membuat objek `analytics` baru dan mereset `targetCorrectCount`. Diuji di Node (setelah restart semua 0; ronde 2 konsisten: jumlah `byCategory` = `totalCollected`, `mistakes` = `wrongCount`) dan di browser (restart dengan tombol Spasi, Game Over ronde 2 hanya menampilkan item ronde 2) |
+
+**Koreksi laporan sebelumnya:** "manifest tidak valid menampilkan kanvas hitam" (deskripsi PR #1) **salah**. Kanvas hitam terjadi karena panel browser tersembunyi sehingga `requestAnimationFrame` tidak berjalan. Saat panel terlihat, layar "AISYS Engine: Manifest Error" tampil dengan daftar error.
+
 ## 9. Yang belum terverifikasi
 
-- Implementasi 4 preset tema, `layers`, `hud`, ekspor `objectives`/`misconceptions` (berkas runtime terbaru belum diperiksa). Perlu tangkapan layar tiap preset dan daftar kunci `theme.palette`.
+- ~~Implementasi 4 preset tema, `layers`, `hud`, ekspor~~: sudah diverifikasi (lihat bagian 6 dan 8.1).
+- Suara, high score, dan tombol ekspor ketika berkas `.html` dibuka langsung (`file://`; tombol ekspor tidak berfungsi tanpa iframe induk menurut kode).
 - Berkas lengkap `public/review/htmlExtractor.ts`, `PreviewPanel.tsx`, `App.tsx` (hanya potongan yang ditinjau). Potongan ekstraktor terlihat benar (penanda `// END_OF_MANIFEST`, properti `kit:`, uji `new Function`).
 - iOS Safari dan ponsel asli (unlock audio, tinggi layar, kinerja frame rate), suara yang benar-benar keluar.
 - Kualitas dan kelayakan manifest keluaran model, akurasi konten edukasi, kelayakan bagi manusia (uji main).
@@ -262,7 +279,7 @@ Masalah lain yang masih perlu ditangani:
 ## 10. Langkah berikutnya (urut)
 
 1. **Perbaiki integrasi Studio** (bagian 8, poin 1-6; kode di Lampiran C). Setelah itu uji ulang dengan manifest yang mengandung `</script>`, manifest yang melempar error, dan pastikan `aisys:selftest` muncul di tab Log dengan status benar.
-2. **Verifikasi runtime terbaru:** jalankan `selfTest` pada manifest contoh (Lampiran A, sekarang memakai `theme: { preset: "cartoon" }`), ambil tangkapan layar 4 preset, dan dokumentasikan kunci `theme.palette` lalu perbarui cheat-sheet.
+2. ~~**Verifikasi runtime terbaru**~~ **Selesai 25 Nov 2026.** Cheat-sheet Lampiran A cocok dengan runtime untuk `theme.preset`, `world.layers`, dan `hud` (tidak perlu diubah). Temuan R1-R7 di bagian 8.1. R1, R2, R4, dan R7 sudah diperbaiki; R3, R5, dan R6 masih terbuka (prioritas rendah-sedang).
 3. **Tempel Lampiran A** ke `src/config/defaultSkill.ts` dan `public/skill-config.json`, naikkan versi prompt.
 4. **Jalankan evaluasi 20 percobaan** (Lampiran B) dan catat tabel metrik per percobaan. Laporkan hasilnya apa adanya, termasuk kegagalan.
 5. **Tinjau hasil:** bila kegagalan terpusat di satu jenis, perbaiki prompt; bila validator terlalu sering menolak atau selfTest gagal pada manifest yang wajar, perbaiki runtime. Ulangi 20 percobaan setelah perubahan besar.

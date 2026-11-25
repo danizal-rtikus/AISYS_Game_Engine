@@ -284,6 +284,24 @@
     return lineCount + 1;
   }
 
+  // Same line-breaking as wrapText, without drawing (uses the current ctx.font)
+  function measureWrappedLines(ctx, text, maxWidth) {
+    if (!text) return 0;
+    const words = String(text).split(' ');
+    let line = '';
+    let count = 1;
+    for (let n = 0; n < words.length; n++) {
+      const testLine = line + words[n] + ' ';
+      if (ctx.measureText(testLine).width > maxWidth && n > 0) {
+        line = words[n] + ' ';
+        count++;
+      } else {
+        line = testLine;
+      }
+    }
+    return count;
+  }
+
   function drawGlossyOrb(ctx, x, y, radius, color) {
     ctx.save();
     const grad = ctx.createRadialGradient(x - radius * 0.3, y - radius * 0.3, radius * 0.1, x, y, radius);
@@ -640,12 +658,13 @@
       }
       this.targetCategory = cats[nextIndex];
       this.targetCorrectCount = 0;
-      this.showToast(`🎯 TARGET BARU: Kumpulkan Sampah ${this.targetCategory.label}!`, 2.5);
+      this.showToast(`🎯 TARGET BARU: Kumpulkan ${this.targetCategory.label}!`, 2.5);
     }
 
     showToast(text, durationSec) {
+      // 200 chars fits "⚠️ Salah! " + label (≤32) + ": " + explain (≤120) without cutting it
       this.explainToast = {
-        text: String(text).slice(0, 100),
+        text: String(text).slice(0, 200),
         timer: durationSec || 2.5
       };
     }
@@ -809,6 +828,16 @@
       this.player.onGround = true;
       this.player.invulnerableTimer = 0;
       this.explainToast = null;
+      // Each round starts with fresh analytics; initLearning() re-creates byCategory, so the
+      // totals and mistakes must be reset too or an export would mix rounds.
+      this.analytics = {
+        totalCollected: 0,
+        correctCount: 0,
+        wrongCount: 0,
+        byCategory: {},
+        mistakes: []
+      };
+      this.targetCorrectCount = 0;
       this.initLearning();
       this.state = 'play';
       this.callHook('onStart');
@@ -1060,6 +1089,8 @@
 
     gameOver() {
       this.state = 'over';
+      // step() stops on game over, so a live toast would never expire and would cover the export button
+      this.explainToast = null;
       this.audio.play('boom');
       this.callHook('onGameOver', this.analytics);
     }
@@ -1490,19 +1521,24 @@
       ctx.save();
       const tw = 680;
       const tx = (LOGICAL_WIDTH - tw) / 2;
-      const ty = LOGICAL_HEIGHT - 130;
+      const lineHeight = 22;
+
+      // Grow the box with the wrapped text (label + 120-char explain can need 3 lines)
+      ctx.font = '16px sans-serif';
+      const lines = measureWrappedLines(ctx, this.explainToast.text, tw - 40);
+      const th = 26 + lines * lineHeight;
+      const ty = LOGICAL_HEIGHT - 60 - th;
 
       ctx.fillStyle = 'rgba(15, 23, 42, 0.94)';
-      drawRoundRect(ctx, tx, ty, tw, 70, 10);
+      drawRoundRect(ctx, tx, ty, tw, th, 10);
       ctx.fill();
       ctx.strokeStyle = '#f59e0b';
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      ctx.font = '16px sans-serif';
       ctx.fillStyle = '#f8fafc';
       ctx.textAlign = 'center';
-      wrapText(ctx, this.explainToast.text, tx + tw / 2, ty + 30, tw - 40, 22);
+      wrapText(ctx, this.explainToast.text, tx + tw / 2, ty + 29, tw - 40, lineHeight);
       ctx.restore();
     }
 
@@ -1562,7 +1598,7 @@
 
         ctx.font = '18px sans-serif';
         ctx.fillStyle = '#f8fafc';
-        ctx.fillText(`Total Sampah Dipilah: ${total}   |   Akurasi: ${acc}%`, LOGICAL_WIDTH / 2, sy + 70);
+        ctx.fillText(`Item Dipungut: ${total}   |   Akurasi: ${acc}%`, LOGICAL_WIDTH / 2, sy + 70);
 
         // List mistakes if any
         ctx.textAlign = 'left';
@@ -1574,13 +1610,20 @@
         let my = sy + 138;
         const mistakes = this.analytics.mistakes.slice(0, 4);
         if (mistakes.length === 0) {
-          ctx.fillStyle = '#34d399';
-          ctx.fillText('Luar biasa! Tidak ada kesalahan pemilahan sampah.', sx + 50, my);
+          ctx.fillStyle = total > 0 ? '#34d399' : '#94a3b8';
+          ctx.fillText(total > 0 ? 'Luar biasa! Tidak ada kesalahan.' : 'Belum ada item yang dipungut.', sx + 50, my);
         } else {
+          const cats = this.m.learning.categories || [];
+          const cardBottom = sy + 330 - 16;
           for (const m of mistakes) {
+            const cat = cats.find((c) => c.id === m.category);
+            const catLabel = cat ? cat.label : m.category;
+            const text = `• ${m.label} (${String(catLabel).toUpperCase()}): ${m.explain}`;
+            // Wrap instead of overflowing the card; stop before running past its bottom edge
+            if (my + 20 * (measureWrappedLines(ctx, text, sw - 90) - 1) > cardBottom) break;
             ctx.fillStyle = '#fca5a5';
-            ctx.fillText(`• ${m.label} (${m.category.toUpperCase()}): ${m.explain}`, sx + 50, my);
-            my += 28;
+            const lines = wrapText(ctx, text, sx + 50, my, sw - 90, 20);
+            my += lines * 20 + 8;
           }
         }
       }
