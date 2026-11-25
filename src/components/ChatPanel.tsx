@@ -16,6 +16,10 @@ import { Message } from '../types';
 import { MarkdownRenderer } from './MarkdownRenderer';
 import { GAME_REGENERATE_REQUEST } from '../config/defaultSkill';
 import { isManifestCode } from '../utils/htmlExtractor';
+import { parseMarkers, latestStep } from '../utils/storyMarkers';
+
+const RANDOM_ANSWER = '🎲 Acak saja, pilihkan yang paling seru!';
+const BUILD_ANSWER = 'Lanjut, bangun game sekarang!';
 
 interface ChatPanelProps {
   messages: Message[];
@@ -102,8 +106,33 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
     }
   };
 
+  const step = latestStep(messages);
+  const lastAssistantIdx = (() => {
+    for (let i = messages.length - 1; i >= 0; i--) if (messages[i].role === 'assistant') return i;
+    return -1;
+  })();
+
   return (
     <div className="h-full flex flex-col bg-white dark:bg-[#0B0C0E] border-r border-slate-200 dark:border-[#282B33]">
+      {/* Studio Cerita progress (from [[LANGKAH: n/11 | name]]) */}
+      {step && (
+        <div className="px-4 pt-3 pb-2 border-b border-slate-200 dark:border-[#282B33] flex-shrink-0">
+          <div className="flex items-center justify-between text-[11px] font-mono">
+            <span className="text-slate-500 dark:text-slate-400">
+              Langkah {Math.min(step.n, step.total)} dari {step.total}
+              {step.name ? <span className="text-slate-800 dark:text-slate-200"> · {step.name}</span> : null}
+            </span>
+            <span className="text-[#F6821F]">{Math.round((Math.min(step.n, step.total) / step.total) * 100)}%</span>
+          </div>
+          <div className="mt-1.5 h-1.5 rounded-full bg-slate-100 dark:bg-[#1C1E24] overflow-hidden">
+            <div
+              className="h-full rounded-full bg-[#F6821F] transition-all duration-500"
+              style={{ width: `${(Math.min(step.n, step.total) / step.total) * 100}%` }}
+            />
+          </div>
+        </div>
+      )}
+
       {/* Messages List Area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 ? (
@@ -141,8 +170,18 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
             </div>
           </div>
         ) : (
-          messages.map((msg) => {
+          messages.map((msg, idx) => {
             const isUser = msg.role === 'user';
+            const parsed = !isUser && msg.content ? parseMarkers(msg.content) : null;
+            const displayContent = parsed ? parsed.clean : msg.content;
+            const showChoices =
+              !!parsed &&
+              idx === lastAssistantIdx &&
+              !msg.isStreaming &&
+              !isStreaming &&
+              !msg.extractedCode &&
+              parsed.options.length > 0;
+            const isFinalStep = !!parsed?.step && parsed.step.n >= parsed.step.total;
             return (
               <div
                 key={msg.id}
@@ -162,7 +201,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                   {/* Message Content (Formatted Markdown) */}
                   <div>
                     {msg.content ? (
-                      <MarkdownRenderer content={msg.content} />
+                      <MarkdownRenderer content={displayContent} />
                     ) : msg.isThinking ? (
                       <span className="inline-flex items-center gap-1.5 text-[#F6821F] font-mono text-[11px] animate-pulse">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#F6821F] animate-ping" />
@@ -181,8 +220,46 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                     )}
                   </div>
 
-                  {/* Quick Blueprint / PRD Review Decision Bar */}
-                  {!msg.isStreaming &&
+                  {/* Studio Cerita choices (from [[PILIHAN: ...]]): one button per option + random pick */}
+                  {showChoices && parsed && (
+                    <div className="mt-3 pt-2.5 border-t border-slate-200/80 dark:border-[#282B33] flex flex-wrap gap-1.5 items-center">
+                      {parsed.options.map((opt, i) => {
+                        const primary = isFinalStep && i === 0;
+                        return (
+                          <button
+                            key={i}
+                            onClick={() => onSendMessage(primary ? BUILD_ANSWER : opt)}
+                            className={
+                              primary
+                                ? 'flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#F6821F] hover:bg-[#E66E0A] text-white text-[11px] font-semibold transition-colors shadow-sm'
+                                : 'px-2.5 py-1.5 rounded-md border border-slate-200 dark:border-[#282B33] bg-slate-50 dark:bg-[#1C1E24] hover:border-[#F6821F]/60 hover:text-[#F6821F] text-slate-700 dark:text-slate-300 text-[11px] text-left transition-colors'
+                            }
+                          >
+                            {primary ? <Sparkles className="w-3.5 h-3.5" /> : null}
+                            {primary ? `🚀 ${opt}` : opt}
+                          </button>
+                        );
+                      })}
+                      {!isFinalStep && (
+                        <button
+                          onClick={() => onSendMessage(RANDOM_ANSWER)}
+                          className="px-2.5 py-1.5 rounded-md border border-dashed border-[#F6821F]/50 text-[#F6821F] hover:bg-[#F6821F]/10 text-[11px] font-medium transition-colors"
+                          title="Biarkan AI memilih yang paling seru"
+                        >
+                          🎲 Acak
+                        </button>
+                      )}
+                      {!isFinalStep && (
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 w-full mt-0.5">
+                          atau ketik idemu sendiri di bawah ✍️
+                        </span>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Legacy Blueprint / PRD Review Decision Bar (prompts without step markers) */}
+                  {!parsed?.step &&
+                    !msg.isStreaming &&
                     !msg.extractedCode &&
                     msg.role === 'assistant' &&
                     (msg.content.includes('GAME BLUEPRINT') ||
@@ -387,7 +464,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
             placeholder={
               isStreaming
                 ? 'Sedang menghasilkan respon...'
-                : 'Ketik ide game, jawaban tahap discovery, atau instruksi revisi...'
+                : 'Ketik jawaban atau idemu di sini...'
             }
             disabled={isStreaming}
             className="w-full px-2.5 sm:px-3 py-2 sm:py-2.5 pr-10 sm:pr-12 text-xs bg-transparent text-slate-900 dark:text-slate-100 placeholder:text-slate-400 resize-none focus:outline-none max-h-28 sm:max-h-36"

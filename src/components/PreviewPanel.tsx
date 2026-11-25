@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import aisysRuntimeRaw from '../runtime/aisys-runtime.js?raw';
+import aisysStoryRaw from '../runtime/aisys-story.js?raw';
 import {
   Play,
   Code2,
@@ -20,6 +21,12 @@ import { ViewportMode, ActiveTab, GameVersion, ConsoleLogItem } from '../types';
 import { isGameCodePlayable } from '../utils/htmlExtractor';
 import { GAME_REGENERATE_REQUEST } from '../config/defaultSkill';
 import { CodeViewer } from './CodeViewer';
+import type { StoryFact, StepInfo } from '../utils/storyMarkers';
+
+const FACT_ICON: Record<string, string> = {
+  Genre: '🎮', Pahlawan: '🦸', Dunia: '🌍', Misi: '🎯', Lawan: '👾',
+  Materi: '📚', Mekanik: '⚙️', Twist: '🌀', Visual: '🎨', Ending: '🏁',
+};
 import { ConsoleViewer } from './ConsoleViewer';
 
 // Escape text inlined into a <script> element so it cannot close the element early
@@ -41,6 +48,9 @@ interface PreviewPanelProps {
   onClearLogs: () => void;
   onFixWithAI: (errorMsg: string) => void;
   isStreaming: boolean;
+  /** Studio Cerita: facts gathered from [[CERITA: ...]] markers, shown before a game exists. */
+  storyFacts?: StoryFact[];
+  storyStep?: StepInfo | null;
 }
 
 export const PreviewPanel: React.FC<PreviewPanelProps> = ({
@@ -56,6 +66,8 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
   onClearLogs,
   onFixWithAI,
   isStreaming,
+  storyFacts = [],
+  storyStep = null,
 }) => {
   const [viewport, setViewport] = useState<ViewportMode>('desktop');
   const [iframeKey, setIframeKey] = useState(0);
@@ -75,6 +87,8 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
   const bundleFullHtml = (code: string, title: string, withBridge = false): string => {
     if (!code || !code.trim()) return '';
     const trimmed = code.trim();
+    // Story shell: prolog before play + ending after play, for every genre (preview and download)
+    const storyScript = `<script>${escapeInline(aisysStoryRaw)}</script>`;
 
     // Error bridge: must be the first <script> in <head> so it also catches runtime parse/load errors.
     const errorBridgeScript = withBridge
@@ -206,6 +220,7 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
     // AISYS Core Runtime v0.1.0
     ${safeRuntime}
   </script>
+  ${storyScript}
 </head>
 <body>
   <div id="portrait-hint">📱 Putar perangkat ke mode lanskap untuk tampilan penuh</div>
@@ -223,20 +238,16 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
 </html>`;
     }
 
-    // Full-HTML game (Beta genres, SESI 7B): inject the error bridge + console bridge right after <head>.
+    // Full-HTML game (Beta genres, SESI 7B): inject the bridges (preview only) and the story shell
+    // (preview and export) right after <head>, so AISYS.end() exists before the game's scripts run.
     // Match tags with attributes too (e.g. <html lang="id">); prepending before <!DOCTYPE> would force quirks mode.
-    if (withBridge) {
-      const bridges = `${errorBridgeScript}${bridgeScript}`;
-      if (/<head[^>]*>/i.test(trimmed)) {
-        return trimmed.replace(/<head[^>]*>/i, (tag) => `${tag}${bridges}`);
-      } else if (/<html[^>]*>/i.test(trimmed)) {
-        return trimmed.replace(/<html[^>]*>/i, (tag) => `${tag}<head>${bridges}</head>`);
-      } else {
-        return `${bridges}${trimmed}`;
-      }
+    const injected = `${withBridge ? `${errorBridgeScript}${bridgeScript}` : ''}${storyScript}`;
+    if (/<head[^>]*>/i.test(trimmed)) {
+      return trimmed.replace(/<head[^>]*>/i, (tag) => `${tag}${injected}`);
+    } else if (/<html[^>]*>/i.test(trimmed)) {
+      return trimmed.replace(/<html[^>]*>/i, (tag) => `${tag}<head>${injected}</head>`);
     }
-
-    return trimmed;
+    return `${injected}${trimmed}`;
   };
 
   const preparedSrcDoc = useMemo(() => {
@@ -514,6 +525,35 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
                     } catch (e) {}
                   }}
                 />
+              </div>
+            </div>
+          ) : storyFacts.length > 0 ? (
+            /* Studio Cerita: story card that grows while the student answers each step */
+            <div className="w-full max-w-md p-4 sm:p-6">
+              <div className="rounded-2xl border border-slate-200 dark:border-[#282B33] bg-white dark:bg-[#13151A] shadow-sm overflow-hidden">
+                <div className="px-5 py-4 bg-gradient-to-br from-[#F6821F]/15 to-transparent border-b border-slate-200 dark:border-[#282B33]">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#F6821F]">Kartu cerita</div>
+                  <div className="mt-1 text-base font-bold text-slate-900 dark:text-slate-100">Game buatanmu</div>
+                  {storyStep && (
+                    <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                      {storyFacts.length} dari 10 bagian terisi · Langkah {Math.min(storyStep.n, storyStep.total)}/{storyStep.total}
+                    </div>
+                  )}
+                </div>
+                <ul className="divide-y divide-slate-100 dark:divide-[#1C1E24]">
+                  {storyFacts.map((f) => (
+                    <li key={f.key} className="px-5 py-3 flex gap-3 animate-in fade-in duration-300">
+                      <span className="text-lg leading-none mt-0.5">{FACT_ICON[f.key] || '✨'}</span>
+                      <div className="min-w-0">
+                        <div className="text-[10px] font-mono uppercase tracking-[0.12em] text-slate-400">{f.key}</div>
+                        <div className="text-[13px] text-slate-800 dark:text-slate-200 leading-snug">{f.value}</div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <div className="px-5 py-3 text-[11px] text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-[#0F1115]">
+                  Game-mu akan muncul di sini setelah langkah terakhir. ✨
+                </div>
               </div>
             </div>
           ) : (

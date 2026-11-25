@@ -66,12 +66,12 @@ const FEATURES = [
 
 const STEPS = [
   {
-    title: 'Jawab lima pertanyaan',
-    body: 'Studio menanyakan satu hal per langkah: genre, topik, inti mekanik, gaya visual, lalu tingkat kesulitan atau aksi spesial.',
+    title: 'Rancang ceritamu',
+    body: 'Sebelas langkah santai, satu pertanyaan per langkah: genre, pahlawan, dunia, misi, lawan, materi pelajaran, twist, gaya visual, dan ending. Bingung? Tekan 🎲 Acak.',
   },
   {
-    title: 'Tinjau rancangannya',
-    body: 'Sebelum ada kode, Anda membaca blueprint lengkap: cara bermain, konten belajar, dan miskonsepsi yang diuji. Ubah yang belum pas.',
+    title: 'Tinjau blueprint dan prolog',
+    body: 'Sebelum game dibangun, kamu membaca blueprint lengkap: prolog cerita, cara menang, materi, dan ending. Ubah yang belum pas.',
   },
   {
     title: 'AI membuat game',
@@ -79,7 +79,7 @@ const STEPS = [
   },
   {
     title: 'Mainkan dan unduh',
-    body: 'Mainkan di panel preview, lalu unduh satu berkas .html. Endless Runner juga divalidasi dan diuji otomatis oleh engine.',
+    body: 'Game dibuka dengan prolog dan ditutup dengan ending menang atau kalah. Unduh satu berkas .html untuk dimainkan di mana saja.',
   },
 ];
 
@@ -349,8 +349,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </h1>
 
           <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-slate-600 dark:text-slate-400">
-            Ceritakan topik pelajaran Anda. AISYS menanyakan satu hal per langkah, menyusun rancangan untuk
-            Anda tinjau, lalu menghasilkan game HTML5 yang langsung jalan di browser, tanpa server.
+            Ciptakan pahlawan, dunia, misi, dan ending-mu sendiri bersama AI, lalu selipkan materi pelajaran di
+            dalamnya. Sekitar 15 menit kemudian, game-mu jalan di browser, lengkap dengan prolog dan ending cerita.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">

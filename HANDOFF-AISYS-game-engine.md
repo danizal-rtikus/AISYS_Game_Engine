@@ -358,6 +358,23 @@ Diuji di Chromium (panel browser Studio, terlihat di layar) dengan halaman uji s
 
 ---
 
+## 14. Studio Cerita, Fase 1 (26 Nov 2026, branch `feat/story-mode`)
+
+**Keputusan pemilik produk:** pengguna utama = siswa SMA di Trial Class; sesi desain sekitar 15 menit; prioritas cerita > visual > mekanik; berlaku untuk semua 9 genre; materi pelajaran wajib (mode arcade murni dihapus); nada AI santai dan akrab. Fase 1 = prolog dan ending; teks antar-babak ditunda ke fase mekanik.
+
+**Yang dibangun:**
+- `src/runtime/aisys-story.js` (story shell): prolog 3 panel sebelum game dan ending menang/kalah sesudahnya, dirender Studio (emoji + gradien, tanpa aset) untuk semua genre. Sumber cerita: field `story` di manifest, atau `<script type="application/json" id="aisys-story">` di game HTML. Akhir ronde: runtime mengirim `aisys:gameover` (menang bila item benar ≥ `story.goal.correct`); game Beta memanggil `AISYS.end("menang"|"kalah")`. Ikut masuk ke berkas unduhan; tombol keyboard ditahan selama overlay terbuka.
+- Prompt **v4.0** (persona "Kak AISYS"): 11 langkah (Genre, Pahlawan, Dunia, Misi, Lawan, Materi, Cara materi jadi permainan, Twist, Visual, Ending, Blueprint + pratinjau prolog), 3 pilihan per langkah + Acak, penanda UI `[[LANGKAH]]`, `[[PILIHAN]]`, `[[CERITA]]`, DATA CERITA wajib di SESI 7A dan 7B. Migrasi `storage.ts` kini mensyaratkan `[[LANGKAH:`.
+- UI: progress bar, tombol pilihan + 🎲 Acak (hanya di pesan terakhir), kartu cerita di panel kanan (`src/utils/storyMarkers.ts`), teks sambutan/landing/input bergaya santai.
+
+**Uji:**
+- Browser (Studio): prolog → game → ending "Misi gagal" untuk Endless Runner; prolog dan ending "Misi berhasil" lewat `AISYS.end` untuk game HTML; progress bar, tombol pilihan, dan kartu cerita tampil benar.
+- run5 (`scripts/eval/results/run5-v40/`, `deepseek-v4-flash`, 2 percakapan penuh): penanda muncul di 11/11 langkah berurutan dengan 3 pilihan di kedua percakapan; balasan 57-104 kata per langkah; manifest Endless Runner lolos selfTest dengan `story` lengkap; game Platformer (526 baris) punya JSON cerita valid dan memanggil `AISYS.end` untuk menang dan kalah, berjalan tanpa error di Studio. Waktu AI total 75 dtk (Endless Runner) dan 112 dtk (Platformer); sisa durasi sesi adalah waktu siswa membaca dan menjawab.
+- Kekurangan yang terlihat: satu langkah tidak menulis `[[CERITA: Genre = ...]]` (kartu cerita kehilangan Genre); materi di game Platformer dangkal (platform hanya berlabel "Energi Kinetik/Potensial"); biaya input sekitar **100 ribu token per percakapan** (sekitar 2,3× v3.0), jadi prompt caching makin penting.
+- Belum diuji: uji dengan siswa sungguhan (durasi nyata ≤ 15 menit), ponsel asli, dan evaluasi model yang lebih besar.
+
+---
+
 ## Lampiran A: Prompt Sesi 7 (siap tempel ke `defaultSkill.ts`)
 
 > **Catatan 25 Nov 2026:** lampiran ini adalah snapshot Sesi 7 untuk prompt v2.0. Sumber prompt yang berlaku sekarang adalah `DEFAULT_SKILL_PROMPT` di `src/config/defaultSkill.ts` (v2.1 menambah aturan konsistensi kategori dan total 8-16 item; v2.2 mengganti contoh kertas yang diperdebatkan). Setelah mengubah prompt, jalankan `node scripts/build-skill-config.mjs <versi>` untuk membuat ulang `public/skill-config.json`.

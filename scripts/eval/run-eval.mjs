@@ -106,7 +106,7 @@ function captureManifest(code) {
 
 // ---------------------------------------------------------------- cheat-sheet field whitelist
 const ALLOWED = {
-  '': ['schema', 'kit', 'id', 'title', 'seed', 'theme', 'player', 'world', 'spawner', 'rules', 'learning', 'hud', 'hooks'],
+  '': ['schema', 'kit', 'id', 'title', 'seed', 'theme', 'player', 'world', 'spawner', 'rules', 'learning', 'hud', 'hooks', 'story'],
   theme: ['preset'],
   player: ['x', 'w', 'h', 'gravity', 'jumpVelocity', 'lives', 'invulnerableSec'],
   world: ['groundY', 'speed', 'maxSpeed', 'accel', 'layers'],
@@ -184,6 +184,8 @@ async function chat(messages) {
 // Prompt v3.0 flow: Sesi 1 genre, 2 tipe & topik, 3 inti mekanik, 4 visual, 5 kesulitan / aksi spesial, 6 PRD.
 // A misconception (s5) is folded into the topic answer, since v3.0 lets the AI propose it in the PRD.
 function userAnswers(t) {
+  // Prompt v4 (Studio Cerita): 11 design answers listed in the trial, then the build confirmation
+  if (Array.isArray(t.answers)) return ['Halo kak, aku mau bikin game!', ...t.answers, 'Lanjut, bangun game sekarang!'];
   return [
     'Halo, saya ingin membuat game baru.',
     t.genre || 'Endless Runner',
@@ -197,6 +199,25 @@ function userAnswers(t) {
 
 const isHtmlGame = (code) => /^\s*(<!DOCTYPE\s+html|<html)/i.test(code || '');
 
+/** Story data required by prompt v4 (rendered by src/runtime/aisys-story.js). */
+function storyCheck(s) {
+  const problems = [];
+  if (!s || typeof s !== 'object') return { ok: false, problem: 'story bukan objek' };
+  if (!s.title) problems.push('title kosong');
+  if (!s.hero || !s.hero.name) problems.push('hero.name kosong');
+  if (!Array.isArray(s.prolog) || s.prolog.length !== 3) problems.push(`prolog ${Array.isArray(s.prolog) ? s.prolog.length : 0} panel (harus 3)`);
+  if (!s.ending || !s.ending.menang || !s.ending.kalah) problems.push('ending menang/kalah tidak lengkap');
+  return { ok: problems.length === 0, problem: problems.join('; ') || undefined, title: s.title, hero: s.hero?.name, goalCorrect: s.goal?.correct ?? null, prolog: (s.prolog || []).map((p) => (typeof p === 'string' ? p : p?.text)) };
+}
+
+/** UI markers required at the end of every design step (prompt v4). */
+function markerCheck(text) {
+  const step = text.match(/\[\[\s*LANGKAH\s*:\s*(\d+)\s*\/\s*(\d+)/i);
+  const opts = text.match(/\[\[\s*PILIHAN\s*:\s*([^\]]*)\]\]/i);
+  const facts = [...text.matchAll(/\[\[\s*CERITA\s*:\s*([^=\]]+)=/gi)].map((m) => m[1].trim());
+  return { step: step ? Number(step[1]) : null, options: opts ? opts[1].split('|').filter((o) => o.trim()).length : 0, facts, words: text.replace(/\[\[[^\]]*\]\]/g, '').split(/\s+/).filter(Boolean).length };
+}
+
 function measure(code) {
   const r = { extracted: Boolean(code) };
   if (!code) return r;
@@ -207,6 +228,13 @@ function measure(code) {
     r.hasEndMarker = /<!--\s*END_OF_GAME\s*-->/i.test(code);
     r.mentionsWatermark = /AISYS HTML5 Engine/.test(code);
     r.unknownFields = [];
+    const sm = code.match(/<script[^>]*id=["']aisys-story["'][^>]*>([\s\S]*?)<\/script>/i);
+    if (sm) {
+      try { r.story = storyCheck(JSON.parse(sm[1])); } catch (e) { r.story = { ok: false, problem: 'JSON tidak valid: ' + String(e).slice(0, 80) }; }
+    } else {
+      r.story = { ok: false, problem: 'tidak ada <script id="aisys-story">' };
+    }
+    r.callsEnd = /AISYS\.end\(\s*["']menang["']/.test(code) && /AISYS\.end\(\s*["']kalah["']/.test(code);
     return r;
   }
   r.mode = 'manifest';
@@ -215,6 +243,7 @@ function measure(code) {
   try { m = captureManifest(code); } catch (e) { r.execError = String(e).slice(0, 200); return r; }
   if (!m) { r.execError = 'defineGame not called'; return r; }
   r.unknownFields = unknownFields(m);
+  r.story = m.story ? storyCheck(m.story) : { ok: false, problem: 'tidak ada field story' };
   r.preset = m.theme?.preset || null;
   r.world = m.world ? { speed: m.world.speed, maxSpeed: m.world.maxSpeed, accel: m.world.accel } : null;
   r.lives = m.player?.lives ?? null;
@@ -271,7 +300,7 @@ async function runTrial(t) {
     msgs.push({ role: 'user', content: userText });
     const r = await chat(msgs);
     msgs.push({ role: 'assistant', content: r.content });
-    turns.push({ user: userText, finishReason: r.finishReason, usage: r.usage, ms: r.ms, reasoningChars: r.reasoningChars });
+    turns.push({ user: userText, finishReason: r.finishReason, usage: r.usage, ms: r.ms, reasoningChars: r.reasoningChars, markers: markerCheck(r.content) });
     const ex = extractHtmlFromStream(r.content);
     if (ex.code) { sesi7 = { turnIndex: i, r, ex, early: i < answers.length - 1 }; break; }
     if (i >= answers.length - 1 && i >= answers.length + MAX_EXTRA_NUDGES - 1) break;
@@ -320,7 +349,7 @@ async function runTrial(t) {
 
 // ---------------------------------------------------------------- dry run (offline)
 if (DRY) {
-  const handoff = fs.readFileSync(path.join(ROOT, 'HANDOFF-AISYS-game-engine.md'), 'utf8');
+  const handoff = fs.readFileSync(path.join(ROOT, 'HANDOFF-AISYS-game-engine.md'), 'utf8').replace(/\r\n/g, '\n');
   const example = handoff.split('```js\n')[1].split('\n```')[0];
   const samples = {
     'lampiran-a': '```js\n' + example + '\n```',

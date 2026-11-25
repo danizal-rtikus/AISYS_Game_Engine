@@ -1093,6 +1093,14 @@
       this.explainToast = null;
       this.audio.play('boom');
       this.callHook('onGameOver', this.analytics);
+      // Let the story shell (aisys-story.js) show the ending. Headless selfTest engines stay silent.
+      if (!this.headless && typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
+        try {
+          window.dispatchEvent(new CustomEvent('aisys:gameover', {
+            detail: { score: this.score, analytics: this.analytics }
+          }));
+        } catch (e) {}
+      }
     }
 
     exportAnalytics() {

@@ -1,0 +1,369 @@
+{
+  "id": "story-runner",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo kak, aku mau bikin game!",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 215,
+        "prompt_tokens": 7389,
+        "total_tokens": 7604,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "ms": 5719,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 1,
+        "options": 3,
+        "facts": [],
+        "words": 86
+      }
+    },
+    {
+      "user": "Endless Runner",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 170,
+        "prompt_tokens": 7610,
+        "total_tokens": 7780,
+        "prompt_tokens_details": {
+          "cached_tokens": 7168
+        }
+      },
+      "ms": 3933,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 2,
+        "options": 3,
+        "facts": [
+          "Genre"
+        ],
+        "words": 61
+      }
+    },
+    {
+      "user": "Miko, kucing ninja yang lincah",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 184,
+        "prompt_tokens": 7794,
+        "total_tokens": 7978,
+        "prompt_tokens_details": {
+          "cached_tokens": 7424
+        }
+      },
+      "ms": 3944,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 3,
+        "options": 3,
+        "facts": [
+          "Pahlawan"
+        ],
+        "words": 59
+      }
+    },
+    {
+      "user": "Hutan hujan tropis yang mulai rusak",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 186,
+        "prompt_tokens": 7991,
+        "total_tokens": 8177,
+        "prompt_tokens_details": {
+          "cached_tokens": 7680
+        }
+      },
+      "ms": 3381,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 4,
+        "options": 3,
+        "facts": [
+          "Dunia"
+        ],
+        "words": 58
+      }
+    },
+    {
+      "user": "Menyelamatkan pohon induk terakhir",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 182,
+        "prompt_tokens": 8191,
+        "total_tokens": 8373,
+        "prompt_tokens_details": {
+          "cached_tokens": 7936
+        }
+      },
+      "ms": 9550,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 5,
+        "options": 3,
+        "facts": [
+          "Misi"
+        ],
+        "words": 57
+      }
+    },
+    {
+      "user": "Pasukan robot penebang liar",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 200,
+        "prompt_tokens": 8383,
+        "total_tokens": 8583,
+        "prompt_tokens_details": {
+          "cached_tokens": 7936
+        }
+      },
+      "ms": 5460,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 6,
+        "options": 3,
+        "facts": [
+          "Lawan"
+        ],
+        "words": 70
+      }
+    },
+    {
+      "user": "Biologi: rantai makanan (produsen, konsumen, pengurai)",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 236,
+        "prompt_tokens": 8603,
+        "total_tokens": 8839,
+        "prompt_tokens_details": {
+          "cached_tokens": 8192
+        }
+      },
+      "ms": 5482,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 7,
+        "options": 3,
+        "facts": [
+          "Materi"
+        ],
+        "words": 75
+      }
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 206,
+        "prompt_tokens": 8843,
+        "total_tokens": 9049,
+        "prompt_tokens_details": {
+          "cached_tokens": 8448
+        }
+      },
+      "ms": 4398,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 8,
+        "options": 3,
+        "facts": [
+          "Mekanik"
+        ],
+        "words": 75
+      }
+    },
+    {
+      "user": "🎲 Acak saja, pilihkan yang paling seru!",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 182,
+        "prompt_tokens": 9066,
+        "total_tokens": 9248,
+        "prompt_tokens_details": {
+          "cached_tokens": 8704
+        }
+      },
+      "ms": 5781,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 9,
+        "options": 3,
+        "facts": [
+          "Twist"
+        ],
+        "words": 66
+      }
+    },
+    {
+      "user": "Cartoon",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 226,
+        "prompt_tokens": 9253,
+        "total_tokens": 9479,
+        "prompt_tokens_details": {
+          "cached_tokens": 8960
+        }
+      },
+      "ms": 4832,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 10,
+        "options": 3,
+        "facts": [
+          "Visual"
+        ],
+        "words": 83
+      }
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 521,
+        "prompt_tokens": 9483,
+        "total_tokens": 10004,
+        "prompt_tokens_details": {
+          "cached_tokens": 9216
+        }
+      },
+      "ms": 7226,
+      "reasoningChars": 0,
+      "markers": {
+        "step": 11,
+        "options": 3,
+        "facts": [
+          "Ending"
+        ],
+        "words": 211
+      }
+    },
+    {
+      "user": "Ya, sudah oke",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 1340,
+        "prompt_tokens": 10012,
+        "total_tokens": 11352,
+        "prompt_tokens_details": {
+          "cached_tokens": 9472
+        }
+      },
+      "ms": 15472,
+      "reasoningChars": 0,
+      "markers": {
+        "step": null,
+        "options": 0,
+        "facts": [],
+        "words": 545
+      }
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo kak, aku mau bikin game!"
+    },
+    {
+      "role": "assistant",
+      "content": "Halo juga! 🎉 Senang banget kamu mau bikin game hari ini. Kita bakal bikin game edukasi buatanmu sendiri bareng AI, cuma sekitar 15 menit!\n\nAda 9 genre yang bisa kita pilih. **Endless Runner** paling stabil (dijalankan AISYS Engine), sisanya Beta: 2D Platformer, Top-Down Shooter, Puzzle Grid, Rhythm, Physics/Slingshot, Tower Defense, Idle/Tycoon, Dungeon Crawler.\n\nMau mulai dari genre yang mana?\n\n- **A** Endless Runner (paling aman & seru)\n- **B** 2D Platformer (lompat-lompatan)\n- **C** Puzzle Grid (puzzle otak)\n\nAtau tulis idemu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 1/11 | Genre]]\n[[PILIHAN: Endless Runner | 2D Platformer | Puzzle Grid]]"
+    },
+    {
+      "role": "user",
+      "content": "Endless Runner"
+    },
+    {
+      "role": "assistant",
+      "content": "Sip, pilihan yang tepat! 🏃 Endless Runner paling stabil dan cepat jadi, jadi kita bisa langsung fokus bikin ceritanya keren.\n\nSekarang, siapa tokoh utama yang bakal berlari di game kamu?\n\n- **A** Kucing ninja lincah dengan lompatan super\n- **B** Robot kecil yang bisa memindai benda\n- **C** Siswa SMA dengan kekuatan rahasia\n\nBoleh tulis idemu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 2/11 | Pahlawan]]\n[[PILIHAN: Kucing ninja lincah | Robot kecil pemindai | Siswa SMA berkekuatan rahasia]]\n[[CERITA: Genre = Endless Runner]]"
+    },
+    {
+      "role": "user",
+      "content": "Miko, kucing ninja yang lincah"
+    },
+    {
+      "role": "assistant",
+      "content": "Mantap, Miko si kucing ninja! 🐱 Idenya jadi makin seru: **Miko, kucing ninja lincah yang menjaga kedamaian dengan gerakannya yang gesit.**\n\nSekarang, di dunia mana Miko bakal berpetualang?\n\n- **A** Kota masa depan yang penuh cahaya neon\n- **B** Hutan ajaib yang rimbun dan misterius\n- **C** Luar angkasa dengan planet-planet aneh\n\nTulis duniamu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 3/11 | Dunia]]\n[[PILIHAN: Kota masa depan neon | Hutan ajaib | Luar angkasa]]\n[[CERITA: Pahlawan = Miko, kucing ninja lincah]]"
+    },
+    {
+      "role": "user",
+      "content": "Hutan hujan tropis yang mulai rusak"
+    },
+    {
+      "role": "assistant",
+      "content": "Keren banget! 🌳 Jadi ceritanya: **Miko, kucing ninja lincah, menjaga hutan hujan tropis yang mulai rusak dan kehilangan keasriannya.**\n\nSekarang, apa misi yang harus Miko capai?\n\n- **A** Mengumpulkan benih pohon untuk menghijaukan hutan lagi\n- **B** Menyelamatkan hewan-hewan yang kehilangan rumah\n- **C** Mencari sumber mata air keramat yang mengering\n\nTulis misimu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 4/11 | Misi]]\n[[PILIHAN: Kumpulkan benih pohon | Selamatkan hewan | Cari mata air keramat]]\n[[CERITA: Dunia = Hutan hujan tropis yang rusak]]"
+    },
+    {
+      "role": "user",
+      "content": "Menyelamatkan pohon induk terakhir"
+    },
+    {
+      "role": "assistant",
+      "content": "Wah, epik! 🌲 Jadi misinya: **Miko harus menyelamatkan pohon induk terakhir yang jadi sumber kehidupan seluruh hutan hujan tropis.**\n\nSekarang, siapa atau apa yang menghalangi Miko?\n\n- **A** Penebang liar raksasa dengan mesin perusak\n- **B** Makhluk bayangan yang menyerap kehidupan hutan\n- **C** Bencana kabut asap yang menyelimuti hutan\n\nTulis lawanmu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 5/11 | Lawan]]\n[[PILIHAN: Penebang liar raksasa | Makhluk bayangan | Kabut asap bencana]]\n[[CERITA: Misi = Selamatkan pohon induk terakhir]]"
+    },
+    {
+      "role": "user",
+      "content": "Pasukan robot penebang liar"
+    },
+    {
+      "role": "assistant",
+      "content": "Gokil! 🤖 Jadi lawannya: **Pasukan robot penebang liar yang menebang hutan tanpa ampun, dan Miko harus menghentikan mereka.**\n\nSekarang bagian penting: materi pelajaran apa yang mau kita selipkan? Aku pilihkan topik yang cocok dengan cerita hutan tropis ini:\n\n- **A** Ekosistem hutan tropis (rantai makanan & keanekaragaman hayati)\n- **B** Pemanasan global & efek rumah kaca\n- **C** Daur ulang & pengelolaan sampah\n\nTulis topikmu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 6/11 | Materi Pelajaran]]\n[[PILIHAN: Ekosistem hutan tropis | Pemanasan global | Daur ulang sampah]]\n[[CERITA: Lawan = Pasukan robot penebang liar]]"
+    },
+    {
+      "role": "user",
+      "content": "Biologi: rantai makanan (produsen, konsumen, pengurai)"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan cerdas! 🍃 Jadi materinya: **Biologi tentang rantai makanan — membedakan produsen, konsumen, dan pengurai di ekosistem hutan.**\n\nSekarang, gimana caranya materi ini jadi permainan? Miko ambil item yang cocok dengan kategori target:\n\n- **A** Target bergilir: ambil **Produsen** (tumbuhan), **Konsumen** (hewan), atau **Pengurai** (jamur & bakteri)\n- **B** Fokus **Konsumen**: ambil Herbivora, Karnivora, atau Omnivora\n- **C** Fokus **Peran ekosistem**: ambil item sesuai perannya di rantai makanan\n\nTulis idemu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 7/11 | Mekanik]]\n[[PILIHAN: Produsen/Konsumen/Pengurai | Herbivora/Karnivora/Omnivora | Peran ekosistem]]\n[[CERITA: Materi = Biologi rantai makanan]]"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Mantap! 🎯 Jadi mekaniknya: **Miko berlari mengambil item yang cocok dengan kategori target — Produsen, Konsumen, atau Pengurai — dan target bergilir selama permainan.**\n\nSekarang, twist seru apa yang terjadi di tengah cerita?\n\n- **A** Ternyata pohon induk bisa bicara dan memberi Miko kekuatan baru\n- **B** Robot penebang ternyata dikendalikan makhluk yang ingin balas dendam pada manusia\n- **C** Hutan mulai runtuh, Miko harus makin cepat menyelamatkannya\n\nTulis twist-mu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 8/11 | Twist]]\n[[PILIHAN: Pohon induk bicara | Robot dikendalikan makhluk | Hutan mulai runtuh]]\n[[CERITA: Mekanik = Ambil item sesuai kategori target]]"
+    },
+    {
+      "role": "user",
+      "content": "🎲 Acak saja, pilihkan yang paling seru!"
+    },
+    {
+      "role": "assistant",
+      "content": "Oke, aku pilih yang paling seru: **pohon induk ternyata bisa bicara dan memberi Miko kekuatan baru!** 🌲✨ Jadi di tengah permainan, pohon induk membisikkan rahasia kekuatan hutan ke Miko.\n\nSekarang, gaya visualnya mau seperti apa?\n\n- **A** Cartoon — cerah, bukit hijau, ramah\n- **B** Clean Modern — bersih dan rapi\n- **C** Retro Pixel — nuansa arcade klasik\n\nTulis gayamu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 9/11 | Gaya Visual]]\n[[PILIHAN: Cartoon cerah | Clean Modern | Retro Pixel]]\n[[CERITA: Twist = Pohon induk bicara & beri kekuatan]]"
+    },
+    {
+      "role": "user",
+      "content": "Cartoon"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan pas! 🎨 Jadi visualnya: **Cartoon yang cerah dengan bukit hijau, cocok banget dengan hutan tropis yang penuh warna.**\n\nTerakhir nih, ending-nya mau gimana?\n\n- **A** Menang: hutan kembali hijau & pohon induk bersemi. Kalah: hutan masih suram, Miko bangkit lagi\n- **B** Menang: robot jadi ramah & ikut menanam. Kalah: robot menang sementara, hutan menunggu Miko\n- **C** Menang: pohon induk berterima kasih & Miko jadi penjaga hutan. Kalah: hutan redup, tapi harapan belum hilang\n\nTulis ending-mu sendiri, atau tekan **🎲 Acak**!\n\n[[LANGKAH: 10/11 | Ending]]\n[[PILIHAN: Hutan hijau kembali | Robot jadi ramah | Miko jadi penjaga hutan]]\n[[CERITA: Visual = Cartoon cerah]]"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Sempurna! 🏆 Jadi ending-nya: **kalau menang hutan kembali hijau dan pohon induk bersemi, kalau kalah hutan masih suram tapi Miko siap bangkit lagi.**\n\nNih rangkuman lengkapnya sebelum kita bangun game:\n\n**📋 Blueprint Game**\n\n**Judul:** Miko & Pohon Induk Terakhir\n**Genre:** Endless Runner (stabil) · **Visual:** Cartoon\n\n**Prolog:**\n1. 🌳 Miko, kucing ninja lincah, menjaga hutan hujan tropis yang dulu asri dan penuh kehidupan.\n2. 🤖 Pasukan robot penebang liar datang menebang hutan! Di tengah krisis, pohon induk terakhir ternyata bisa bicara dan memberi Miko kekuatan baru.\n3. 🎯 Bantu Miko berlari, ambil item sesuai kategori target, dan selamatkan pohon induk terakhir!\n\n**Cara bermain & menang:** Miko berlari otomatis. Ambil item yang cocok dengan **kategori target** (Produsen / Konsumen / Pengurai) yang bergilir. Ambil **10 item benar** untuk menang. Salah ambil atau kena rintangan = kehilangan nyawa.\n\n**Materi:** Biologi — Rantai Makanan\n- **Tujuan:** Mengelompokkan makhluk hidup sebagai produsen, konsumen, atau pengurai.\n- **Miskonsepsi diuji:** Jamur dianggap tumbuhan/produsen (padahal pengurai).\n- **Kategori & item:**\n  - **Produsen** (hijau): Rumput, Pohon pisang, Paku air\n  - **Konsumen** (biru): Rusa, Ular, Elang\n  - **Pengurai** (merah): Jamur, Bakteri, Cacing tanah\n\n**Ending:** Menang → hutan hijau kembali & pohon induk bersemi. Kalah → hutan masih suram, Miko siap bangkit lagi.\n\nSudah siap dibangun, atau ada yang mau diubah?\n\n[[LANGKAH: 11/11 | Blueprint]]\n[[PILIHAN: Lanjut, bangun game! | Ubah cerita | Ubah materi]]\n[[CERITA: Ending = Hutan hijau kembali]]"
+    },
+    {
+      "role": "user",
+      "content": "Ya, sudah oke"
+    },
+    {
+      "role": "assistant",
+      "content": "Siap! Game **Miko & Pohon Induk Terakhir** langsung dibangun ya. Asumsiku: kesulitan Normal dan target bergilir tiap 5 item benar.\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"miko-pohon-induk\", title: \"Miko & Pohon Induk Terakhir\", seed: \"miko-hutan-01\",\n  theme: { preset: \"cartoon\" },\n\n  story: {\n    title: \"Miko & Pohon Induk Terakhir\",\n    hero: { name: \"Miko\", emoji: \"🐱\", desc: \"Kucing ninja lincah penjaga hutan hujan tropis\" },\n    world: { name: \"Hutan Hujan Tropis\", emoji: \"🌳\" },\n    mood: { from: \"#14532d\", to: \"#0f766e\" },\n    prolog: [\n      { text: \"Miko, kucing ninja lincah, menjaga hutan hujan tropis yang dulu asri dan penuh kehidupan.\", emoji: \"🌳\" },\n      { text: \"Pasukan robot penebang liar menebang hutan! Di tengah krisis, pohon induk terakhir ternyata bisa bicara dan memberi Miko kekuatan baru.\", emoji: \"🤖\" },\n      { text: \"Bantu Miko berlari, ambil item sesuai kategori target, dan selamatkan pohon induk terakhir!\", emoji: \"🎯\" }\n    ],\n    goal: { text: \"Ambil 10 item yang cocok dengan kategori target untuk menyelamatkan pohon induk\", correct: 10 },\n    ending: {\n      menang: { text: \"Hutan kembali hijau dan pohon induk bersemi! Berkat kamu dan Miko, hutan hujan tropis hidup lagi.\", emoji: \"🏆\" },\n      kalah: { text: \"Hutan masih suram, tapi Miko tak menyerah. Ayo coba lagi, kamu pasti bisa!\", emoji: \"💫\" }\n    }\n  },\n\n  learning: {\n    subject: \"Biologi\",\n    concept: \"Rantai makanan: produsen, konsumen, dan pengurai\",\n    objectives: [\"Mengelompokkan makhluk hidup sebagai produsen, konsumen, atau pengurai\"],\n    misconceptions: [\"Jamur dianggap tumbuhan/produsen padahal ia pengurai\"],\n    mode: \"category\",\n    categories: [\n      { id: \"produsen\", label: \"Produsen\", color: \"#3FA34D\" },\n      { id: \"konsumen\", label: \"Konsumen\", color: \"#2F80ED\" },\n      { id: \"pengurai\", label: \"Pengurai\", color: \"#E5484D\" }\n    ],\n    items: [\n      { id: \"rumput\", label: \"Rumput\", category: \"produsen\", explain: \"Tumbuhan hijau berfotosintesis, membuat makanan sendiri.\" },\n      { id: \"pohon-pisang\", label: \"Pohon pisang\", category: \"produsen\", explain: \"Tumbuhan berdaun hijau yang berfotosintesis.\" },\n      { id: \"paku-air\", label: \"Paku air\", category: \"produsen\", explain: \"Tumbuhan hijau kecil yang berfotosintesis di air.\" },\n      { id: \"rusa\", label: \"Rusa\", category: \"konsumen\", explain: \"Hewan yang memakan tumbuhan, jadi konsumen.\" },\n      { id: \"ular\", label: \"Ular\", category: \"konsumen\", explain: \"Hewan pemakan hewan lain, termasuk konsumen.\" },\n      { id: \"elang\", label: \"Elang\", category: \"konsumen\", explain: \"Pemangsa yang makan hewan lain, jadi konsumen.\" },\n      { id: \"jamur\", label: \"Jamur\", category: \"pengurai\", explain: \"Menguraikan sisa makhluk hidup; bukan tumbuhan hijau.\" },\n      { id: \"bakteri\", label: \"Bakteri pengurai\", category: \"pengurai\", explain: \"Membusukkan sisa organisme menjadi zat hara.\" },\n      { id: \"cacing\", label: \"Cacing tanah\", category: \"pengurai\", explain: \"Menguraikan bahan organik di dalam tanah.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"robot\", w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"kayu\", w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```\n\nGame-mu siap dimainkan! 🎮 Selamat berlari bersama Miko menyelamatkan hutan!"
+    }
+  ]
+}

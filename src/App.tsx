@@ -27,20 +27,21 @@ import {
 } from './utils/storage';
 import { extractHtmlFromStream, extractGameTitle, codeFenceLang } from './utils/htmlExtractor';
 import { GAME_REPAIR_DIRECTIVE } from './config/defaultSkill';
+import { collectStory, latestStep } from './utils/storyMarkers';
 import { sendDeepSeekMessage } from './utils/deepseekStream';
 
 export const INITIAL_WELCOME_MESSAGE: Message = {
   id: 'welcome-init',
   role: 'assistant',
-  content: `Halo! Selamat datang di **AISYS Game Studio** 🎮
+  content: `Halo! Aku **Kak AISYS** 👋
 
-Saya mentor desain game Anda. Kita akan merancang game **arcade** atau **edukasi** yang hasil akhirnya satu berkas HTML dan bisa dimainkan offline.
+Hari ini kamu bakal bikin **game edukasi buatanmu sendiri** bareng AI: kamu yang menentukan pahlawannya, dunianya, misinya, sampai ending-nya. Sekitar 15 menit, 11 langkah seru, dan hasilnya satu file game yang bisa kamu mainkan dan bagikan.
 
-Pilih salah satu dari 9 genre:
+Mulai dari genre dulu, ya:
 - **Endless Runner** (stabil, diuji otomatis oleh AISYS Engine)
-- **2D Platformer**, **Top-Down Shooter**, **Puzzle Grid**, **Rhythm / Music**, **Physics / Slingshot**, **Tower Defense**, **Idle / Tycoon**, **Dungeon Crawler** (Beta: kode ditulis AI, coba mainkan dulu sebelum dibagikan)
+- **2D Platformer**, **Top-Down Shooter**, **Puzzle Grid**, **Rhythm / Music**, **Physics / Slingshot**, **Tower Defense**, **Idle / Tycoon**, **Dungeon Crawler** (Beta: kodenya ditulis AI, coba mainkan dulu sebelum dibagikan)
 
-Ketik genre atau ide game Anda, atau pilih salah satu kartu di bawah.`,
+Pilih kartu di bawah atau ketik genre yang kamu mau.`,
   timestamp: Date.now(),
 };
 
@@ -680,6 +681,8 @@ export function App() {
                 onClearLogs={() => setLogs([])}
                 onFixWithAI={handleFixWithAI}
                 isStreaming={isStreaming}
+                storyFacts={collectStory(messages)}
+                storyStep={latestStep(messages)}
               />
             </div>
           </div>

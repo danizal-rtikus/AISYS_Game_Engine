@@ -1,5 +1,5 @@
 {
-  "_note": "Lampiran B: 5 topik x 4 variasi (2 mudah, 1 miskonsepsi eksplisit, 1 arcade) + 2 PRD jebakan. Jawaban pengguna disimulasikan per sesi; PRD tetap dihasilkan model lewat alur Sesi 1-6. Varian holdout (ditambah setelah run1): topik yang tidak dipakai sebagai contoh di prompt v2.1, untuk menguji aturan kategori tanpa bias. Varian beta (prompt v3.0): genre selain Endless Runner, dibuat dalam mode HTML (SESI 7B); s4 = aksi spesial.",
+  "_note": "Lampiran B: 5 topik x 4 variasi (2 mudah, 1 miskonsepsi eksplisit, 1 arcade) + 2 PRD jebakan. Jawaban pengguna disimulasikan per sesi; PRD tetap dihasilkan model lewat alur Sesi 1-6. Varian holdout (ditambah setelah run1): topik yang tidak dipakai sebagai contoh di prompt v2.1, untuk menguji aturan kategori tanpa bias. Varian beta (prompt v3.0): genre selain Endless Runner, dibuat dalam mode HTML (SESI 7B); s4 = aksi spesial. Varian story (prompt v4.0): 11 jawaban desain Studio Cerita (answers), termasuk satu jawaban Acak.",
   "trials": [
     {
       "id": "ling-mudah-1",
@@ -237,6 +237,46 @@
       "s1": "Arcade murni, bertema kebun yang diserang hama.",
       "s3": "A",
       "s4": "Slow-Motion"
+    },
+    {
+      "id": "story-runner",
+      "genre": "Endless Runner",
+      "topic": "biologi",
+      "variant": "story",
+      "expected": {},
+      "answers": [
+        "Endless Runner",
+        "Miko, kucing ninja yang lincah",
+        "Hutan hujan tropis yang mulai rusak",
+        "Menyelamatkan pohon induk terakhir",
+        "Pasukan robot penebang liar",
+        "Biologi: rantai makanan (produsen, konsumen, pengurai)",
+        "A",
+        "🎲 Acak saja, pilihkan yang paling seru!",
+        "Cartoon",
+        "A",
+        "Ya, sudah oke"
+      ]
+    },
+    {
+      "id": "story-platformer",
+      "genre": "2D Platformer",
+      "topic": "fisika",
+      "variant": "story-beta",
+      "expected": {},
+      "answers": [
+        "2D Platformer",
+        "Rani, siswi SMA yang bisa mengendalikan gravitasi",
+        "Laboratorium sekolah di masa depan",
+        "Mengembalikan reaktor energi yang dicuri",
+        "Profesor Entropi dan drone-dronenya",
+        "Fisika: energi kinetik dan energi potensial",
+        "B",
+        "Ternyata Profesor Entropi adalah guru fisika Rani sendiri",
+        "A",
+        "B",
+        "Sudah, mantap"
+      ]
     }
   ]
 }

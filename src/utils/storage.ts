@@ -50,13 +50,13 @@ export const getStoredSettings = (): AppSettings => {
       model = 'deepseek-v4-flash';
     }
 
-    // Auto-update system prompt if it predates the PRD blueprint review or the manifest flow
-    // (prompt v2.0: the model writes an AISYS.defineGame manifest ending in END_OF_MANIFEST, not HTML)
+    // Auto-update system prompt if it predates the manifest flow (END_OF_MANIFEST, v2.0+) or the
+    // story-first flow whose UI markers drive the option chips and progress bar ([[LANGKAH:, v4.0+)
     let systemPrompt = parsed.systemPrompt || DEFAULT_SKILL_PROMPT;
     if (
       systemPrompt.includes('AISYS menyiapkan 4 genre') ||
-      !systemPrompt.includes('Sesi 6: Presentasi PRD') ||
-      !systemPrompt.includes('END_OF_MANIFEST')
+      !systemPrompt.includes('END_OF_MANIFEST') ||
+      !systemPrompt.includes('[[LANGKAH:')
     ) {
       systemPrompt = DEFAULT_SKILL_PROMPT;
     }
