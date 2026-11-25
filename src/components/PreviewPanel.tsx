@@ -1,4 +1,5 @@
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
+import aisysRuntimeRaw from '../runtime/aisys-runtime.js?raw';
 import {
   Play,
   Code2,
@@ -20,7 +21,14 @@ import { isGameCodePlayable } from '../utils/htmlExtractor';
 import { CodeViewer } from './CodeViewer';
 import { ConsoleViewer } from './ConsoleViewer';
 
+// Escape text inlined into a <script> element so it cannot close the element early
+// (`</script`) or switch the HTML parser into the script-data-escaped state (`<!--`).
+const escapeInline = (s: string) =>
+  s.replace(/<\/script/gi, '<\\/script').replace(/<!--/g, '<\\!--');
+
 interface PreviewPanelProps {
+  /** Shared with App so the message bridge can verify `e.source`. */
+  iframeRef: React.RefObject<HTMLIFrameElement | null>;
   gameCode: string;
   gameTitle: string;
   activeTab: ActiveTab;
@@ -35,6 +43,7 @@ interface PreviewPanelProps {
 }
 
 export const PreviewPanel: React.FC<PreviewPanelProps> = ({
+  iframeRef,
   gameCode,
   gameTitle,
   activeTab,
@@ -49,7 +58,6 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
 }) => {
   const [viewport, setViewport] = useState<ViewportMode>('desktop');
   const [iframeKey, setIframeKey] = useState(0);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const errorCount = useMemo(() => logs.filter((l) => l.type === 'error').length, [logs]);
 
@@ -62,27 +70,43 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
     return isGameCodePlayable(gameCode);
   }, [gameCode]);
 
-  // Inject console bridge into the game code so iframe logs and errors can be captured safely
-  const preparedSrcDoc = useMemo(() => {
-    if (!gameCode || !gameCode.trim()) return '';
+  // Bundle game code into a complete, standalone, offline HTML document
+  const bundleFullHtml = (code: string, title: string, withBridge = false): string => {
+    if (!code || !code.trim()) return '';
+    const trimmed = code.trim();
 
-    const bridgeScript = `
+    // Error bridge: must be the first <script> in <head> so it also catches runtime parse/load errors.
+    const errorBridgeScript = withBridge
+      ? `
       <script>
         (function() {
-          window.onerror = function(msg, url, line) {
-            window.parent.postMessage({ type: 'AISYS_CONSOLE', level: 'error', text: String(msg) + ' (line ' + line + ')' }, '*');
-            return false;
-          };
+          if (!window.parent || window.parent === window) return;
+          addEventListener('error', function (e) {
+            parent.postMessage({ type: 'aisys:error', message: String(e.message).slice(0, 300), line: e.lineno }, '*');
+          });
+          addEventListener('unhandledrejection', function (e) {
+            parent.postMessage({ type: 'aisys:error', message: String(e.reason).slice(0, 300) }, '*');
+          });
+        })();
+      </script>`
+      : '';
+
+    const bridgeScript = withBridge
+      ? `
+      <script>
+        (function() {
           var _origLog = console.log;
           console.log = function() {
             var args = Array.prototype.slice.call(arguments);
             _origLog.apply(console, args);
             try {
-              window.parent.postMessage({
-                type: 'AISYS_CONSOLE',
-                level: 'log',
-                text: args.map(function(a) { return typeof a === 'object' ? JSON.stringify(a) : String(a); }).join(' ')
-              }, '*');
+              if (window.parent && window.parent !== window) {
+                window.parent.postMessage({
+                  type: 'AISYS_CONSOLE',
+                  level: 'log',
+                  text: args.map(function(a) { return typeof a === 'object' ? JSON.stringify(a) : String(a); }).join(' ')
+                }, '*');
+              }
             } catch(e) {}
           };
           var _origWarn = console.warn;
@@ -90,25 +114,131 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
             var args = Array.prototype.slice.call(arguments);
             _origWarn.apply(console, args);
             try {
-              window.parent.postMessage({
-                type: 'AISYS_CONSOLE',
-                level: 'warn',
-                text: args.map(function(a) { return typeof a === 'object' ? JSON.stringify(a) : String(a); }).join(' ')
-              }, '*');
+              if (window.parent && window.parent !== window) {
+                window.parent.postMessage({
+                  type: 'AISYS_CONSOLE',
+                  level: 'warn',
+                  text: args.map(function(a) { return typeof a === 'object' ? JSON.stringify(a) : String(a); }).join(' ')
+                }, '*');
+              }
             } catch(e) {}
           };
         })();
-      </script>
-    `;
+      </script>`
+      : '';
 
-    if (gameCode.includes('<head>')) {
-      return gameCode.replace('<head>', `<head>${bridgeScript}`);
-    } else if (gameCode.includes('<html>')) {
-      return gameCode.replace('<html>', `<html><head>${bridgeScript}</head>`);
-    } else {
-      return `${bridgeScript}${gameCode}`;
+    // Check if code is a Declarative Manifest
+    const isManifest = trimmed.includes('AISYS.defineGame');
+
+    if (isManifest) {
+      const safeTitle = (title || 'AISYS Game')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      const safeManifest = escapeInline(trimmed);
+      const safeRuntime = escapeInline(aisysRuntimeRaw);
+
+      // Preview only: run selfTest once the engine has launched. defineGame defers launch to
+      // DOMContentLoaded while the document is still parsing, so this listener (registered after
+      // the manifest) runs after the runtime's own launch listener.
+      const selfTestScript = withBridge
+        ? `
+  <script>
+    addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () {
+        try {
+          if (window.__AISYS_GAME__) {
+            AISYS.selfTest(window.__AISYS_GAME__.rawManifest);
+          } else {
+            parent.postMessage({ type: 'aisys:error', message: 'Game tidak terpasang: AISYS.defineGame tidak menghasilkan engine.' }, '*');
+          }
+        } catch (err) {
+          parent.postMessage({ type: 'aisys:error', message: String(err).slice(0, 300) }, '*');
+        }
+      }, 0);
+    });
+  </script>`
+        : '';
+
+      return `<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>${safeTitle}</title>
+  ${errorBridgeScript}
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #0f172a;
+      overflow: hidden;
+      touch-action: none;
+      user-select: none;
     }
-  }, [gameCode]);
+    #portrait-hint {
+      display: none;
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(30, 41, 59, 0.95);
+      border: 1px solid #f59e0b;
+      color: #fde68a;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 999;
+      pointer-events: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    @media (orientation: portrait) {
+      #portrait-hint { display: block; }
+    }
+  </style>
+  ${bridgeScript}
+  <script>
+    // AISYS Core Runtime v0.1.0
+    ${safeRuntime}
+  </script>
+</head>
+<body>
+  <div id="portrait-hint">📱 Putar perangkat ke mode lanskap untuk tampilan penuh</div>
+  <canvas id="aisys-canvas"></canvas>
+  <script>
+    try {
+      ${safeManifest}
+    } catch (err) {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'aisys:error', message: ('Manifest Runtime Error: ' + (err && err.message || err)).slice(0, 300) }, '*');
+      }
+    }
+  </script>${selfTestScript}
+</body>
+</html>`;
+    }
+
+    // Legacy Single-File HTML
+    if (withBridge) {
+      if (trimmed.includes('<head>')) {
+        return trimmed.replace('<head>', `<head>${bridgeScript}`);
+      } else if (trimmed.includes('<html>')) {
+        return trimmed.replace('<html>', `<html><head>${bridgeScript}</head>`);
+      } else {
+        return `${bridgeScript}${trimmed}`;
+      }
+    }
+
+    return trimmed;
+  };
+
+  const preparedSrcDoc = useMemo(() => {
+    return bundleFullHtml(gameCode, gameTitle, true);
+  }, [gameCode, gameTitle]);
 
   const handleRestart = () => {
     setIframeKey((prev) => prev + 1);
@@ -116,7 +246,8 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
 
   const handleOpenNewTab = () => {
     if (!gameCode) return;
-    const blob = new Blob([gameCode], { type: 'text/html;charset=utf-8' });
+    const fullHtml = bundleFullHtml(gameCode, gameTitle, false);
+    const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     window.open(url, '_blank');
   };
@@ -128,7 +259,8 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-|-$/g, '');
     const filename = `${safeTitle || 'aisys-game'}.html`;
-    const blob = new Blob([gameCode], { type: 'text/html;charset=utf-8' });
+    const fullHtml = bundleFullHtml(gameCode, gameTitle, false);
+    const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -359,6 +491,11 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
               }`}
             >
               <div
+                onClick={() => {
+                  try {
+                    iframeRef.current?.contentWindow?.focus();
+                  } catch (e) {}
+                }}
                 className={`transition-all duration-200 overflow-hidden bg-black flex items-center justify-center shadow-lg ${
                   viewport === 'mobile'
                     ? 'w-[375px] max-w-full h-full max-h-[667px] aspect-[375/667] rounded-2xl border-4 border-slate-800 dark:border-slate-700'
@@ -370,8 +507,13 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
                   ref={iframeRef}
                   srcDoc={preparedSrcDoc}
                   title="AISYS Live Game Sandbox"
-                  sandbox="allow-scripts allow-pointer-lock allow-modals"
+                  sandbox="allow-scripts"
                   className="w-full h-full border-0 bg-black"
+                  onLoad={() => {
+                    try {
+                      iframeRef.current?.contentWindow?.focus();
+                    } catch (e) {}
+                  }}
                 />
               </div>
             </div>

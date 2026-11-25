@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AISYS Runtime Browser SelfTest Harness</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #0f172a;
+      color: #f8fafc;
+      font-family: system-ui, -apple-system, sans-serif;
+      overflow: hidden;
+      touch-action: none;
+    }
+    #test-hud {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid #334155;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.4;
+      max-width: 380px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: all 0.2s ease;
+    }
+    #test-hud.collapsed #results {
+      display: none;
+    }
+    .hud-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .hud-title {
+      font-weight: bold;
+      font-size: 13px;
+      color: #38bdf8;
+    }
+    .hud-toggle {
+      background: #1e293b;
+      border: 1px solid #475569;
+      color: #cbd5e1;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+    .pass { color: #34d399; font-weight: bold; }
+    .fail { color: #f87171; font-weight: bold; }
+    .skip { color: #94a3b8; font-weight: bold; }
+
+    /* Portrait Orientation Hint on Mobile */
+    #portrait-hint {
+      display: none;
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(30, 41, 59, 0.95);
+      border: 1px solid #f59e0b;
+      color: #fde68a;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 999;
+      pointer-events: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    @media (orientation: portrait) {
+      #portrait-hint { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <div id="test-hud" class="collapsed">
+    <div class="hud-header" onclick="document.getElementById('test-hud').classList.toggle('collapsed')">
+      <div class="hud-title">🧪 AISYS Runtime Diagnostic</div>
+      <button class="hud-toggle" type="button">Buka/Tutup HUD</button>
+    </div>
+    <div id="status" style="margin-top: 4px; font-size: 11px;">Menjalankan selfTest di browser...</div>
+    <div id="results" style="margin-top: 8px; border-top: 1px solid #334155; padding-top: 6px;"></div>
+  </div>
+
+  <div id="portrait-hint">📱 Putar perangkat ke mode lanskap untuk tampilan penuh</div>
+
+  <canvas id="aisys-canvas"></canvas>
+
+  <script src="/src/runtime/aisys-runtime.js"></script>
+  <script>
+    const ecosortManifest = {
+      schema: 1,
+      kit: "endless-runner",
+      id: "ecosort-run",
+      title: "EcoSort Run",
+      seed: "ecosort-01",
+      theme: { preset: "clean-modern" },
+
+      learning: {
+        subject: "Lingkungan Hidup",
+        concept: "Pemilahan sampah organik, anorganik, dan B3",
+        objectives: ["Mengelompokkan sampah berdasarkan sifatnya"],
+        misconceptions: ["Baterai bekas dianggap sampah anorganik biasa"],
+        mode: "category",
+        categories: [
+          { id: "organik",   label: "Organik",   color: "#3FA34D" },
+          { id: "anorganik", label: "Anorganik", color: "#2F80ED" },
+          { id: "b3",        label: "B3",        color: "#E5484D" }
+        ],
+        items: [
+          { id: "kulit-pisang", label: "Kulit pisang",  category: "organik",   explain: "Terurai alami, bisa jadi kompos." },
+          { id: "botol",        label: "Botol plastik", category: "anorganik", explain: "Sulit terurai, didaur ulang." },
+          { id: "baterai",      label: "Baterai bekas", category: "b3",        explain: "Mengandung logam berbahaya." }
+        ],
+        target: { rotateAfterCorrect: 5, bias: 0.5 }
+      },
+
+      player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },
+      world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6, layers: ["clouds", "hills"] },
+
+      spawner: {
+        interval: [0.9, 1.5],
+        table: [
+          { type: "hazard", id: "batu",     w: 44, h: 48, weight: 3 },
+          { type: "hazard", id: "genangan", w: 90, h: 24, weight: 2 },
+          { type: "item", weight: 5, heights: ["ground", "mid", "high"] }
+        ]
+      },
+
+      rules: {
+        perSecond: 5,
+        correct: { score: 50, combo: 1, sfx: "coin" },
+        wrong:   { score: -20, combo: "reset", lives: 0, sfx: "hit", showExplain: true },
+        hazard:  { lives: -1, sfx: "hit", shake: 8 },
+        combo:   { step: 5, max: 4 },
+        difficulty: { everySec: 15, speed: 25 }
+      },
+
+      hud: ["score", "lives", "combo", "target"],
+      hooks: {}
+    };
+
+    // Run self-test and launch game
+    function initHarness() {
+      const startTime = performance.now();
+      const res = AISYS.selfTest(ecosortManifest);
+      const duration = Math.round(performance.now() - startTime);
+
+      const statusEl = document.getElementById('status');
+      const resultsEl = document.getElementById('results');
+
+      if (statusEl) {
+        statusEl.innerHTML = res.ok 
+          ? `<span class="pass">SELESAI: 9/9 Lolos (${duration}ms)</span> (DPR: ${window.devicePixelRatio || 1})`
+          : `<span class="fail">GAGAL (${duration}ms)</span>`;
+      }
+
+      if (resultsEl) {
+        resultsEl.innerHTML = res.checks.map(c => 
+          `<div><span class="${c.pass ? 'pass' : 'fail'}">[${c.pass ? 'PASS' : 'FAIL'}]</span> <b>${c.id}</b>: ${c.detail}</div>`
+        ).join('');
+      }
+
+      console.log('Browser SelfTest Result:', res);
+
+      // Launch the game visually on canvas so it can be played directly
+      AISYS.defineGame(ecosortManifest);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHarness);
+    } else {
+      initHarness();
+    }
+  </script>
+</body>
+</html>

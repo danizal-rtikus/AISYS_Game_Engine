@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AISYS Runtime Browser SelfTest Harness</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #0f172a;
+      color: #f8fafc;
+      font-family: system-ui, -apple-system, sans-serif;
+      overflow: hidden;
+      touch-action: none;
+    }
+    #test-hud {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid #334155;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.4;
+      max-width: 380px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: all 0.2s ease;
+    }
+    #test-hud.collapsed #results {
+      display: none;
+    }
+    .hud-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .hud-title {
+      font-weight: bold;
+      font-size: 13px;
+      color: #38bdf8;
+    }
+    .hud-toggle {
+      background: #1e293b;
+      border: 1px solid #475569;
+      color: #cbd5e1;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+    .pass { color: #34d399; font-weight: bold; }
+    .fail { color: #f87171; font-weight: bold; }
+    .skip { color: #94a3b8; font-weight: bold; }
+
+    /* Portrait Orientation Hint on Mobile */
+    #portrait-hint {
+      display: none;
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(30, 41, 59, 0.95);
+      border: 1px solid #f59e0b;
+      color: #fde68a;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 999;
+      pointer-events: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    @media (orientation: portrait) {
+      #portrait-hint { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <div id="test-hud" class="collapsed">
+    <div class="hud-header" onclick="document.getElementById('test-hud').classList.toggle('collapsed')">
+      <div class="hud-title">🧪 AISYS Runtime Diagnostic</div>
+      <button class="hud-toggle" type="button">Buka/Tutup HUD</button>
+    </div>
+    <div id="status" style="margin-top: 4px; font-size: 11px;">Menjalankan selfTest di browser...</div>
+    <div id="results" style="margin-top: 8px; border-top: 1px solid #334155; padding-top: 6px;"></div>
+  </div>
+
+  <div id="portrait-hint">📱 Putar perangkat ke mode lanskap untuk tampilan penuh</div>
+
+  <canvas id="aisys-canvas"></canvas>
+
+  <script>
+/**
+ * AISYS HTML5 Game Engine Core Runtime (v0.1.0 - Endless Runner Kit)
+ * STIKOM YOS SUDARSO - DKV & Informatika
+ *
+ * License: ISC License (Permissive with copyright notice)
+ * Copyright (c) 2026 STIKOM Yos Sudarso & AISYS Game Engine Contributors
+ *
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ */
+
+(function (root) {
+  'use strict';
+
+  // -------------------------------------------------------------
+  // 1. CONSTANTS, ICONS & SEEDED PRNG
+  // -------------------------------------------------------------
+  const LOGICAL_WIDTH = 1280;
+  const LOGICAL_HEIGHT = 720;
+  const FIXED_DT = 1 / 120; // 120Hz fixed time-step
+  const MAX_FRAME_DT = 0.05; // 50ms clamp against spiral of death
+
+  // Curated Vector Icons (Lucide/Standard Vector under ISC/MIT)
+  const ICONS = {
+    heart: {
+      type: 'fill',
+      path: 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z',
+      vb: 24
+    },
+    coin: {
+      type: 'fill',
+      path: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5h-2v-1.1c-1.47-.28-2.6-1.3-2.73-2.68l1.7-.22c.11.83.74 1.4 1.73 1.4 1.04 0 1.6-.58 1.6-1.22 0-.82-.7-1.12-1.92-1.44-1.6-.42-2.58-.96-2.58-2.18 0-1.18.94-2.1 2.2-2.38V5.5h2v1.12c1.23.26 2.16 1.13 2.33 2.36l-1.68.24c-.13-.7-.62-1.2-1.35-1.2-.84 0-1.42.48-1.42 1.1 0 .7.62.96 1.76 1.28 1.66.46 2.74 1 2.74 2.34 0 1.3-.98 2.26-2.38 2.52v1.24z',
+      vb: 24
+    },
+    sound: {
+      type: 'stroke',
+      path: 'M11 5L6 9H2v6h4l5 4V5z M19.07 4.93a10 10 0 010 14.14 M15.54 8.46a5 5 0 010 7.08',
+      vb: 24
+    },
+    mute: {
+      type: 'stroke',
+      path: 'M11 5L6 9H2v6h4l5 4V5z M23 9l-6 6 M17 9l6 6',
+      vb: 24
+    },
+    gamepad: {
+      type: 'stroke',
+      path: 'M6 12h4m-2-2v4m7-3a1 1 0 100-2 1 1 0 000 2zm3 3a1 1 0 100-2 1 1 0 000 2zM2 10a4 4 0 014-4h12a4 4 0 014 4v5a4 4 0 01-4 4l-3-2H9l-3 2a4 4 0 01-4-4v-5z',
+      vb: 24
+    }
+  };
+
+  // Curated Visual Themes (DKV Presets)
+  const THEME_PRESETS = {
+    'clean-modern': {
+      font: 'sans-serif',
+      bg: ['#0f172a', '#1e293b', '#334155'],
+      cloudColor: 'rgba(255, 255, 255, 0.05)',
+      hillColor: 'rgba(15, 23, 42, 0.4)',
+      ground: ['#10b981', '#047857', '#064e3b', '#022c22'],
+      groundLine: 'rgba(255, 255, 255, 0.2)',
+      player: ['#38bdf8', '#0284c7'],
+      playerStyle: 'rounded',
+      playerBorder: null,
+      hazard: ['#f87171', '#991b1b'],
+      hudBg: 'rgba(15, 23, 42, 0.75)',
+      hudText: '#ffffff',
+      hudBorder: 'rgba(255, 255, 255, 0.15)',
+      accent: '#38bdf8'
+    },
+    'neon': {
+      font: 'monospace',
+      bg: ['#05050a', '#0b091a', '#180b2b'],
+      cloudColor: 'rgba(168, 85, 247, 0.12)',
+      hillColor: 'rgba(217, 70, 239, 0.18)',
+      ground: ['#06b6d4', '#0891b2', '#0e7490', '#082f49'],
+      groundLine: '#22d3ee',
+      player: ['#06b6d4', '#3b82f6'],
+      playerStyle: 'glow',
+      playerBorder: '#22d3ee',
+      hazard: ['#f43f5e', '#881337'],
+      hudBg: 'rgba(10, 10, 20, 0.9)',
+      hudText: '#22d3ee',
+      hudBorder: '#06b6d4',
+      accent: '#ec4899'
+    },
+    'cartoon': {
+      font: 'sans-serif',
+      bg: ['#60a5fa', '#93c5fd', '#bae6fd'],
+      cloudColor: 'rgba(255, 255, 255, 0.85)',
+      hillColor: 'rgba(34, 197, 94, 0.45)',
+      ground: ['#22c55e', '#16a34a', '#15803d', '#14532d'],
+      groundLine: '#86efac',
+      player: ['#fb923c', '#ea580c'],
+      playerStyle: 'cartoon',
+      playerBorder: '#1e293b',
+      hazard: ['#ef4444', '#b91c1c'],
+      hudBg: 'rgba(255, 255, 255, 0.92)',
+      hudText: '#0f172a',
+      hudBorder: '#f97316',
+      accent: '#f97316'
+    },
+    'retro-pixel': {
+      font: '"Courier New", monospace',
+      bg: ['#18181b', '#27272a', '#09090b'],
+      cloudColor: 'rgba(251, 191, 36, 0.25)',
+      hillColor: 'rgba(63, 63, 70, 0.65)',
+      ground: ['#d97706', '#b45309', '#78350f', '#451a03'],
+      groundLine: '#fde68a',
+      player: ['#eab308', '#ca8a04'],
+      playerStyle: 'pixel',
+      playerBorder: '#000000',
+      hazard: ['#dc2626', '#7f1d1d'],
+      hudBg: 'rgba(0, 0, 0, 0.92)',
+      hudText: '#facc15',
+      hudBorder: '#eab308',
+      accent: '#facc15'
+    }
+  };
+
+  // Compile Path2D objects safely
+  const COMPILED_PATHS = {};
+  if (typeof Path2D !== 'undefined') {
+    for (const [k, v] of Object.entries(ICONS)) {
+      try {
+        COMPILED_PATHS[k] = new Path2D(v.path);
+      } catch (e) {
+        // Fallback if SVG path string is not supported
+      }
+    }
+  }
+
+  // Safe Mulberry32 Seeded PRNG
+  function createPRNG(seedStr) {
+    let s = 1779033703;
+    const str = String(seedStr || 'aisys-seed');
+    for (let i = 0; i < str.length; i++) {
+      s = Math.imul(s ^ str.charCodeAt(i), 3432918353);
+      s = (s << 13) | (s >>> 19);
+    }
+    return function () {
+      s = Math.imul(s ^ (s >>> 16), 2246822507);
+      s = Math.imul(s ^ (s >>> 13), 3266489909);
+      return ((s ^= s >>> 16) >>> 0) / 4294967296;
+    };
+  }
+
+  // Safe Storage with In-Memory Fallback
+  const memoryStorage = {};
+  const storage = {
+    get(k, def) {
+      try {
+        const val = localStorage.getItem(k);
+        return val !== null ? val : def;
+      } catch (e) {
+        return memoryStorage[k] !== undefined ? memoryStorage[k] : def;
+      }
+    },
+    set(k, v) {
+      try {
+        localStorage.setItem(k, String(v));
+      } catch (e) {
+        memoryStorage[k] = String(v);
+      }
+    }
+  };
+
+  // -------------------------------------------------------------
+  // 2. WEB AUDIO SYNTHESIZER (ZERO ASSETS, LAZY GESTURE SINGLETON)
+  // -------------------------------------------------------------
+  let sharedAudioCtx = null;
+  let audioUnlocked = false;
+
+  function unlockSharedAudio() {
+    if (audioUnlocked || typeof window === 'undefined') return;
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      if (!sharedAudioCtx) {
+        sharedAudioCtx = new AudioCtx();
+      }
+      if (sharedAudioCtx.state === 'suspended') {
+        sharedAudioCtx.resume().then(() => {
+          audioUnlocked = true;
+        }).catch(() => {});
+      } else {
+        audioUnlocked = true;
+      }
+    } catch (e) {}
+  }
+
+  class AudioEngine {
+    constructor(silent = false) {
+      this.silent = Boolean(silent);
+      this.muted = storage.get('aisys_mute', '0') === '1';
+    }
+
+    toggleMute() {
+      this.muted = !this.muted;
+      storage.set('aisys_mute', this.muted ? '1' : '0');
+      return this.muted;
+    }
+
+    play(type) {
+      if (this.silent || this.muted || !audioUnlocked || !sharedAudioCtx) return;
+
+      try {
+        const t = sharedAudioCtx.currentTime;
+        const osc = sharedAudioCtx.createOscillator();
+        const gain = sharedAudioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(sharedAudioCtx.destination);
+
+        if (type === 'jump') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(220, t);
+          osc.frequency.exponentialRampToValueAtTime(580, t + 0.15);
+          gain.gain.setValueAtTime(0.2, t);
+          gain.gain.linearRampToValueAtTime(0.01, t + 0.15);
+          osc.start(t);
+          osc.stop(t + 0.16);
+        } else if (type === 'coin') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(880, t);
+          osc.frequency.setValueAtTime(1320, t + 0.08);
+          gain.gain.setValueAtTime(0.25, t);
+          gain.gain.linearRampToValueAtTime(0.01, t + 0.22);
+          osc.start(t);
+          osc.stop(t + 0.23);
+        } else if (type === 'hit') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(140, t);
+          osc.frequency.linearRampToValueAtTime(40, t + 0.2);
+          gain.gain.setValueAtTime(0.3, t);
+          gain.gain.linearRampToValueAtTime(0.01, t + 0.25);
+          osc.start(t);
+          osc.stop(t + 0.26);
+        } else if (type === 'laser') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(800, t);
+          osc.frequency.exponentialRampToValueAtTime(100, t + 0.15);
+          gain.gain.setValueAtTime(0.2, t);
+          gain.gain.linearRampToValueAtTime(0.01, t + 0.15);
+          osc.start(t);
+          osc.stop(t + 0.16);
+        } else if (type === 'boom') {
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(100, t);
+          osc.frequency.exponentialRampToValueAtTime(20, t + 0.35);
+          gain.gain.setValueAtTime(0.35, t);
+          gain.gain.linearRampToValueAtTime(0.01, t + 0.4);
+          osc.start(t);
+          osc.stop(t + 0.42);
+        }
+      } catch (e) {
+        // Safe degrade
+      }
+    }
+  }
+
+  // -------------------------------------------------------------
+  // 3. TEXT WRAPPING & DRAWING HELPERS (DKV STANDARD)
+  // -------------------------------------------------------------
+  function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+    if (!text) return 0;
+    const words = String(text).split(' ');
+    let line = '';
+    let currentY = y;
+    let lineCount = 0;
+
+    for (let n = 0; n < words.length; n++) {
+      const testLine = line + words[n] + ' ';
+      const metrics = ctx.measureText(testLine);
+      if (metrics.width > maxWidth && n > 0) {
+        ctx.fillText(line, x, currentY);
+        line = words[n] + ' ';
+        currentY += lineHeight;
+        lineCount++;
+      } else {
+        line = testLine;
+      }
+    }
+    ctx.fillText(line, x, currentY);
+    return lineCount + 1;
+  }
+
+  function drawGlossyOrb(ctx, x, y, radius, color) {
+    ctx.save();
+    const grad = ctx.createRadialGradient(x - radius * 0.3, y - radius * 0.3, radius * 0.1, x, y, radius);
+    grad.addColorStop(0, '#ffffff');
+    grad.addColorStop(0.2, color);
+    grad.addColorStop(1, '#000000');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Specular highlight dot
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+    ctx.beginPath();
+    ctx.arc(x - radius * 0.35, y - radius * 0.35, radius * 0.22, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawOutlineText(ctx, text, x, y, font, fillColor, strokeColor, strokeWidth) {
+    ctx.save();
+    ctx.font = font;
+    if (strokeColor) {
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = strokeWidth || 4;
+      ctx.lineJoin = 'round';
+      ctx.strokeText(text, x, y);
+    }
+    ctx.fillStyle = fillColor || '#ffffff';
+    ctx.fillText(text, x, y);
+    ctx.restore();
+  }
+
+  function drawIcon(ctx, name, x, y, size, color) {
+    const icon = ICONS[name];
+    if (!icon) return;
+    ctx.save();
+    ctx.translate(x, y);
+    const scale = size / icon.vb;
+    ctx.scale(scale, scale);
+
+    if (COMPILED_PATHS[name]) {
+      if (icon.type === 'fill') {
+        ctx.fillStyle = color || '#ffffff';
+        ctx.fill(COMPILED_PATHS[name]);
+      } else {
+        ctx.strokeStyle = color || '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.stroke(COMPILED_PATHS[name]);
+      }
+    } else {
+      // Fallback simple circle
+      ctx.fillStyle = color || '#ffffff';
+      ctx.beginPath();
+      ctx.arc(icon.vb / 2, icon.vb / 2, icon.vb / 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  // -------------------------------------------------------------
+  // 4. VALIDATOR & CROSS-VALIDATION
+  // -------------------------------------------------------------
+  function validateManifest(m) {
+    const errors = [];
+    const warnings = [];
+
+    if (!m || typeof m !== 'object') {
+      return { valid: false, errors: ['Manifest must be an object'], warnings };
+    }
+
+    // Required fields
+    if (m.schema !== 1) errors.push('schema must be 1');
+    if (m.kit !== 'endless-runner') errors.push('kit must be "endless-runner"');
+    if (!m.id || typeof m.id !== 'string') errors.push('id is required and must be a string');
+    if (!m.title || typeof m.title !== 'string') errors.push('title is required and must be a string');
+
+    // Player validation & clamp
+    m.player = m.player || {};
+    m.player.x = clamp(m.player.x, 80, 600, 220, warnings, 'player.x');
+    m.player.w = clamp(m.player.w, 20, 120, 44, warnings, 'player.w');
+    m.player.h = clamp(m.player.h, 20, 120, 56, warnings, 'player.h');
+    m.player.gravity = clamp(m.player.gravity, 800, 4000, 2400, warnings, 'player.gravity');
+    m.player.jumpVelocity = clamp(m.player.jumpVelocity, 400, 1400, 900, warnings, 'player.jumpVelocity');
+    m.player.lives = clamp(m.player.lives, 1, 9, 3, warnings, 'player.lives');
+    m.player.invulnerableSec = clamp(m.player.invulnerableSec, 0, 3, 1.2, warnings, 'player.invulnerableSec');
+
+    // World validation & clamp
+    m.world = m.world || {};
+    m.world.groundY = clamp(m.world.groundY, 400, 680, 600, warnings, 'world.groundY');
+    m.world.speed = clamp(m.world.speed, 150, 600, 360, warnings, 'world.speed');
+    m.world.maxSpeed = Math.max(m.world.speed, clamp(m.world.maxSpeed, 150, 1200, 720, warnings, 'world.maxSpeed'));
+    m.world.accel = clamp(m.world.accel, 0, 30, 6, warnings, 'world.accel');
+    m.world.layers = Array.isArray(m.world.layers) && m.world.layers.length > 0 ? m.world.layers : ['clouds', 'hills'];
+
+    // Jump math guarantees
+    const H = (m.player.jumpVelocity * m.player.jumpVelocity) / (2 * m.player.gravity);
+    const T = (2 * m.player.jumpVelocity) / m.player.gravity;
+
+    // Reject combinations where jump height cannot clear minimum hazard (16px)
+    if (H < 27) {
+      errors.push(`player jump height H (${Math.round(H)}px) is too small to clear minimum hazard (16px). Increase jumpVelocity (min 400) or decrease gravity.`);
+    }
+
+    // Spawner table validation
+    m.spawner = m.spawner || {};
+    m.spawner.interval = Array.isArray(m.spawner.interval) && m.spawner.interval.length === 2
+      ? [Math.max(0.4, m.spawner.interval[0]), Math.max(0.6, m.spawner.interval[1])]
+      : [0.9, 1.5];
+
+    if (!Array.isArray(m.spawner.table) || m.spawner.table.length === 0) {
+      warnings.push('spawner.table was empty; default obstacles injected');
+      m.spawner.table = [
+        { type: 'hazard', id: 'batu', w: 44, h: 48, weight: 3 },
+        { type: 'item', weight: 5, heights: ['ground', 'mid', 'high'] }
+      ];
+    } else {
+      for (const entry of m.spawner.table) {
+        if (entry.type === 'hazard') {
+          entry.w = clamp(entry.w, 20, 140, 44, warnings, 'hazard.w');
+          const maxH = Math.floor(H * 0.6);
+          if (entry.h > maxH) {
+            warnings.push(`hazard height ${entry.h} clamped to max jumpable ${maxH}`);
+            entry.h = maxH;
+          }
+          entry.h = clamp(entry.h, 16, 110, 48, warnings, 'hazard.h');
+          entry.weight = Math.max(1, entry.weight || 1);
+
+          // Mathematical clearability check at world.speed (worst-case: slowest speed where hazard overlap duration is longest)
+          // Player time in air above height h: 2 * sqrt(v_jump^2 - 2*g*h) / g
+          const disc = m.player.jumpVelocity * m.player.jumpVelocity - 2 * m.player.gravity * entry.h;
+          if (disc <= 0) {
+            errors.push(`hazard "${entry.id}" height (${entry.h}px) reaches or exceeds jump apex (${Math.round(H)}px)`);
+          } else {
+            const tAbove = (2 * Math.sqrt(disc)) / m.player.gravity;
+            const tReq = (entry.w + m.player.w) / m.world.speed + 0.12;
+
+            if (tAbove < tReq) {
+              const maxW = Math.floor((tAbove - 0.12) * m.world.speed - m.player.w);
+              if (maxW >= 20) {
+                warnings.push(`hazard "${entry.id}" width ${entry.w} clamped to ${maxW}px for fair clearability at speed ${m.world.speed}`);
+                entry.w = maxW;
+              } else {
+                errors.push(`hazard "${entry.id}" (w:${entry.w}, h:${entry.h}) cannot be cleared at speed ${m.world.speed}: air time above hazard (${Math.round(tAbove * 1000)}ms) < required clearance (${Math.round(tReq * 1000)}ms). Reduce hazard size or increase world.speed.`);
+              }
+            }
+          }
+        } else if (entry.type === 'item') {
+          entry.weight = Math.max(1, entry.weight || 1);
+          entry.heights = Array.isArray(entry.heights) && entry.heights.length > 0
+            ? entry.heights
+            : ['ground', 'mid', 'high'];
+        }
+      }
+    }
+
+    // Cross-validate Learning Block if present
+    if (m.learning) {
+      if (!Array.isArray(m.learning.categories) || m.learning.categories.length < 2) {
+        errors.push('learning.categories must be an array with at least 2 categories');
+      }
+      if (!Array.isArray(m.learning.items) || m.learning.items.length === 0) {
+        errors.push('learning.items must be a non-empty array');
+      }
+
+      if (errors.length === 0) {
+        const catIds = new Set(m.learning.categories.map(c => c.id));
+        const itemCats = new Set();
+
+        for (const item of m.learning.items) {
+          if (!catIds.has(item.category)) {
+            errors.push(`item "${item.id}" references unknown category "${item.category}"`);
+          }
+          itemCats.add(item.category);
+          // Sanitize text length
+          item.label = String(item.label || item.id).slice(0, 32);
+          item.explain = String(item.explain || '').slice(0, 120);
+        }
+
+        // Check that every category has at least one item
+        for (const cat of m.learning.categories) {
+          if (!itemCats.has(cat.id)) {
+            errors.push(`category "${cat.id}" has no items assigned`);
+          }
+          cat.label = String(cat.label || cat.id).slice(0, 24);
+        }
+
+        m.learning.target = m.learning.target || {};
+        m.learning.target.rotateAfterCorrect = clamp(m.learning.target.rotateAfterCorrect, 2, 15, 5, warnings, 'learning.target.rotateAfterCorrect');
+        m.learning.target.bias = clamp(m.learning.target.bias, 0.2, 0.8, 0.5, warnings, 'learning.target.bias');
+      }
+    }
+
+    // Rules validation
+    m.rules = m.rules || {};
+    m.rules.perSecond = m.rules.perSecond || 5;
+    m.rules.correct = m.rules.correct || { score: 50, combo: 1, sfx: 'coin' };
+    m.rules.wrong = m.rules.wrong || { score: -20, combo: 'reset', lives: 0, sfx: 'hit', showExplain: true };
+    m.rules.hazard = m.rules.hazard || { lives: -1, sfx: 'hit', shake: 8 };
+    m.rules.combo = m.rules.combo || { step: 5, max: 4 };
+    m.rules.difficulty = m.rules.difficulty || { everySec: 15, speed: 25 };
+
+    m.hud = Array.isArray(m.hud) ? m.hud : ['score', 'lives', 'combo', 'target'];
+    m.hooks = m.hooks || {};
+
+    // Theme validation & defaults
+    m.theme = m.theme || {};
+    const validPresets = ['clean-modern', 'neon', 'cartoon', 'retro-pixel'];
+    if (!m.theme.preset || !validPresets.includes(m.theme.preset)) {
+      if (m.theme.preset && typeof m.theme.preset === 'string') {
+        warnings.push(`theme.preset "${m.theme.preset}" unknown, defaulted to clean-modern`);
+      }
+      m.theme.preset = 'clean-modern';
+    }
+
+    return {
+      valid: errors.length === 0,
+      errors,
+      warnings,
+      H,
+      T
+    };
+  }
+
+  function clamp(val, min, max, def, warnings, fieldName) {
+    if (typeof val !== 'number' || isNaN(val)) {
+      warnings.push(`${fieldName} invalid or missing, defaulted to ${def}`);
+      return def;
+    }
+    if (val < min) {
+      warnings.push(`${fieldName} (${val}) below min ${min}, clamped`);
+      return min;
+    }
+    if (val > max) {
+      warnings.push(`${fieldName} (${val}) above max ${max}, clamped`);
+      return max;
+    }
+    return val;
+  }
+
+  // -------------------------------------------------------------
+  // 5. RUNTIME ENGINE CLASS (ENDLESS RUNNER KIT)
+  // -------------------------------------------------------------
+  class EndlessRunnerEngine {
+    constructor(manifest, options = {}) {
+      this.rawManifest = manifest;
+      this.validation = validateManifest(manifest);
+      this.m = manifest;
+      this.options = options;
+      this.headless = Boolean(options.headless);
+      this.silent = Boolean(options.silent);
+      this.audio = new AudioEngine(this.silent);
+      this.rng = createPRNG(manifest.seed || 'ecosort-01');
+
+      this.canvas = null;
+      this.ctx = null;
+      this.dpr = 1;
+      this.scale = 1;
+      this.offsetX = 0;
+      this.offsetY = 0;
+      this.destroyed = false;
+
+      // Game state
+      this.state = 'menu'; // menu | play | over
+      this.time = 0;
+      this.distance = 0;
+      this.score = 0;
+      this.scoreFloat = 0;
+      this.lives = this.m.player ? this.m.player.lives : 3;
+      this.collisionCount = 0;
+      this.combo = 0;
+      this.comboMultiplier = 1;
+      this.speed = this.m.world ? this.m.world.speed : 360;
+      this.screenShake = 0;
+      this.screenShakeDuration = 0;
+
+      // Player state
+      this.player = {
+        x: this.m.player ? this.m.player.x : 220,
+        y: (this.m.world ? this.m.world.groundY : 600) - (this.m.player ? this.m.player.h : 56),
+        w: this.m.player ? this.m.player.w : 44,
+        h: this.m.player ? this.m.player.h : 56,
+        vy: 0,
+        onGround: true,
+        invulnerableTimer: 0
+      };
+
+      // Spawner state
+      this.entities = []; // hazards and items
+      this.spawnTimer = 0;
+      this.nextSpawnInterval = 1.0;
+      this.lastHazardX = -9999;
+      this.historySpawnedTypes = new Set();
+
+      // Learning state & tracking
+      this.targetCategory = null;
+      this.targetCorrectCount = 0;
+      this.explainToast = null; // { text, timer }
+      this.analytics = {
+        totalCollected: 0,
+        correctCount: 0,
+        wrongCount: 0,
+        byCategory: {},
+        mistakes: [] // { id, label, category, targetCategory, explain }
+      };
+
+      this.hookErrorCount = 0;
+      this.frameCount = 0;
+
+      // Theme resolution
+      const presetKey = (this.m.theme && this.m.theme.preset) || 'clean-modern';
+      const baseTheme = THEME_PRESETS[presetKey] || THEME_PRESETS['clean-modern'];
+      const customPalette = (this.m.theme && this.m.theme.palette) || {};
+      this.theme = {
+        name: presetKey,
+        font: customPalette.font || baseTheme.font,
+        bg: customPalette.bg || baseTheme.bg,
+        cloudColor: customPalette.cloudColor || baseTheme.cloudColor,
+        hillColor: customPalette.hillColor || baseTheme.hillColor,
+        ground: customPalette.ground || baseTheme.ground,
+        groundLine: customPalette.groundLine || baseTheme.groundLine,
+        player: customPalette.player || baseTheme.player,
+        playerStyle: baseTheme.playerStyle,
+        playerBorder: customPalette.playerBorder || baseTheme.playerBorder,
+        hazard: customPalette.hazard || baseTheme.hazard,
+        hudBg: customPalette.hudBg || baseTheme.hudBg,
+        hudText: customPalette.hudText || baseTheme.hudText,
+        hudBorder: customPalette.hudBorder || baseTheme.hudBorder,
+        accent: customPalette.accent || baseTheme.accent
+      };
+
+      this.initLearning();
+    }
+
+    initLearning() {
+      if (this.m.learning && this.m.learning.categories && this.m.learning.categories.length > 0) {
+        for (const cat of this.m.learning.categories) {
+          this.analytics.byCategory[cat.id] = { correct: 0, wrong: 0 };
+        }
+        this.targetCategory = this.m.learning.categories[0];
+      }
+    }
+
+    rotateTarget() {
+      if (!this.m.learning || !this.m.learning.categories) return;
+      const cats = this.m.learning.categories;
+      if (cats.length <= 1) return;
+
+      let nextIndex = Math.floor(this.rng() * cats.length);
+      if (cats[nextIndex].id === this.targetCategory.id) {
+        nextIndex = (nextIndex + 1) % cats.length;
+      }
+      this.targetCategory = cats[nextIndex];
+      this.targetCorrectCount = 0;
+      this.showToast(`🎯 TARGET BARU: Kumpulkan Sampah ${this.targetCategory.label}!`, 2.5);
+    }
+
+    showToast(text, durationSec) {
+      this.explainToast = {
+        text: String(text).slice(0, 100),
+        timer: durationSec || 2.5
+      };
+    }
+
+    track(event, itemId, isCorrect) {
+      this.analytics.totalCollected++;
+      if (isCorrect) {
+        this.analytics.correctCount++;
+        if (this.targetCategory) {
+          this.analytics.byCategory[this.targetCategory.id].correct++;
+        }
+      } else {
+        this.analytics.wrongCount++;
+        if (this.targetCategory) {
+          this.analytics.byCategory[this.targetCategory.id].wrong++;
+        }
+        const itemObj = this.m.learning && this.m.learning.items
+          ? this.m.learning.items.find(it => it.id === itemId)
+          : null;
+        if (itemObj) {
+          this.analytics.mistakes.push({
+            id: itemObj.id,
+            label: itemObj.label,
+            category: itemObj.category,
+            targetCategory: this.targetCategory ? this.targetCategory.id : '',
+            explain: itemObj.explain
+          });
+        }
+      }
+
+      // Notify parent studio ONLY if NOT headless and running inside iframe
+      if (!this.headless && typeof window !== 'undefined' && window.parent && window.parent !== window) {
+        try {
+          window.parent.postMessage({
+            type: 'aisys:track',
+            gameId: this.m.id,
+            event,
+            itemId,
+            isCorrect,
+            score: this.score,
+            combo: this.combo
+          }, '*');
+        } catch (e) {}
+      }
+    }
+
+    // -------------------------------------------------------------
+    // ATTACH TO DOM & RESIZE HANDLING
+    // -------------------------------------------------------------
+    attach(canvas) {
+      this.canvas = canvas;
+      this.ctx = canvas.getContext('2d', { alpha: false });
+      this.bindInputs();
+      this.resize();
+      window.addEventListener('resize', () => this.resize());
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden && this.state === 'play') {
+          // Auto-pause loop or clamp
+        }
+      });
+      this.startLoop();
+    }
+
+    resize() {
+      if (!this.canvas) return;
+      const dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 3));
+      this.dpr = dpr;
+
+      const parentW = window.innerWidth || 1280;
+      const parentH = window.innerHeight || 720;
+      const scale = Math.min(parentW / LOGICAL_WIDTH, parentH / LOGICAL_HEIGHT);
+      this.scale = scale;
+
+      const displayW = Math.floor(LOGICAL_WIDTH * scale);
+      const displayH = Math.floor(LOGICAL_HEIGHT * scale);
+      this.offsetX = Math.floor((parentW - displayW) / 2);
+      this.offsetY = Math.floor((parentH - displayH) / 2);
+
+      this.canvas.width = Math.floor(LOGICAL_WIDTH * dpr * scale);
+      this.canvas.height = Math.floor(LOGICAL_HEIGHT * dpr * scale);
+      this.canvas.style.width = `${displayW}px`;
+      this.canvas.style.height = `${displayH}px`;
+      this.canvas.style.position = 'absolute';
+      this.canvas.style.left = `${this.offsetX}px`;
+      this.canvas.style.top = `${this.offsetY}px`;
+      this.canvas.style.touchAction = 'none';
+      this.canvas.style.userSelect = 'none';
+    }
+
+    bindInputs() {
+      const handleAction = () => {
+        try { window.focus(); } catch (err) {}
+        unlockSharedAudio();
+        if (this.state === 'menu') {
+          this.startGame();
+        } else if (this.state === 'play') {
+          this.jump();
+        } else if (this.state === 'over') {
+          this.restartGame();
+        }
+      };
+
+      window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'KeyW') {
+          e.preventDefault();
+          handleAction();
+        } else if (e.code === 'KeyM') {
+          this.audio.toggleMute();
+        } else if (e.code === 'KeyR' && this.state === 'play') {
+          this.restartGame();
+        }
+      });
+
+      if (this.canvas) {
+        this.canvas.addEventListener('pointerdown', (e) => {
+          try { window.focus(); } catch (err) {}
+          // Note: Do NOT call e.preventDefault() here so focus successfully transfers to iframe!
+
+          // Check Mute button hit
+          const rect = this.canvas.getBoundingClientRect();
+          const clickX = (e.clientX - rect.left) / this.scale;
+          const clickY = (e.clientY - rect.top) / this.scale;
+
+          if (clickX >= LOGICAL_WIDTH - 80 && clickY <= 70) {
+            this.audio.toggleMute();
+            return;
+          }
+
+          // Check Export button hit on game over
+          if (this.state === 'over' && clickX >= 480 && clickX <= 800 && clickY >= 580 && clickY <= 630) {
+            this.exportAnalytics();
+            return;
+          }
+
+          handleAction();
+        });
+      }
+    }
+
+    startGame() {
+      this.state = 'play';
+      this.callHook('onStart');
+    }
+
+    restartGame() {
+      this.time = 0;
+      this.distance = 0;
+      this.score = 0;
+      this.scoreFloat = 0;
+      this.lives = this.m.player.lives;
+      this.collisionCount = 0;
+      this.combo = 0;
+      this.comboMultiplier = 1;
+      this.speed = this.m.world.speed;
+      this.entities = [];
+      this.spawnTimer = 0;
+      this.lastHazardX = -9999;
+      this.historySpawnedTypes = new Set();
+      this.player.y = this.m.world.groundY - this.player.h;
+      this.player.vy = 0;
+      this.player.onGround = true;
+      this.player.invulnerableTimer = 0;
+      this.explainToast = null;
+      this.initLearning();
+      this.state = 'play';
+      this.callHook('onStart');
+    }
+
+    jump() {
+      if (this.player.onGround) {
+        this.player.vy = -this.m.player.jumpVelocity;
+        this.player.onGround = false;
+        this.audio.play('jump');
+        this.callHook('onJump');
+      }
+    }
+
+    callHook(name, ...args) {
+      if (this.m.hooks && typeof this.m.hooks[name] === 'function') {
+        try {
+          this.m.hooks[name](this, ...args);
+        } catch (err) {
+          this.hookErrorCount++;
+        }
+      }
+    }
+
+    // -------------------------------------------------------------
+    // FIXED TIME-STEP SIMULATION (step)
+    // -------------------------------------------------------------
+    step(dt) {
+      if (this.state !== 'play') return;
+
+      this.time += dt;
+      this.distance += this.speed * dt;
+      this.scoreFloat += this.m.rules.perSecond * dt;
+      this.score = Math.floor(this.scoreFloat);
+
+      // Continuous acceleration from world.accel
+      if (this.m.world && this.m.world.accel > 0) {
+        this.speed = Math.min(this.m.world.maxSpeed, this.speed + this.m.world.accel * dt);
+      }
+
+      // Speed escalation from difficulty
+      const diff = this.m.rules.difficulty;
+      if (diff && diff.everySec && diff.speed) {
+        const speedIncrements = Math.floor(this.time / diff.everySec);
+        this.speed = Math.min(this.m.world.maxSpeed, Math.max(this.speed, this.m.world.speed + speedIncrements * diff.speed));
+      }
+
+      // Screen shake decay
+      if (this.screenShakeDuration > 0) {
+        this.screenShakeDuration -= dt;
+        if (this.screenShakeDuration <= 0) this.screenShake = 0;
+      }
+
+      // Toast decay
+      if (this.explainToast) {
+        this.explainToast.timer -= dt;
+        if (this.explainToast.timer <= 0) this.explainToast = null;
+      }
+
+      // Player physics
+      this.player.vy += this.m.player.gravity * dt;
+      this.player.y += this.player.vy * dt;
+
+      const groundY = this.m.world.groundY - this.player.h;
+      if (this.player.y >= groundY) {
+        this.player.y = groundY;
+        this.player.vy = 0;
+        this.player.onGround = true;
+      }
+
+      if (this.player.invulnerableTimer > 0) {
+        this.player.invulnerableTimer -= dt;
+      }
+
+      // Decrement last hazard distance
+      this.lastHazardX -= this.speed * dt;
+
+      // Spawner logic
+      this.updateSpawner(dt);
+
+      // Entities movement & AABB collision
+      this.updateEntities(dt);
+
+      this.callHook('onTick', dt);
+    }
+
+    updateSpawner(dt) {
+      this.spawnTimer += dt;
+      if (this.spawnTimer < this.nextSpawnInterval) return;
+
+      // Calculate dynamic Fair Gap with human reaction time allowance (220ms):
+      const T = (2 * this.m.player.jumpVelocity) / this.m.player.gravity;
+      const fairGap = this.speed * (T + 0.22) * 1.15 + 160;
+
+      // Select entry from table
+      const table = this.m.spawner.table;
+      let totalWeight = 0;
+      for (const e of table) totalWeight += e.weight;
+      let roll = this.rng() * totalWeight;
+      let selected = table[0];
+      for (const e of table) {
+        if (roll <= e.weight) {
+          selected = e;
+          break;
+        }
+        roll -= e.weight;
+      }
+
+      const spawnX = LOGICAL_WIDTH + 60;
+      // Ensure fair gap distance from last spawned hazard
+      if (spawnX - this.lastHazardX < fairGap && selected.type === 'hazard') {
+        // Delay spawn until fair gap met
+        return;
+      }
+
+      this.historySpawnedTypes.add(selected.type);
+
+      if (selected.type === 'hazard') {
+        this.entities.push({
+          type: 'hazard',
+          id: selected.id,
+          x: spawnX,
+          y: this.m.world.groundY - selected.h,
+          w: selected.w,
+          h: selected.h
+        });
+        this.lastHazardX = spawnX;
+      } else if (selected.type === 'item') {
+        const itemHeights = selected.heights || ['ground', 'mid', 'high'];
+        const chosenHeight = itemHeights[Math.floor(this.rng() * itemHeights.length)];
+        const H = (this.m.player.jumpVelocity * this.m.player.jumpVelocity) / (2 * this.m.player.gravity);
+
+        let itemY = this.m.world.groundY - 44;
+        if (chosenHeight === 'mid') itemY = this.m.world.groundY - 44 - H * 0.45;
+        if (chosenHeight === 'high') itemY = this.m.world.groundY - 44 - Math.min(H * 0.85, H - 20);
+
+        // Pick learning item
+        let itemData = null;
+        if (this.m.learning && this.m.learning.items) {
+          const bias = this.m.learning.target.bias || 0.5;
+          const targetCat = this.targetCategory ? this.targetCategory.id : null;
+          const matchingItems = this.m.learning.items.filter(it => it.category === targetCat);
+          const otherItems = this.m.learning.items.filter(it => it.category !== targetCat);
+
+          if (this.rng() < bias && matchingItems.length > 0) {
+            itemData = matchingItems[Math.floor(this.rng() * matchingItems.length)];
+          } else if (otherItems.length > 0) {
+            itemData = otherItems[Math.floor(this.rng() * otherItems.length)];
+          } else {
+            itemData = this.m.learning.items[0];
+          }
+        }
+
+        this.entities.push({
+          type: 'item',
+          id: itemData ? itemData.id : 'coin',
+          data: itemData,
+          x: spawnX,
+          y: itemY,
+          w: 40,
+          h: 40,
+          collected: false
+        });
+      }
+
+      this.spawnTimer = 0;
+      const minI = this.m.spawner.interval[0];
+      const maxI = this.m.spawner.interval[1];
+      this.nextSpawnInterval = minI + this.rng() * (maxI - minI);
+    }
+
+    updateEntities(dt) {
+      const p = this.player;
+
+      for (let i = this.entities.length - 1; i >= 0; i--) {
+        const ent = this.entities[i];
+        ent.x -= this.speed * dt;
+
+        // Collision with player (AABB)
+        if (ent.type === 'hazard') {
+          if (p.invulnerableTimer <= 0 && checkAABB(p, ent)) {
+            // Player hit hazard
+            this.collisionCount++;
+            this.lives += this.m.rules.hazard.lives || -1;
+            this.combo = 0;
+            this.comboMultiplier = 1;
+            this.audio.play(this.m.rules.hazard.sfx || 'hit');
+            this.screenShake = this.m.rules.hazard.shake || 8;
+            this.screenShakeDuration = 0.25;
+            p.invulnerableTimer = this.m.player.invulnerableSec || 1.2;
+            this.callHook('onHit', ent);
+
+            if (this.lives <= 0) {
+              this.gameOver();
+              return;
+            }
+          }
+        } else if (ent.type === 'item' && !ent.collected) {
+          if (checkAABB(p, ent)) {
+            ent.collected = true;
+            this.handleItemCollect(ent);
+          }
+        }
+
+        // Out of screen cleanup
+        if (ent.x + ent.w < -100) {
+          this.entities.splice(i, 1);
+        }
+      }
+    }
+
+    handleItemCollect(ent) {
+      let isCorrect = true;
+      if (this.m.learning && ent.data) {
+        isCorrect = ent.data.category === (this.targetCategory ? this.targetCategory.id : null);
+      }
+
+      if (isCorrect) {
+        this.scoreFloat += this.m.rules.correct.score * this.comboMultiplier;
+        this.score = Math.floor(this.scoreFloat);
+        this.combo++;
+        const maxCombo = this.m.rules.combo.max || 4;
+        const step = this.m.rules.combo.step || 5;
+        this.comboMultiplier = Math.min(maxCombo, 1 + Math.floor(this.combo / step));
+        this.audio.play(this.m.rules.correct.sfx || 'coin');
+
+        if (this.m.learning) {
+          this.targetCorrectCount++;
+          if (this.targetCorrectCount >= this.m.learning.target.rotateAfterCorrect) {
+            this.rotateTarget();
+          }
+        }
+      } else {
+        this.scoreFloat = Math.max(0, this.scoreFloat + this.m.rules.wrong.score);
+        this.score = Math.floor(this.scoreFloat);
+        this.combo = 0;
+        this.comboMultiplier = 1;
+        this.audio.play(this.m.rules.wrong.sfx || 'hit');
+
+        if (this.m.rules.wrong.showExplain && ent.data && ent.data.explain) {
+          this.showToast(`⚠️ Salah! ${ent.data.label}: ${ent.data.explain}`, 3.0);
+        }
+      }
+
+      // Track AFTER state (score & combo) is updated so telemetry payload is accurate!
+      this.track('collect', ent.data ? ent.data.id : ent.id, isCorrect);
+      this.callHook('onCollect', ent, isCorrect);
+    }
+
+    gameOver() {
+      this.state = 'over';
+      this.audio.play('boom');
+      this.callHook('onGameOver', this.analytics);
+    }
+
+    exportAnalytics() {
+      if (typeof window !== 'undefined' && window.parent && window.parent !== window) {
+        try {
+          window.parent.postMessage({
+            type: 'aisys:export',
+            gameId: this.m.id,
+            title: this.m.title,
+            score: this.score,
+            distance: Math.floor(this.distance),
+            analytics: this.analytics,
+            objectives: (this.m.learning && this.m.learning.objectives) || [],
+            misconceptions: (this.m.learning && this.m.learning.misconceptions) || []
+          }, '*');
+        } catch (e) {}
+      }
+    }
+
+    // -------------------------------------------------------------
+    // RENDER PIPELINE
+    // -------------------------------------------------------------
+    startLoop() {
+      let accumulator = 0;
+      let lastTime = performance.now();
+
+      const frame = (now) => {
+        if (this.destroyed) return;
+        let dt = (now - lastTime) / 1000;
+        lastTime = now;
+        dt = Math.min(dt, MAX_FRAME_DT);
+        accumulator += dt;
+
+        while (accumulator >= FIXED_DT) {
+          this.step(FIXED_DT);
+          accumulator -= FIXED_DT;
+        }
+
+        this.render();
+        requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    }
+
+    render() {
+      if (!this.ctx || !this.canvas) return;
+      this.frameCount++;
+      const ctx = this.ctx;
+
+      ctx.save();
+      ctx.setTransform(this.scale * this.dpr, 0, 0, this.scale * this.dpr, 0, 0);
+
+      // Screenshake offset
+      if (this.screenShake > 0) {
+        const sx = (this.rng() - 0.5) * this.screenShake;
+        const sy = (this.rng() - 0.5) * this.screenShake;
+        ctx.translate(sx, sy);
+      }
+
+      // If manifest is invalid, draw error screen
+      if (!this.validation.valid) {
+        this.renderErrorScreen(ctx);
+        ctx.restore();
+        return;
+      }
+
+      this.renderBackground(ctx);
+      this.renderWorld(ctx);
+      this.renderEntities(ctx);
+      this.renderPlayer(ctx);
+      this.renderHUD(ctx);
+
+      if (this.state === 'menu') {
+        this.renderMenu(ctx);
+      } else if (this.state === 'over') {
+        this.renderGameOver(ctx);
+      }
+
+      // Draw Toast Notification if active
+      if (this.explainToast) {
+        this.renderToast(ctx);
+      }
+
+      ctx.restore();
+    }
+
+    renderErrorScreen(ctx) {
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+
+      drawOutlineText(ctx, '⚠️ AISYS Engine: Manifest Error', 80, 100, 'bold 36px sans-serif', '#ef4444');
+      ctx.font = '20px monospace';
+      ctx.fillStyle = '#94a3b8';
+      let y = 160;
+      ctx.fillText('Field wajib yang hilang atau tidak valid:', 80, y);
+      y += 40;
+
+      for (const err of this.validation.errors) {
+        ctx.fillStyle = '#f87171';
+        ctx.fillText(`• ${err}`, 100, y);
+        y += 32;
+      }
+
+      ctx.fillStyle = '#cbd5e1';
+      ctx.fillText('Silakan periksa kembali manifest AISYS.defineGame() Anda.', 80, y + 40);
+    }
+
+    renderBackground(ctx) {
+      const bgStops = Array.isArray(this.theme.bg) ? this.theme.bg : ['#0f172a', '#1e293b', '#334155'];
+      const grad = ctx.createLinearGradient(0, 0, 0, LOGICAL_HEIGHT);
+      if (bgStops.length === 2) {
+        grad.addColorStop(0, bgStops[0]);
+        grad.addColorStop(1, bgStops[1]);
+      } else {
+        grad.addColorStop(0, bgStops[0]);
+        grad.addColorStop(0.6, bgStops[1]);
+        grad.addColorStop(1, bgStops[bgStops.length - 1]);
+      }
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+
+      const layers = this.m.world && Array.isArray(this.m.world.layers)
+        ? this.m.world.layers
+        : ['clouds', 'hills'];
+
+      // Clouds / Sky accents
+      if (layers.includes('clouds')) {
+        ctx.fillStyle = this.theme.cloudColor;
+        ctx.beginPath();
+        ctx.arc(200, 180, 70, 0, Math.PI * 2);
+        ctx.arc(260, 160, 90, 0, Math.PI * 2);
+        ctx.arc(330, 180, 60, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(880, 140, 50, 0, Math.PI * 2);
+        ctx.arc(930, 130, 65, 0, Math.PI * 2);
+        ctx.arc(980, 145, 45, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Parallax Hills
+      if (layers.includes('hills')) {
+        ctx.fillStyle = this.theme.hillColor;
+        ctx.beginPath();
+        ctx.moveTo(0, this.m.world.groundY);
+        ctx.quadraticCurveTo(400, this.m.world.groundY - 140, 800, this.m.world.groundY);
+        ctx.quadraticCurveTo(1050, this.m.world.groundY - 100, LOGICAL_WIDTH, this.m.world.groundY);
+        ctx.lineTo(LOGICAL_WIDTH, LOGICAL_HEIGHT);
+        ctx.lineTo(0, LOGICAL_HEIGHT);
+        ctx.fill();
+      }
+    }
+
+    renderWorld(ctx) {
+      const gY = this.m.world.groundY;
+      const gStops = Array.isArray(this.theme.ground) ? this.theme.ground : ['#10b981', '#047857', '#064e3b', '#022c22'];
+
+      // Ground surface gradient
+      const groundGrad = ctx.createLinearGradient(0, gY, 0, LOGICAL_HEIGHT);
+      groundGrad.addColorStop(0, gStops[0]);
+      groundGrad.addColorStop(0.12, gStops[1] || gStops[0]);
+      groundGrad.addColorStop(0.45, gStops[2] || gStops[1] || gStops[0]);
+      groundGrad.addColorStop(1, gStops[gStops.length - 1]);
+      ctx.fillStyle = groundGrad;
+      ctx.fillRect(0, gY, LOGICAL_WIDTH, LOGICAL_HEIGHT - gY);
+
+      // Ground highlight strip
+      ctx.fillStyle = this.theme.groundLine;
+      ctx.fillRect(0, gY, LOGICAL_WIDTH, this.theme.playerStyle === 'cartoon' ? 6 : 4);
+    }
+
+    renderPlayer(ctx) {
+      const p = this.player;
+
+      // Hook custom draw
+      if (this.m.hooks && typeof this.m.hooks.drawPlayer === 'function') {
+        try {
+          this.m.hooks.drawPlayer(this, ctx, p);
+          return;
+        } catch (e) {
+          this.hookErrorCount++;
+        }
+      }
+
+      ctx.save();
+      // Flashing if invulnerable
+      if (p.invulnerableTimer > 0 && Math.floor(this.time * 15) % 2 === 0) {
+        ctx.globalAlpha = 0.4;
+      }
+
+      // Shadow on ground
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+      ctx.beginPath();
+      ctx.ellipse(p.x + p.w / 2, this.m.world.groundY, p.w * 0.6, 6, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Body Gradient
+      const pStops = Array.isArray(this.theme.player) ? this.theme.player : ['#38bdf8', '#0284c7'];
+      const bodyGrad = ctx.createLinearGradient(p.x, p.y, p.x, p.y + p.h);
+      bodyGrad.addColorStop(0, pStops[0]);
+      bodyGrad.addColorStop(1, pStops[1] || pStops[0]);
+      ctx.fillStyle = bodyGrad;
+
+      if (this.theme.playerStyle === 'pixel') {
+        // Sharp retro pixel rect
+        ctx.fillRect(p.x, p.y, p.w, p.h);
+        if (this.theme.playerBorder) {
+          ctx.strokeStyle = this.theme.playerBorder;
+          ctx.lineWidth = 3;
+          ctx.strokeRect(p.x, p.y, p.w, p.h);
+        }
+        // Pixel eye
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(p.x + p.w - 14, p.y + 14, 8, 8);
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(p.x + p.w - 10, p.y + 16, 4, 4);
+      } else if (this.theme.playerStyle === 'cartoon') {
+        // Bubbly round rect with thick cartoon outline
+        drawRoundRect(ctx, p.x, p.y, p.w, p.h, 16);
+        ctx.fill();
+        ctx.strokeStyle = this.theme.playerBorder || '#1e293b';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Big cartoon eye
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(p.x + p.w - 14, p.y + 18, 8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#1e293b';
+        ctx.beginPath();
+        ctx.arc(p.x + p.w - 12, p.y + 18, 4, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (this.theme.playerStyle === 'glow') {
+        // Neon tech box with cyan glow
+        ctx.shadowColor = this.theme.playerBorder || '#22d3ee';
+        ctx.shadowBlur = 12;
+        drawRoundRect(ctx, p.x, p.y, p.w, p.h, 8);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.strokeStyle = this.theme.playerBorder || '#22d3ee';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Glowing visor
+        ctx.fillStyle = '#ffffff';
+        drawRoundRect(ctx, p.x + 8, p.y + 14, p.w - 16, 8, 4);
+        ctx.fill();
+      } else {
+        // Clean Modern default
+        drawRoundRect(ctx, p.x, p.y, p.w, p.h, 12);
+        ctx.fill();
+
+        // Specular highlight line
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+        drawRoundRect(ctx, p.x + 6, p.y + 6, p.w - 12, 10, 5);
+        ctx.fill();
+
+        // Animated eye
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(p.x + p.w - 14, p.y + 18, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#0f172a';
+        ctx.beginPath();
+        ctx.arc(p.x + p.w - 12, p.y + 18, 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+
+    renderEntities(ctx) {
+      for (const ent of this.entities) {
+        if (this.m.hooks && typeof this.m.hooks.drawEntity === 'function') {
+          try {
+            this.m.hooks.drawEntity(this, ctx, ent);
+            continue;
+          } catch (e) {
+            this.hookErrorCount++;
+          }
+        }
+
+        if (ent.type === 'hazard') {
+          // Sharp rock / spike obstacle using theme hazard palette
+          ctx.save();
+          const hStops = Array.isArray(this.theme.hazard) ? this.theme.hazard : ['#f87171', '#991b1b'];
+          const rockGrad = ctx.createLinearGradient(ent.x, ent.y, ent.x, ent.y + ent.h);
+          rockGrad.addColorStop(0, hStops[0]);
+          rockGrad.addColorStop(1, hStops[1] || hStops[0]);
+          ctx.fillStyle = rockGrad;
+
+          if (this.theme.playerStyle === 'pixel') {
+            // Blocky stepped pixel spike
+            ctx.beginPath();
+            ctx.moveTo(ent.x, ent.y + ent.h);
+            ctx.lineTo(ent.x, ent.y + ent.h * 0.4);
+            ctx.lineTo(ent.x + ent.w * 0.3, ent.y + ent.h * 0.4);
+            ctx.lineTo(ent.x + ent.w * 0.3, ent.y);
+            ctx.lineTo(ent.x + ent.w * 0.7, ent.y);
+            ctx.lineTo(ent.x + ent.w * 0.7, ent.y + ent.h * 0.4);
+            ctx.lineTo(ent.x + ent.w, ent.y + ent.h * 0.4);
+            ctx.lineTo(ent.x + ent.w, ent.y + ent.h);
+            ctx.closePath();
+            ctx.fill();
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+          } else {
+            ctx.beginPath();
+            ctx.moveTo(ent.x, ent.y + ent.h);
+            ctx.lineTo(ent.x + ent.w * 0.5, ent.y);
+            ctx.lineTo(ent.x + ent.w, ent.y + ent.h);
+            ctx.closePath();
+            ctx.fill();
+            if (this.theme.playerStyle === 'cartoon') {
+              ctx.strokeStyle = '#1e293b';
+              ctx.lineWidth = 3;
+              ctx.stroke();
+            } else if (this.theme.playerStyle === 'glow') {
+              ctx.strokeStyle = hStops[0];
+              ctx.lineWidth = 2;
+              ctx.stroke();
+            }
+          }
+          ctx.restore();
+        } else if (ent.type === 'item' && !ent.collected) {
+          // Collectible item with category color
+          const cat = this.m.learning && ent.data
+            ? this.m.learning.categories.find(c => c.id === ent.data.category)
+            : null;
+          const color = cat ? cat.color : '#facc15';
+
+          drawGlossyOrb(ctx, ent.x + ent.w / 2, ent.y + ent.h / 2, ent.w / 2, color);
+
+          // Item Label
+          if (ent.data && ent.data.label) {
+            ctx.save();
+            ctx.font = `bold 13px ${this.theme.font}`;
+            ctx.textAlign = 'center';
+            drawOutlineText(ctx, ent.data.label, ent.x + ent.w / 2, ent.y - 10, `bold 13px ${this.theme.font}`, '#ffffff', '#000000', 3);
+            ctx.restore();
+          }
+        }
+      }
+    }
+
+    renderHUD(ctx) {
+      const hudList = Array.isArray(this.m.hud) ? this.m.hud : ['score', 'lives', 'combo', 'target'];
+      ctx.save();
+
+      // Score badge
+      if (hudList.includes('score')) {
+        ctx.fillStyle = this.theme.hudBg;
+        drawRoundRect(ctx, 40, 24, 180, 48, 8);
+        ctx.fill();
+        if (this.theme.hudBorder) {
+          ctx.strokeStyle = this.theme.hudBorder;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        }
+        drawOutlineText(ctx, `SKOR: ${this.score}`, 54, 56, `bold 22px ${this.theme.font}`, '#fbbf24');
+      }
+
+      // Lives
+      if (hudList.includes('lives')) {
+        let hx = 240;
+        for (let i = 0; i < this.lives; i++) {
+          drawIcon(ctx, 'heart', hx, 32, 32, '#ef4444');
+          hx += 36;
+        }
+      }
+
+      // Combo Pill
+      if (hudList.includes('combo') && this.combo >= 2) {
+        ctx.fillStyle = '#f59e0b';
+        drawRoundRect(ctx, 380, 28, 120, 40, 20);
+        ctx.fill();
+        drawOutlineText(ctx, `${this.comboMultiplier}X COMBO`, 396, 54, `bold 16px ${this.theme.font}`, '#0f172a');
+      }
+
+      // Learning Target Banner (center top)
+      if (hudList.includes('target') && this.targetCategory) {
+        const bw = 420;
+        const bx = (LOGICAL_WIDTH - bw) / 2;
+        ctx.fillStyle = this.theme.hudBg;
+        drawRoundRect(ctx, bx, 20, bw, 56, 12);
+        ctx.fill();
+        ctx.strokeStyle = this.targetCategory.color || this.theme.accent;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        ctx.font = `bold 14px ${this.theme.font}`;
+        ctx.fillStyle = '#94a3b8';
+        ctx.textAlign = 'center';
+        ctx.fillText('TARGET PILIHAN:', bx + bw / 2, 40);
+
+        ctx.font = `bold 20px ${this.theme.font}`;
+        ctx.fillStyle = this.targetCategory.color || this.theme.accent;
+        ctx.fillText(this.targetCategory.label.toUpperCase(), bx + bw / 2, 64);
+      }
+
+      // Mute icon button (top right)
+      ctx.fillStyle = this.theme.hudBg;
+      drawRoundRect(ctx, LOGICAL_WIDTH - 80, 24, 48, 48, 8);
+      ctx.fill();
+      if (this.theme.hudBorder) {
+        ctx.strokeStyle = this.theme.hudBorder;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+      drawIcon(ctx, this.audio.muted ? 'mute' : 'sound', LOGICAL_WIDTH - 72, 32, 32, '#ffffff');
+
+      // Subtle Watermark bottom right
+      ctx.font = `bold 13px ${this.theme.font}`;
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+      ctx.textAlign = 'right';
+      ctx.fillText('Built with AISYS HTML5 Engine • STIKOM YOS SUDARSO', LOGICAL_WIDTH - 30, LOGICAL_HEIGHT - 18);
+
+      ctx.restore();
+    }
+
+    renderToast(ctx) {
+      if (!this.explainToast) return;
+      ctx.save();
+      const tw = 680;
+      const tx = (LOGICAL_WIDTH - tw) / 2;
+      const ty = LOGICAL_HEIGHT - 130;
+
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.94)';
+      drawRoundRect(ctx, tx, ty, tw, 70, 10);
+      ctx.fill();
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.font = '16px sans-serif';
+      ctx.fillStyle = '#f8fafc';
+      ctx.textAlign = 'center';
+      wrapText(ctx, this.explainToast.text, tx + tw / 2, ty + 30, tw - 40, 22);
+      ctx.restore();
+    }
+
+    renderMenu(ctx) {
+      ctx.save();
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      ctx.fillRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+
+      ctx.textAlign = 'center';
+      drawOutlineText(ctx, this.m.title.toUpperCase(), LOGICAL_WIDTH / 2, 240, 'bold 54px sans-serif', '#38bdf8', '#0284c7', 6);
+
+      if (this.m.learning) {
+        ctx.font = '20px sans-serif';
+        ctx.fillStyle = '#cbd5e1';
+        ctx.fillText(`Topik: ${this.m.learning.subject} • ${this.m.learning.concept}`, LOGICAL_WIDTH / 2, 290);
+      }
+
+      ctx.font = 'bold 26px sans-serif';
+      ctx.fillStyle = '#facc15';
+      const bounce = Math.sin(this.frameCount * 0.08) * 6;
+      ctx.fillText('TEKAN SPASI / SENTUH LAYAR UNTUK MULAI', LOGICAL_WIDTH / 2, 440 + bounce);
+
+      ctx.font = '16px sans-serif';
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillText('Kontrol: [Spasi / W / Tap] Lompat  •  [M] Mute Audio  •  [R] Restart', LOGICAL_WIDTH / 2, 500);
+
+      ctx.restore();
+    }
+
+    renderGameOver(ctx) {
+      ctx.save();
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.92)';
+      ctx.fillRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+
+      ctx.textAlign = 'center';
+      drawOutlineText(ctx, 'PERMAINAN SELESAI', LOGICAL_WIDTH / 2, 130, 'bold 44px sans-serif', '#ef4444', '#991b1b', 6);
+
+      ctx.font = 'bold 28px sans-serif';
+      ctx.fillStyle = '#fbbf24';
+      ctx.fillText(`SKOR AKHIR: ${this.score}  •  JARAK: ${Math.floor(this.distance)}m`, LOGICAL_WIDTH / 2, 185);
+
+      // Educational summary card
+      if (this.m.learning) {
+        const sw = 760;
+        const sx = (LOGICAL_WIDTH - sw) / 2;
+        const sy = 220;
+        ctx.fillStyle = 'rgba(30, 41, 59, 0.9)';
+        drawRoundRect(ctx, sx, sy, sw, 330, 12);
+        ctx.fill();
+
+        ctx.font = 'bold 20px sans-serif';
+        ctx.fillStyle = '#38bdf8';
+        ctx.fillText('📊 RINGKASAN PEMBELAJARAN (ANALITIK)', LOGICAL_WIDTH / 2, sy + 36);
+
+        const total = this.analytics.totalCollected;
+        const acc = total > 0 ? Math.round((this.analytics.correctCount / total) * 100) : 0;
+
+        ctx.font = '18px sans-serif';
+        ctx.fillStyle = '#f8fafc';
+        ctx.fillText(`Total Sampah Dipilah: ${total}   |   Akurasi: ${acc}%`, LOGICAL_WIDTH / 2, sy + 70);
+
+        // List mistakes if any
+        ctx.textAlign = 'left';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillStyle = '#f87171';
+        ctx.fillText('Evaluasi Kesalahan:', sx + 40, sy + 110);
+
+        ctx.font = '14px sans-serif';
+        let my = sy + 138;
+        const mistakes = this.analytics.mistakes.slice(0, 4);
+        if (mistakes.length === 0) {
+          ctx.fillStyle = '#34d399';
+          ctx.fillText('Luar biasa! Tidak ada kesalahan pemilahan sampah.', sx + 50, my);
+        } else {
+          for (const m of mistakes) {
+            ctx.fillStyle = '#fca5a5';
+            ctx.fillText(`• ${m.label} (${m.category.toUpperCase()}): ${m.explain}`, sx + 50, my);
+            my += 28;
+          }
+        }
+      }
+
+      // Export Analytics Button
+      ctx.fillStyle = '#2563eb';
+      drawRoundRect(ctx, 480, 580, 320, 50, 8);
+      ctx.fill();
+      ctx.font = 'bold 18px sans-serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'center';
+      ctx.fillText('📥 EKSPOR ANALITIK (JSON)', 640, 612);
+
+      ctx.font = 'bold 20px sans-serif';
+      ctx.fillStyle = '#facc15';
+      ctx.fillText('Klik / Tekan Spasi untuk Main Lagi', LOGICAL_WIDTH / 2, 675);
+
+      ctx.restore();
+    }
+  }
+
+  // Helper for rounded rectangle in Canvas 2D
+  function drawRoundRect(ctx, x, y, w, h, r) {
+    if (ctx.roundRect) {
+      ctx.beginPath();
+      ctx.roundRect(x, y, w, h, r);
+    } else {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+  }
+
+  function checkAABB(a, b) {
+    return (
+      a.x < b.x + b.w &&
+      a.x + a.w > b.x &&
+      a.y < b.y + b.h &&
+      a.y + a.h > b.y
+    );
+  }
+
+  // -------------------------------------------------------------
+  // 6. HEADLESS DETERMINISTIC SELF-TEST (9 CHECKS)
+  // -------------------------------------------------------------
+  function runSelfTest(manifest) {
+    const checks = [];
+    let ok = true;
+
+    function addCheck(id, pass, detail, status = null) {
+      checks.push({ id, pass, detail, status: status || (pass ? 'pass' : 'fail') });
+      if (!pass) ok = false;
+    }
+
+    // 1. validate
+    const validation = validateManifest(manifest);
+    addCheck('validate', validation.valid, validation.valid ? 'Manifest valid' : validation.errors.join('; '));
+    if (!validation.valid) {
+      return { ok: false, checks, metrics: {} };
+    }
+
+    // Initialize headless and silent engine for tests (zero audio, zero postMessage side effects)
+    const engine = new EndlessRunnerEngine(manifest, { headless: true, silent: true });
+    engine.startGame();
+
+    // 2. render check (simulate on virtual offscreen canvas)
+    let renderPass = false;
+    let renderDetail = '';
+    try {
+      const isNode = typeof window === 'undefined' || !window.document || !window.document.createElement || !window.HTMLCanvasElement;
+      if (isNode) {
+        addCheck('render', true, 'Dilewati di lingkungan Node (hanya valid di browser nyata)', 'skipped');
+      } else {
+        const offCanvas = document.createElement('canvas');
+        offCanvas.width = 320;
+        offCanvas.height = 180;
+        const offCtx = offCanvas.getContext('2d');
+        engine.ctx = offCtx;
+        engine.canvas = offCanvas;
+        engine.scale = 320 / LOGICAL_WIDTH;
+        engine.dpr = 1;
+
+        for (let i = 0; i < 15; i++) {
+          engine.render();
+        }
+
+        const imgData = offCtx.getImageData(0, 0, 320, 180).data;
+        const seenColors = new Set();
+        for (let p = 0; p < imgData.length; p += 40) {
+          const col = `${imgData[p]},${imgData[p + 1]},${imgData[p + 2]}`;
+          if (col !== '0,0,0') seenColors.add(col);
+        }
+        const colorCount = seenColors.size;
+        renderPass = colorCount >= 3;
+        renderDetail = `Rendered frames with ${colorCount} distinct colors`;
+        addCheck('render', renderPass, renderDetail);
+      }
+    } catch (e) {
+      addCheck('render', false, 'Render exception: ' + (e.message || e));
+    }
+
+    // 3. jump check
+    const startY = engine.player.y;
+    engine.jump();
+    let jumpSuccess = false;
+    let minJumpY = startY;
+    const T = (2 * manifest.player.jumpVelocity) / manifest.player.gravity;
+
+    // Simulate jump over T + 0.15s
+    const steps = Math.ceil((T + 0.15) / FIXED_DT);
+    for (let s = 0; s < steps; s++) {
+      engine.step(FIXED_DT);
+      if (engine.player.y < minJumpY) minJumpY = engine.player.y;
+      if (engine.player.onGround && s > 10) {
+        jumpSuccess = minJumpY < startY - 40;
+        break;
+      }
+    }
+    addCheck('jump', jumpSuccess, `Jump apex height reached: ${Math.round(startY - minJumpY)}px`);
+
+    // 4. progress check
+    const preDist = engine.distance;
+    const preScore = engine.score;
+    engine.player.invulnerableTimer = 15; // Shield during progress sampling
+    for (let s = 0; s < Math.ceil(10 / FIXED_DT); s++) {
+      engine.step(FIXED_DT);
+    }
+    const progPass = engine.distance > preDist + 1000 && engine.score > preScore;
+    addCheck('progress', progPass, `Simulated 10s: dist=+${Math.round(engine.distance - preDist)}px, score=+${engine.score - preScore}`);
+
+    // 5. spawn check (simulate 30s)
+    for (let s = 0; s < Math.ceil(30 / FIXED_DT); s++) {
+      engine.step(FIXED_DT);
+    }
+    const spawnPass = engine.historySpawnedTypes.has('hazard') && engine.historySpawnedTypes.has('item');
+    addCheck('spawn', spawnPass, `Spawned types observed: ${Array.from(engine.historySpawnedTypes).join(', ')}`);
+
+    // 6. numeric check
+    const numPass =
+      !isNaN(engine.player.x) && !isNaN(engine.player.y) && !isNaN(engine.player.vy) &&
+      !isNaN(engine.distance) && !isNaN(engine.score) &&
+      isFinite(engine.player.y) && isFinite(engine.distance);
+    addCheck('numerik', numPass, numPass ? 'All state numbers valid and finite' : 'NaN or Infinity detected');
+
+    // 7. bot adil check (center-targeting bot with ±50ms error window on 3 seeds at initial & max speed)
+    function testBotRun(seedVal, useMaxSpeed, errTiming) {
+      const cloneM = JSON.parse(JSON.stringify(manifest));
+      cloneM.seed = seedVal;
+      const botEngine = new EndlessRunnerEngine(cloneM, { headless: true, silent: true });
+      botEngine.startGame();
+      if (useMaxSpeed) botEngine.speed = botEngine.m.world.maxSpeed;
+
+      const T = (2 * cloneM.player.jumpVelocity) / cloneM.player.gravity;
+      const totalSteps = Math.ceil((useMaxSpeed ? 30 : 60) / FIXED_DT);
+
+      for (let s = 0; s < totalSteps; s++) {
+        if (botEngine.player.onGround) {
+          const pMid = botEngine.player.x + botEngine.player.w / 2;
+          const v = botEngine.speed;
+
+          // Find nearest hazard whose right edge is still ahead of player
+          let nearestHaz = null;
+          let minDx = Infinity;
+
+          for (const ent of botEngine.entities) {
+            if (ent.type === 'hazard' && (ent.x + ent.w) > botEngine.player.x) {
+              const dx = ent.x - botEngine.player.x;
+              if (dx < minDx) {
+                minDx = dx;
+                nearestHaz = ent;
+              }
+            }
+          }
+
+          if (nearestHaz) {
+            const hMid = nearestHaz.x + nearestHaz.w / 2;
+            const dc = hMid - pMid;
+            // Target jump apex at center of hazard, adjusted by err timing window (±50ms)
+            const targetTriggerDist = v * (T / 2 - errTiming);
+
+            if (dc <= targetTriggerDist) {
+              botEngine.jump();
+            }
+          }
+        }
+
+        botEngine.step(FIXED_DT);
+        if (botEngine.collisionCount > 0) return false;
+      }
+      return botEngine.collisionCount === 0;
+    }
+
+    const testSeeds = [manifest.seed || 'ecosort-01', 'seed-beta-42', 'seed-gamma-99'];
+    const timingErrors = [-0.05, 0, 0.05]; // ±50ms takeoff timing tolerance
+    let allBotPassed = true;
+    let botPassCount = 0;
+    const totalRuns = testSeeds.length * 2 * timingErrors.length; // 18 sub-runs
+
+    for (const s of testSeeds) {
+      for (const err of timingErrors) {
+        const normOk = testBotRun(s, false, err);
+        const maxOk = testBotRun(s, true, err);
+        if (normOk) botPassCount++;
+        if (maxOk) botPassCount++;
+        if (!normOk || !maxOk) allBotPassed = false;
+      }
+    }
+
+    addCheck(
+      'bot adil',
+      allBotPassed,
+      `Center-target bot (±50ms error window) on 3 seeds at min/max speed: ${botPassCount}/${totalRuns} sub-runs passed with 0 collisions`
+    );
+
+    // 8. hooks check
+    addCheck('hooks', engine.hookErrorCount === 0, `Hook exceptions caught: ${engine.hookErrorCount}`);
+
+    // 9. belajar check (if learning is defined)
+    if (manifest.learning) {
+      let collectedCorrect = false;
+      let collectedWrong = false;
+
+      // Force collect mock items
+      if (manifest.learning.items && manifest.learning.items.length >= 2) {
+        const correctItem = manifest.learning.items.find(i => i.category === engine.targetCategory.id);
+        const wrongItem = manifest.learning.items.find(i => i.category !== engine.targetCategory.id);
+
+        if (correctItem) {
+          engine.handleItemCollect({ type: 'item', data: correctItem });
+          collectedCorrect = true;
+        }
+        if (wrongItem) {
+          engine.handleItemCollect({ type: 'item', data: wrongItem });
+          collectedWrong = true;
+        }
+      }
+
+      const learnPass = collectedCorrect && collectedWrong && engine.analytics.totalCollected >= 2;
+      addCheck('belajar', learnPass, `Learning tracking verified (correct & wrong recorded)`);
+    } else {
+      addCheck('belajar', true, 'Arcade mode (no learning block)');
+    }
+
+    // Send postMessage if running in browser
+    if (typeof window !== 'undefined' && window.parent && window.parent !== window) {
+      try {
+        window.parent.postMessage({
+          type: 'aisys:selftest',
+          ok,
+          checks,
+          metrics: {
+            distance: Math.floor(engine.distance),
+            score: engine.score
+          }
+        }, '*');
+      } catch (e) {}
+    }
+
+    return { ok, checks };
+  }
+
+  // -------------------------------------------------------------
+  // 7. PUBLIC AISYS API
+  // -------------------------------------------------------------
+  const AISYS = {
+    version: '0.1.0',
+    schema: 1,
+
+    defineGame(manifest) {
+      if (typeof window === 'undefined') {
+        return manifest;
+      }
+
+      const launch = () => {
+        let canvas = document.getElementById('aisys-canvas');
+        if (!canvas) {
+          canvas = document.createElement('canvas');
+          canvas.id = 'aisys-canvas';
+          document.body.appendChild(canvas);
+        }
+
+        const engine = new EndlessRunnerEngine(manifest);
+        engine.attach(canvas);
+        window.__AISYS_GAME__ = engine;
+
+        // Auto execute self-test if requested
+        if (window.location.search.includes('selftest=1')) {
+          runSelfTest(manifest);
+        }
+      };
+
+      if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', launch);
+      } else {
+        // Document already interactive or complete; launch immediately
+        launch();
+      }
+
+      return manifest;
+    },
+
+    selfTest(manifest) {
+      return runSelfTest(manifest);
+    },
+
+    // Exposed helpers for testing & custom hooks
+    draw: {
+      glossyOrb: drawGlossyOrb,
+      outlineText: drawOutlineText,
+      icon: drawIcon,
+      roundRect: drawRoundRect,
+      wrapText: wrapText
+    },
+    validate: validateManifest,
+    EndlessRunnerEngine: EndlessRunnerEngine,
+    THEMES: THEME_PRESETS
+  };
+
+  root.AISYS = AISYS;
+
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+  <script>
+    const ecosortManifest = {
+      schema: 1,
+      kit: "endless-runner",
+      id: "ecosort-run",
+      title: "EcoSort Run",
+      seed: "ecosort-01",
+      theme: { preset: "clean-modern" },
+
+      learning: {
+        subject: "Lingkungan Hidup",
+        concept: "Pemilahan sampah organik, anorganik, dan B3",
+        objectives: ["Mengelompokkan sampah berdasarkan sifatnya"],
+        misconceptions: ["Baterai bekas dianggap sampah anorganik biasa"],
+        mode: "category",
+        categories: [
+          { id: "organik",   label: "Organik",   color: "#3FA34D" },
+          { id: "anorganik", label: "Anorganik", color: "#2F80ED" },
+          { id: "b3",        label: "B3",        color: "#E5484D" }
+        ],
+        items: [
+          { id: "kulit-pisang", label: "Kulit pisang",  category: "organik",   explain: "Terurai alami, bisa jadi kompos." },
+          { id: "botol",        label: "Botol plastik", category: "anorganik", explain: "Sulit terurai, didaur ulang." },
+          { id: "baterai",      label: "Baterai bekas", category: "b3",        explain: "Mengandung logam berbahaya." }
+        ],
+        target: { rotateAfterCorrect: 5, bias: 0.5 }
+      },
+
+      player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },
+      world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6, layers: ["clouds", "hills"] },
+
+      spawner: {
+        interval: [0.9, 1.5],
+        table: [
+          { type: "hazard", id: "batu",     w: 44, h: 48, weight: 3 },
+          { type: "hazard", id: "genangan", w: 90, h: 24, weight: 2 },
+          { type: "item", weight: 5, heights: ["ground", "mid", "high"] }
+        ]
+      },
+
+      rules: {
+        perSecond: 5,
+        correct: { score: 50, combo: 1, sfx: "coin" },
+        wrong:   { score: -20, combo: "reset", lives: 0, sfx: "hit", showExplain: true },
+        hazard:  { lives: -1, sfx: "hit", shake: 8 },
+        combo:   { step: 5, max: 4 },
+        difficulty: { everySec: 15, speed: 25 }
+      },
+
+      hud: ["score", "lives", "combo", "target"],
+      hooks: {}
+    };
+
+    // Run self-test and launch game
+    function initHarness() {
+      const startTime = performance.now();
+      const res = AISYS.selfTest(ecosortManifest);
+      const duration = Math.round(performance.now() - startTime);
+
+      const statusEl = document.getElementById('status');
+      const resultsEl = document.getElementById('results');
+
+      if (statusEl) {
+        statusEl.innerHTML = res.ok 
+          ? `<span class="pass">SELESAI: 9/9 Lolos (${duration}ms)</span> (DPR: ${window.devicePixelRatio || 1})`
+          : `<span class="fail">GAGAL (${duration}ms)</span>`;
+      }
+
+      if (resultsEl) {
+        resultsEl.innerHTML = res.checks.map(c => 
+          `<div><span class="${c.pass ? 'pass' : 'fail'}">[${c.pass ? 'PASS' : 'FAIL'}]</span> <b>${c.id}</b>: ${c.detail}</div>`
+        ).join('');
+      }
+
+      console.log('Browser SelfTest Result:', res);
+
+      // Launch the game visually on canvas so it can be played directly
+      AISYS.defineGame(ecosortManifest);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHarness);
+    } else {
+      initHarness();
+    }
+  </script>
+</body>
+</html>

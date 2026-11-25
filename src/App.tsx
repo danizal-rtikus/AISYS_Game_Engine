@@ -83,6 +83,8 @@ export function App() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const abortControllerRef = useRef<AbortController | null>(null);
+  const previewIframeRef = useRef<HTMLIFrameElement>(null);
+  const lastExportAtRef = useRef(0);
 
   // Apply Theme to DOM
   useEffect(() => {
@@ -115,10 +117,23 @@ export function App() {
     }
   }, [versions, currentVersionIndex]);
 
-  // In-Game Iframe Console Bridge Listener
+  // In-Game Iframe Console Bridge & Telemetry Listener
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
-      if (e.data && e.data.type === 'AISYS_CONSOLE') {
+      // Only trust messages from our own preview iframe (manifest/hook code is model-generated).
+      if (!previewIframeRef.current || e.source !== previewIframeRef.current.contentWindow) return;
+      if (!e.data || typeof e.data !== 'object') return;
+
+      if (e.data.type === 'aisys:error') {
+        const line = typeof e.data.line === 'number' && e.data.line > 0 ? ` (line ${e.data.line})` : '';
+        const item: ConsoleLogItem = {
+          id: Math.random().toString(36).substring(2),
+          type: 'error',
+          message: `[Game Error] ${String(e.data.message ?? 'Unknown error').slice(0, 300)}${line}`,
+          timestamp: Date.now(),
+        };
+        setLogs((prev) => [...prev.slice(-200), item]);
+      } else if (e.data.type === 'AISYS_CONSOLE') {
         const item: ConsoleLogItem = {
           id: Math.random().toString(36).substring(2),
           type: e.data.level || 'log',
@@ -126,6 +141,45 @@ export function App() {
           timestamp: Date.now(),
         };
         setLogs((prev) => [...prev.slice(-200), item]);
+      } else if (e.data.type === 'aisys:selftest') {
+        const checks: any[] = Array.isArray(e.data.checks) ? e.data.checks : [];
+        const failDetails = checks
+          .filter((c) => !c.pass && c.status !== 'skipped' && c.detail)
+          .map((c) => `${c.id}: ${String(c.detail).slice(0, 300)}`)
+          .join(' | ');
+        const item: ConsoleLogItem = {
+          id: Math.random().toString(36).substring(2),
+          type: e.data.ok ? 'log' : 'error',
+          message: `[SelfTest Engine] ${e.data.ok ? 'PASSED ✅' : 'FAILED ❌'}: ${checks.map((c) => `${c.id}=${c.pass ? 'PASS' : (c.status === 'skipped' ? 'SKIP' : 'FAIL')}`).join(', ')}${failDetails ? ` — ${failDetails}` : ''}`,
+          timestamp: Date.now(),
+        };
+        setLogs((prev) => [...prev.slice(-200), item]);
+      } else if (e.data.type === 'aisys:track') {
+        const item: ConsoleLogItem = {
+          id: Math.random().toString(36).substring(2),
+          type: 'log',
+          message: `[Learning Telemetry] Item: "${e.data.itemId}" (${e.data.isCorrect ? 'BENAR ✅' : 'SALAH ⚠️'}) | Skor: ${e.data.score}`,
+          timestamp: Date.now(),
+        };
+        setLogs((prev) => [...prev.slice(-200), item]);
+      } else if (e.data.type === 'aisys:export') {
+        // Safe analytics download initiated from iframe: at most 1 download per 2 seconds
+        const now = Date.now();
+        if (now - lastExportAtRef.current < 2000) return;
+        lastExportAtRef.current = now;
+        try {
+          const exportData = JSON.stringify(e.data, null, 2);
+          const blob = new Blob([exportData], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          const safeId = String(e.data.gameId || 'game').replace(/[^a-z0-9_-]/gi, '_').slice(0, 40);
+          a.download = `aisys-analytics-${safeId}.json`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        } catch (err) {}
       }
     };
 
@@ -607,6 +661,7 @@ export function App() {
               className="h-full flex flex-col min-w-[360px]"
             >
               <PreviewPanel
+                iframeRef={previewIframeRef}
                 gameCode={activeCode}
                 gameTitle={activeTitle}
                 activeTab={activeTab}
