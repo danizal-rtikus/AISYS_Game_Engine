@@ -15,6 +15,7 @@ import {
 import { Message } from '../types';
 import { MarkdownRenderer } from './MarkdownRenderer';
 import { GAME_REGENERATE_REQUEST } from '../config/defaultSkill';
+import { isManifestCode } from '../utils/htmlExtractor';
 
 interface ChatPanelProps {
   messages: Message[];
@@ -244,12 +245,12 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                                 <>
                                   <span className="w-1.5 h-1.5 rounded-full bg-[#F6821F] animate-ping" />
                                   <span className="text-[#F6821F]">
-                                    Menyusun kode HTML5... ({msg.codeLineCount || 0} baris)
+                                    {isManifestCode(msg.extractedCode) ? 'Menyusun manifest game' : 'Menyusun kode HTML5'}... ({msg.codeLineCount || 0} baris)
                                   </span>
                                 </>
                               ) : msg.isCodeComplete ? (
                                 <span className="text-emerald-600 dark:text-emerald-400">
-                                  Kode game HTML5 siap ({msg.codeLineCount || 0} baris)
+                                  {isManifestCode(msg.extractedCode) ? 'Manifest game siap' : 'Kode game HTML5 siap'} ({msg.codeLineCount || 0} baris)
                                 </span>
                               ) : (
                                 <span className="text-amber-600 dark:text-amber-400">
@@ -261,7 +262,9 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                               {msg.isStreaming
                                 ? 'Dialirkan langsung ke Panel Preview kanan'
                                 : msg.isCodeComplete
-                                ? 'Siap dimainkan via Canvas 2D & Web Audio'
+                                ? isManifestCode(msg.extractedCode)
+                                  ? 'Endless Runner · dijalankan & diuji AISYS Engine'
+                                  : 'Genre Beta · HTML5 Canvas 2D, coba mainkan dulu'
                                 : 'Terhenti sebelum kode selesai. Klik tombol di samping untuk membuat ulang.'}
                             </div>
                           </div>

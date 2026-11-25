@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Copy, Check, Download } from 'lucide-react';
+import { isManifestCode } from '../utils/htmlExtractor';
 
 interface CodeViewerProps {
   code: string;
@@ -15,9 +16,14 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ code, gameTitle }) => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  // A manifest is only data for AISYS Engine: saving it as .html would give a file that does not play.
+  // Download it as .js here; the playable single-file game comes from the Export button in the preview.
+  const manifest = isManifestCode(code);
+
   const handleDownload = () => {
-    const filename = `${gameTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-') || 'game'}.html`;
-    const blob = new Blob([code], { type: 'text/html;charset=utf-8' });
+    const base = gameTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-') || 'game';
+    const filename = manifest ? `${base}.manifest.js` : `${base}.html`;
+    const blob = new Blob([code], { type: manifest ? 'text/javascript;charset=utf-8' : 'text/html;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -35,7 +41,7 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ code, gameTitle }) => {
       {/* Top Bar */}
       <div className="h-9 px-4 border-b border-slate-200 dark:border-[#282B33] bg-white dark:bg-[#13151A] flex items-center justify-between">
         <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
-          <span>HTML5 Single-File</span>
+          <span>{manifest ? 'Manifest AISYS Engine' : 'HTML5 Single-File'}</span>
           <span>•</span>
           <span>{lines.length} baris</span>
           <span>•</span>
@@ -52,10 +58,11 @@ export const CodeViewer: React.FC<CodeViewerProps> = ({ code, gameTitle }) => {
           </button>
           <button
             onClick={handleDownload}
+            title={manifest ? 'Unduh manifest saja. Untuk game siap main, pakai tombol Export.' : undefined}
             className="flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-sans bg-[#F6821F] hover:bg-[#E66E0A] text-white transition-colors"
           >
             <Download className="w-3.5 h-3.5" />
-            <span>Download .html</span>
+            <span>{manifest ? 'Download manifest .js' : 'Download .html'}</span>
           </button>
         </div>
       </div>

@@ -509,7 +509,13 @@ export function App() {
           ...prev.slice(-200),
           {
             id: Math.random().toString(36).substring(2),
-            type: finalParsed.isComplete ? 'info' : 'warn',
+            // Warn only for a real problem: code that started but is incomplete, or a non-"stop" finish
+            // (e.g. "length"). Chat turns without code are normal and stay neutral.
+            type:
+              (finalParsed.code && !finalParsed.isComplete) ||
+              (finalDiagnostic.finishReason && finalDiagnostic.finishReason !== 'stop')
+                ? 'warn'
+                : 'info',
             message: diagLogText,
             timestamp: Date.now(),
           },
