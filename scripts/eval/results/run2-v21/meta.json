@@ -1,0 +1,13 @@
+{
+  "startedAt": "2026-11-25T13:53:46.289Z",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "promptVersion": "2.1",
+  "runtimeVersion": "0.1.0",
+  "trials": 10,
+  "finishedAt": "2026-11-25T13:58:24.496Z"
+}

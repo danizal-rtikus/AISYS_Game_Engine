@@ -1,0 +1,167 @@
+{
+  "id": "bio-mudah-2",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 174,
+        "prompt_tokens": 5632,
+        "total_tokens": 5806,
+        "prompt_tokens_details": {
+          "cached_tokens": 5376
+        }
+      },
+      "ms": 9298,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: hewan herbivora, karnivora, dan omnivora.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 328,
+        "prompt_tokens": 5833,
+        "total_tokens": 6161,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 7036,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 203,
+        "prompt_tokens": 6165,
+        "total_tokens": 6368,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 4298,
+      "reasoningChars": 0
+    },
+    {
+      "user": "C",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 141,
+        "prompt_tokens": 6372,
+        "total_tokens": 6513,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 4371,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Santai",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 234,
+        "prompt_tokens": 6518,
+        "total_tokens": 6752,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 5154,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 660,
+        "prompt_tokens": 6756,
+        "total_tokens": 7416,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 11233,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 1243,
+        "prompt_tokens": 7422,
+        "total_tokens": 8665,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 14798,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio 🎮 Senang sekali bisa membantu Anda merancang game baru.\n\nSebagai info singkat: AISYS Engine saat ini membangun game bertipe **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain (Platformer, Shooter, Puzzle, dll.) akan segera hadir.\n\nPertanyaan pertama saya:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks), atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: hewan herbivora, karnivora, dan omnivora."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang bagus! 🐾 Topik **penggolongan hewan berdasarkan jenis makanannya (herbivora, karnivora, omnivora)** sangat cocok dijadikan mekanik Endless Runner — pemain mengambil hewan yang sesuai dengan target kategori di layar.\n\nBerikut beberapa opsi skema kategori. Silakan pilih yang paling Anda sukai:\n\n**Opsi A — Tiga Golongan Makanan (klasik & jelas)**\n- **Herbivora** (pemakan tumbuhan): sapi, kambing, kelinci\n- **Karnivora** (pemakan daging): singa, harimau, elang\n- **Omnivora** (pemakan segala): ayam, babi, beruang\n\n**Opsi B — Tiga Golongan + Contoh Menjebak**\n- **Herbivora**: gajah, jerapah, kuda\n- **Karnivora**: serigala, buaya, ular\n- **Omnivora**: monyet, tikus, kura-kura (beberapa jenis)\n\n**Opsi C — Dua Golongan Sederhana (untuk pemula/anak)**\n- **Pemakan Tumbuhan**: sapi, kelinci, kambing\n- **Pemakan Daging**: singa, harimau, elang\n\nDari opsi di atas, mana yang paling Anda sukai (**A**, **B**, atau **C**)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan tepat! **Opsi A** dengan tiga golongan (Herbivora, Karnivora, Omnivora) plus contoh hewan yang jelas — mudah dikenali dan kuat secara konsep.\n\nSekarang masuk ke gaya visual. AISYS menyediakan 4 preset tema:\n\n- **Opsi A — Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n- **Opsi B — Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n- **Opsi C — Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n- **Opsi D — Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (**A**, **B**, **C**, atau **D**)?"
+    },
+    {
+      "role": "user",
+      "content": "C"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang seru! **Opsi C — Cartoon** dengan langit cerah dan bukit hijau sangat pas untuk tema hewan dan alam — ramah anak dan menyenangkan. 🌿\n\nSekarang soal tempo permainan. Ada 3 tingkat kesulitan:\n\n- **Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (**Santai**, **Normal**, atau **Menantang**)?"
+    },
+    {
+      "role": "user",
+      "content": "Santai"
+    },
+    {
+      "role": "assistant",
+      "content": "Mantap, **Santai** — pilihan bijak untuk game edukasi anak agar fokus belajar tanpa tekanan tempo. 🐢\n\nSekarang soal fokus belajar. Ada beberapa miskonsepsi umum tentang penggolongan hewan yang bisa diluruskan lewat item jebakan:\n\n- **Opsi A:** \"Semua hewan yang makan daging itu buas dan berbahaya\" — padahal banyak pemakan daging yang tidak berbahaya bagi manusia (misal: burung pelatuk pemakan serangga, kucing rumahan).\n- **Opsi B:** \"Ayam dianggap herbivora karena sering makan biji-bijian\" — padahal ayam juga makan serangga dan cacing, jadi omnivora.\n- **Opsi C:** \"Beruang dianggap karnivora karena bertaring tajam\" — padahal beruang makan buah, madu, ikan, dan tumbuhan, jadi omnivora.\n\nMiskonsepsi mana yang paling ingin diluruskan lewat game ini (**A**, **B**, atau **C**)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan bagus! **Opsi A** — meluruskan anggapan bahwa semua pemakan daging itu buas dan berbahaya — akan jadi benang merah yang menarik di game ini. 🦜\n\nBaik, semua informasi sudah lengkap. Berikut **Game Blueprint (PRD)** Anda:\n\n**📋 GAME BLUEPRINT / PRD**\n\n**Identitas Game**\n- **Judul:** Petualangan Sang Pemakan\n- **Genre:** Endless Runner\n- **Tipe:** Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis di padang rumput ceria, melompat menghindari rintangan (batu, semak, lubang).\n- Target kategori tampil di layar (misal \"Herbivora\"). Pemain mengambil hewan yang sesuai dengan target untuk mencetak skor.\n- Mengambil hewan yang salah memunculkan penjelasan singkat dan mengurangi skor.\n- Menabrak rintangan mengurangi nyawa. Game berakhir saat nyawa habis.\n- Target berganti setelah beberapa hewan benar diambil.\n\n**2. Konten Belajar**\n- **Subjek:** Ilmu Pengetahuan Alam (Biologi)\n- **Konsep:** Penggolongan hewan berdasarkan jenis makanannya\n- **Tujuan Pembelajaran:** Mengelompokkan hewan ke dalam herbivora, karnivora, dan omnivora berdasarkan jenis makanannya.\n- **Kategori & Item:**\n  - **Herbivora** (pemakan tumbuhan): Sapi, Kambing, Kelinci, Gajah\n  - **Karnivora** (pemakan daging): Singa, Harimau, Elang, Serigala\n  - **Omnivora** (pemakan segala): Ayam, Babi, Beruang, Monyet\n- **Miskonsepsi yang diuji:** \"Semua hewan pemakan daging itu buas dan berbahaya\" — diluruskan lewat item karnivora yang tidak berbahaya (misal burung pemakan serangga) dan penjelasan bahwa karnivora = pemakan daging, bukan berarti buas.\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Cartoon** (langit cerah, bukit hijau, outline tegas)\n\n**4. Tingkat Kesulitan**\n- **Santai** (lari lambat, percepatan pelan, 5 nyawa)\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti kategori, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Berikut manifest game \"Petualangan Sang Pemakan\" — Endless Runner edukasi bergaya Cartoon dengan tempo Santai. Saya menambahkan burung pelatuk sebagai item karnivora untuk menguji miskonsepsi \"semua pemakan daging itu buas\".\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"petualangan-sang-pemakan\", title: \"Petualangan Sang Pemakan\", seed: \"pemakan-01\",\n  theme: { preset: \"cartoon\" },\n\n  learning: {\n    subject: \"Ilmu Pengetahuan Alam\",\n    concept: \"Penggolongan hewan berdasarkan jenis makanannya: herbivora, karnivora, omnivora\",\n    objectives: [\"Mengelompokkan hewan ke dalam herbivora, karnivora, dan omnivora berdasarkan jenis makanannya\"],\n    misconceptions: [\"Semua hewan pemakan daging itu buas dan berbahaya\"],\n    mode: \"category\",\n    categories: [\n      { id: \"herbivora\", label: \"Herbivora\", color: \"#3FA34D\" },\n      { id: \"karnivora\", label: \"Karnivora\", color: \"#E5484D\" },\n      { id: \"omnivora\",  label: \"Omnivora\",  color: \"#F2A93B\" }\n    ],\n    items: [\n      { id: \"sapi\",      label: \"Sapi\",       category: \"herbivora\", explain: \"Memakan rumput dan tumbuhan, jadi herbivora.\" },\n      { id: \"kambing\",   label: \"Kambing\",    category: \"herbivora\", explain: \"Pemakan daun dan rumput, termasuk herbivora.\" },\n      { id: \"kelinci\",   label: \"Kelinci\",    category: \"herbivora\", explain: \"Memakan sayur dan rumput, jadi herbivora.\" },\n      { id: \"gajah\",     label: \"Gajah\",      category: \"herbivora\", explain: \"Memakan daun, buah, dan rumput, jadi herbivora.\" },\n      { id: \"singa\",     label: \"Singa\",      category: \"karnivora\", explain: \"Pemakan daging, jadi karnivora.\" },\n      { id: \"harimau\",   label: \"Harimau\",    category: \"karnivora\", explain: \"Berburu dan memakan daging, jadi karnivora.\" },\n      { id: \"elang\",     label: \"Elang\",      category: \"karnivora\", explain: \"Memakan daging hasil buruan, jadi karnivora.\" },\n      { id: \"pelatuk\",   label: \"Burung pelatuk\", category: \"karnivora\", explain: \"Pemakan serangga; karnivora tak selalu buas dan berbahaya.\" },\n      { id: \"ayam\",      label: \"Ayam\",       category: \"omnivora\",  explain: \"Makan biji, serangga, dan cacing, jadi omnivora.\" },\n      { id: \"babi\",      label: \"Babi\",       category: \"omnivora\",  explain: \"Makan tumbuhan dan hewan kecil, jadi omnivora.\" },\n      { id: \"beruang\",   label: \"Beruang\",    category: \"omnivora\",  explain: \"Makan buah, madu, ikan, dan tumbuhan, jadi omnivora.\" },\n      { id: \"monyet\",    label: \"Monyet\",     category: \"omnivora\",  explain: \"Makan buah, daun, dan serangga, jadi omnivora.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 5, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 300, maxSpeed: 600, accel: 4 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"batu\",  w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"semak\", w: 90, h: 40, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 20, speed: 20 }\n  }\n});\n// END_OF_MANIFEST\n```\n\nGame ini mengajak pemain mengambil hewan yang cocok dengan target kategori (Herbivora/Karnivora/Omnivora) sambil melompati batu dan semak. Asumsi penting: burung pelatuk dipakai sebagai item karnivora untuk meluruskan miskonsepsi bahwa semua pemakan daging itu buas."
+    }
+  ]
+}

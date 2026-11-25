@@ -1,0 +1,167 @@
+{
+  "id": "sej-arcade",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 183,
+        "prompt_tokens": 5632,
+        "total_tokens": 5815,
+        "prompt_tokens_details": {
+          "cached_tokens": 5376
+        }
+      },
+      "ms": 5132,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Arcade murni, bertema penjelajah candi kuno.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 288,
+        "prompt_tokens": 5835,
+        "total_tokens": 6123,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 5680,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 189,
+        "prompt_tokens": 6127,
+        "total_tokens": 6316,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 5210,
+      "reasoningChars": 0
+    },
+    {
+      "user": "D",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 124,
+        "prompt_tokens": 6320,
+        "total_tokens": 6444,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 4026,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 66,
+        "prompt_tokens": 6448,
+        "total_tokens": 6514,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 6019,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Silakan Anda yang memberi nama.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 416,
+        "prompt_tokens": 6524,
+        "total_tokens": 6940,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 6884,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 492,
+        "prompt_tokens": 6946,
+        "total_tokens": 7438,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 7058,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio 🎮\n\nSenang sekali Anda ingin membuat game baru! Saat ini AISYS Engine membangun game bertipe **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain seperti Platformer, Puzzle, atau Top-Down Shooter masih dalam tahap pengembangan dan segera hadir.\n\nSebelum kita mulai merancang, saya perlu tahu arah game Anda:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks), atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Arcade murni, bertema penjelajah candi kuno."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang menarik! Tema penjelajah candi kuno sangat cocok untuk nuansa petualangan yang seru 🏛️\n\nKarena ini **Arcade Murni**, kita akan fokus pada hiburan skor dan refleks. Sekarang saya perlu menentukan **tema dunia dan rintangan** yang akan muncul di sepanjang perjalanan.\n\nBerikut 3 opsi skema dunia untuk tema penjelajah candi kuno:\n\n**Opsi A — Lorong Candi**\n- Rintangan: batu andesit rendah, pecahan relief, genangan air lumut\n- Nuansa: interior candi, lorong batu, suasana sakral\n\n**Opsi B — Halaman Candi Terbuka**\n- Rintangan: batu candi berserak, akar pohon besar, jurang batu kecil\n- Nuansa: area terbuka, langit cerah, rerumputan dan pepohonan\n\n**Opsi C — Hutan Menuju Candi**\n- Rintangan: tunggul pohon, batu berlumut, tanaman menjalar\n- Nuansa: hutan tropis, jalur setapak, perjalanan menuju candi\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang mantap! **Lorong Candi** akan memberi nuansa petualangan yang kental dan misterius 🏛️\n\nSekarang kita masuk ke tahap visual. AISYS menyediakan 4 preset tema yang bisa langsung diterapkan:\n\n**Opsi A — Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n\n**Opsi B — Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n\n**Opsi C — Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n\n**Opsi D — Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "D"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang pas! **Retro Pixel** akan memberi nuansa arcade klasik yang nostalgic, sangat cocok dengan petualangan candi kuno 🕹️\n\nSekarang kita tentukan tingkat kesulitannya:\n\n**Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n\n**Normal:** tempo seimbang (bawaan).\n\n**Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Sempurna! **Normal** akan memberi tempo yang seimbang dan menantang namun tetap adil ⚖️\n\nSekarang tinggal satu langkah lagi sebelum saya menyusun blueprint lengkapnya:\n\nApa judul yang Anda inginkan untuk game ini, atau boleh saya yang memberi nama?"
+    },
+    {
+      "role": "user",
+      "content": "Silakan Anda yang memberi nama."
+    },
+    {
+      "role": "assistant",
+      "content": "Baik! Saya akan memberi nama yang pas untuk petualangan lorong candi bergaya retro pixel ini: **\"Relik Lorong Candi\"** 🏛️\n\nBerikut Game Blueprint (PRD) lengkapnya:\n\n**📋 GAME BLUEPRINT / PRD**\n\n**Identitas Game**\n- Judul: Relik Lorong Candi\n- Genre: Endless Runner\n- Tipe: Arcade Murni\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis menyusuri lorong candi kuno.\n- Tujuan: mengumpulkan koin relik sebanyak mungkin untuk mencetak skor tertinggi.\n- Rintangan: batu andesit rendah, pecahan relief, dan genangan air lumut yang harus dilompati.\n- Skor bertambah dari koin dan bonus combo; menabrak rintangan mengurangi nyawa.\n- Kondisi kalah: nyawa habis (3 nyawa).\n\n**2. Konten Belajar**\n- Tidak ada (mode arcade murni).\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Retro Pixel** — nuansa arcade klasik dengan warna kuning dan oranye.\n\n**4. Tingkat Kesulitan**\n- **Normal** — tempo seimbang, percepatan bertahap tiap 15 detik.\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti rintangan, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Game arcade \"Relik Lorong Candi\" siap dimainkan: penjelajah berlari di lorong candi bergaya retro pixel, mengumpulkan koin relik sambil melompati batu, pecahan relief, dan genangan lumut. Asumsi penting: karena mode arcade murni, tidak ada blok `learning` sehingga item berfungsi sebagai koin skor generik.\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"relik-lorong-candi\", title: \"Relik Lorong Candi\", seed: \"candi-retro-01\",\n  theme: { preset: \"retro-pixel\" },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"batu-andesit\",   w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"pecahan-relief\", w: 70, h: 36, weight: 2 },\n      { type: \"hazard\", id: \"genangan-lumut\", w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: false },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```"
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "id": "eko-mudah-2",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 165,
+        "prompt_tokens": 5632,
+        "total_tokens": 5797,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        },
+        "input_tokens": 5632,
+        "input_tokens_details": {
+          "cached_tokens": 5632
+        },
+        "output_tokens": 165,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 5632,
+        "prompt_cache_miss_tokens": 0
+      },
+      "ms": 7070,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: barang konsumsi dan barang modal.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 297,
+        "prompt_tokens": 5816,
+        "total_tokens": 6113,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 6011,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 192,
+        "prompt_tokens": 6117,
+        "total_tokens": 6309,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 7298,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 119,
+        "prompt_tokens": 6313,
+        "total_tokens": 6432,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 6584,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Santai",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 180,
+        "prompt_tokens": 6437,
+        "total_tokens": 6617,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 9339,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 677,
+        "prompt_tokens": 6621,
+        "total_tokens": 7298,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 8310,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 950,
+        "prompt_tokens": 7304,
+        "total_tokens": 8254,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 11420,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio 🎮\n\nSenang sekali Anda ingin membuat game baru. Saat ini AISYS Engine membangun game bergenre **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain sedang disiapkan dan segera hadir.\n\nSekarang, mari kita tentukan arah game Anda:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks) atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: barang konsumsi dan barang modal."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang menarik! Topik **barang konsumsi vs barang modal** sangat pas dijadikan mekanik pengambilan item — pemain harus jeli membedakan benda yang dipakai langsung untuk memenuhi kebutuhan versus benda yang dipakai untuk menghasilkan barang lain.\n\nBerikut beberapa opsi skema kategori untuk topik ini:\n\n**Opsi A — Dua Kategori Sederhana**\n- **Barang Konsumsi:** nasi, sepatu, sabun, minuman kemasan\n- **Barang Modal:** mesin jahit, traktor, oven pabrik, bor listrik\n\n**Opsi B — Tiga Kategori (Konsumsi, Modal, Bahan Baku)**\n- **Barang Konsumsi:** roti, baju, pasta gigi\n- **Barang Modal:** mesin fotokopi, truk pengangkut, gerobak dagang\n- **Bahan Baku:** kapas, kayu gelondongan, bijih besi\n\n**Opsi C — Dua Kategori dengan Penekanan Alat Kerja**\n- **Barang Konsumsi:** air minum, tas sekolah, obat-obatan, makanan kaleng\n- **Barang Modal:** mesin las, cangkul, komputer kantor, mesin cuci industri\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan bagus! **Opsi A** dengan dua kategori — Barang Konsumsi dan Barang Modal — akan membuat mekanik belajar terasa fokus dan jelas.\n\nSekarang kita masuk ke gaya visual. AISYS menyediakan 4 preset tema:\n\n- **Opsi A, Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n- **Opsi B, Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n- **Opsi C, Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n- **Opsi D, Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang tepat! **Clean Modern** akan memberi kesan rapi dan serius — cocok untuk topik ekonomi yang akademik.\n\nSekarang kita tentukan tingkat kesulitannya:\n\n- **Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Santai"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, **Santai** — tempo yang nyaman untuk pemula. \n\nSekarang kita masuk ke fokus belajar. Untuk topik barang konsumsi dan barang modal, ada beberapa miskonsepsi umum yang sering muncul:\n\n- **Opsi A:** Menganggap semua benda mahal adalah barang modal (padahal barang konsumsi bisa juga mahal, misalnya kulkas rumah tangga).\n- **Opsi B:** Menganggap alat yang dipakai di rumah selalu barang modal (padahal barang modal dipakai untuk menghasilkan barang/jasa lain, bukan untuk konsumsi pribadi).\n- **Opsi C:** Menganggap bahan mentah seperti kapas atau kayu langsung termasuk barang modal (padahal itu bahan baku, bukan alat produksi).\n\nMiskonsepsi mana yang paling ingin diluruskan lewat game ini (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan bagus! Miskonsepsi **\"semua benda mahal adalah barang modal\"** akan diuji lewat item jebakan seperti kulkas rumah tangga dan televisi — mahal, tetapi tetap barang konsumsi karena dipakai langsung untuk memenuhi kebutuhan.\n\nBerikut rancangan lengkapnya:\n\n**📋 GAME BLUEPRINT / PRD (Product Requirements Document)**\n\n**Identitas Game**\n- **Judul:** Konsumsi vs Modal Run\n- **Genre:** Endless Runner\n- **Tipe:** Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis dan melompat menghindari rintangan (peti kemas, tumpukan kardus).\n- Item muncul di jalur; pemain mengambil item yang **cocok dengan target kategori** yang tampil di HUD (misal target \"Barang Modal\": ambil mesin jahit, hindari nasi).\n- Item benar menambah skor dan combo; item salah mengurangi skor dan memunculkan penjelasan singkat.\n- Target kategori berganti setelah beberapa item benar.\n- Kondisi kalah: nyawa habis (5 nyawa pada mode Santai) akibat menabrak rintangan.\n\n**2. Konten Belajar**\n- **Subjek:** Ekonomi\n- **Konsep:** Perbedaan barang konsumsi dan barang modal\n- **Tujuan Pembelajaran:** Mengelompokkan benda berdasarkan fungsinya — dipakai langsung untuk memenuhi kebutuhan (konsumsi) atau dipakai untuk menghasilkan barang/jasa lain (modal).\n- **Kategori & Item:**\n  - **Barang Konsumsi:** nasi (makanan pokok), sepatu (dipakai pribadi), sabun (kebersihan pribadi), kulkas rumah tangga (menyimpan makanan keluarga — meski mahal, tetap konsumsi).\n  - **Barang Modal:** mesin jahit (menghasilkan pakaian), traktor (mengolah lahan), oven pabrik (memproduksi roti massal), bor listrik (alat kerja produksi).\n- **Miskonsepsi yang Diuji:** \"Semua benda mahal adalah barang modal\" — diuji lewat item **kulkas rumah tangga** yang mahal tetapi termasuk barang konsumsi.\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Clean Modern** (biru gelap, bersih, serius).\n\n**4. Tingkat Kesulitan**\n- **Santai:** lari lebih lambat, percepatan pelan, 5 nyawa.\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti kategori, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Game edukasi Endless Runner tentang membedakan barang konsumsi dan barang modal, dengan tema Clean Modern dan mode Santai. Saya asumsikan rintangan berupa peti kemas dan tumpukan kardus yang bisa dilompati, serta target kategori berganti setiap 5 item benar.\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"konsumsi-modal-run\", title: \"Konsumsi vs Modal Run\", seed: \"konsumsi-modal-01\",\n  theme: { preset: \"clean-modern\" },\n\n  learning: {\n    subject: \"Ekonomi\",\n    concept: \"Perbedaan barang konsumsi dan barang modal berdasarkan fungsinya\",\n    objectives: [\n      \"Mengelompokkan benda sebagai barang konsumsi atau barang modal\",\n      \"Menjelaskan alasan suatu benda termasuk barang konsumsi atau modal\"\n    ],\n    misconceptions: [\n      \"Semua benda mahal dianggap barang modal\"\n    ],\n    mode: \"category\",\n    categories: [\n      { id: \"konsumsi\", label: \"Barang Konsumsi\", color: \"#2F80ED\" },\n      { id: \"modal\",    label: \"Barang Modal\",    color: \"#E5A100\" }\n    ],\n    items: [\n      { id: \"nasi\",          label: \"Nasi\",             category: \"konsumsi\", explain: \"Makanan pokok yang langsung dikonsumsi untuk memenuhi kebutuhan.\" },\n      { id: \"sepatu\",        label: \"Sepatu\",           category: \"konsumsi\", explain: \"Dipakai pribadi untuk melindungi kaki, bukan untuk produksi.\" },\n      { id: \"sabun\",         label: \"Sabun\",            category: \"konsumsi\", explain: \"Dipakai langsung untuk kebersihan diri, habis sekali pakai.\" },\n      { id: \"kulkas-rumah\",  label: \"Kulkas rumah tangga\", category: \"konsumsi\", explain: \"Meski mahal, dipakai keluarga untuk menyimpan makanan, bukan produksi.\" },\n      { id: \"mesin-jahit\",   label: \"Mesin jahit\",      category: \"modal\",    explain: \"Alat produksi untuk membuat pakaian yang akan dijual.\" },\n      { id: \"traktor\",       label: \"Traktor\",          category: \"modal\",    explain: \"Dipakai mengolah lahan pertanian untuk menghasilkan panen.\" },\n      { id: \"oven-pabrik\",   label: \"Oven pabrik\",      category: \"modal\",    explain: \"Alat produksi roti dalam jumlah besar untuk dijual.\" },\n      { id: \"bor-listrik\",   label: \"Bor listrik\",      category: \"modal\",    explain: \"Alat kerja untuk merakit atau memperbaiki barang produksi.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 5, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 300, maxSpeed: 600, accel: 4 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"peti-kemas\", w: 100, h: 44, weight: 3 },\n      { type: \"hazard\", id: \"tumpukan-kardus\", w: 80, h: 70, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 20, speed: 20 }\n  }\n});\n// END_OF_MANIFEST\n```"
+    }
+  ]
+}

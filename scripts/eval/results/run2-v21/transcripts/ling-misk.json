@@ -1,0 +1,189 @@
+{
+  "id": "ling-misk",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 184,
+        "prompt_tokens": 5938,
+        "total_tokens": 6122,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "ms": 5567,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: bahan yang bisa dan tidak bisa didaur ulang.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 316,
+        "prompt_tokens": 6144,
+        "total_tokens": 6460,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 5958,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 193,
+        "prompt_tokens": 6464,
+        "total_tokens": 6657,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 6754,
+      "reasoningChars": 0
+    },
+    {
+      "user": "C",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 111,
+        "prompt_tokens": 6661,
+        "total_tokens": 6772,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 8453,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 196,
+        "prompt_tokens": 6776,
+        "total_tokens": 6972,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 7365,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Saya ingin meluruskan miskonsepsi bahwa semua jenis plastik bisa didaur ulang.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 658,
+        "prompt_tokens": 6996,
+        "total_tokens": 7654,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 8812,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 966,
+        "prompt_tokens": 7660,
+        "total_tokens": 8626,
+        "prompt_tokens_details": {
+          "cached_tokens": 6912
+        }
+      },
+      "ms": 12019,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Manifest belum bisa dijalankan. Manifest tidak lengkap: penanda // END_OF_MANIFEST tidak ada atau sintaks JavaScript belum tertutup.\nPerbaiki dan kirim ulang manifest lengkap dalam tepat satu blok ```js yang diakhiri // END_OF_MANIFEST, tanpa penjelasan panjang.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 865,
+        "prompt_tokens": 8698,
+        "total_tokens": 9563,
+        "prompt_tokens_details": {
+          "cached_tokens": 7424
+        }
+      },
+      "ms": 10016,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio 🎮\n\nSaya siap membantu Anda merancang game yang seru. Saat ini AISYS Engine Core baru mendukung genre **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain (Platformer, Top-Down Shooter, Puzzle, dan lainnya) segera hadir, tapi kita bisa mulai dari Endless Runner dulu.\n\nPertanyaan pertama saya:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks), atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: bahan yang bisa dan tidak bisa didaur ulang."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang bagus! Topik **bahan yang bisa dan tidak bisa didaur ulang** sangat cocok dijadikan mekanik Endless Runner — pemain mengambil item sesuai target kategori yang tampil.\n\nBerikut 3 opsi skema kategori. Setiap item hanya masuk **satu** kategori dengan jelas:\n\n**Opsi A — Berdasarkan sifat bahan**\n- **Dapat Didaur Ulang**: botol plastik PET, kaleng aluminium, koran bekas\n- **Tidak Dapat Didaur Ulang**: puntung rokok, piring kertas bekas makanan, sedotan plastik sekali pakai\n\n**Opsi B — Berdasarkan golongan sampah**\n- **Anorganik Daur Ulang**: botol kaca, kaleng minuman, kardus\n- **Organik**: kulit pisang, sisa sayur, daun kering\n- **Residu (Tidak Didaur Ulang)**: styrofoam bekas, puntung rokok, popok sekali pakai\n\n**Opsi C — Berdasarkan tingkat kemudahan daur ulang**\n- **Mudah Didaur Ulang**: kaleng aluminium, botol PET bening, kardus\n- **Sulit Didaur Ulang**: styrofoam, kantong plastik hitam, sedotan plastik\n\nDari opsi di atas, mana yang paling Anda sukai (**A**, **B**, atau **C**)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang tepat! Opsi A memberi kontras yang jelas antara bahan yang bisa didaur ulang dan yang tidak — cocok untuk mekanik Ludic Learning.\n\nSekarang, gaya visual. AISYS menyediakan 4 preset tema:\n\n- **Opsi A, Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n- **Opsi B, Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n- **Opsi C, Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n- **Opsi D, Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (**A**, **B**, **C**, atau **D**)?"
+    },
+    {
+      "role": "user",
+      "content": "C"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan ceria dan ramah lingkungan — pas untuk topik daur ulang! 🌿\n\nSekarang tingkat kesulitannya:\n\n- **Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (**Santai**, **Normal**, atau **Menantang**)?"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Tempo seimbang, pilihan aman! ⚖️\n\nTerakhir, soal fokus belajar. Berikut 3 miskonsepsi umum tentang daur ulang yang bisa diluruskan lewat item jebakan:\n\n- **Opsi A:** \"Semua plastik bisa didaur ulang\" — padahal sedotan dan kantong plastik sekali pakai sulit didaur ulang.\n- **Opsi B:** \"Kertas yang terkena minyak/lemak masih bisa didaur ulang\" — padahal piring kertas bekas makanan berminyak justru sulit didaur ulang.\n- **Opsi C:** \"Puntung rokok bisa didaur ulang\" — padahal puntung rokok termasuk residu yang tidak dapat didaur ulang.\n\nMiskonsepsi mana yang paling ingin diluruskan lewat game ini (**A**, **B**, atau **C**)?"
+    },
+    {
+      "role": "user",
+      "content": "Saya ingin meluruskan miskonsepsi bahwa semua jenis plastik bisa didaur ulang."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang bagus — miskonsepsi ini memang sangat umum! Berikut Game Blueprint-nya.\n\n**📋 GAME BLUEPRINT / PRD (Product Requirements Document)**\n\n**Identitas Game**\n- **Judul:** Daur Ulang Dash\n- **Genre:** Endless Runner\n- **Tipe:** Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis dan melompat menghindari rintangan (tong sampah, genangan).\n- Item berjatuhan; pemain mengambil item yang cocok dengan **kategori target** yang tampil di HUD.\n- Item benar menambah skor dan combo; item salah mengurangi skor dan memunculkan penjelasan singkat.\n- Target berganti setelah beberapa item benar.\n- Kondisi kalah: nyawa habis (3 nyawa) akibat menabrak rintangan.\n\n**2. Konten Belajar**\n- **Subjek:** Lingkungan Hidup\n- **Konsep:** Membedakan bahan yang dapat dan tidak dapat didaur ulang\n- **Tujuan Pembelajaran:** Mengelompokkan benda berdasarkan kemampuan didaur ulang\n- **Miskonsepsi yang diuji:** \"Semua jenis plastik bisa didaur ulang\" — sedotan dan kantong plastik sekali pakai justru sulit didaur ulang.\n\n**Kategori & Item:**\n- **Dapat Didaur Ulang** (hijau):\n  - Botol plastik PET — plastik PET mudah dilebur ulang jadi bahan baru.\n  - Kaleng aluminium — logam bisa didaur ulang berulang kali.\n  - Koran bekas — serat kertas bisa diolah kembali jadi kertas baru.\n  - Botol kaca — kaca dapat dilebur dan dibentuk ulang.\n- **Tidak Dapat Didaur Ulang** (merah):\n  - Puntung rokok — residu beracun, tidak bisa didaur ulang.\n  - Piring kertas bekas makanan — berminyak dan sulit diproses ulang.\n  - Sedotan plastik sekali pakai — terlalu kecil dan tipis untuk didaur ulang.\n  - Styrofoam bekas — sulit terurai dan sulit didaur ulang.\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Cartoon** (langit cerah, bukit hijau, outline tegas)\n\n**4. Tingkat Kesulitan**\n- **Normal** (tempo seimbang)\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti kategori, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Game edukasi \"Daur Ulang Dash\": pemain melompat menghindari rintangan sambil mengambil item sesuai kategori target (Dapat vs Tidak Dapat Didaur Ulang). Asumsi: item salah menampilkan penjelasan singkat, dan miskonsepsi \"semua plastik bisa didaur ulang\" diuji lewat item sedotan plastik.\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"daur-ulang-dash\", title: \"Daur Ulang Dash\", seed: \"daur-ulang-01\",\n  theme: { preset: \"cartoon\" },\n\n  learning: {\n    subject: \"Lingkungan Hidup\",\n    concept: \"Membedakan bahan yang dapat dan tidak dapat didaur ulang\",\n    objectives: [\"Mengelompokkan benda berdasarkan kemampuan didaur ulang\"],\n    misconceptions: [\"Semua jenis plastik bisa didaur ulang\"],\n    mode: \"category\",\n    categories: [\n      { id: \"dapat\",   label: \"Dapat Didaur Ulang\",     color: \"#3FA34D\" },\n      { id: \"tidak\",   label: \"Tidak Dapat Didaur Ulang\", color: \"#E5484D\" }\n    ],\n    items: [\n      { id: \"botol-pet\",     label: \"Botol plastik PET\",       category: \"dapat\", explain: \"Plastik PET mudah dilebur ulang menjadi bahan baru.\" },\n      { id: \"kaleng\",        label: \"Kaleng aluminium\",        category: \"dapat\", explain: \"Logam aluminium bisa didaur ulang berulang kali.\" },\n      { id: \"koran\",         label: \"Koran bekas\",             category: \"dapat\", explain: \"Serat kertas bisa diolah kembali menjadi kertas baru.\" },\n      { id: \"botol-kaca\",    label: \"Botol kaca\",              category: \"dapat\", explain: \"Kaca dapat dilebur dan dibentuk ulang tanpa batas.\" },\n      { id: \"puntung\",       label: \"Puntung rokok\",           category: \"tidak\", explain: \"Residu beracun dan bercampur bahan kimia; tidak didaur ulang.\" },\n      { id: \"piring-kertas\", label: \"Piring kertas bekas\",     category: \"tidak\", explain: \"Berminyak dan kotor sehingga sulit diproses ulang.\" },\n      { id: \"sedotan\",       label: \"Sedotan plastik sekali pakai\", category: \"tidak\", explain: \"Terlalu kecil dan tipis; tidak semua plastik bisa didaur ulang.\" },\n      { id: \"styrofoam\",     label: \"Styrofoam bekas\",         category: \"tidak\", explain: \"Sulit terurai dan sulit didaur ulang.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"tong-sampah\", w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"genangan\",    w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST"
+    },
+    {
+      "role": "user",
+      "content": "Manifest belum bisa dijalankan. Manifest tidak lengkap: penanda // END_OF_MANIFEST tidak ada atau sintaks JavaScript belum tertutup.\nPerbaiki dan kirim ulang manifest lengkap dalam tepat satu blok ```js yang diakhiri // END_OF_MANIFEST, tanpa penjelasan panjang."
+    },
+    {
+      "role": "assistant",
+      "content": "```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"daur-ulang-dash\", title: \"Daur Ulang Dash\", seed: \"daur-ulang-01\",\n  theme: { preset: \"cartoon\" },\n\n  learning: {\n    subject: \"Lingkungan Hidup\",\n    concept: \"Membedakan bahan yang dapat dan tidak dapat didaur ulang\",\n    objectives: [\"Mengelompokkan benda berdasarkan kemampuan didaur ulang\"],\n    misconceptions: [\"Semua jenis plastik bisa didaur ulang\"],\n    mode: \"category\",\n    categories: [\n      { id: \"dapat\", label: \"Dapat Didaur Ulang\", color: \"#3FA34D\" },\n      { id: \"tidak\", label: \"Tidak Dapat Didaur Ulang\", color: \"#E5484D\" }\n    ],\n    items: [\n      { id: \"botol-pet\", label: \"Botol plastik PET\", category: \"dapat\", explain: \"Plastik PET mudah dilebur ulang menjadi bahan baru.\" },\n      { id: \"kaleng\", label: \"Kaleng aluminium\", category: \"dapat\", explain: \"Logam aluminium bisa didaur ulang berulang kali.\" },\n      { id: \"koran\", label: \"Koran bekas\", category: \"dapat\", explain: \"Serat kertas bisa diolah kembali menjadi kertas baru.\" },\n      { id: \"botol-kaca\", label: \"Botol kaca\", category: \"dapat\", explain: \"Kaca dapat dilebur dan dibentuk ulang tanpa batas.\" },\n      { id: \"puntung\", label: \"Puntung rokok\", category: \"tidak\", explain: \"Residu beracun dan bercampur bahan kimia; tidak didaur ulang.\" },\n      { id: \"piring-kertas\", label: \"Piring kertas bekas\", category: \"tidak\", explain: \"Berminyak dan kotor sehingga sulit diproses ulang.\" },\n      { id: \"sedotan\", label: \"Sedotan plastik sekali pakai\", category: \"tidak\", explain: \"Terlalu kecil dan tipis; tidak semua plastik bisa didaur ulang.\" },\n      { id: \"styrofoam\", label: \"Styrofoam bekas\", category: \"tidak\", explain: \"Sulit terurai dan sulit didaur ulang.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world: { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"tong-sampah\", w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"genangan\", w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong: { score: -20, sfx: \"hit\", showExplain: true },\n    hazard: { lives: -1, sfx: \"hit\", shake: 8 },\n    combo: { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```"
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "id": "trap-doublejump",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 168,
+        "prompt_tokens": 5938,
+        "total_tokens": 6106,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 6675,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: pemilahan sampah organik dan anorganik.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 324,
+        "prompt_tokens": 6129,
+        "total_tokens": 6453,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 4983,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A, dan tolong tambahkan lompat ganda serta power-up perisai.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 346,
+        "prompt_tokens": 6475,
+        "total_tokens": 6821,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 6196,
+      "reasoningChars": 0
+    },
+    {
+      "user": "C",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 134,
+        "prompt_tokens": 6825,
+        "total_tokens": 6959,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 3727,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 258,
+        "prompt_tokens": 6963,
+        "total_tokens": 7221,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 5887,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 679,
+        "prompt_tokens": 7225,
+        "total_tokens": 7904,
+        "prompt_tokens_details": {
+          "cached_tokens": 6912
+        }
+      },
+      "ms": 9537,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 941,
+        "prompt_tokens": 7910,
+        "total_tokens": 8851,
+        "prompt_tokens_details": {
+          "cached_tokens": 7168
+        }
+      },
+      "ms": 10616,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio 🎮\n\nSaat ini AISYS Engine Core baru mendukung genre **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain seperti Platformer, Top-Down Shooter, atau Puzzle Grid masih dalam pengembangan.\n\nSebelum kita mulai merancang, saya perlu tahu arah game Anda:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks), atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: pemilahan sampah organik dan anorganik."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang bagus! Pemilahan sampah adalah topik yang sangat cocok dijadikan mekanik inti — pemain belajar mengelompokkan benda berdasarkan sifatnya sambil bermain.\n\nSekarang saya perlu menentukan **skema kategori** yang akan dipakai. Berikut 3 opsi:\n\n**Opsi A — Organik vs Anorganik (2 kategori)**\n- **Organik:** kulit pisang, daun kering, sisa nasi, sisa sayur\n- **Anorganik:** botol plastik, kaleng minuman, kantong plastik, kertas koran\n\n**Opsi B — Organik, Anorganik, dan B3 (3 kategori)**\n- **Organik:** kulit pisang, daun kering, sisa nasi\n- **Anorganik:** botol plastik, kaleng minuman, kertas koran\n- **B3 (Bahan Berbahaya):** baterai bekas, lampu neon bekas, obat kedaluwarsa\n\n**Opsi C — Organik, Daur Ulang, dan Residu (3 kategori)**\n- **Organik:** kulit pisang, daun kering, sisa nasi\n- **Daur Ulang:** botol plastik, kaleng minuman, kertas koran\n- **Residu:** puntung rokok, styrofoam, pampers bekas\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A, dan tolong tambahkan lompat ganda serta power-up perisai."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan A dicatat — skema **Organik vs Anorganik** yang bersih dan fokus. 👍\n\nNamun saya perlu jujur soal dua permintaan tambahan Anda: **lompat ganda** dan **power-up perisai** belum tersedia di AISYS Engine Core v0.1. Mekanik yang didukung saat ini hanya lompat tunggal, dan belum ada sistem power-up sama sekali. Saya tidak bisa menjanjikannya karena manifest-nya akan ditolak engine.\n\nSebagai gantinya, saya bisa menawarkan pengalaman terdekat: **tingkat kesulitan Santai** (lari lebih lambat, nyawa lebih banyak) agar terasa lebih ramah dan memberi ruang bernapas — cocok bila Anda ingin nuansa \"lebih aman\". Kita bisa bahas itu nanti di sesi kesulitan.\n\nSekarang, lanjut ke gaya visual. Berikut 4 preset yang tersedia:\n\n- **Opsi A, Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n- **Opsi B, Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n- **Opsi C, Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n- **Opsi D, Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "C"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang tepat! **Cartoon** dengan langit cerah dan bukit hijau akan sangat pas untuk tema lingkungan dan pemilahan sampah — terasa ramah dan mengundang. 🌿\n\nSekarang kita tentukan tingkat kesulitannya:\n\n- **Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Normal dicatat — tempo seimbang, pas untuk pemain umum. ⚖️\n\nSekarang bagian terpenting untuk game edukasi: **miskonsepsi** apa yang paling ingin kita luruskan lewat item jebakan. Berikut 3 miskonsepsi umum tentang pemilahan sampah:\n\n- **Opsi A:** \"Kertas dan kardus dianggap sampah organik karena berasal dari tumbuhan.\" — Padahal kertas yang sudah diolah (koran, kardus) digolongkan anorganik karena sulit terurai alami dan justru bisa didaur ulang.\n\n- **Opsi B:** \"Tulang ayam dan duri ikan dianggap anorganik karena keras.\" — Padahal keduanya berasal dari makhluk hidup sehingga termasuk organik dan bisa membusuk.\n\n- **Opsi C:** \"Kantong plastik yang bertuliskan 'biodegradable' dianggap organik.\" — Padahal tetap digolongkan anorganik karena butuh waktu sangat lama dan tidak bisa dikomposkan seperti sampah dapur.\n\nMiskonsepsi mana yang paling ingin diluruskan lewat game ini (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan bagus! Miskonsepsi \"kertas = organik\" memang sangat umum dan cocok diuji lewat item jebakan. 📄\n\nBerikut dokumen rancangan lengkapnya:\n\n**📋 GAME BLUEPRINT / PRD (Product Requirements Document)**\n\n**Identitas Game**\n- **Judul:** Pilah Sampah Run\n- **Genre:** Endless Runner\n- **Tipe:** Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis di dunia cartoon, melompat menghindari rintangan (batu, genangan), dan mengambil item sampah.\n- Target kategori tampil di HUD (misal \"Organik\"). Pemain harus mengambil item yang cocok dengan target; item salah memunculkan penjelasan singkat.\n- Skor bertambah dari item benar dan jarak tempuh; combo memperbesar skor. Item salah mengurangi skor.\n- Nyawa berkurang saat menabrak rintangan. Game berakhir saat nyawa habis.\n\n**2. Konten Belajar**\n- **Subjek:** Lingkungan Hidup\n- **Konsep:** Pemilahan sampah organik dan anorganik\n- **Tujuan Pembelajaran:** Mengelompokkan sampah berdasarkan sifatnya (mudah terurai vs sulit terurai)\n- **Kategori & Item:**\n  - **Organik** (mudah terurai alami):\n    - Kulit pisang — terurai alami, bisa jadi kompos\n    - Daun kering — bahan alami yang membusuk menjadi kompos\n    - Sisa nasi — sisa makanan cepat membusuk\n    - Sisa sayur — bahan alami yang mudah terurai\n  - **Anorganik** (sulit terurai):\n    - Botol plastik — sulit terurai, bisa didaur ulang\n    - Kaleng minuman — logam yang bisa didaur ulang\n    - Kantong plastik — sangat lama terurai\n    - Kertas koran — sudah diolah, sulit terurai alami, bisa didaur ulang\n- **Miskonsepsi yang diuji:** \"Kertas dan kardus dianggap organik karena berasal dari tumbuhan\" — kertas koran ditempatkan sebagai item **anorganik** dengan penjelasan pelurusan.\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Cartoon** (langit cerah, bukit hijau, outline tegas)\n\n**4. Tingkat Kesulitan**\n- **Normal** (tempo seimbang)\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti kategori, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Game edukasi pemilahan sampah organik vs anorganik dengan tema Cartoon dan kesulitan Normal siap dibangun; item \"Kertas koran\" sengaja ditaruh di kategori anorganik untuk meluruskan miskonsepsi.\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"pilah-sampah-run\", title: \"Pilah Sampah Run\", seed: \"pilah-sampah-01\",\n  theme: { preset: \"cartoon\" },\n\n  learning: {\n    subject: \"Lingkungan Hidup\",\n    concept: \"Pemilahan sampah organik dan anorganik\",\n    objectives: [\"Mengelompokkan sampah berdasarkan sifatnya: mudah terurai atau sulit terurai\"],\n    misconceptions: [\"Kertas dan kardus dianggap sampah organik karena berasal dari tumbuhan\"],\n    mode: \"category\",\n    categories: [\n      { id: \"organik\",   label: \"Organik\",   color: \"#3FA34D\" },\n      { id: \"anorganik\", label: \"Anorganik\", color: \"#2F80ED\" }\n    ],\n    items: [\n      { id: \"kulit-pisang\", label: \"Kulit pisang\",   category: \"organik\",   explain: \"Bahan alami yang cepat terurai dan bisa dijadikan kompos.\" },\n      { id: \"daun-kering\",  label: \"Daun kering\",    category: \"organik\",   explain: \"Bahan alami yang membusuk menjadi kompos.\" },\n      { id: \"sisa-nasi\",    label: \"Sisa nasi\",      category: \"organik\",   explain: \"Sisa makanan yang cepat membusuk dan bisa dikomposkan.\" },\n      { id: \"sisa-sayur\",   label: \"Sisa sayur\",     category: \"organik\",   explain: \"Bahan alami yang mudah terurai oleh mikroba.\" },\n      { id: \"botol\",        label: \"Botol plastik\",  category: \"anorganik\", explain: \"Sulit terurai alami; bisa didaur ulang.\" },\n      { id: \"kaleng\",       label: \"Kaleng minuman\", category: \"anorganik\", explain: \"Logam yang bisa didaur ulang berulang kali.\" },\n      { id: \"kantong\",      label: \"Kantong plastik\", category: \"anorganik\", explain: \"Sangat lama terurai; kurangi pemakaiannya.\" },\n      { id: \"koran\",        label: \"Kertas koran\",   category: \"anorganik\", explain: \"Kertas sudah diolah: sulit terurai alami, tetapi bisa didaur ulang.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"batu\",     w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"genangan\", w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```"
+    }
+  ]
+}

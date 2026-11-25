@@ -1,0 +1,215 @@
+{
+  "_note": "Lampiran B: 5 topik x 4 variasi (2 mudah, 1 miskonsepsi eksplisit, 1 arcade) + 2 PRD jebakan. Jawaban pengguna disimulasikan per sesi; PRD tetap dihasilkan model lewat alur Sesi 1-6. Varian holdout (ditambah setelah run1): topik yang tidak dipakai sebagai contoh di prompt v2.1, untuk menguji aturan kategori tanpa bias.",
+  "trials": [
+    {
+      "id": "ling-mudah-1",
+      "topic": "lingkungan",
+      "variant": "mudah",
+      "s1": "Edukasi, topik: pemilahan sampah organik, anorganik, dan B3.",
+      "s3": "C",
+      "s4": "Normal"
+    },
+    {
+      "id": "ling-mudah-2",
+      "topic": "lingkungan",
+      "variant": "mudah",
+      "s1": "Edukasi, topik: sumber energi terbarukan dan tidak terbarukan.",
+      "s3": "A",
+      "s4": "Santai"
+    },
+    {
+      "id": "ling-misk",
+      "topic": "lingkungan",
+      "variant": "miskonsepsi",
+      "s1": "Edukasi, topik: bahan yang bisa dan tidak bisa didaur ulang.",
+      "s3": "C",
+      "s4": "Normal",
+      "s5": "Saya ingin meluruskan miskonsepsi bahwa semua jenis plastik bisa didaur ulang."
+    },
+    {
+      "id": "ling-arcade",
+      "topic": "lingkungan",
+      "variant": "arcade",
+      "s1": "Arcade murni, bertema hutan hujan tropis.",
+      "s3": "C",
+      "s4": "Menantang"
+    },
+    {
+      "id": "info-mudah-1",
+      "topic": "informatika",
+      "variant": "mudah",
+      "s1": "Edukasi, topik: perangkat input dan perangkat output komputer.",
+      "s3": "B",
+      "s4": "Normal"
+    },
+    {
+      "id": "info-mudah-2",
+      "topic": "informatika",
+      "variant": "mudah",
+      "s1": "Edukasi, topik: perangkat jaringan komputer berdasarkan lapisan model OSI (fisik, data link, network).",
+      "s3": "B",
+      "s4": "Normal"
+    },
+    {
+      "id": "info-misk",
+      "topic": "informatika",
+      "variant": "miskonsepsi",
+      "s1": "Edukasi, topik: perangkat keras (hardware) dan perangkat lunak (software).",
+      "s3": "B",
+      "s4": "Santai",
+      "s5": "Saya ingin meluruskan miskonsepsi bahwa sistem operasi adalah perangkat keras karena sudah terpasang di komputer."
+    },
+    {
+      "id": "info-arcade",
+      "topic": "informatika",
+      "variant": "arcade",
+      "s1": "Arcade murni, bertema dunia siber dan sirkuit digital.",
+      "s3": "B",
+      "s4": "Menantang"
+    },
+    {
+      "id": "bio-mudah-1",
+      "topic": "biologi",
+      "variant": "mudah",
+      "s1": "Edukasi, topik: hewan vertebrata dan invertebrata.",
+      "s3": "C",
+      "s4": "Normal"
+    },
+    {
+      "id": "bio-mudah-2",
+      "topic": "biologi",
+      "variant": "mudah",
+      "s1": "Edukasi, topik: hewan herbivora, karnivora, dan omnivora.",
+      "s3": "C",
+      "s4": "Santai"
+    },
+    {
+      "id": "bio-misk",
+      "topic": "biologi",
+      "variant": "miskonsepsi",
+      "s1": "Edukasi, topik: kelas hewan mamalia, reptil, dan ikan.",
+      "s3": "A",
+      "s4": "Normal",
+      "s5": "Saya ingin meluruskan miskonsepsi bahwa paus dan lumba-lumba termasuk ikan."
+    },
+    {
+      "id": "bio-arcade",
+      "topic": "biologi",
+      "variant": "arcade",
+      "s1": "Arcade murni, bertema petualangan di dalam tubuh manusia.",
+      "s3": "D",
+      "s4": "Normal"
+    },
+    {
+      "id": "eko-mudah-1",
+      "topic": "ekonomi",
+      "variant": "mudah",
+      "s1": "Edukasi, topik: kebutuhan primer, sekunder, dan tersier.",
+      "s3": "A",
+      "s4": "Normal"
+    },
+    {
+      "id": "eko-mudah-2",
+      "topic": "ekonomi",
+      "variant": "mudah",
+      "s1": "Edukasi, topik: barang konsumsi dan barang modal.",
+      "s3": "A",
+      "s4": "Santai"
+    },
+    {
+      "id": "eko-misk",
+      "topic": "ekonomi",
+      "variant": "miskonsepsi",
+      "s1": "Edukasi, topik: pajak pusat dan pajak daerah di Indonesia.",
+      "s3": "A",
+      "s4": "Normal",
+      "s5": "Saya ingin meluruskan miskonsepsi bahwa pajak kendaraan bermotor adalah pajak pusat."
+    },
+    {
+      "id": "eko-arcade",
+      "topic": "ekonomi",
+      "variant": "arcade",
+      "s1": "Arcade murni, bertema pasar tradisional yang ramai.",
+      "s3": "D",
+      "s4": "Menantang"
+    },
+    {
+      "id": "sej-mudah-1",
+      "topic": "sejarah",
+      "variant": "mudah",
+      "s1": "Edukasi, topik: kerajaan Hindu-Buddha dan kerajaan Islam di Nusantara.",
+      "s3": "D",
+      "s4": "Normal"
+    },
+    {
+      "id": "sej-mudah-2",
+      "topic": "sejarah",
+      "variant": "mudah",
+      "s1": "Edukasi, topik: tokoh proklamasi dan tokoh Sumpah Pemuda.",
+      "s3": "A",
+      "s4": "Santai"
+    },
+    {
+      "id": "sej-misk",
+      "topic": "sejarah",
+      "variant": "miskonsepsi",
+      "s1": "Edukasi, topik: peristiwa sebelum dan sesudah proklamasi kemerdekaan 17 Agustus 1945.",
+      "s3": "D",
+      "s4": "Normal",
+      "s5": "Saya ingin meluruskan miskonsepsi bahwa Sumpah Pemuda terjadi setelah proklamasi kemerdekaan."
+    },
+    {
+      "id": "sej-arcade",
+      "topic": "sejarah",
+      "variant": "arcade",
+      "s1": "Arcade murni, bertema penjelajah candi kuno.",
+      "s3": "D",
+      "s4": "Normal"
+    },
+    {
+      "id": "trap-doublejump",
+      "topic": "lingkungan",
+      "variant": "jebakan",
+      "s1": "Edukasi, topik: pemilahan sampah organik dan anorganik.",
+      "s2": "A, dan tolong tambahkan lompat ganda serta power-up perisai.",
+      "s3": "C",
+      "s4": "Normal",
+      "trap": "lompat ganda + power-up",
+      "trapKeywords": [
+        "lompat ganda",
+        "double jump",
+        "power-up",
+        "perisai"
+      ]
+    },
+    {
+      "id": "trap-sequence",
+      "topic": "informatika",
+      "variant": "jebakan",
+      "s1": "Edukasi, topik: urutan langkah algoritma bubble sort. Pemain harus mengambil langkah-langkahnya sesuai urutan yang benar dari langkah pertama sampai terakhir.",
+      "s3": "B",
+      "s4": "Normal",
+      "trap": "urutan token (mode sequence)",
+      "trapKeywords": [
+        "urutan",
+        "sequence"
+      ]
+    },
+    {
+      "id": "bio-holdout",
+      "topic": "biologi",
+      "variant": "holdout",
+      "s1": "Edukasi, topik: organ tubuh manusia berdasarkan sistem pencernaan, pernapasan, dan peredaran darah.",
+      "s3": "C",
+      "s4": "Normal"
+    },
+    {
+      "id": "eko-holdout",
+      "topic": "ekonomi",
+      "variant": "holdout",
+      "s1": "Edukasi, topik: pelaku kegiatan ekonomi (rumah tangga konsumen, rumah tangga produsen, dan pemerintah).",
+      "s3": "A",
+      "s4": "Normal"
+    }
+  ]
+}

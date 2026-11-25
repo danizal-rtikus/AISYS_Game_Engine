@@ -288,7 +288,12 @@ Diuji di Chromium (panel browser Studio, terlihat di layar) dengan halaman uji s
    - Perintah tetap di aplikasi yang meminta HTML diganti versi manifest: direktif perbaikan (`App.tsx`), tombol "Buat Ulang Kode Utuh" (ChatPanel, PreviewPanel), dan auto-continuation (pagar ```js dan penutup `// END_OF_MANIFEST`). Riwayat yang dikirim ulang ke model memakai pagar ```js untuk manifest.
    - Ekstraktor: blok manifest yang diawali `// CATATAN: ...` (diwajibkan BATAS FITUR Lampiran A) sebelumnya **tidak terekstrak sama sekali**; sekarang diterima.
    - Belum diuji: percakapan nyata dengan model (itu langkah 4).
-4. **Jalankan evaluasi 20 percobaan** (Lampiran B) dan catat tabel metrik per percobaan. Laporkan hasilnya apa adanya, termasuk kegagalan.
+4. ~~**Jalankan evaluasi 20 percobaan**~~ **Selesai 25 Nov 2026 (run1, `deepseek-v4-flash`, 22 percobaan).** Analisis: `docs/eval/2026-11-25-run1-analisis.md`; data mentah dan transkrip: `scripts/eval/results/run1/`; harness: `scripts/eval/run-eval.mjs` + `summarize.mjs` (API key dari `.env.local`, tidak pernah dicetak).
+   - Semua metrik otomatis lulus: 22/22 `stop`, playable, lolos validator (0 clamp), selfTest (Node 8/8 dan Chromium 9/9 termasuk `render`), 0 field asing; median 11,4 dtk dan 1.004 token. Perbaikan otomatis tidak pernah dipicu.
+   - Jebakan 1/2 menurut definisi ketat: `trap-doublejump` ditolak dengan benar di chat Sesi 2, jadi tanpa `// CATATAN`. Disarankan mengubah definisi metrik.
+   - Konten: 1 game (`sej-mudah-2`) memuat klasifikasi salah (Fatmawati sebagai "Proklamator"), 1 game label kategori tidak konsisten; 2 game < 8 item. **Tinjauan dosen tetap wajib.**
+   - Catatan: Studio memakai `deepseek-flash`, bukan model yang dievaluasi.
+   - **Uji ulang run2 (prompt v2.1, 10 percobaan termasuk 2 holdout):** `docs/eval/2026-11-25-run2-v21-analisis.md`. Aturan 8-16 item bekerja (10/10). Kesalahan spesifik run1 hilang, tetapi kesalahan fakta baru muncul di item lain (3 dari 9 game bermateri belajar), jadi tinjauan dosen tetap wajib. Ditemukan juga model lupa menutup blok kode; ekstraktor sekarang menerima kode lengkap tanpa pagar penutup. Prompt v2.2 mengganti satu contoh yang diperdebatkan (kertas); v2.2 belum diuji ulang.
 5. **Tinjau hasil:** bila kegagalan terpusat di satu jenis, perbaiki prompt; bila validator terlalu sering menolak atau selfTest gagal pada manifest yang wajar, perbaiki runtime. Ulangi 20 percobaan setelah perubahan besar.
 6. Setelah lolos: uji main nyata (5 game terbaik × 3 orang) untuk kalibrasi jendela 120 ms, dan uji di ponsel asli (Android Chrome, iOS Safari).
 
@@ -323,7 +328,7 @@ Diuji di Chromium (panel browser Studio, terlihat di layar) dengan halaman uji s
 | `src/components/PreviewPanel.tsx` | Iframe sandbox, penyatuan runtime + manifest, templat ekspor, fokus keyboard |
 | `src/App.tsx` | Jembatan pesan iframe, ekspor JSON analitik |
 | `src/components/ChatPanel.tsx` | Kartu status generasi dan tombol "Lanjutkan" |
-| `src/config/defaultSkill.ts` dan `public/skill-config.json` | System prompt (versi 2.0, alur manifest). JSON dimuat saat aplikasi dibuka dan menimpa konstanta TS, jadi keduanya harus identik. `defaultSkill.ts` di akar repo adalah salinan lama yang tidak dipakai |
+| `src/config/defaultSkill.ts` dan `public/skill-config.json` | System prompt (versi 2.2, alur manifest; JSON dibuat dari TS dengan `scripts/build-skill-config.mjs`). JSON dimuat saat aplikasi dibuka dan menimpa konstanta TS, jadi keduanya harus identik. `defaultSkill.ts` di akar repo adalah salinan lama yang tidak dipakai |
 | `src/utils/storage.ts` | `localStorage` dan migrasi prompt |
 | `public/review/` | Salinan `htmlExtractor.ts`, `PreviewPanel.tsx`, `App.tsx` untuk ditinjau |
 
@@ -346,6 +351,8 @@ Diuji di Chromium (panel browser Studio, terlihat di layar) dengan halaman uji s
 ---
 
 ## Lampiran A: Prompt Sesi 7 (siap tempel ke `defaultSkill.ts`)
+
+> **Catatan 25 Nov 2026:** lampiran ini adalah snapshot Sesi 7 untuk prompt v2.0. Sumber prompt yang berlaku sekarang adalah `DEFAULT_SKILL_PROMPT` di `src/config/defaultSkill.ts` (v2.1 menambah aturan konsistensi kategori dan total 8-16 item; v2.2 mengganti contoh kertas yang diperdebatkan). Setelah mengubah prompt, jalankan `node scripts/build-skill-config.mjs <versi>` untuk membuat ulang `public/skill-config.json`.
 
 Salin isi di antara dua penanda berikut. Versi ini memuat `theme`, `world.layers`, dan `hud` berdasarkan laporan agen; setelah verifikasi runtime (langkah 2), sesuaikan bila ada perbedaan.
 
@@ -537,7 +544,7 @@ AISYS.defineGame({
 | Durasi median | < 20 dtk (perkiraan wajar: 12-25 dtk) |
 | `completion_tokens` median | < 4.000 |
 | Penggunaan field di luar cheat-sheet | < 5% |
-| PRD jebakan ditangani dengan benar (tidak membuat mekanik yang tidak ada, ada `// CATATAN`) | 2 dari 2 |
+| PRD jebakan ditangani dengan benar: tidak membuat mekanik/field yang tidak ada, game lolos, dan pengguna diberi tahu bahwa fitur belum tersedia, lewat `// CATATAN` di manifest **atau** di chat sebelum manifest (pesan harus menyebut fitur jebakannya; diperbarui 25 Nov 2026 setelah run1) | 2 dari 2 |
 
 **Penilaian manual (dosen atau pengajar):**
 - **Akurasi konten:** setiap `explain` dan klasifikasi item diperiksa. Target ≥ 95% item benar, dan **tidak ada** item yang salah pada game yang akan dibagikan.

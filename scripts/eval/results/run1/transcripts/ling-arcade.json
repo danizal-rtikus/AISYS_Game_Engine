@@ -1,0 +1,167 @@
+{
+  "id": "ling-arcade",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 176,
+        "prompt_tokens": 5632,
+        "total_tokens": 5808,
+        "prompt_tokens_details": {
+          "cached_tokens": 5376
+        }
+      },
+      "ms": 5093,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Arcade murni, bertema hutan hujan tropis.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 272,
+        "prompt_tokens": 5826,
+        "total_tokens": 6098,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 9510,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 203,
+        "prompt_tokens": 6102,
+        "total_tokens": 6305,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 8325,
+      "reasoningChars": 0
+    },
+    {
+      "user": "C",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 133,
+        "prompt_tokens": 6309,
+        "total_tokens": 6442,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 4598,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Menantang",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 72,
+        "prompt_tokens": 6448,
+        "total_tokens": 6520,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 3871,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Silakan Anda yang memberi nama.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 458,
+        "prompt_tokens": 6530,
+        "total_tokens": 6988,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 7276,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 487,
+        "prompt_tokens": 6994,
+        "total_tokens": 7481,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 6426,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Senang sekali Anda ingin membuat game baru bersama AISYS Game Studio. 👋\n\nSaat ini AISYS Engine Core baru mendukung genre **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain (platformer, shooter, puzzle, dll.) sedang dalam pengembangan dan segera hadir.\n\nSebelum kita mulai merancang, saya perlu tahu arah game Anda:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks), atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Arcade murni, bertema hutan hujan tropis."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang menyenangkan! 🌴 Hutan hujan tropis memberi banyak bahan visual alami untuk sebuah arcade runner.\n\nKarena ini **Arcade Murni**, kita akan fokus pada skor dan refleks tanpa materi belajar. Sekarang saya perlu menentukan \"dunia\" dan jenis rintangannya.\n\nDari opsi tema dunia dan rintangan berikut, mana yang paling Anda sukai?\n\n- **Opsi A — Lantai Hutan:** pemain berlari di jalur tanah hutan. Rintangan berupa batu berlumut, akar pohon melintang, dan genangan air hujan. Nuansa tenang namun liar.\n\n- **Opsi B — Kanopi & Sulur:** pemain berlari di antara pepohonan raksasa. Rintangan berupa sulur menjuntai, tunggul pohon tumbang, dan semak berduri. Nuansa rimba lebat dan rimbun.\n\n- **Opsi C — Tepi Sungai Hutan:** pemain berlari di bibir sungai. Rintangan berupa batu sungai, kayu apung, dan kabut air. Nuansa segar dan berair.\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang mantap! 🌿 **Lantai Hutan** dengan batu berlumut, akar melintang, dan genangan air hujan akan terasa alami dan cocok untuk arcade refleks.\n\nSekarang kita masuk ke gaya visual. AISYS menyediakan 4 preset tema:\n\n- **Opsi A — Clean Modern:** bersih dan serius, latar biru gelap. Cocok untuk akademik dan bisnis.\n- **Opsi B — Neon:** latar gelap dengan pendaran cyan dan magenta. Cocok untuk teknologi dan siber.\n- **Opsi C — Cartoon:** langit cerah, bukit hijau, outline tegas. Cocok untuk anak, alam, dan lingkungan.\n- **Opsi D — Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "C"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan bagus! 🎨 **Cartoon** dengan langit cerah dan outline tegas akan membuat hutan tropis terasa ramah dan hidup — pas untuk arcade yang menyenangkan.\n\nSekarang kita tentukan tingkat kesulitannya:\n\n- **Santai:** lari lebih lambat dan percepatan pelan. Cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Menantang"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan menantang! 🔥 Tempo cepat akan menguji refleks pemain dengan baik.\n\nKarena ini **Arcade Murni**, kita lewati sesi fokus belajar. Satu hal terakhir sebelum saya susun blueprint:\n\nApa judul yang Anda inginkan untuk game ini, atau boleh saya yang memberi nama?"
+    },
+    {
+      "role": "user",
+      "content": "Silakan Anda yang memberi nama."
+    },
+    {
+      "role": "assistant",
+      "content": "Siap! Saya akan memberi nama **\"Rimba Lari\"** — singkat, berirama, dan langsung menggambarkan aksi berlari di hutan tropis.\n\nBerikut blueprint lengkapnya:\n\n**📋 GAME BLUEPRINT / PRD (Product Requirements Document)**\n\n**Identitas Game**\n- **Judul:** Rimba Lari\n- **Genre:** Endless Runner\n- **Tipe:** Arcade Murni\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis di lantai hutan tropis dan melompat (satu tombol) untuk menghindari rintangan.\n- Skor bertambah seiring jarak tempuh dan dari mengambil koin yang muncul di jalur.\n- Rintangan: batu berlumut, akar pohon melintang, dan genangan air hujan.\n- Kecepatan lari meningkat bertahap seiring waktu (percepatan tinggi, sesuai mode Menantang).\n- Kondisi kalah: nyawa habis (3 nyawa). Setiap tabrakan mengurangi 1 nyawa dengan efek getar layar.\n\n**2. Konten Belajar**\n- Tidak ada (mode arcade murni). Item berupa koin skor generik.\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Cartoon** — langit cerah, bukit hijau, outline tegas, nuansa ramah dan alami.\n\n**4. Tingkat Kesulitan**\n- **Menantang** — lari lebih cepat dan percepatan lebih tinggi.\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti rintangan, ubah judul, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"rimba-lari\", title: \"Rimba Lari\", seed: \"rimba-lari-01\",\n  theme: { preset: \"cartoon\" },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 420, maxSpeed: 720, accel: 10 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"batu-lumut\", w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"akar-pohon\", w: 90, h: 24, weight: 2 },\n      { type: \"hazard\", id: \"genangan\",   w: 70, h: 90, weight: 1 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 12, speed: 30 }\n  }\n});\n// END_OF_MANIFEST\n```\n\n**Rimba Lari** adalah arcade runner bertema hutan tropis dengan tema Cartoon dan kesulitan Menantang, di mana pemain melompati batu berlumut, akar, dan genangan sambil mengumpulkan koin. Saya memakai rintangan genangan yang tinggi (90) dengan lebar lebih sempit (70) agar tetap bisa dilompati pada kecepatan Menantang."
+    }
+  ]
+}

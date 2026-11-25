@@ -1,0 +1,173 @@
+{
+  "id": "eko-arcade",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 166,
+        "prompt_tokens": 5632,
+        "total_tokens": 5798,
+        "prompt_tokens_details": {
+          "cached_tokens": 5376
+        }
+      },
+      "ms": 4271,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Arcade murni, bertema pasar tradisional yang ramai.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 329,
+        "prompt_tokens": 5816,
+        "total_tokens": 6145,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 8806,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 191,
+        "prompt_tokens": 6149,
+        "total_tokens": 6340,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 5810,
+      "reasoningChars": 0
+    },
+    {
+      "user": "D",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 125,
+        "prompt_tokens": 6345,
+        "total_tokens": 6470,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 4421,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Menantang",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 65,
+        "prompt_tokens": 6477,
+        "total_tokens": 6542,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 3843,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Silakan Anda yang memberi nama.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 451,
+        "prompt_tokens": 6552,
+        "total_tokens": 7003,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 8850,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 462,
+        "prompt_tokens": 7009,
+        "total_tokens": 7471,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 5858,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Senang sekali Anda ingin membuat game baru bersama AISYS Game Studio. 👋\n\nSaat ini AISYS Engine Core membangun game bertipe **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain sedang disiapkan dan segera hadir.\n\nSebelum kita mulai merancang, saya perlu tahu arah game Anda:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks) atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Arcade murni, bertema pasar tradisional yang ramai."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang menyenangkan! Tema pasar tradisional yang ramai pasti terasa hidup dan penuh warna. 🛒\n\nKarena ini **Arcade Murni**, kita akan fokus pada hiburan skor dan refleks — tanpa materi belajar, item berupa koin skor. Sekarang saya perlu menentukan **tema dunia dan jenis rintangan** yang akan muncul di lintasan lari.\n\nBerikut 3 opsi skema dunia untuk tema pasar tradisional:\n\n**Opsi A — Pasar Pagi yang Padat**\n- Latar: lorong pasar dengan deretan lapak dan pedagang\n- Rintangan: keranjang sayur terbalik, tumpukan kardus, genangan air\n- Nuansa: sibuk, hangat, penuh aktivitas pagi\n\n**Opsi B — Pasar Malam dengan Lampu**\n- Latar: pasar malam dengan lampu gantung dan tenda\n- Rintangan: bangku kayu, ember plastik, gerobak kecil\n- Nuansa: meriah, cahaya hangat, suasana malam\n\n**Opsi C — Pasar Buah dan Rempah**\n- Latar: kios buah dengan peti dan karung rempah\n- Rintangan: peti kayu, karung beras, keranjang anyaman\n- Nuansa: warna-warni, aroma rempah, klasik\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan bagus! **Opsi A — Pasar Pagi yang Padat** akan memberi nuansa sibuk dan hangat yang khas. 🌅\n\nSekarang kita masuk ke gaya visual. AISYS menyediakan 4 preset tema visual:\n\n- **Opsi A, Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n- **Opsi B, Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n- **Opsi C, Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n- **Opsi D, Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "D"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang tepat! **Opsi D, Retro Pixel** akan memberi nuansa arcade klasik yang pas untuk pasar pagi yang ramai. 🕹️\n\nSekarang kita tentukan tingkat kesulitannya:\n\n- **Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Menantang"
+    },
+    {
+      "role": "assistant",
+      "content": "Tantangan yang seru! **Menantang** akan membuat pasar pagi terasa benar-benar hiruk-pikuk. 🔥\n\nSekarang tinggal satu hal lagi: nama game-nya.\n\nApa judul yang Anda inginkan untuk game ini, atau boleh saya yang memberi nama?"
+    },
+    {
+      "role": "user",
+      "content": "Silakan Anda yang memberi nama."
+    },
+    {
+      "role": "assistant",
+      "content": "Siap! Saya usulkan judul **\"Pasar Pagi Sprint\"** — singkat, ritmis, dan langsung menggambarkan aksi berlari di pasar yang ramai. 🏃‍♂️🛒\n\nBerikut Game Blueprint lengkapnya:\n\n**📋 GAME BLUEPRINT / PRD**\n\n**Identitas Game**\n- Judul: Pasar Pagi Sprint\n- Genre: Endless Runner\n- Tipe: Arcade Murni\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis menyusuri lorong pasar pagi yang padat.\n- Pemain melompat menghindari rintangan dan mengambil koin untuk mencetak skor.\n- Skor bertambah dari koin yang diambil dan dari jarak tempuh; combo memperbesar perolehan.\n- Rintangan: keranjang sayur terbalik, tumpukan kardus, dan genangan air.\n- Kondisi kalah: nyawa habis (3 nyawa) setelah menabrak rintangan.\n\n**2. Konten Belajar**\n- Tidak ada (mode Arcade Murni). Item berupa koin skor generik.\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Retro Pixel** — nuansa arcade klasik dengan warna kuning dan oranye, cocok untuk suasana pasar pagi yang hangat dan ramai.\n\n**4. Tingkat Kesulitan**\n- **Menantang** — lari lebih cepat dan percepatan lebih tinggi.\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti rintangan, ubah judul, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Game arcade \"Pasar Pagi Sprint\" siap dimainkan: lari di pasar pagi yang padat, ambil koin, dan lompati keranjang, kardus, serta genangan. Saya memakai tingkat Menantang (3 nyawa) dan preset Retro Pixel sesuai blueprint.\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"pasar-pagi-sprint\", title: \"Pasar Pagi Sprint\", seed: \"pasar-pagi-01\",\n  theme: { preset: \"retro-pixel\" },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 420, maxSpeed: 720, accel: 10 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"keranjang\", w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"kardus\",    w: 60, h: 70, weight: 2 },\n      { type: \"hazard\", id: \"genangan\",  w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: false },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 12, speed: 30 }\n  }\n});\n// END_OF_MANIFEST\n```"
+    }
+  ]
+}

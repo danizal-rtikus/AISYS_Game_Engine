@@ -118,9 +118,21 @@ export function extractHtmlFromStream(fullText: string): ExtractorResult {
   const closingIdx = remainingText.indexOf('```');
 
   if (closingIdx === -1) {
-    // Still actively streaming!
+    // No closing fence: either still streaming, or the model forgot the closing ``` (seen in eval
+    // run2: a complete manifest with // END_OF_MANIFEST but no fence). Partial code is never
+    // playable (no end marker / unbalanced syntax), so accepting playable code here is safe.
     const rawCode = remainingText;
     const lines = rawCode.split('\n').length;
+    const trimmedCode = rawCode.trim();
+    if (isGameCodePlayable(trimmedCode)) {
+      return {
+        displayText: beforeCode,
+        code: trimmedCode,
+        isWritingCode: false,
+        isComplete: true,
+        lineCount: trimmedCode.split('\n').length,
+      };
+    }
     return {
       displayText: beforeCode,
       code: rawCode,

@@ -1,0 +1,170 @@
+{
+  "id": "sej-mudah-1",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 162,
+        "prompt_tokens": 5632,
+        "total_tokens": 5794,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 6662,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: kerajaan Hindu-Buddha dan kerajaan Islam di Nusantara.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 367,
+        "prompt_tokens": 5821,
+        "total_tokens": 6188,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 7181,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 205,
+        "prompt_tokens": 6192,
+        "total_tokens": 6397,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 5129,
+      "reasoningChars": 0
+    },
+    {
+      "user": "D",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 116,
+        "prompt_tokens": 6401,
+        "total_tokens": 6517,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 6770,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 230,
+        "prompt_tokens": 6521,
+        "total_tokens": 6751,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 6529,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 579,
+        "prompt_tokens": 6755,
+        "total_tokens": 7334,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 7399,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 1109,
+        "prompt_tokens": 7340,
+        "total_tokens": 8449,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 12761,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Senang sekali bisa membantu Anda merancang game baru di AISYS Game Studio. 🎮\n\nSaat ini AISYS Engine Core baru mendukung genre **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain sedang dalam pengembangan, tapi kita bisa mulai dari sini dulu.\n\nPertanyaan pertama saya:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks) atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: kerajaan Hindu-Buddha dan kerajaan Islam di Nusantara."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan topik yang menarik! Sejarah kerajaan Nusantara selalu kaya cerita. 🏛️\n\nSekarang saya tawarkan beberapa skema kategori untuk game edukasi Anda. Setiap item harus jelas masuk **satu** kategori saja.\n\n**Opsi A — Berdasarkan Agama Kerajaan**\n- **Hindu-Buddha:** Candi Borobudur, Candi Prambanan, Prasasti Yupa, Kitab Negarakertagama\n- **Islam:** Masjid Demak, Masjid Kudus, Kerajaan Samudera Pasai, Kesultanan Aceh\n\n**Opsi B — Berdasarkan Kerajaan Asal**\n- **Majapahit:** Sumpah Palapa, Patih Gajah Mada, Kitab Negarakertagama, Candi Penataran\n- **Sriwijaya:** Prasasti Kedukan Bukit, Candi Muara Jambi, Kerajaan maritim, Bahasa Sanskerta\n- **Demak:** Masjid Agung Demak, Raden Patah, Walisongo, Kerajaan Islam pertama di Jawa\n\n**Opsi C — Berdasarkan Peninggalan**\n- **Candi & Bangunan:** Borobudur, Prambanan, Masjid Demak, Masjid Kudus\n- **Prasasti & Naskah:** Prasasti Yupa, Negarakertagama, Prasasti Kedukan Bukit, Babad Tanah Jawi\n- **Tokoh & Peristiwa:** Gajah Mada, Sumpah Palapa, Raden Patah, Walisongo\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang bagus! Skema **Opsi A** (Hindu-Buddha vs Islam) memberi pembelajar perbandingan yang jelas antara dua periode besar Nusantara. 🕌🛕\n\nSekarang masuk ke gaya visual. AISYS punya 4 preset tema:\n\n- **Opsi A, Clean Modern:** bersih dan serius, latar biru gelap — cocok untuk nuansa akademik dan sejarah.\n- **Opsi B, Neon:** latar gelap dengan pendaran cyan dan magenta — cocok untuk teknologi dan siber.\n- **Opsi C, Cartoon:** langit cerah, bukit hijau, outline tegas — cocok untuk anak dan suasana ceria.\n- **Opsi D, Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye — kesan nostalgia.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "D"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan mantap! **Retro Pixel** akan memberi nuansa klasik yang pas untuk petualangan sejarah. 🕹️\n\nSekarang soal tingkat kesulitan:\n\n- **Santai:** lari lebih lambat dan percepatan pelan — cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Tempo seimbang, pilihan yang aman! ⚖️\n\nSekarang soal fokus belajar. Berikut beberapa miskonsepsi umum tentang kerajaan Hindu-Buddha dan Islam di Nusantara yang bisa diluruskan lewat item jebakan:\n\n- **Opsi A:** \"Majapahit adalah kerajaan Islam\" — sering tertukar karena letaknya di Jawa dan terkenal, padahal Majapahit adalah kerajaan Hindu-Buddha.\n- **Opsi B:** \"Borobudur dan Prambanan dibangun oleh kerajaan yang sama\" — keduanya sering dianggap satu paket, padahal Borobudur warisan Buddha (Syailendra) dan Prambanan warisan Hindu (Sanjaya).\n- **Opsi C:** \"Kerajaan Islam pertama di Nusantara ada di Jawa\" — banyak yang mengira Demak yang pertama, padahal Samudera Pasai di Aceh lebih awal.\n\nMiskonsepsi mana yang paling ingin diluruskan lewat game ini (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan bagus! Miskonsepsi \"Majapahit = kerajaan Islam\" memang sering muncul dan penting diluruskan. 🏛️\n\nBerikut **Game Blueprint / PRD** untuk game Anda:\n\n**📋 GAME BLUEPRINT / PRD**\n\n**Identitas Game**\n- **Judul:** Nusantara Legacy Run\n- **Genre:** Endless Runner\n- **Tipe:** Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis dan melompat menghindari rintangan.\n- Pemain mengambil item peninggalan yang cocok dengan **kategori target** yang tampil di layar (Hindu-Buddha atau Islam).\n- Item benar menambah skor dan combo; item salah mengurangi skor dan memunculkan penjelasan singkat.\n- Target berganti setelah beberapa item benar.\n- Kondisi kalah: nyawa habis (3 nyawa).\n\n**2. Konten Belajar**\n- **Subjek:** Sejarah Indonesia\n- **Konsep:** Perbandingan kerajaan Hindu-Buddha dan Islam di Nusantara\n- **Tujuan Pembelajaran:** Mengelompokkan peninggalan dan tokoh berdasarkan corak kerajaan Hindu-Buddha atau Islam.\n- **Kategori & Item:**\n  - **Hindu-Buddha:** Candi Borobudur, Candi Prambanan, Prasasti Yupa, Kitab Negarakertagama, Patih Gajah Mada\n  - **Islam:** Masjid Demak, Masjid Kudus, Samudera Pasai, Kesultanan Aceh, Raden Patah\n- **Miskonsepsi yang diuji:** \"Majapahit adalah kerajaan Islam\" — diluruskan lewat item Majapahit/Negarakertagama/Gajah Mada yang masuk kategori Hindu-Buddha.\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Retro Pixel** (nuansa arcade klasik, kuning-oranye).\n\n**4. Tingkat Kesulitan**\n- **Normal** (tempo seimbang, 3 nyawa).\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti kategori, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Game edukasi sejarah Nusantara dengan mekanik ambil peninggalan sesuai kategori target (Hindu-Buddha vs Islam), tema Retro Pixel, kesulitan Normal. Asumsi: item Majapahit (Negarakertagama, Gajah Mada) sengaja masuk kategori Hindu-Buddha untuk meluruskan miskonsepsi.\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"nusantara-legacy-run\", title: \"Nusantara Legacy Run\", seed: \"nusantara-01\",\n  theme: { preset: \"retro-pixel\" },\n\n  learning: {\n    subject: \"Sejarah Indonesia\",\n    concept: \"Perbandingan kerajaan Hindu-Buddha dan Islam di Nusantara\",\n    objectives: [\n      \"Mengelompokkan peninggalan dan tokoh berdasarkan corak kerajaan Hindu-Buddha atau Islam\"\n    ],\n    misconceptions: [\n      \"Majapahit dianggap kerajaan Islam padahal bercorak Hindu-Buddha\"\n    ],\n    mode: \"category\",\n    categories: [\n      { id: \"hindu-buddha\", label: \"Hindu-Buddha\", color: \"#E8A33D\" },\n      { id: \"islam\",        label: \"Islam\",        color: \"#3FA34D\" }\n    ],\n    items: [\n      { id: \"borobudur\",   label: \"Candi Borobudur\",     category: \"hindu-buddha\", explain: \"Candi Buddha peninggalan Dinasti Syailendra.\" },\n      { id: \"prambanan\",   label: \"Candi Prambanan\",     category: \"hindu-buddha\", explain: \"Candi Hindu Siwa peninggalan Wangsa Sanjaya.\" },\n      { id: \"yupa\",        label: \"Prasasti Yupa\",       category: \"hindu-buddha\", explain: \"Prasasti tertua Kutai, bercorak Hindu.\" },\n      { id: \"negarakertagama\", label: \"Negarakertagama\", category: \"hindu-buddha\", explain: \"Kitab pujangga Mpu Prapanca dari Majapahit yang Hindu-Buddha.\" },\n      { id: \"gajah-mada\",  label: \"Patih Gajah Mada\",    category: \"hindu-buddha\", explain: \"Mahapatih Majapahit, kerajaan bercorak Hindu-Buddha.\" },\n      { id: \"masjid-demak\", label: \"Masjid Agung Demak\", category: \"islam\",        explain: \"Masjid peninggalan Kesultanan Demak, kerajaan Islam.\" },\n      { id: \"masjid-kudus\", label: \"Masjid Kudus\",       category: \"islam\",        explain: \"Masjid bercorak Islam dengan menara bata khas.\" },\n      { id: \"samudera-pasai\", label: \"Samudera Pasai\",   category: \"islam\",        explain: \"Kesultanan Islam pertama di Nusantara, di Aceh.\" },\n      { id: \"aceh\",        label: \"Kesultanan Aceh\",     category: \"islam\",        explain: \"Kesultanan Islam maritim yang berpusat di Aceh.\" },\n      { id: \"raden-patah\", label: \"Raden Patah\",         category: \"islam\",        explain: \"Pendiri Kesultanan Demak, kerajaan Islam di Jawa.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"batu\",     w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"semak\",    w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```"
+    }
+  ]
+}

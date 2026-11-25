@@ -1,0 +1,170 @@
+{
+  "id": "bio-misk",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 182,
+        "prompt_tokens": 5632,
+        "total_tokens": 5814,
+        "prompt_tokens_details": {
+          "cached_tokens": 5376
+        }
+      },
+      "ms": 4050,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: kelas hewan mamalia, reptil, dan ikan.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 320,
+        "prompt_tokens": 5837,
+        "total_tokens": 6157,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 7326,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 199,
+        "prompt_tokens": 6161,
+        "total_tokens": 6360,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 4116,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 123,
+        "prompt_tokens": 6364,
+        "total_tokens": 6487,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "ms": 5393,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 224,
+        "prompt_tokens": 6491,
+        "total_tokens": 6715,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 5279,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Saya ingin meluruskan miskonsepsi bahwa paus dan lumba-lumba termasuk ikan.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 623,
+        "prompt_tokens": 6739,
+        "total_tokens": 7362,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 10931,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 1177,
+        "prompt_tokens": 7368,
+        "total_tokens": 8545,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 16395,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Senang sekali Anda ingin membuat game baru bersama AISYS Game Studio! 🎮\n\nSaat ini AISYS Engine Core membangun game bertipe **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain (Platformer, Top-Down Shooter, Puzzle, dll.) sedang dalam pengembangan dan segera hadir.\n\nSebelum kita mulai merancang, saya perlu tahu arah game Anda:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks) atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: kelas hewan mamalia, reptil, dan ikan."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang bagus! 🐾 Topik **Klasifikasi Hewan (Mamalia, Reptil, dan Ikan)** sangat cocok dijadikan mekanik Endless Runner — pemain berlari sambil \"menangkap\" hewan yang sesuai dengan target kategori di layar.\n\nSekarang saya perlu menentukan **skema kategori** yang akan dipakai. Berikut 3 opsi:\n\n**Opsi A — Tiga Kelas Vertebrata (Sederhana & Jelas)**\n- **Mamalia:** lumba-lumba, kelelawar, kucing\n- **Reptil:** kadal, ular, penyu\n- **Ikan:** hiu, salmon, kuda laut\n\n**Opsi B — Tiga Kelas + Ciri Tubuh (Fokus Ciri)**\n- **Mamalia:** paus, sapi, tikus\n- **Reptil:** buaya, cicak, kura-kura\n- **Ikan:** tongkol, pari, ikan mas\n\n**Opsi C — Tiga Kelas dengan Hewan Air & Darat Campuran (Lebih Menantang)**\n- **Mamalia:** dugong, kambing, paus biru\n- **Reptil:** iguana, komodo, ular laut\n- **Ikan:** tuna, kakap, hiu martil\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan tepat! **Opsi A** dengan contoh hewan yang akrab dan mudah dikenali — bagus untuk pembelajaran yang jelas dan tidak ambigu. 🐬🦎🐟\n\nSekarang kita masuk ke **gaya visual**. AISYS menyediakan 4 preset tema:\n\n- **Opsi A — Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n- **Opsi B — Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n- **Opsi C — Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n- **Opsi D — Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, **Clean Modern** — tampilan bersih dan serius, cocok untuk game edukasi sains. ✨\n\nSekarang kita tentukan **tingkat kesulitan** permainannya:\n\n- **Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Sempurna, **Normal** — tempo seimbang untuk pengalaman belajar yang nyaman. ⚖️\n\nSekarang bagian pentingnya: **fokus belajar**. Saya ingin menguji satu miskonsepsi umum tentang klasifikasi hewan lewat item jebakan. Berikut 3 opsi:\n\n- **Opsi A — \"Lumba-lumba dan paus itu ikan karena hidup di air.\"** Faktanya keduanya mamalia: bernapas dengan paru-paru, melahirkan, dan menyusui.\n- **Opsi B — \"Ular itu bukan reptil karena tidak punya kaki.\"** Faktanya ular tetap reptil: bersisik, berdarah dingin, dan bertelur.\n- **Opsi C — \"Kuda laut itu bukan ikan karena bentuknya aneh.\"** Faktanya kuda laut adalah ikan: bernapas dengan insang dan bertelur.\n\nMiskonsepsi mana yang paling ingin diluruskan lewat game ini (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "Saya ingin meluruskan miskonsepsi bahwa paus dan lumba-lumba termasuk ikan."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang sangat bermakna! 🐋 Miskonsepsi \"paus dan lumba-lumba itu ikan\" memang sangat umum — padahal keduanya mamalia sejati. Ini akan menjadi inti pembelajaran game Anda.\n\nBerikut **Game Blueprint (PRD)** lengkapnya:\n\n---\n\n**📋 GAME BLUEPRINT / PRD**\n\n**Identitas Game**\n- **Judul:** Klasifikasi Satwa Run\n- **Genre:** Endless Runner\n- **Tipe:** Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis dan melompat menghindari rintangan.\n- Di layar tampil **target kategori** (Mamalia / Reptil / Ikan). Pemain mengambil hewan yang sesuai target untuk mencetak skor.\n- Mengambil hewan yang salah memunculkan penjelasan singkat dan mengurangi skor.\n- Menabrak rintangan mengurangi nyawa. Game berakhir saat nyawa habis (3 nyawa).\n- Target berganti setiap 5 item benar.\n\n**2. Konten Belajar**\n- **Subjek:** Biologi — Klasifikasi Hewan Vertebrata\n- **Konsep:** Mengelompokkan hewan ke dalam kelas Mamalia, Reptil, dan Ikan berdasarkan cirinya.\n- **Tujuan Pembelajaran:** Siswa mampu membedakan mamalia, reptil, dan ikan, serta meluruskan miskonsepsi bahwa paus dan lumba-lumba adalah ikan.\n- **Kategori & Item:**\n  - **Mamalia:** lumba-lumba, kelelawar, kucing, paus\n  - **Reptil:** kadal, ular, penyu\n  - **Ikan:** hiu, salmon, kuda laut\n- **Miskonsepsi yang diuji:** \"Paus dan lumba-lumba dianggap ikan karena hidup di air.\" → Keduanya mamalia: bernapas dengan paru-paru, melahirkan, dan menyusui.\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Clean Modern** (bersih, serius, latar biru gelap).\n\n**4. Tingkat Kesulitan**\n- **Normal** — tempo seimbang (speed 360, maxSpeed 720, accel 6, 3 nyawa).\n\n---\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti kategori, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Berikut manifest game klasifikasi hewan vertebrata dengan mekanik Ludic Learning dan tema Clean Modern. Saya menambahkan paus dan lumba-lumba sebagai item mamalia untuk meluruskan miskonsepsi utama.\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"klasifikasi-satwa-run\", title: \"Klasifikasi Satwa Run\", seed: \"satwa-01\",\n  theme: { preset: \"clean-modern\" },\n\n  learning: {\n    subject: \"Biologi - Klasifikasi Hewan Vertebrata\",\n    concept: \"Mengelompokkan hewan ke dalam kelas Mamalia, Reptil, dan Ikan berdasarkan cirinya\",\n    objectives: [\n      \"Membedakan hewan mamalia, reptil, dan ikan\",\n      \"Meluruskan miskonsepsi bahwa paus dan lumba-lumba adalah ikan\"\n    ],\n    misconceptions: [\n      \"Paus dan lumba-lumba dianggap ikan karena hidup di air\"\n    ],\n    mode: \"category\",\n    categories: [\n      { id: \"mamalia\", label: \"Mamalia\", color: \"#2F80ED\" },\n      { id: \"reptil\",  label: \"Reptil\",  color: \"#3FA34D\" },\n      { id: \"ikan\",    label: \"Ikan\",    color: \"#00A3C4\" }\n    ],\n    items: [\n      { id: \"lumba-lumba\", label: \"Lumba-lumba\", category: \"mamalia\", explain: \"Bernapas dengan paru-paru dan menyusui anaknya; mamalia, bukan ikan.\" },\n      { id: \"paus\",        label: \"Paus\",        category: \"mamalia\", explain: \"Hidup di air tapi bernapas dengan paru-paru dan melahirkan; mamalia.\" },\n      { id: \"kelelawar\",   label: \"Kelelawar\",   category: \"mamalia\", explain: \"Berbulu, melahirkan, dan menyusui; mamalia meski bisa terbang.\" },\n      { id: \"kucing\",      label: \"Kucing\",      category: \"mamalia\", explain: \"Berbulu, melahirkan, dan menyusui anaknya; mamalia.\" },\n      { id: \"kadal\",       label: \"Kadal\",       category: \"reptil\",  explain: \"Bersisik, berdarah dingin, dan bertelur; reptil.\" },\n      { id: \"ular\",        label: \"Ular\",        category: \"reptil\",  explain: \"Bertubuh bersisik dan bertelur; reptil walau tanpa kaki.\" },\n      { id: \"penyu\",       label: \"Penyu\",       category: \"reptil\",  explain: \"Bercangkang keras, bertelur di pasir; reptil.\" },\n      { id: \"hiu\",         label: \"Hiu\",         category: \"ikan\",    explain: \"Bernapas dengan insang dan bertelur atau melahirkan; ikan.\" },\n      { id: \"salmon\",      label: \"Salmon\",      category: \"ikan\",    explain: \"Bernapas dengan insang dan bertelur; ikan.\" },\n      { id: \"kuda-laut\",   label: \"Kuda laut\",   category: \"ikan\",    explain: \"Bernapas dengan insang dan bertelur; ikan walau bentuknya unik.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"batu\",     w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"genangan\", w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```\n\nGame ini mengajak pemain mengklasifikasikan hewan mamalia, reptil, dan ikan sambil menghindari rintangan, dengan paus dan lumba-lumba sebagai item kunci untuk meluruskan miskonsepsi. Asumsi penting: rintangan dibuat sederhana (batu dan genangan) agar fokus belajar tetap pada klasifikasi hewan."
+    }
+  ]
+}

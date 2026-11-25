@@ -1,0 +1,167 @@
+{
+  "id": "bio-arcade",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 181,
+        "prompt_tokens": 5632,
+        "total_tokens": 5813,
+        "prompt_tokens_details": {
+          "cached_tokens": 5376
+        }
+      },
+      "ms": 3795,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Arcade murni, bertema petualangan di dalam tubuh manusia.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 273,
+        "prompt_tokens": 5832,
+        "total_tokens": 6105,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 5381,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 191,
+        "prompt_tokens": 6109,
+        "total_tokens": 6300,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 3629,
+      "reasoningChars": 0
+    },
+    {
+      "user": "D",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 129,
+        "prompt_tokens": 6304,
+        "total_tokens": 6433,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 3348,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 67,
+        "prompt_tokens": 6437,
+        "total_tokens": 6504,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 2961,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Silakan Anda yang memberi nama.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 426,
+        "prompt_tokens": 6514,
+        "total_tokens": 6940,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 6320,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 472,
+        "prompt_tokens": 6946,
+        "total_tokens": 7418,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 6803,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio 🎮\n\nSenang sekali Anda ingin membuat game baru! Saat ini AISYS Engine Core membangun game bertipe **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. (Genre lain seperti Platformer, Puzzle, atau Top-Down Shooter masih segera hadir, ya.)\n\nSebelum kita mulai merancang, saya perlu tahu arah game Anda:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks), atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Arcade murni, bertema petualangan di dalam tubuh manusia."
+    },
+    {
+      "role": "assistant",
+      "content": "Wah, ide yang menarik! Petualangan di dalam tubuh manusia sebagai Endless Runner arcade — pemain bisa membayangkan diri sebagai \"penjelajah mikro\" yang berlari melewati lorong-lorong tubuh. Seru! 🫀\n\nSekarang saya perlu menentukan **tema dunia dan rintangan** yang akan dilewati pemain. Berikut 3 opsi:\n\n**Opsi A — Aliran Darah**\nPemain berlari di sepanjang pembuluh darah. Rintangan: gumpalan kolesterol, sel darah yang menumpuk, dan plak lemak. Nuansa merah dan organik.\n\n**Opsi B — Saluran Pencernaan**\nPemain menyusuri lorong pencernaan. Rintangan: sisa makanan besar, gelembung asam lambung, dan batu empedu. Nuansa hangat dan bertekstur.\n\n**Opsi C — Sistem Saraf**\nPemain melesat di sepanjang jalur saraf. Rintangan: simpul saraf, pulsa listrik, dan celah sinapsis. Nuansa biru-ungu elektris.\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang mantap! **Aliran Darah** memberi nuansa organik yang kaya warna merah dan sangat cocok untuk petualangan di dalam tubuh. 🩸\n\nSekarang kita tentukan gaya visualnya. AISYS menyediakan 4 preset tema:\n\n**Opsi A — Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n\n**Opsi B — Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n\n**Opsi C — Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n\n**Opsi D — Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "D"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan keren! **Retro Pixel** akan memberi nuansa arcade klasik yang nostalgic — sangat pas untuk petualangan seru di aliran darah. 🕹️\n\nSekarang tinggal satu hal lagi: tingkat kesulitannya.\n\n**Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n\n**Normal:** tempo seimbang (bawaan).\n\n**Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Sempurna! **Normal** akan memberi tempo yang seimbang dan menantang tanpa terlalu menyiksa. ⚖️\n\nSekarang tinggal satu pertanyaan terakhir sebelum saya susun blueprint-nya:\n\nApa judul yang Anda inginkan untuk game ini, atau boleh saya yang memberi nama?"
+    },
+    {
+      "role": "user",
+      "content": "Silakan Anda yang memberi nama."
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, saya akan memberi nama yang pas untuk petualangan seru di aliran darah ini! 🩸\n\nBerikut **Game Blueprint / PRD** yang sudah saya susun berdasarkan semua pilihan Anda:\n\n**📋 GAME BLUEPRINT / PRD**\n\n**Identitas Game**\n- **Judul:** Bloodstream Runner\n- **Genre:** Endless Runner\n- **Tipe:** Arcade Murni\n\n**1. Gameplay Loop & Objektif**\n- Pemain otomatis berlari di sepanjang aliran darah dalam tubuh manusia.\n- Pemain melompat untuk menghindari rintangan (gumpalan kolesterol, plak lemak, tumpukan sel darah).\n- Pemain mengumpulkan koin skor yang tersebar di jalur.\n- Skor bertambah dari koin yang diambil dan dari jarak lari.\n- Kondisi kalah: nyawa habis (3 nyawa) setelah menabrak rintangan.\n\n**2. Konten Belajar**\n- Tidak ada (mode arcade murni, item berupa koin skor generik).\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Retro Pixel** — nuansa arcade klasik dengan warna kuning dan oranye.\n\n**4. Tingkat Kesulitan**\n- **Normal** — tempo seimbang, kecepatan awal 360, akselerasi 6, 3 nyawa.\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti rintangan, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Berikut manifest game **Bloodstream Runner** — Endless Runner arcade bertema aliran darah dengan gaya Retro Pixel dan kesulitan Normal.\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"bloodstream-runner\", title: \"Bloodstream Runner\", seed: \"bloodstream-01\",\n  theme: { preset: \"retro-pixel\" },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"kolesterol\", w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"plak-lemak\", w: 90, h: 24, weight: 2 },\n      { type: \"hazard\", id: \"sel-darah\", w: 40, h: 40, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: false },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```\n\nGame ini adalah arcade murni tanpa konten belajar, dengan tiga jenis rintangan organik dan koin skor; asumsi pentingnya, semua rintangan memakai ukuran aman agar tetap bisa dilompati pada kecepatan Normal."
+    }
+  ]
+}
