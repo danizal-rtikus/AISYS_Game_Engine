@@ -181,23 +181,35 @@ async function chat(messages) {
 }
 
 // ---------------------------------------------------------------- one trial
+// Prompt v3.0 flow: Sesi 1 genre, 2 tipe & topik, 3 inti mekanik, 4 visual, 5 kesulitan / aksi spesial, 6 PRD.
+// A misconception (s5) is folded into the topic answer, since v3.0 lets the AI propose it in the PRD.
 function userAnswers(t) {
-  const edu = t.variant !== 'arcade';
   return [
     'Halo, saya ingin membuat game baru.',
-    t.s1,
+    t.genre || 'Endless Runner',
+    t.s5 ? `${t.s1} ${t.s5}` : t.s1,
     t.s2 || 'A',
     t.s3,
     t.s4,
-    t.s5 || (edu ? 'A' : 'Silakan Anda yang memberi nama.'),
     'Lanjut',
   ];
 }
+
+const isHtmlGame = (code) => /^\s*(<!DOCTYPE\s+html|<html)/i.test(code || '');
 
 function measure(code) {
   const r = { extracted: Boolean(code) };
   if (!code) return r;
   r.lines = code.split('\n').length;
+  if (isHtmlGame(code)) {
+    // Beta genres (SESI 7B): no validator/selfTest; runtime behaviour is checked in a real browser separately
+    r.mode = 'html';
+    r.hasEndMarker = /<!--\s*END_OF_GAME\s*-->/i.test(code);
+    r.mentionsWatermark = /AISYS HTML5 Engine/.test(code);
+    r.unknownFields = [];
+    return r;
+  }
+  r.mode = 'manifest';
   r.hasCatatan = /^\s*\/\/\s*CATATAN/m.test(code);
   let m;
   try { m = captureManifest(code); } catch (e) { r.execError = String(e).slice(0, 200); return r; }
@@ -238,7 +250,10 @@ function measure(code) {
 
 function failureSummary(ex, ms) {
   if (!ex.code) return 'Tidak ada blok manifest ```js yang terdeteksi.';
-  if (!ex.isComplete) return 'Manifest tidak lengkap: penanda // END_OF_MANIFEST tidak ada atau sintaks JavaScript belum tertutup.';
+  if (!ex.isComplete) return isHtmlGame(ex.code)
+    ? 'Dokumen HTML tidak lengkap: </html> atau <script> belum tertutup, atau kode terlalu pendek.'
+    : 'Manifest tidak lengkap: penanda // END_OF_MANIFEST tidak ada atau sintaks JavaScript belum tertutup.';
+  if (ms.mode === 'html') return null;
   if (ms.execError) return `Manifest melempar error saat dijalankan: ${ms.execError}`;
   if (!ms.valid) return `Validator menolak manifest: ${ms.validatorErrors.join('; ')}`;
   if (!ms.selfTestOk) return `selfTest gagal: ${ms.selfTestChecks.filter((c) => !c.pass && c.id !== 'render').map((c) => `${c.id}: ${c.detail}`).join('; ')}`;
@@ -285,7 +300,9 @@ async function runTrial(t) {
 
     if (fail) {
       // One automatic repair turn: send the diagnostic back and ask for a corrected full manifest
-      const repairMsg = `Manifest belum bisa dijalankan. ${fail}\nPerbaiki dan kirim ulang manifest lengkap dalam tepat satu blok \`\`\`js yang diakhiri // END_OF_MANIFEST, tanpa penjelasan panjang.`;
+      const repairMsg = isHtmlGame(sesi7.ex.code)
+        ? `Game belum bisa dijalankan. ${fail}\nKirim ulang seluruh game dalam tepat satu blok \`\`\`html dari <!DOCTYPE html> sampai </html> lalu <!-- END_OF_GAME -->, tanpa penjelasan panjang.`
+        : `Manifest belum bisa dijalankan. ${fail}\nPerbaiki dan kirim ulang manifest lengkap dalam tepat satu blok \`\`\`js yang diakhiri // END_OF_MANIFEST, tanpa penjelasan panjang.`;
       msgs.push({ role: 'user', content: repairMsg });
       const r2 = await chat(msgs);
       msgs.push({ role: 'assistant', content: r2.content });

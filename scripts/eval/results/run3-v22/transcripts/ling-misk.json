@@ -1,0 +1,173 @@
+{
+  "id": "ling-misk",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 182,
+        "prompt_tokens": 5970,
+        "total_tokens": 6152,
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      },
+      "ms": 7090,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: bahan yang bisa dan tidak bisa didaur ulang.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 302,
+        "prompt_tokens": 6174,
+        "total_tokens": 6476,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 4096
+        }
+      },
+      "ms": 9077,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 202,
+        "prompt_tokens": 6481,
+        "total_tokens": 6683,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 4498,
+      "reasoningChars": 0
+    },
+    {
+      "user": "C",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 114,
+        "prompt_tokens": 6687,
+        "total_tokens": 6801,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 8302,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 214,
+        "prompt_tokens": 6805,
+        "total_tokens": 7019,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 5713,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Saya ingin meluruskan miskonsepsi bahwa semua jenis plastik bisa didaur ulang.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 774,
+        "prompt_tokens": 7043,
+        "total_tokens": 7817,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 12392,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 1021,
+        "prompt_tokens": 7823,
+        "total_tokens": 8844,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 6698,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio 🎮 Senang sekali Anda ingin membuat game baru bersama kami.\n\nSebagai info singkat: AISYS Engine Core saat ini membangun game bergenre **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain (Platformer, Top-Down Shooter, Puzzle, dan lainnya) sedang dalam pengembangan dan segera hadir.\n\nPertanyaan pertama saya:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks) atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: bahan yang bisa dan tidak bisa didaur ulang."
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, topik **bahan yang bisa dan tidak bisa didaur ulang** — pilihan yang bagus dan sangat relevan untuk kesadaran lingkungan! 🌱\n\nSekarang saya tawarkan beberapa skema kategori. Setiap item hanya masuk ke **satu** kategori secara jelas.\n\n**Opsi A — Berdasarkan Sifat Material**\n- **Dapat Didaur Ulang**: botol plastik PET, kaleng aluminium, koran bekas\n- **Tidak Dapat Didaur Ulang**: puntung rokok, pampers sekali pakai, styrofoam wadah makanan\n\n**Opsi B — Berdasarkan Jenis Bahan**\n- **Kertas & Karton**: koran bekas, kardus, kertas HVS\n- **Plastik & Logam**: botol plastik PET, kaleng aluminium, kaleng susu\n- **Sisa Sekali Pakai**: puntung rokok, pampers, sedotan plastik\n\n**Opsi C — Berdasarkan Kemudahan Daur Ulang**\n- **Mudah Didaur Ulang**: kaleng aluminium, botol plastik PET, kardus\n- **Sulit Didaur Ulang**: styrofoam, sedotan plastik, kantong plastik sekali pakai\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang tepat! **Opsi A** dengan dua kategori tegas — **Dapat Didaur Ulang** vs **Tidak Dapat Didaur Ulang** — sangat jelas untuk mekanik Ludic Learning. 👍\n\nSekarang masuk ke gaya visual. Ada 4 preset tema dari engine:\n\n- **Opsi A, Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n- **Opsi B, Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n- **Opsi C, Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n- **Opsi D, Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "C"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan bagus! **Cartoon** dengan langit cerah dan bukit hijau sangat pas untuk tema lingkungan. 🌿\n\nSekarang tingkat kesulitan:\n\n- **Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Sempurna, **Normal** — tempo seimbang untuk pengalaman belajar yang nyaman. ⚖️\n\nSekarang, untuk mempertajam fokus belajar, saya tawarkan beberapa miskonsepsi umum tentang daur ulang yang bisa diluruskan lewat item jebakan:\n\n- **Opsi A:** \"Semua plastik bisa didaur ulang\" — padahal banyak plastik sekali pakai (sedotan, styrofoam) sulit didaur ulang.\n- **Opsi B:** \"Kertas yang sudah kotor minyak masih bisa didaur ulang\" — padahal kertas berminyak (misal kardus pizza bekas) sulit diproses.\n- **Opsi C:** \"Kaleng dan botol harus dibuang karena tidak berguna\" — padahal keduanya justru bahan daur ulang bernilai tinggi.\n\nMiskonsepsi mana yang paling ingin diluruskan lewat game ini (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "Saya ingin meluruskan miskonsepsi bahwa semua jenis plastik bisa didaur ulang."
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, fokus pada miskonsepsi **\"semua plastik bisa didaur ulang\"** — ini akan diuji lewat item jebakan seperti sedotan dan styrofoam yang tampak seperti plastik biasa tetapi sulit didaur ulang. 👍\n\nBerikut dokumen rancangannya:\n\n**📋 GAME BLUEPRINT / PRD (Product Requirements Document)**\n\n**Identitas Game**\n- **Judul:** Sortir Sampah Run\n- **Genre:** Endless Runner\n- **Tipe:** Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis dan melompat menghindari rintangan (batu, genangan).\n- Pemain mengambil item sampah yang cocok dengan **kategori target** yang tampil di HUD (misal target \"Dapat Didaur Ulang\").\n- Item benar menambah skor dan memicu combo; item salah mengurangi skor dan menampilkan penjelasan singkat.\n- Target berganti setelah beberapa item benar.\n- Kondisi kalah: nyawa habis (3 nyawa) akibat menabrak rintangan.\n\n**2. Konten Belajar**\n- **Subjek:** Lingkungan Hidup / Pengelolaan Sampah\n- **Konsep:** Membedakan bahan yang dapat dan tidak dapat didaur ulang\n- **Tujuan Pembelajaran:** Mengelompokkan sampah berdasarkan sifat dapat/tidak dapat didaur ulang, serta meluruskan anggapan bahwa semua plastik bisa didaur ulang.\n- **Miskonsepsi yang diuji:** \"Semua jenis plastik bisa didaur ulang.\"\n\n- **Kategori 1 — Dapat Didaur Ulang** (hijau):\n  - Botol plastik PET — plastik bernomor 1, mudah didaur ulang jadi serat/plastik baru.\n  - Kaleng aluminium — logam bernilai tinggi, bisa didaur ulang berulang kali.\n  - Koran bekas — kertas bersih dapat diproses kembali menjadi kertas daur ulang.\n  - Kardus — karton bersih mudah didaur ulang menjadi kertas kemasan baru.\n\n- **Kategori 2 — Tidak Dapat Didaur Ulang** (merah):\n  - Puntung rokok — mengandung filter kimia; tidak dapat didaur ulang.\n  - Pampers sekali pakai — campuran bahan sulit dipisah; tidak didaur ulang.\n  - Styrofoam wadah makanan — plastik sekali pakai yang sulit didaur ulang.\n  - Sedotan plastik — plastik kecil sekali pakai yang tidak diterima fasilitas daur ulang.\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Cartoon** — langit cerah, bukit hijau, outline tegas, ramah anak dan lingkungan.\n\n**4. Tingkat Kesulitan**\n- **Normal** — tempo seimbang (speed 360, maxSpeed 720, accel 6), 3 nyawa.\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti kategori, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"sortir-sampah-run\", title: \"Sortir Sampah Run\", seed: \"sortir-sampah-01\",\n  theme: { preset: \"cartoon\" },\n\n  learning: {\n    subject: \"Lingkungan Hidup\",\n    concept: \"Membedakan bahan yang dapat dan tidak dapat didaur ulang\",\n    objectives: [\n      \"Mengelompokkan sampah berdasarkan sifat dapat atau tidak dapat didaur ulang\",\n      \"Meluruskan anggapan bahwa semua plastik bisa didaur ulang\"\n    ],\n    misconceptions: [\"Semua jenis plastik bisa didaur ulang\"],\n    mode: \"category\",\n    categories: [\n      { id: \"dapat\", label: \"Dapat Didaur Ulang\", color: \"#3FA34D\" },\n      { id: \"tidak\", label: \"Tidak Didaur Ulang\", color: \"#E5484D\" }\n    ],\n    items: [\n      { id: \"botol-pet\",   label: \"Botol plastik PET\", category: \"dapat\", explain: \"Plastik nomor 1, mudah didaur ulang menjadi serat atau plastik baru.\" },\n      { id: \"kaleng-alu\",  label: \"Kaleng aluminium\",  category: \"dapat\", explain: \"Logam bernilai tinggi yang bisa didaur ulang berulang kali.\" },\n      { id: \"koran\",       label: \"Koran bekas\",       category: \"dapat\", explain: \"Kertas bersih dapat diproses kembali menjadi kertas daur ulang.\" },\n      { id: \"kardus\",      label: \"Kardus\",            category: \"dapat\", explain: \"Karton bersih mudah didaur ulang menjadi kertas kemasan baru.\" },\n      { id: \"puntung\",     label: \"Puntung rokok\",     category: \"tidak\", explain: \"Mengandung filter kimia; tidak dapat didaur ulang.\" },\n      { id: \"pampers\",     label: \"Pampers sekali pakai\", category: \"tidak\", explain: \"Campuran bahan sulit dipisah; tidak didaur ulang.\" },\n      { id: \"styrofoam\",   label: \"Styrofoam wadah\",   category: \"tidak\", explain: \"Plastik sekali pakai yang sulit didaur ulang, bukan semua plastik bisa.\" },\n      { id: \"sedotan\",     label: \"Sedotan plastik\",   category: \"tidak\", explain: \"Plastik kecil sekali pakai yang tidak diterima fasilitas daur ulang.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"batu\",     w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"genangan\", w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```\n\nGame **Sortir Sampah Run** adalah Endless Runner edukasi bertema lingkungan dengan gaya Cartoon, di mana pemain mengambil sampah sesuai target \"Dapat Didaur Ulang\" atau \"Tidak Didaur Ulang\". Asumsi penting: item jebakan seperti styrofoam dan sedotan sengaja dimasukkan ke kategori \"Tidak Didaur Ulang\" untuk meluruskan miskonsepsi bahwa semua plastik bisa didaur ulang."
+    }
+  ]
+}

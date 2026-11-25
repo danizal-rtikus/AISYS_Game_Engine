@@ -1,5 +1,5 @@
 {
-  "_note": "Lampiran B: 5 topik x 4 variasi (2 mudah, 1 miskonsepsi eksplisit, 1 arcade) + 2 PRD jebakan. Jawaban pengguna disimulasikan per sesi; PRD tetap dihasilkan model lewat alur Sesi 1-6. Varian holdout (ditambah setelah run1): topik yang tidak dipakai sebagai contoh di prompt v2.1, untuk menguji aturan kategori tanpa bias.",
+  "_note": "Lampiran B: 5 topik x 4 variasi (2 mudah, 1 miskonsepsi eksplisit, 1 arcade) + 2 PRD jebakan. Jawaban pengguna disimulasikan per sesi; PRD tetap dihasilkan model lewat alur Sesi 1-6. Varian holdout (ditambah setelah run1): topik yang tidak dipakai sebagai contoh di prompt v2.1, untuk menguji aturan kategori tanpa bias. Varian beta (prompt v3.0): genre selain Endless Runner, dibuat dalam mode HTML (SESI 7B); s4 = aksi spesial.",
   "trials": [
     {
       "id": "ling-mudah-1",
@@ -210,6 +210,33 @@
       "s1": "Edukasi, topik: pelaku kegiatan ekonomi (rumah tangga konsumen, rumah tangga produsen, dan pemerintah).",
       "s3": "A",
       "s4": "Normal"
+    },
+    {
+      "id": "beta-platformer",
+      "genre": "2D Platformer",
+      "topic": "biologi",
+      "variant": "beta",
+      "s1": "Edukasi, topik: rantai makanan (produsen, konsumen, pengurai).",
+      "s3": "C",
+      "s4": "Double Jump"
+    },
+    {
+      "id": "beta-puzzle",
+      "genre": "Puzzle Grid",
+      "topic": "informatika",
+      "variant": "beta",
+      "s1": "Edukasi, topik: bilangan biner dan desimal.",
+      "s3": "B",
+      "s4": "Garis Prediksi Lintasan"
+    },
+    {
+      "id": "beta-tower",
+      "genre": "Tower Defense",
+      "topic": "lingkungan",
+      "variant": "beta",
+      "s1": "Arcade murni, bertema kebun yang diserang hama.",
+      "s3": "A",
+      "s4": "Slow-Motion"
     }
   ]
 }

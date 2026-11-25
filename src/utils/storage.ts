@@ -18,10 +18,11 @@ export const getEffectiveApiKey = (customKey?: string): string => {
 
 export const DEFAULT_SETTINGS: AppSettings = {
   apiKey: getCampusDefaultApiKey(),
-  model: 'deepseek-flash',
+  model: 'deepseek-v4-flash',
   baseUrl: 'https://ai.sumopod.com/v1',
   systemPrompt: DEFAULT_SKILL_PROMPT,
   theme: 'dark',
+  migrationVersion: 2,
 };
 
 export const getStoredSettings = (): AppSettings => {
@@ -39,10 +40,14 @@ export const getStoredSettings = (): AppSettings => {
     const customKey = (parsed.apiKey || '').trim();
     const effectiveKey = customKey || getCampusDefaultApiKey();
 
-    // Auto-migrate legacy reasoning model to high-throughput flash to prevent 145-line token truncation
-    let model = parsed.model || 'deepseek-flash';
-    if (model === 'deepseek-v4-flash') {
-      model = 'deepseek-flash';
+    // Migration 2 (one time): default model is deepseek-v4-flash, the model evaluated in docs/eval.
+    // The old code forced every stored setting to deepseek-flash on each load (a workaround for
+    // truncation caused by thinking mode, now disabled via reasoning_effort: 'none'), so stored
+    // 'deepseek-flash' values were not a user choice. After this runs once, the user's pick is kept.
+    let model = parsed.model || DEFAULT_SETTINGS.model;
+    const migrationVersion = typeof parsed.migrationVersion === 'number' ? parsed.migrationVersion : 0;
+    if (migrationVersion < 2) {
+      model = 'deepseek-v4-flash';
     }
 
     // Auto-update system prompt if it predates the PRD blueprint review or the manifest flow
@@ -63,10 +68,11 @@ export const getStoredSettings = (): AppSettings => {
       baseUrl,
       model: model as any,
       systemPrompt,
+      migrationVersion: Math.max(migrationVersion, 2),
     };
 
     // Resave if migrated
-    if (parsed.model === 'deepseek-v4-flash' || parsed.systemPrompt !== systemPrompt) {
+    if (migrationVersion < 2 || parsed.model !== model || parsed.systemPrompt !== systemPrompt) {
       saveStoredSettings(migratedSettings);
     }
 

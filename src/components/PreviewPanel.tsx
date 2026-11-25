@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { ViewportMode, ActiveTab, GameVersion, ConsoleLogItem } from '../types';
 import { isGameCodePlayable } from '../utils/htmlExtractor';
-import { MANIFEST_REGENERATE_REQUEST } from '../config/defaultSkill';
+import { GAME_REGENERATE_REQUEST } from '../config/defaultSkill';
 import { CodeViewer } from './CodeViewer';
 import { ConsoleViewer } from './ConsoleViewer';
 
@@ -223,14 +223,16 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
 </html>`;
     }
 
-    // Legacy Single-File HTML
+    // Full-HTML game (Beta genres, SESI 7B): inject the error bridge + console bridge right after <head>.
+    // Match tags with attributes too (e.g. <html lang="id">); prepending before <!DOCTYPE> would force quirks mode.
     if (withBridge) {
-      if (trimmed.includes('<head>')) {
-        return trimmed.replace('<head>', `<head>${bridgeScript}`);
-      } else if (trimmed.includes('<html>')) {
-        return trimmed.replace('<html>', `<html><head>${bridgeScript}</head>`);
+      const bridges = `${errorBridgeScript}${bridgeScript}`;
+      if (/<head[^>]*>/i.test(trimmed)) {
+        return trimmed.replace(/<head[^>]*>/i, (tag) => `${tag}${bridges}`);
+      } else if (/<html[^>]*>/i.test(trimmed)) {
+        return trimmed.replace(/<html[^>]*>/i, (tag) => `${tag}<head>${bridges}</head>`);
       } else {
-        return `${bridgeScript}${trimmed}`;
+        return `${bridges}${trimmed}`;
       }
     }
 
@@ -470,10 +472,10 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({
                 Kode Game Terpotong ({codeLineCount} baris)
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4 leading-relaxed">
-                Pembuatan kode terhenti di baris {codeLineCount} sebelum selesai (penanda akhir tidak ditemukan atau sintaks belum tertutup). Klik tombol di bawah untuk meminta AI membuat ulang manifest game.
+                Pembuatan kode terhenti di baris {codeLineCount} sebelum selesai (penanda akhir tidak ditemukan atau sintaks belum tertutup). Klik tombol di bawah untuk meminta AI membuat ulang game.
               </p>
               <button
-                onClick={() => onFixWithAI(MANIFEST_REGENERATE_REQUEST)}
+                onClick={() => onFixWithAI(GAME_REGENERATE_REQUEST)}
                 className="flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#F6821F] hover:bg-[#E66E0A] text-white text-xs font-medium transition-colors shadow-sm"
               >
                 <Sparkles className="w-3.5 h-3.5" />

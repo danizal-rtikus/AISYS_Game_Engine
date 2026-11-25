@@ -1,0 +1,167 @@
+{
+  "id": "bio-mudah-1",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 187,
+        "prompt_tokens": 5970,
+        "total_tokens": 6157,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 10728,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: hewan vertebrata dan invertebrata.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 326,
+        "prompt_tokens": 6178,
+        "total_tokens": 6504,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 11908,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 193,
+        "prompt_tokens": 6508,
+        "total_tokens": 6701,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 8859,
+      "reasoningChars": 0
+    },
+    {
+      "user": "C",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 135,
+        "prompt_tokens": 6705,
+        "total_tokens": 6840,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 8944,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 246,
+        "prompt_tokens": 6844,
+        "total_tokens": 7090,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 6518,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 819,
+        "prompt_tokens": 7094,
+        "total_tokens": 7913,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 12327,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 1137,
+        "prompt_tokens": 7919,
+        "total_tokens": 9056,
+        "prompt_tokens_details": {
+          "cached_tokens": 6912
+        }
+      },
+      "ms": 12681,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio 🎮 Senang sekali Anda ingin membuat game baru bersama kami.\n\nSaat ini AISYS Engine Core membangun game bergenre **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain (Platformer, Top-Down Shooter, Puzzle, dan lainnya) sedang dalam pengembangan dan segera hadir.\n\nSebelum kita mulai merancang, saya perlu tahu arah game Anda:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks), atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: hewan vertebrata dan invertebrata."
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, topik **Hewan Vertebrata dan Invertebrata** — pilihan yang bagus untuk game edukasi biologi! 🐟🦋\n\nSekarang saya perlu menentukan skema kategori. Berikut 3 opsi yang bisa Anda pilih:\n\n**Opsi A — Kelompok Hewan (2 kategori)**\n- **Vertebrata** (punya tulang belakang): ikan mas, katak, burung merpati, ular kobra\n- **Invertebrata** (tanpa tulang belakang): cacing tanah, ubur-ubur, cumi-cumi, belalang\n\n**Opsi B — Kelas Vertebrata (3 kategori)**\n- **Pisces** (ikan): ikan mas, ikan hiu, ikan lele\n- **Aves** (burung): burung merpati, ayam, elang\n- **Mamalia**: kucing, lumba-lumba, kelelawar\n\n**Opsi C — Filum Invertebrata (3 kategori)**\n- **Moluska** (berbadan lunak): cumi-cumi, siput, kerang\n- **Arthropoda** (berkaki sendi): belalang, laba-laba, udang\n- **Coelenterata** (berongga): ubur-ubur, anemon laut, koral\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang tepat! **Opsi A — Vertebrata vs Invertebrata** adalah fondasi klasifikasi hewan yang jelas dan mudah dipahami. 🐾\n\nSekarang kita masuk ke gaya visual. AISYS menyediakan 4 preset tema:\n\n- **Opsi A, Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n- **Opsi B, Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n- **Opsi C, Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n- **Opsi D, Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "C"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang ceria! **Cartoon** sangat pas untuk tema hewan dan alam — langit cerah dengan outline tegas akan membuat hewan-hewannya tampil ramah. 🌿\n\nSekarang, tingkat kesulitan. Ada 3 pilihan:\n\n- **Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Sempurna, **Normal** — tempo seimbang yang cocok untuk pemain umum. ⚖️\n\nTerakhir, kita tentukan fokus belajar. Berikut beberapa miskonsepsi umum tentang vertebrata dan invertebrata yang bisa diluruskan lewat item jebakan:\n\n- **Opsi A:** \"Semua hewan yang hidup di air adalah ikan.\" — Padahal lumba-lumba dan paus adalah mamalia (vertebrata), sedangkan ubur-ubur dan cumi-cumi adalah invertebrata.\n- **Opsi B:** \"Ular dan cacing itu sama karena sama-sama tidak berkaki.\" — Padahal ular bertulang belakang (vertebrata), sedangkan cacing tanah tidak (invertebrata).\n- **Opsi C:** \"Hewan kecil pasti invertebrata, hewan besar pasti vertebrata.\" — Padahal ukuran tubuh tidak menentukan; kelelawar kecil adalah vertebrata, sedangkan cumi-cumi raksasa adalah invertebrata.\n\nMiskonsepsi mana yang paling ingin diluruskan lewat game ini (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan bagus! Miskonsepsi **\"semua hewan air adalah ikan\"** adalah salah satu yang paling sering muncul, dan sangat cocok diuji lewat item jebakan seperti lumba-lumba dan ubur-ubur. 🌊\n\nSekarang saya susun rancangan lengkapnya untuk Anda tinjau.\n\n**📋 GAME BLUEPRINT / PRD (Product Requirements Document)**\n\n**Identitas Game**\n- **Judul:** Vertebrata vs Invertebrata Run\n- **Genre:** Endless Runner\n- **Tipe:** Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis dan melompat menghindari rintangan (batu, semak).\n- Di layar tampil **kategori target** (misal \"Vertebrata\"). Pemain mengambil item hewan yang **cocok** dengan target untuk mencetak skor.\n- Mengambil item yang **salah** mengurangi skor dan memunculkan penjelasan singkat.\n- Menabrak rintangan mengurangi nyawa. Game berakhir saat nyawa habis (3 nyawa).\n- Skor bertambah dari item benar + bonus combo; kecepatan meningkat seiring waktu.\n\n**2. Konten Belajar**\n- **Subjek:** Biologi — Klasifikasi Hewan\n- **Konsep:** Hewan vertebrata (bertulang belakang) vs invertebrata (tanpa tulang belakang)\n- **Tujuan Pembelajaran:** Mengelompokkan hewan berdasarkan ada/tidaknya tulang belakang; meluruskan miskonsepsi bahwa semua hewan air adalah ikan.\n- **Miskonsepsi yang diuji:** \"Semua hewan yang hidup di air adalah ikan.\"\n\n**Kategori & Item:**\n\n**Vertebrata** (punya tulang belakang):\n- Ikan mas — ikan bertulang belakang sejati.\n- Katak — amfibi bertulang belakang.\n- Burung merpati — aves bertulang belakang.\n- Ular kobra — reptil bertulang belakang.\n- Lumba-lumba — mamalia air bertulang belakang (jebakan miskonsepsi: bukan ikan!).\n- Kucing — mamalia bertulang belakang.\n\n**Invertebrata** (tanpa tulang belakang):\n- Cacing tanah — annelida tanpa tulang belakang.\n- Ubur-ubur — coelenterata tanpa tulang belakang (jebakan miskonsepsi: hewan air, tapi bukan ikan).\n- Cumi-cumi — moluska tanpa tulang belakang (jebakan miskonsepsi: hewan air, tapi bukan ikan).\n- Belalang — arthropoda tanpa tulang belakang.\n- Siput — moluska tanpa tulang belakang.\n- Bintang laut — echinodermata tanpa tulang belakang.\n\n*(Total 12 item, 6 per kategori.)*\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Cartoon** — langit cerah, bukit hijau, outline tegas, ramah anak dan alam.\n\n**4. Tingkat Kesulitan**\n- **Normal** — tempo seimbang, 3 nyawa.\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti kategori, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Berikut manifest game **Vertebrata vs Invertebrata Run** dengan tema Cartoon dan kesulitan Normal. Asumsi penting: item hewan air seperti lumba-lumba, ubur-ubur, dan cumi-cumi dipakai sebagai jebakan miskonsepsi \"semua hewan air adalah ikan\".\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"vertebrata-invertebrata-run\", title: \"Vertebrata vs Invertebrata Run\", seed: \"vert-invert-01\",\n  theme: { preset: \"cartoon\" },\n\n  learning: {\n    subject: \"Biologi\",\n    concept: \"Klasifikasi hewan vertebrata dan invertebrata berdasarkan ada tidaknya tulang belakang\",\n    objectives: [\n      \"Mengelompokkan hewan berdasarkan ada tidaknya tulang belakang\",\n      \"Meluruskan miskonsepsi bahwa semua hewan air adalah ikan\"\n    ],\n    misconceptions: [\"Semua hewan yang hidup di air adalah ikan\"],\n    mode: \"category\",\n    categories: [\n      { id: \"vertebrata\",   label: \"Vertebrata\",   color: \"#2F80ED\" },\n      { id: \"invertebrata\", label: \"Invertebrata\", color: \"#3FA34D\" }\n    ],\n    items: [\n      { id: \"ikan-mas\",       label: \"Ikan mas\",        category: \"vertebrata\",   explain: \"Ikan bertulang belakang sejati, termasuk vertebrata.\" },\n      { id: \"katak\",          label: \"Katak\",           category: \"vertebrata\",   explain: \"Amfibi yang memiliki tulang belakang.\" },\n      { id: \"burung-merpati\", label: \"Burung merpati\",  category: \"vertebrata\",   explain: \"Aves bertulang belakang, termasuk vertebrata.\" },\n      { id: \"ular-kobra\",     label: \"Ular kobra\",      category: \"vertebrata\",   explain: \"Reptil bertulang belakang meski tidak berkaki.\" },\n      { id: \"lumba-lumba\",    label: \"Lumba-lumba\",     category: \"vertebrata\",   explain: \"Mamalia air bertulang belakang; bukan ikan.\" },\n      { id: \"kucing\",         label: \"Kucing\",          category: \"vertebrata\",   explain: \"Mamalia darat yang memiliki tulang belakang.\" },\n      { id: \"cacing-tanah\",   label: \"Cacing tanah\",    category: \"invertebrata\", explain: \"Annelida tanpa tulang belakang.\" },\n      { id: \"ubur-ubur\",      label: \"Ubur-ubur\",       category: \"invertebrata\", explain: \"Hewan air tanpa tulang belakang; bukan ikan.\" },\n      { id: \"cumi-cumi\",      label: \"Cumi-cumi\",       category: \"invertebrata\", explain: \"Moluska air tanpa tulang belakang; bukan ikan.\" },\n      { id: \"belalang\",       label: \"Belalang\",        category: \"invertebrata\", explain: \"Arthropoda tanpa tulang belakang.\" },\n      { id: \"siput\",          label: \"Siput\",           category: \"invertebrata\", explain: \"Moluska berbadan lunak tanpa tulang belakang.\" },\n      { id: \"bintang-laut\",   label: \"Bintang laut\",    category: \"invertebrata\", explain: \"Echinodermata tanpa tulang belakang.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"batu\",  w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"semak\", w: 90, h: 40, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```"
+    }
+  ]
+}

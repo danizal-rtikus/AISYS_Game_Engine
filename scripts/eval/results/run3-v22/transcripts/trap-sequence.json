@@ -1,0 +1,167 @@
+{
+  "id": "trap-sequence",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 178,
+        "prompt_tokens": 5970,
+        "total_tokens": 6148,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 5245,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: urutan langkah algoritma bubble sort. Pemain harus mengambil langkah-langkahnya sesuai urutan yang benar dari langkah pertama sampai terakhir.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 717,
+        "prompt_tokens": 6191,
+        "total_tokens": 6908,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 11123,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 203,
+        "prompt_tokens": 6912,
+        "total_tokens": 7115,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 4961,
+      "reasoningChars": 0
+    },
+    {
+      "user": "B",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 134,
+        "prompt_tokens": 7119,
+        "total_tokens": 7253,
+        "prompt_tokens_details": {
+          "cached_tokens": 6912
+        }
+      },
+      "ms": 4568,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 270,
+        "prompt_tokens": 7257,
+        "total_tokens": 7527,
+        "prompt_tokens_details": {
+          "cached_tokens": 6912
+        }
+      },
+      "ms": 7954,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 847,
+        "prompt_tokens": 7531,
+        "total_tokens": 8378,
+        "prompt_tokens_details": {
+          "cached_tokens": 7168
+        }
+      },
+      "ms": 13037,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 1092,
+        "prompt_tokens": 8384,
+        "total_tokens": 9476,
+        "prompt_tokens_details": {
+          "cached_tokens": 7424
+        }
+      },
+      "ms": 12258,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio 🎮 Senang sekali Anda ingin membuat game baru!\n\nSaat ini AISYS Engine Core membangun game bergenre **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. (Genre lain seperti Platformer, Puzzle, atau Top-Down Shooter segera hadir, jadi kita mulai dari Endless Runner dulu ya.)\n\nPertanyaan pertama saya:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks) atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: urutan langkah algoritma bubble sort. Pemain harus mengambil langkah-langkahnya sesuai urutan yang benar dari langkah pertama sampai terakhir."
+    },
+    {
+      "role": "assistant",
+      "content": "Wah, pilihan yang menarik! Topik algoritma Bubble Sort memang pas untuk dijadikan mekanik belajar — pemain benar-benar \"menjalankan\" algoritma langkah demi langkah, bukan sekadar menghafal. 👏\n\nSebelum saya susun skemanya, saya perlu jujur soal satu hal: mekanik engine saat ini bekerja dengan **mencocokkan item ke kategori target** (misal target \"Organik\" → ambil kulit pisang). Engine **belum mendukung mekanik urutan berurutan** (sequence/ordering) seperti \"ambil langkah 1, lalu 2, lalu 3\". Jadi kita perlu memetakan ide Anda ke bentuk kategori yang paling dekat.\n\nKabar baiknya: Bubble Sort tetap bisa diajarkan lewat kategori! Kita bisa membagi langkah-langkah algoritma menjadi **fase/tahap** (misal: \"Bandingkan\", \"Tukar\", \"Selesai Satu Putaran\"), lalu pemain mengambil item yang sesuai dengan fase target yang tampil. Ini tetap melatih pemahaman alur algoritma, hanya saja dikelompokkan per tahap, bukan urutan ketat.\n\nBerikut 3 opsi skema kategori untuk topik Bubble Sort:\n\n**Opsi A — Fase Algoritma (3 kategori)**\n- **Bandingkan** (membandingkan dua elemen bersebelahan): \"Bandingkan A[i] dan A[i+1]\", \"Cek apakah A[i] > A[i+1]\", \"Lihat pasangan bersebelahan\"\n- **Tukar** (menukar posisi bila urutan salah): \"Tukar A[i] dengan A[i+1]\", \"Geser elemen lebih besar ke kanan\", \"Swap posisi dua elemen\"\n- **Selesai Putaran** (akhir satu iterasi): \"Elemen terbesar naik ke ujung\", \"Kurangi rentang perbandingan\", \"Putaran selesai, ulangi dari awal\"\n\n**Opsi B — Sifat Operasi (3 kategori)**\n- **Perbandingan** (operasi membandingkan nilai): \"A[i] > A[i+1]?\", \"Cek nilai lebih besar\", \"Bandingkan dua angka\"\n- **Penukaran** (operasi memindahkan elemen): \"Swap dua elemen\", \"Tukar posisi\", \"Pindahkan elemen besar ke kanan\"\n- **Pengulangan** (operasi mengulang proses): \"Ulangi untuk semua elemen\", \"Kurangi batas loop\", \"Iterasi berikutnya\"\n\n**Opsi C — Struktur Loop (3 kategori)**\n- **Loop Luar** (mengatur jumlah putaran): \"Putaran ke-1\", \"Putaran ke-2\", \"Kurangi n setiap putaran\"\n- **Loop Dalam** (membandingkan tiap pasangan): \"Bandingkan pasangan ke-i\", \"Geser indeks i\", \"Cek pasangan bersebelahan\"\n- **Kondisi Berhenti** (kapan algoritma selesai): \"Tidak ada pertukaran lagi\", \"Array sudah terurut\", \"Hentikan proses\"\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang bagus! Opsi A (Fase Algoritma) paling intuitif karena pemain benar-benar merasakan alur \"bandingkan → tukar → selesai satu putaran\". 👍\n\nSekarang kita masuk ke gaya visual. AISYS menyediakan 4 preset tema:\n\n- **Opsi A, Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n- **Opsi B, Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n- **Opsi C, Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n- **Opsi D, Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "B"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang pas! **Neon** dengan pendaran cyan dan magenta sangat cocok untuk topik algoritma dan teknologi — terasa seperti \"dunia siber\" tempat data mengalir. 🌐\n\nSekarang kita tentukan tingkat kesulitannya:\n\n- **Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Sempurna, **Normal** — tempo seimbang, pas untuk fokus belajar sambil tetap menantang. ⚖️\n\nSekarang kita masuk ke bagian penting: **miskonsepsi** yang ingin diluruskan. Untuk topik Bubble Sort, ada beberapa kesalahpahaman umum yang sering muncul. Berikut 3 opsi yang bisa diuji lewat item jebakan:\n\n- **Opsi A:** \"Bubble Sort menukar elemen yang berjauhan (bukan bersebelahan) — padahal Bubble Sort hanya membandingkan dan menukar **dua elemen bersebelahan**.\"\n\n- **Opsi B:** \"Bubble Sort langsung selesai dalam satu putaran — padahal perlu **beberapa putaran** sampai seluruh array terurut, dan tiap putaran menempatkan satu elemen terbesar ke posisi akhirnya.\"\n\n- **Opsi C:** \"Bubble Sort memilih elemen terkecil lalu memindahkannya ke depan (seperti Selection Sort) — padahal Bubble Sort **membandingkan pasangan bersebelahan** dan menukarnya bila urutannya salah.\"\n\nMiskonsepsi mana yang paling ingin diluruskan lewat game ini (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Terima kasih! Miskonsepsi **A** — \"Bubble Sort menukar elemen berjauhan, padahal hanya bersebelahan\" — memang kesalahpahaman yang sangat umum dan penting. Ini akan jadi jebakan utama di game. 🎯\n\nBerikut dokumen rancangan lengkapnya:\n\n---\n\n**📋 GAME BLUEPRINT / PRD (Product Requirements Document)**\n\n**Identitas Game**\n- **Judul:** Bubble Sort Runner\n- **Genre:** Endless Runner\n- **Tipe:** Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis di lintasan neon, melompat menghindari rintangan (blok data rusak) dan mengambil item berupa langkah-langkah algoritma Bubble Sort.\n- Di layar tampil **target fase** (misal \"Bandingkan\"). Pemain harus mengambil item yang sesuai dengan fase tersebut untuk mencetak skor.\n- Item yang salah memunculkan penjelasan singkat dan mengurangi skor.\n- Target berganti setelah beberapa item benar.\n- Skor bertambah dari item benar + bonus combo. Nyawa berkurang bila menabrak rintangan. Game berakhir saat nyawa habis.\n\n**2. Konten Belajar**\n- **Subjek:** Informatika / Algoritma\n- **Konsep:** Fase-fase dalam algoritma Bubble Sort\n- **Tujuan Pembelajaran:** Mengenali dan membedakan fase \"Bandingkan\", \"Tukar\", dan \"Selesai Putaran\" dalam Bubble Sort.\n- **Miskonsepsi yang diuji:** Bubble Sort menukar elemen berjauhan, padahal hanya membandingkan dan menukar dua elemen bersebelahan.\n\n**Kategori & Item:**\n\n- **Bandingkan** (membandingkan dua elemen bersebelahan)\n  - \"Bandingkan A[i] dan A[i+1]\" — membandingkan dua elemen yang bersebelahan.\n  - \"Cek apakah A[i] > A[i+1]\" — memeriksa urutan dua elemen bertetangga.\n  - \"Lihat pasangan bersebelahan\" — fokus pada dua elemen yang berdampingan.\n\n- **Tukar** (menukar posisi bila urutan salah)\n  - \"Tukar A[i] dengan A[i+1]\" — menukar dua elemen bersebelahan yang salah urutan.\n  - \"Geser elemen lebih besar ke kanan\" — elemen besar berpindah satu posisi ke kanan.\n  - \"Swap posisi dua elemen\" — menukar posisi dua elemen bertetangga.\n\n- **Selesai Putaran** (akhir satu iterasi)\n  - \"Elemen terbesar naik ke ujung\" — elemen terbesar menempati posisi akhir setelah satu putaran.\n  - \"Kurangi rentang perbandingan\" — batas perbandingan menyusut tiap putaran.\n  - \"Putaran selesai, ulangi dari awal\" — satu iterasi tuntas, lanjut iterasi berikutnya.\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Neon** (latar gelap dengan pendaran cyan dan magenta).\n\n**4. Tingkat Kesulitan**\n- **Normal** (tempo seimbang).\n\n---\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti kategori, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Berikut manifest game Bubble Sort Runner sesuai blueprint yang disetujui.\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"bubble-sort-runner\", title: \"Bubble Sort Runner\", seed: \"bubblesort-01\",\n  theme: { preset: \"neon\" },\n\n  learning: {\n    subject: \"Informatika\",\n    concept: \"Fase-fase algoritma Bubble Sort\",\n    objectives: [\"Membedakan fase Bandingkan, Tukar, dan Selesai Putaran pada Bubble Sort\"],\n    misconceptions: [\"Bubble Sort menukar elemen berjauhan, padahal hanya membandingkan dan menukar dua elemen bersebelahan\"],\n    mode: \"category\",\n    categories: [\n      { id: \"bandingkan\", label: \"Bandingkan\", color: \"#22D3EE\" },\n      { id: \"tukar\",      label: \"Tukar\",      color: \"#F472B6\" },\n      { id: \"selesai\",    label: \"Selesai Putaran\", color: \"#A78BFA\" }\n    ],\n    items: [\n      { id: \"bandingkan-a\",  label: \"Bandingkan A[i] dan A[i+1]\", category: \"bandingkan\", explain: \"Membandingkan dua elemen yang bersebelahan.\" },\n      { id: \"cek-lebih\",     label: \"Cek A[i] > A[i+1]\",          category: \"bandingkan\", explain: \"Memeriksa urutan dua elemen bertetangga.\" },\n      { id: \"lihat-pasangan\", label: \"Lihat pasangan bersebelahan\", category: \"bandingkan\", explain: \"Fokus pada dua elemen yang berdampingan.\" },\n      { id: \"tukar-ai\",      label: \"Tukar A[i] dengan A[i+1]\",   category: \"tukar\",      explain: \"Menukar dua elemen bersebelahan yang salah urutan.\" },\n      { id: \"geser-kanan\",   label: \"Geser elemen besar ke kanan\", category: \"tukar\",     explain: \"Elemen besar berpindah satu posisi ke kanan.\" },\n      { id: \"swap-posisi\",   label: \"Swap posisi dua elemen\",     category: \"tukar\",      explain: \"Menukar posisi dua elemen bertetangga.\" },\n      { id: \"terbesar-ujung\", label: \"Elemen terbesar ke ujung\",  category: \"selesai\",    explain: \"Elemen terbesar menempati posisi akhir setelah satu putaran.\" },\n      { id: \"kurangi-rentang\", label: \"Kurangi rentang perbandingan\", category: \"selesai\", explain: \"Batas perbandingan menyusut tiap putaran.\" },\n      { id: \"ulangi-awal\",   label: \"Putaran selesai, ulangi\",    category: \"selesai\",    explain: \"Satu iterasi tuntas, lanjut iterasi berikutnya.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"blok-rusak\", w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"glitch\",     w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```\n\nGame edukasi bertema Neon ini mengajak pemain mengambil langkah Bubble Sort yang cocok dengan fase target (Bandingkan, Tukar, Selesai Putaran). Asumsi penting: karena engine belum mendukung mekanik urutan ketat, langkah-langkah algoritma dipetakan ke pencocokan kategori fase."
+    }
+  ]
+}

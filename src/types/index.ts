@@ -46,6 +46,8 @@ export interface AppSettings {
   baseUrl: string;
   systemPrompt: string;
   theme: 'dark' | 'light';
+  /** One-time settings migrations already applied (2 = default model switched to deepseek-v4-flash). */
+  migrationVersion?: number;
 }
 
 export interface ConsoleLogItem {

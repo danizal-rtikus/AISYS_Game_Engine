@@ -1,0 +1,178 @@
+{
+  "id": "eko-misk",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 178,
+        "prompt_tokens": 5970,
+        "total_tokens": 6148,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 5555,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: pajak pusat dan pajak daerah di Indonesia.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 376,
+        "prompt_tokens": 6171,
+        "total_tokens": 6547,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 5653,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 201,
+        "prompt_tokens": 6552,
+        "total_tokens": 6753,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 4697,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 125,
+        "prompt_tokens": 6758,
+        "total_tokens": 6883,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 8101,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 188,
+        "prompt_tokens": 6887,
+        "total_tokens": 7075,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 9341,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Saya ingin meluruskan miskonsepsi bahwa pajak kendaraan bermotor adalah pajak pusat.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 801,
+        "prompt_tokens": 7102,
+        "total_tokens": 7903,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 10716,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 952,
+        "prompt_tokens": 7909,
+        "total_tokens": 8861,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        },
+        "prompt_cache_hit_tokens": 5888,
+        "prompt_cache_miss_tokens": 2021
+      },
+      "ms": 8301,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio 🎮\n\nSenang sekali Anda ingin membuat game baru! Saat ini AISYS Engine Core membangun game bergenre **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain seperti Platformer, Puzzle, atau Rhythm sedang dalam pengembangan dan segera hadir.\n\nSebelum kita mulai merancang, saya perlu tahu arah game Anda:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks) atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: pajak pusat dan pajak daerah di Indonesia."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang bagus! Topik **Pajak Pusat dan Pajak Daerah di Indonesia** sangat relevan dan cocok dijadikan mekanik belajar lewat pemilahan item.\n\nBerikut 3 opsi skema kategori yang bisa Anda pilih. Setiap item hanya masuk ke **satu** kategori berdasarkan definisi baku (siapa yang memungut dan mengelolanya):\n\n**Opsi A — Berdasarkan Pemungut (2 kategori)**\n- **Pajak Pusat** (dipungut pemerintah pusat/DJP): PPh, PPN, Bea Meterai\n- **Pajak Daerah** (dipungut pemerintah daerah/Bapenda): Pajak Hotel, Pajak Restoran, Pajak Bumi dan Bangunan (PBB)\n\n**Opsi B — Berdasarkan Tingkat Daerah (3 kategori)**\n- **Pajak Pusat**: PPh, PPN, Bea Meterai\n- **Pajak Provinsi**: Pajak Kendaraan Bermotor, Bea Balik Nama Kendaraan Bermotor, Pajak Rokok\n- **Pajak Kabupaten/Kota**: Pajak Hotel, Pajak Restoran, Pajak Reklame\n\n**Opsi C — Berdasarkan Objek & Sifat (3 kategori)**\n- **Pajak Pusat**: PPh, PPN, Bea Meterai\n- **Pajak Daerah**: Pajak Hotel, Pajak Restoran, Pajak Reklame\n- **Retribusi Daerah**: Retribusi Parkir, Retribusi Pasar, Retribusi Kebersihan\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang tepat! **Opsi A** dengan dua kategori jelas — **Pajak Pusat** vs **Pajak Daerah** — sangat pas untuk mekanik pemilahan yang cepat dan tegas.\n\nSekarang kita masuk ke gaya visual. AISYS menyediakan 4 preset tema:\n\n- **Opsi A, Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n- **Opsi B, Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n- **Opsi C, Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n- **Opsi D, Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan bagus! **Clean Modern** akan memberi kesan rapi, serius, dan profesional — sangat cocok untuk topik perpajakan yang formal.\n\nSekarang kita tentukan tingkat kesulitannya:\n\n- **Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Sempurna, **Normal** — tempo seimbang yang pas untuk pengalaman belajar yang menantang namun tetap nyaman.\n\nSekarang kita masuk ke bagian penting: **miskonsepsi** apa yang paling ingin Anda luruskan lewat game ini? Saya pilihkan tiga yang paling umum terjadi:\n\n- **Opsi A:** \"PBB (Pajak Bumi dan Bangunan) adalah pajak pusat, padahal dipungut dan dikelola pemerintah daerah.\"\n- **Opsi B:** \"Pajak Restoran dan Pajak Hotel dianggap pajak pusat, padahal keduanya pajak daerah.\"\n- **Opsi C:** \"Bea Meterai dianggap pajak daerah, padahal Bea Meterai dipungut pemerintah pusat.\"\n\nMiskonsepsi mana yang paling ingin diluruskan lewat game ini (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "Saya ingin meluruskan miskonsepsi bahwa pajak kendaraan bermotor adalah pajak pusat."
+    },
+    {
+      "role": "assistant",
+      "content": "Ide yang sangat bagus! Miskonsepsi bahwa **Pajak Kendaraan Bermotor (PKB) adalah pajak pusat** memang sering terjadi — padahal PKB dipungut oleh pemerintah **provinsi**. Ini akan jadi jebakan belajar yang kuat.\n\nKarena PKB adalah pajak **provinsi** (pajak daerah), saya akan memasukkannya sebagai item jebakan di kategori **Pajak Daerah**, dan menuliskan miskonsepsi ini secara eksplisit di blueprint. Ini tetap konsisten dengan skema Opsi A (Pajak Pusat vs Pajak Daerah).\n\nBerikut Game Blueprint-nya:\n\n**📋 GAME BLUEPRINT / PRD**\n\n**Identitas Game**\n- Judul: **Sadar Pajak Run**\n- Genre: Endless Runner\n- Tipe: Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis dan melompat menghindari rintangan (misal: pos pemeriksaan, dokumen).\n- Target kategori tampil di HUD (misal \"Pajak Pusat\"). Pemain mengambil item yang cocok dengan target untuk mencetak skor.\n- Item salah mengurangi skor dan memunculkan penjelasan singkat.\n- Menabrak rintangan mengurangi nyawa. Game berakhir saat nyawa habis (3 nyawa).\n- Target berganti setiap 5 item benar.\n\n**2. Konten Belajar**\n- Subjek: Perpajakan Indonesia\n- Konsep: Perbedaan pajak pusat dan pajak daerah berdasarkan pemungutnya\n- Tujuan Pembelajaran: Mengelompokkan jenis pajak sebagai pajak pusat atau pajak daerah\n- Miskonsepsi yang diuji: \"Pajak Kendaraan Bermotor dianggap pajak pusat, padahal dipungut pemerintah provinsi (pajak daerah).\"\n\n**Kategori & Item:**\n- **Pajak Pusat** (dipungut pemerintah pusat/DJP):\n  - PPh (Pajak Penghasilan) — dipungut pemerintah pusat atas penghasilan wajib pajak.\n  - PPN (Pajak Pertambahan Nilai) — dipungut pemerintah pusat atas konsumsi barang/jasa.\n  - Bea Meterai — dipungut pemerintah pusat atas dokumen tertentu.\n- **Pajak Daerah** (dipungut pemerintah daerah):\n  - Pajak Hotel — dipungut pemerintah kabupaten/kota atas jasa penginapan.\n  - Pajak Restoran — dipungut pemerintah kabupaten/kota atas jasa makanan/minuman.\n  - PBB (Pajak Bumi dan Bangunan) — dipungut pemerintah daerah atas bumi dan bangunan.\n  - Pajak Kendaraan Bermotor — dipungut pemerintah provinsi atas kepemilikan kendaraan. *(item jebakan miskonsepsi)*\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Clean Modern** (biru gelap, bersih, serius)\n\n**4. Tingkat Kesulitan**\n- **Normal** — tempo seimbang, 3 nyawa.\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti kategori, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"sadar-pajak-run\", title: \"Sadar Pajak Run\", seed: \"sadar-pajak-01\",\n  theme: { preset: \"clean-modern\" },\n\n  learning: {\n    subject: \"Perpajakan Indonesia\",\n    concept: \"Perbedaan pajak pusat dan pajak daerah berdasarkan pemungutnya\",\n    objectives: [\"Mengelompokkan jenis pajak sebagai pajak pusat atau pajak daerah\"],\n    misconceptions: [\"Pajak Kendaraan Bermotor dianggap pajak pusat, padahal dipungut pemerintah provinsi (pajak daerah)\"],\n    mode: \"category\",\n    categories: [\n      { id: \"pusat\",  label: \"Pajak Pusat\",  color: \"#2F80ED\" },\n      { id: \"daerah\", label: \"Pajak Daerah\", color: \"#3FA34D\" }\n    ],\n    items: [\n      { id: \"pph\",         label: \"PPh\",                 category: \"pusat\",  explain: \"Pajak Penghasilan dipungut pemerintah pusat atas penghasilan wajib pajak.\" },\n      { id: \"ppn\",         label: \"PPN\",                 category: \"pusat\",  explain: \"Pajak Pertambahan Nilai dipungut pemerintah pusat atas konsumsi barang dan jasa.\" },\n      { id: \"bea-meterai\", label: \"Bea Meterai\",         category: \"pusat\",  explain: \"Dipungut pemerintah pusat atas dokumen tertentu.\" },\n      { id: \"pajak-hotel\", label: \"Pajak Hotel\",         category: \"daerah\", explain: \"Dipungut pemerintah kabupaten/kota atas jasa penginapan.\" },\n      { id: \"pajak-resto\", label: \"Pajak Restoran\",      category: \"daerah\", explain: \"Dipungut pemerintah kabupaten/kota atas jasa makanan dan minuman.\" },\n      { id: \"pbb\",         label: \"PBB\",                 category: \"daerah\", explain: \"Pajak Bumi dan Bangunan dipungut pemerintah daerah atas bumi dan bangunan.\" },\n      { id: \"pkb\",         label: \"Pajak Kendaraan Bermotor\", category: \"daerah\", explain: \"Dipungut pemerintah provinsi atas kepemilikan kendaraan bermotor.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"pos-pemeriksaan\", w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"tumpukan-dokumen\", w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```\n\n**Sadar Pajak Run** adalah game Endless Runner edukasi bertema Clean Modern di mana pemain memilah item pajak pusat dan pajak daerah, dengan Pajak Kendaraan Bermotor sebagai jebakan miskonsepsi. Asumsi penting: jumlah item dibuat 7 (3 pusat + 4 daerah) agar setiap kategori tetap terwakili dengan jelas."
+    }
+  ]
+}

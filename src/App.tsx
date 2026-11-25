@@ -26,7 +26,7 @@ import {
   getEffectiveApiKey,
 } from './utils/storage';
 import { extractHtmlFromStream, extractGameTitle, codeFenceLang } from './utils/htmlExtractor';
-import { MANIFEST_REPAIR_DIRECTIVE } from './config/defaultSkill';
+import { GAME_REPAIR_DIRECTIVE } from './config/defaultSkill';
 import { sendDeepSeekMessage } from './utils/deepseekStream';
 
 export const INITIAL_WELCOME_MESSAGE: Message = {
@@ -34,17 +34,13 @@ export const INITIAL_WELCOME_MESSAGE: Message = {
   role: 'assistant',
   content: `Halo! Selamat datang di **AISYS Game Studio** 🎮
 
-Saya Technical Game Designer & Mentor Anda di laboratorium ini. Di sini kita bisa merancang dan merekayasa game HTML5 siap main tanpa perlu server lokal.
+Saya mentor desain game Anda. Kita akan merancang game **arcade** atau **edukasi** yang hasil akhirnya satu berkas HTML dan bisa dimainkan offline.
 
-Pilih salah satu **genre dasar game** yang disiapkan:
-- **2D Scrolling Platformer** (Aksi lompat rintangan, gravitasi presisi, dan koleksi item)
-- **Top-Down Space Shooter** (Navigasi 8 arah, tembakan laser, dan gelombang tantangan)
-- **Neon Puzzle Grid** (Matriks ubin logika, kombo warna, dan reaksi berantai)
-- **Endless Runner / Dodger** (Refleks cepat menghindari rintangan berkecepatan dinamis)
+Pilih salah satu dari 9 genre:
+- **Endless Runner** (stabil, diuji otomatis oleh AISYS Engine)
+- **2D Platformer**, **Top-Down Shooter**, **Puzzle Grid**, **Rhythm / Music**, **Physics / Slingshot**, **Tower Defense**, **Idle / Tycoon**, **Dungeon Crawler** (Beta: kode ditulis AI, coba mainkan dulu sebelum dibagikan)
 
-Setiap genre di atas dapat Anda kembangkan untuk **game arcade seru** maupun **bertema misi edukasi / pembelajaran interaktif**.
-
-Ceritakan ide game Anda atau klik salah satu kartu di bawah untuk langsung mulai!`,
+Ketik genre atau ide game Anda, atau pilih salah satu kartu di bawah.`,
   timestamp: Date.now(),
 };
 
@@ -335,7 +331,7 @@ export function App() {
         if (isRepairIntent && !m.content.includes('<!DOCTYPE html>') && !m.content.includes('AISYS.defineGame')) {
           return {
             role: m.role,
-            content: `${m.content.trim()}\n\n${MANIFEST_REPAIR_DIRECTIVE}`,
+            content: `${m.content.trim()}\n\n${GAME_REPAIR_DIRECTIVE}`,
           };
         }
 

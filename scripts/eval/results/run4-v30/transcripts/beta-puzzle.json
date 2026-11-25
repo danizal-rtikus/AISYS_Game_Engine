@@ -1,0 +1,167 @@
+{
+  "id": "beta-puzzle",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 387,
+        "prompt_tokens": 6712,
+        "total_tokens": 7099,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 8592,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Puzzle Grid",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 76,
+        "prompt_tokens": 7105,
+        "total_tokens": 7181,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 3302,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: bilangan biner dan desimal.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 402,
+        "prompt_tokens": 7199,
+        "total_tokens": 7601,
+        "prompt_tokens_details": {
+          "cached_tokens": 6912
+        }
+      },
+      "ms": 8348,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 165,
+        "prompt_tokens": 7605,
+        "total_tokens": 7770,
+        "prompt_tokens_details": {
+          "cached_tokens": 7168
+        }
+      },
+      "ms": 3809,
+      "reasoningChars": 0
+    },
+    {
+      "user": "B",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 130,
+        "prompt_tokens": 7774,
+        "total_tokens": 7904,
+        "prompt_tokens_details": {
+          "cached_tokens": 7424
+        }
+      },
+      "ms": 4316,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Garis Prediksi Lintasan",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 759,
+        "prompt_tokens": 7914,
+        "total_tokens": 8673,
+        "prompt_tokens_details": {
+          "cached_tokens": 7680
+        }
+      },
+      "ms": 9173,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 6508,
+        "prompt_tokens": 8679,
+        "total_tokens": 15187,
+        "prompt_tokens_details": {
+          "cached_tokens": 7680
+        }
+      },
+      "ms": 52284,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio 🎮\n\nSaya siap membantu Anda merancang game edukasi atau arcade yang seru. Berikut **9 genre resmi** yang bisa kita bangun:\n\n**Mode Engine (stabil):**\n- **Endless Runner** — lari otomatis, lompati rintangan, ambil item sesuai kategori target. *(stabil)*\n\n**Mode HTML (Beta):**\n1. **2D Platformer** — lompat presisi, gravitasi, platform bergerak, rintangan, item.\n2. **Top-Down Shooter** — navigasi 8 arah, membidik dengan mouse/sentuh, gelombang musuh, proyektil.\n3. **Puzzle Grid** — papan ubin, pencocokan warna/simbol, reaksi berantai, kombo berbasis giliran.\n4. **Rhythm / Music** — ketukan tempo, not jatuh, akurasi Perfect/Good/Miss, audio sintesis.\n5. **Physics / Slingshot** — ketapel tarik-lepas, lintasan parabola, tumbukan dan penghancuran balok.\n6. **Tower Defense** — menara di sepanjang jalur musuh, upgrade, gelombang musuh.\n7. **Idle / Tycoon** — sumber daya bertingkat, generator pasif, otomatisasi produksi.\n8. **Dungeon Crawler** — eksplorasi labirin, kunci dan pintu, musuh berpatroli, inventori.\n\n*(Catatan: Endless Runner dibuat dengan Engine stabil yang tervalidasi otomatis; 8 genre lainnya dalam mode HTML Beta.)*\n\n**Genre mana yang ingin Anda bangun?**"
+    },
+    {
+      "role": "user",
+      "content": "Puzzle Grid"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, kita akan membangun **Puzzle Grid** dalam mode **HTML Beta** (satu berkas HTML5 Canvas 2D, perlu Anda coba sendiri setelah dibuat).\n\n**Apakah game ini ingin dirancang sebagai Arcade Murni (hiburan skor dan refleks) atau Edukasi (sebutkan topiknya)?**"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: bilangan biner dan desimal."
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, topiknya **Bilangan Biner dan Desimal** dalam genre **Puzzle Grid** (mode HTML Beta).\n\nBerikut 3 opsi arah mekanik yang membuat konsep bilangan menjadi inti permainan:\n\n**Opsi A — Konversi Ubin Biner**\nPapan berisi ubin bertanda bit (1, 2, 4, 8, ...). Pemain memilih kombinasi ubin yang jumlahnya sama dengan target desimal yang muncul. Contoh: target 13 → pilih ubin 8 + 4 + 1. Konsep nilai tempat biner menjadi mekanik inti: setiap ubin mewakili pangkat 2, dan pemain merasakan langsung bahwa kombinasi bit membentuk angka desimal.\n\n**Opsi B — Pencocokan Biner–Desimal**\nUbin berisi angka biner (misal \"1011\") dan ubin berisi angka desimal (misal \"11\"). Pemain mencocokkan pasangan yang setara dengan menukar atau menyambungkan ubin. Konsep konversi dua arah menjadi mekanik inti: pemain harus membaca nilai bit dan menjumlahkannya untuk menemukan pasangan yang benar.\n\n**Opsi C — Reaksi Berantai Nilai Tempat**\nPapan berisi ubin desimal; pemain menggabungkan dua ubin yang bila dijumlahkan menghasilkan pangkat 2 (1, 2, 4, 8, 16, ...). Penggabungan memicu reaksi berantai dan kombo. Konsep pangkat dua dan dekomposisi bilangan menjadi mekanik inti: pemain berlatih memecah angka menjadi komponen biner secara bertahap.\n\n**Dari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?**"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, kita pakai **Opsi A — Konversi Ubin Biner**: pemain memilih kombinasi ubin bit (1, 2, 4, 8, ...) yang jumlahnya sama dengan target desimal.\n\n**Gaya visual mana yang ingin diterapkan pada game Anda?**\n\n- **Opsi A — Clean Modern & Soft Gradient:** gradien pastel halus, sudut membulat, karakter bulat ekspresif.\n- **Opsi B — Cyberpunk / Neon Glow:** latar gelap bergradien, pendaran cyan/magenta, partikel percikan.\n- **Opsi C — Vibrant Cartoon Arcade:** warna cerah kontras, outline tegas, partikel bintang dan teks skor melayang."
+    },
+    {
+      "role": "user",
+      "content": "B"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, gaya **Cyberpunk / Neon Glow** (latar gelap bergradien, pendaran cyan/magenta, partikel percikan) akan diterapkan.\n\n**Satu fitur aksi spesial apa yang Anda inginkan?**\n\n- **Double Tap / Hint** — menampilkan petunjuk bit mana yang harus dipilih saat buntu.\n- **Slow-Motion** — memperlambat waktu agar lebih tenang memilih kombinasi bit.\n- **Garis Prediksi** — menampilkan pratinjau jumlah total dari ubin yang sedang dipilih sebelum dikonfirmasi."
+    },
+    {
+      "role": "user",
+      "content": "Garis Prediksi Lintasan"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, fitur **Garis Prediksi** akan menampilkan pratinjau jumlah total dari ubin yang sedang dipilih sebelum dikonfirmasi. Sekarang saya susun blueprint-nya.\n\n---\n\n📋 **GAME BLUEPRINT / PRD**\n\n**Identitas Game**\n- **Judul:** Binary Grid Neon\n- **Genre:** Puzzle Grid\n- **Mode:** HTML Beta\n- **Tipe:** Edukasi — Bilangan Biner dan Desimal\n\n**1. Gameplay Loop & Objektif**\n- Papan 4×4 berisi ubin bit dengan nilai pangkat 2 (1, 2, 4, 8, 16, 32, 64, 128) yang tersebar acak.\n- Di atas papan muncul **target desimal** (misal 13). Pemain memilih kombinasi ubin bit yang jumlahnya tepat sama dengan target.\n- **Garis Prediksi** menampilkan jumlah total ubin yang sedang dipilih secara langsung, sehingga pemain bisa mengatur kombinasi sebelum menekan Konfirmasi.\n- Kombinasi benar → skor + kombo naik, target baru muncul. Kombinasi salah → nyawa berkurang, target tetap.\n- Kondisi kalah: nyawa habis (3 nyawa). Kondisi menang: tidak ada batas akhir, skor setinggi mungkin.\n\n**2. Konten Belajar**\n- **Subjek:** Matematika — Sistem Bilangan\n- **Konsep:** Konversi desimal ke biner melalui penjumlahan pangkat 2\n- **Tujuan:** Pemain dapat memecah bilangan desimal menjadi kombinasi bit biner yang tepat.\n- **Mekanik inti:** Setiap ubin mewakili satu bit (pangkat 2). Pemain merasakan langsung bahwa angka desimal adalah jumlah dari bit-bit yang aktif.\n- **Miskonsepsi yang diuji:** \"Bilangan biner hanya bisa bernilai 0 atau 1\" — padahal setiap digit biner adalah 0/1, tetapi bilangan biner multi-digit bisa bernilai besar (misal 1011 = 11).\n\n**3. Arahan Visual (DKV)**\n- **Cyberpunk / Neon Glow:** latar gelap bergradien, pendaran cyan/magenta (`shadowBlur`), partikel percikan saat ubin dipilih atau kombinasi benar.\n\n**4. Mekanik Teknis**\n- **Kontrol:** Mouse/touch untuk memilih ubin, tombol Konfirmasi, tombol Reset. Keyboard: angka 1–4 untuk baris, atau klik langsung.\n- **Aksi spesial:** Garis Prediksi — menampilkan jumlah total ubin terpilih secara real-time.\n- **Audio:** Web Audio API oscillator (klik, benar, salah, kombo).\n- **Watermark:** `Built with AISYS HTML5 Engine` & `STIKOM YOS SUDARSO` di menu dan game over; `AISYS HTML5 Engine` redup di dalam permainan.\n\n---\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung membuat gamenya.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan.\n\n**Apakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?**"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, saya buat game **Binary Grid Neon** sekarang dalam satu berkas HTML5 Canvas 2D.\n\n```html\n<!DOCTYPE html>\n<html lang=\"id\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">\n<title>Binary Grid Neon — AISYS</title>\n<style>\n  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }\n  html,body { width:100%; height:100%; overflow:hidden; background:#05060f; font-family:'Segoe UI',system-ui,sans-serif; }\n  #wrap { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; }\n  canvas { display:block; background:#05060f; touch-action:none; }\n  #muteBtn {\n    position:fixed; top:12px; right:12px; z-index:20;\n    width:44px; height:44px; border-radius:12px; border:1px solid rgba(0,240,255,.5);\n    background:rgba(10,20,40,.7); color:#7df9ff; font-size:20px; cursor:pointer;\n    box-shadow:0 0 12px rgba(0,240,255,.4); backdrop-filter:blur(4px);\n  }\n  #muteBtn:active { transform:scale(.94); }\n</style>\n</head>\n<body>\n<div id=\"wrap\"><canvas id=\"cv\"></canvas></div>\n<button id=\"muteBtn\" aria-label=\"Mute\">🔊</button>\n<script>\n\"use strict\";\n// ===== AISYS HTML5 Engine — Binary Grid Neon =====\nconst cv = document.getElementById('cv');\nconst ctx = cv.getContext('2d');\nconst W = 1280, H = 720;\nlet scale = 1, offX = 0, offY = 0;\n\nfunction resize(){\n  const ww = window.innerWidth, wh = window.innerHeight;\n  const s = Math.min(ww / W, wh / H);\n  scale = s;\n  cv.width = W; cv.height = H;\n  cv.style.width = (W * s) + 'px';\n  cv.style.height = (H * s) + 'px';\n  offX = (ww - W * s) / 2; offY = (wh - H * s) / 2;\n}\nwindow.addEventListener('resize', resize);\nresize();\n\n// ===== AUDIO =====\nlet audioCtx = null, muted = false;\nfunction unlockAudio(){\n  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }\n  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();\n}\nfunction beep(freq, dur, type, vol){\n  if (muted || !audioCtx) return;\n  const o = audioCtx.createOscillator(), g = audioCtx.createGain();\n  o.type = type || 'sine'; o.frequency.value = freq;\n  g.gain.setValueAtTime(0.0001, audioCtx.currentTime);\n  g.gain.exponentialRampToValueAtTime(vol || 0.15, audioCtx.currentTime + 0.01);\n  g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);\n  o.connect(g); g.connect(audioCtx.destination);\n  o.start(); o.stop(audioCtx.currentTime + dur + 0.02);\n}\nconst sfx = {\n  click: () => beep(660, 0.08, 'square', 0.08),\n  deselect: () => beep(330, 0.08, 'square', 0.06),\n  correct: () => { beep(880,0.1,'sine',0.15); setTimeout(()=>beep(1320,0.15,'sine',0.14),90); },\n  wrong: () => { beep(180,0.25,'sawtooth',0.14); setTimeout(()=>beep(120,0.3,'sawtooth',0.12),120); },\n  combo: () => { beep(1046,0.08,'triangle',0.12); setTimeout(()=>beep(1568,0.12,'triangle',0.12),70); },\n  over: () => { beep(400,0.2,'sawtooth',0.15); setTimeout(()=>beep(300,0.25,'sawtooth',0.14),180); setTimeout(()=>beep(200,0.4,'sawtooth',0.13),380); }\n};\ndocument.getElementById('muteBtn').addEventListener('click', (e)=>{\n  e.stopPropagation(); unlockAudio(); muted = !muted;\n  document.getElementById('muteBtn').textContent = muted ? '🔇' : '🔊';\n});\n\n// ===== GAME STATE =====\nconst STATE = { MENU:0, PLAY:1, OVER:2 };\nlet state = STATE.MENU;\nlet score = 0, lives = 3, combo = 0, bestCombo = 0;\nlet target = 0, selected = new Set();\nlet grid = []; // 16 tiles {val, x, y, w, h, pulse}\nlet particles = [];\nlet toast = null; // {text, t, color}\nlet shakeT = 0, shakeMag = 0;\nlet time = 0;\nlet roundStart = 0;\n\nconst BITS = [1,2,4,8,16,32,64,128];\nconst GRID_COLS = 4, GRID_ROWS = 4;\nconst TILE_W = 150, TILE_H = 110, GAP = 18;\nconst GRID_X = (W - (GRID_COLS * TILE_W + (GRID_COLS-1)*GAP)) / 2;\nconst GRID_Y = 240;\n\nfunction randInt(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }\n\nfunction buildGrid(){\n  // 16 tiles: 8 bit values, each appearing twice, shuffled\n  let pool = [];\n  for (const b of BITS) { pool.push(b); pool.push(b); }\n  for (let i = pool.length - 1; i > 0; i--){\n    const j = Math.floor(Math.random()*(i+1));\n    [pool[i], pool[j]] = [pool[j], pool[i]];\n  }\n  grid = [];\n  for (let r = 0; r < GRID_ROWS; r++){\n    for (let c = 0; c < GRID_COLS; c++){\n      const idx = r*GRID_COLS + c;\n      grid.push({\n        val: pool[idx],\n        x: GRID_X + c*(TILE_W+GAP),\n        y: GRID_Y + r*(TILE_H+GAP),\n        w: TILE_W, h: TILE_H,\n        pulse: 0\n      });\n    }\n  }\n}\n\nfunction newTarget(){\n  // target = sum of 2-4 distinct bit values (so solvable with distinct tiles)\n  const distinct = BITS.slice();\n  for (let i = distinct.length-1; i>0; i--){ const j=Math.floor(Math.random()*(i+1)); [distinct[i],distinct[j]]=[distinct[j],distinct[i]]; }\n  const count = randInt(2,4);\n  let sum = 0;\n  for (let i = 0; i < count; i++) sum += distinct[i];\n  target = sum;\n  selected.clear();\n  roundStart = time;\n}\n\nfunction startGame(){\n  score = 0; lives = 3; combo = 0; bestCombo = 0;\n  buildGrid(); newTarget();\n  particles = []; toast = null; shakeT = 0;\n  state = STATE.PLAY;\n  unlockAudio();\n}\n\nfunction addParticles(x, y, color, n){\n  for (let i = 0; i < n; i++){\n    const a = Math.random()*Math.PI*2, sp = 60 + Math.random()*220;\n    particles.push({ x, y, vx: Math.cos(a)*sp, vy: Math.sin(a)*sp, life: 0.6+Math.random()*0.5, max: 1.1, color, size: 2+Math.random()*3 });\n  }\n}\n\nfunction showToast(text, color){ toast = { text, t: 1.6, color: color || '#7df9ff' }; }\n\nfunction selectedSum(){\n  let s = 0;\n  for (const i of selected) s += grid[i].val;\n  return s;\n}\n\n// ===== INPUT =====\nfunction pointerToCanvas(e){\n  const rect = cv.getBoundingClientRect();\n  const cx = (e.clientX - rect.left) / scale;\n  const cy = (e.clientY - rect.top) / scale;\n  return { x: cx, y: cy };\n}\n\nfunction handleTap(x, y){\n  unlockAudio();\n  if (state === STATE.MENU){\n    startGame(); return;\n  }\n  if (state === STATE.OVER){\n    // restart button area\n    if (x > W/2-140 && x < W/2+140 && y > 500 && y < 570){ startGame(); }\n    return;\n  }\n  // PLAY\n  // confirm button\n  if (x > W/2-160 && x < W/2+160 && y > 640 && y < 700){\n    confirmSelection(); return;\n  }\n  // reset button\n  if (x > W/2+180 && x < W/2+300 && y > 640 && y < 700){\n    selected.clear(); sfx.deselect(); return;\n  }\n  // tiles\n  for (let i = 0; i < grid.length; i++){\n    const t = grid[i];\n    if (x >= t.x && x <= t.x+t.w && y >= t.y && y <= t.y+t.h){\n      if (selected.has(i)){ selected.delete(i); sfx.deselect(); }\n      else { selected.add(i); sfx.click(); t.pulse = 1; addParticles(t.x+t.w/2, t.y+t.h/2, '#00f0ff', 6); }\n      return;\n    }\n  }\n}\n\nfunction confirmSelection(){\n  if (selected.size === 0){ showToast('Pilih dulu ubin bit-nya!', '#ff5fa2'); return; }\n  const sum = selectedSum();\n  if (sum === target){\n    combo++;\n    if (combo > bestCombo) bestCombo = combo;\n    const gain = 100 + combo * 25;\n    score += gain;\n    sfx.correct();\n    if (combo >= 2) sfx.combo();\n    showToast('Benar! +' + gain + (combo >= 2 ? '  (Kombo x'+combo+')' : ''), '#39ff9e');\n    // particles on all selected tiles\n    for (const i of selected){ const t = grid[i]; addParticles(t.x+t.w/2, t.y+t.h/2, '#39ff9e', 12); }\n    selected.clear();\n    newTarget();\n  } else {\n    combo = 0;\n    lives--;\n    sfx.wrong();\n    shakeT = 0.35; shakeMag = 10;\n    showToast('Salah! ' + sum + ' ≠ ' + target, '#ff5fa2');\n    selected.clear();\n    if (lives <= 0){\n      state = STATE.OVER;\n      sfx.over();\n    }\n  }\n}\n\ncv.addEventListener('pointerdown', (e)=>{ e.preventDefault(); const p = pointerToCanvas(e); handleTap(p.x, p.y); });\nwindow.addEventListener('keydown', (e)=>{\n  if (e.key === 'Enter' || e.key === ' '){\n    e.preventDefault(); unlockAudio();\n    if (state === STATE.MENU) startGame();\n    else if (state === STATE.OVER) startGame();\n    else if (state === STATE.PLAY) confirmSelection();\n  }\n  if (e.key === 'r' || e.key === 'R'){ if (state === STATE.PLAY){ selected.clear(); sfx.deselect(); } }\n});\n\n// ===== UPDATE =====\nfunction update(dt){\n  time += dt;\n  if (toast){ toast.t -= dt; if (toast.t <= 0) toast = null; }\n  if (shakeT > 0) shakeT -= dt;\n  for (const t of grid){ if (t.pulse > 0) t.pulse = Math.max(0, t.pulse - dt*3); }\n  for (let i = particles.length-1; i >= 0; i--){\n    const p = particles[i];\n    p.x += p.vx*dt; p.y += p.vy*dt; p.vy += 200*dt; p.life -= dt;\n    if (p.life <= 0) particles.splice(i,1);\n  }\n}\n\n// ===== DRAW HELPERS =====\nfunction roundRect(x,y,w,h,r){\n  ctx.beginPath();\n  ctx.moveTo(x+r,y);\n  ctx.arcTo(x+w,y,x+w,y+h,r);\n  ctx.arcTo(x+w,y+h,x,y+h,r);\n  ctx.arcTo(x,y+h,x,y,r);\n  ctx.arcTo(x,y,x+w,y,r);\n  ctx.closePath();\n}\n\nfunction drawBackground(){\n  const g = ctx.createLinearGradient(0,0,0,H);\n  g.addColorStop(0,'#0a0e2a'); g.addColorStop(0.5,'#0d0620'); g.addColorStop(1,'#05060f');\n  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);\n  // grid lines glow\n  ctx.save();\n  ctx.strokeStyle = 'rgba(0,240,255,0.06)'; ctx.lineWidth = 1;\n  for (let x = 0; x < W; x += 60){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }\n  for (let y = 0; y < H; y += 60){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }\n  ctx.restore();\n  // vignette glow blobs\n  const b1 = ctx.createRadialGradient(200,150,0,200,150,400);\n  b1.addColorStop(0,'rgba(0,240,255,0.12)'); b1.addColorStop(1,'rgba(0,240,255,0)');\n  ctx.fillStyle = b1; ctx.fillRect(0,0,W,H);\n  const b2 = ctx.createRadialGradient(1080,600,0,1080,600,420);\n  b2.addColorStop(0,'rgba(255,0,200,0.12)'); b2.addColorStop(1,'rgba(255,0,200,0)');\n  ctx.fillStyle = b2; ctx.fillRect(0,0,W,H);\n}\n\nfunction drawWatermark(){\n  ctx.save();\n  ctx.globalAlpha = 0.35; ctx.fillStyle = '#ffffff';\n  ctx.font = '14px \"Segoe UI\",sans-serif'; ctx.textAlign = 'right';\n  ctx.fillText('AISYS HTML5 Engine', W-20, H-14);\n  ctx.restore();\n}\n\nfunction drawTile(t, i){\n  const sel = selected.has(i);\n  const pulse = t.pulse;\n  ctx.save();\n  const cx = t.x + t.w/2, cy = t.y + t.h/2;\n  const grow = pulse * 6;\n  const x = t.x - grow/2, y = t.y - grow/2, w = t.w + grow, h = t.h + grow;\n\n  // shadow / glow\n  ctx.shadowBlur = sel ? 28 : 12;\n  ctx.shadowColor = sel ? '#00f0ff' : 'rgba(120,0,255,0.5)';\n\n  const g = ctx.createLinearGradient(x, y, x, y+h);\n  if (sel){\n    g.addColorStop(0,'rgba(0,240,255,0.35)');\n    g.addColorStop(1,'rgba(0,120,255,0.25)');\n  } else {\n    g.addColorStop(0,'rgba(30,20,60,0.95)');\n    g.addColorStop(1,'rgba(15,10,35,0.95)');\n  }\n  ctx.fillStyle = g;\n  roundRect(x, y, w, h, 16); ctx.fill();\n\n  ctx.shadowBlur = 0;\n  ctx.lineWidth = sel ? 3 : 1.5;\n  ctx.strokeStyle = sel ? '#00f0ff' : 'rgba(160,80,255,0.55)';\n  roundRect(x, y, w, h, 16); ctx.stroke();\n\n  // value text\n  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n  ctx.font = 'bold 44px \"Segoe UI\",sans-serif';\n  if (sel){\n    ctx.shadowBlur = 18; ctx.shadowColor = '#00f0ff';\n    ctx.fillStyle = '#eaffff';\n  } else {\n    ctx.fillStyle = '#c9b8ff';\n  }\n  ctx.fillText(String(t.val), cx, cy - 6);\n  ctx.shadowBlur = 0;\n\n  // bit label\n  ctx.font = '13px \"Segoe UI\",sans-serif';\n  ctx.fillStyle = sel ? 'rgba(180,255,255,0.9)' : 'rgba(160,140,220,0.7)';\n  ctx.fillText('bit ' + t.val, cx, cy + 30);\n\n  ctx.restore();\n}\n\nfunction drawHUD(){\n  // top bar\n  ctx.save();\n  ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';\n  ctx.font = 'bold 22px \"Segoe UI\",sans-serif';\n  ctx.fillStyle = '#7df9ff'; ctx.shadowBlur = 12; ctx.shadowColor = '#00f0ff';\n  ctx.fillText('SKOR ' + score, 30, 46);\n  ctx.shadowBlur = 0;\n\n  // lives\n  ctx.textAlign = 'right';\n  ctx.fillStyle = '#ff5fa2'; ctx.font = 'bold 22px \"Segoe UI\",sans-serif';\n  ctx.shadowBlur = 10; ctx.shadowColor = '#ff00c8';\n  ctx.fillText('NYAWA ' + '♥'.repeat(Math.max(0,lives)), W-30, 46);\n  ctx.shadowBlur = 0;\n\n  // combo\n  if (combo >= 2){\n    ctx.textAlign = 'center';\n    ctx.font = 'bold 20px \"Segoe UI\",sans-serif';\n    ctx.fillStyle = '#39ff9e'; ctx.shadowBlur = 14; ctx.shadowColor = '#39ff9e';\n    ctx.fillText('KOMBO x' + combo, W/2, 46);\n    ctx.shadowBlur = 0;\n  }\n  ctx.restore();\n\n  // target panel\n  ctx.save();\n  const tw = 420, th = 120, tx = (W-tw)/2, ty = 90;\n  ctx.shadowBlur = 24; ctx.shadowColor = 'rgba(255,0,200,0.6)';\n  const g = ctx.createLinearGradient(tx,ty,tx,ty+th);\n  g.addColorStop(0,'rgba(60,10,80,0.9)'); g.addColorStop(1,'rgba(20,5,40,0.9)');\n  ctx.fillStyle = g; roundRect(tx,ty,tw,th,20); ctx.fill();\n  ctx.shadowBlur = 0;\n  ctx.strokeStyle = '#ff00c8'; ctx.lineWidth = 2; roundRect(tx,ty,tw,th,20); ctx.stroke();\n\n  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n  ctx.font = '15px \"Segoe UI\",sans-serif'; ctx.fillStyle = 'rgba(255,180,240,0.85)';\n  ctx.fillText('TARGET DESIMAL', W/2, ty+24);\n  ctx.font = 'bold 58px \"Segoe UI\",sans-serif';\n  ctx.fillStyle = '#ffffff'; ctx.shadowBlur = 20; ctx.shadowColor = '#ff00c8';\n  ctx.fillText(String(target), W/2, ty+72);\n  ctx.shadowBlur = 0;\n  ctx.restore();\n\n  // prediction line\n  ctx.save();\n  const sum = selectedSum();\n  const ok = sum === target;\n  const pw = 500, ph = 54, px = (W-pw)/2, py = 570;\n  ctx.shadowBlur = 16; ctx.shadowColor = ok ? '#39ff9e' : 'rgba(0,240,255,0.6)';\n  const pg = ctx.createLinearGradient(px,py,px+pw,py);\n  pg.addColorStop(0,'rgba(0,60,80,0.85)'); pg.addColorStop(1,'rgba(40,0,60,0.85)');\n  ctx.fillStyle = pg; roundRect(px,py,pw,ph,14); ctx.fill();\n  ctx.shadowBlur = 0;\n  ctx.strokeStyle = ok ? '#39ff9e' : '#00f0ff'; ctx.lineWidth = 2;\n  roundRect(px,py,pw,ph,14); ctx.stroke();\n\n  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n  ctx.font = 'bold 20px \"Segoe UI\",sans-serif';\n  ctx.fillStyle = ok ? '#39ff9e' : '#7df9ff';\n  ctx.fillText('Garis Prediksi:  ' + sum + '  /  ' + target, W/2, py+ph/2);\n  ctx.restore();\n\n  // buttons\n  drawButton(W/2-160, 640, 320, 60, 'KONFIRMASI', '#39ff9e', '#0a3a2a');\n  drawButton(W/2+180, 640, 120, 60, 'RESET', '#ff5fa2', '#3a0a1e');\n}\n\nfunction drawButton(x,y,w,h,label,color,bg){\n  ctx.save();\n  ctx.shadowBlur = 16; ctx.shadowColor = color;\n  const g = ctx.createLinearGradient(x,y,x,y+h);\n  g.addColorStop(0, bg); g.addColorStop(1, 'rgba(10,10,20,0.9)');\n  ctx.fillStyle = g; roundRect(x,y,w,h,14); ctx.fill();\n  ctx.shadowBlur = 0;\n  ctx.strokeStyle = color; ctx.lineWidth = 2; roundRect(x,y,w,h,14); ctx.stroke();\n  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n  ctx.font = 'bold 20px \"Segoe UI\",sans-serif'; ctx.fillStyle = color;\n  ctx.fillText(label, x+w/2, y+h/2);\n  ctx.restore();\n}\n\nfunction drawParticles(){\n  for (const p of particles){\n    ctx.save();\n    ctx.globalAlpha = Math.max(0, p.life / p.max);\n    ctx.fillStyle = p.color; ctx.shadowBlur = 12; ctx.shadowColor = p.color;\n    ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2); ctx.fill();\n    ctx.restore();\n  }\n}\n\nfunction drawToast(){\n  if (!toast) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, toast.t / 0.5);\n  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n  ctx.font = 'bold 26px \"Segoe UI\",sans-serif';\n  ctx.fillStyle = toast.color; ctx.shadowBlur = 18; ctx.shadowColor = toast.color;\n  ctx.fillText(toast.text, W/2, 200);\n  ctx.restore();\n}\n\nfunction drawMenu(){\n  drawBackground();\n  ctx.save();\n  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n  ctx.font = 'bold 64px \"Segoe UI\",sans-serif';\n  ctx.fillStyle = '#ffffff'; ctx.shadowBlur = 30; ctx.shadowColor = '#00f0ff';\n  ctx.fillText('BINARY GRID', W/2, 220);\n  ctx.font = 'bold 40px \"Segoe UI\",sans-serif';\n  ctx.fillStyle = '#ff00c8'; ctx.shadowBlur = 24; ctx.shadowColor = '#ff00c8';\n  ctx.fillText('NEON', W/2, 280);\n  ctx.shadowBlur = 0;\n\n  ctx.font = '20px \"Segoe UI\",sans-serif'; ctx.fillStyle = '#b8c8ff';\n  ctx.fillText('Pilih ubin bit (1, 2, 4, 8, ...) yang jumlahnya', W/2, 370);\n  ctx.fillText('sama dengan target desimal.', W/2, 400);\n\n  ctx.font = '16px \"Segoe UI\",sans-serif'; ctx.fillStyle = 'rgba(160,180,255,0.7)';\n  ctx.fillText('Contoh: target 13 → pilih 8 + 4 + 1', W/2, 450);\n\n  drawButton(W/2-140, 520, 280, 64, 'MULAI', '#00f0ff', '#0a2a3a');\n\n  ctx.font = '14px \"Segoe UI\",sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.35)';\n  ctx.fillText('Built with AISYS HTML5 Engine', W/2, 660);\n  ctx.fillText('STIKOM YOS SUDARSO', W/2, 682);\n  ctx.restore();\n}\n\nfunction drawOver(){\n  drawBackground();\n  ctx.save();\n  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';\n  ctx.font = 'bold 56px \"Segoe UI\",sans-serif';\n  ctx.fillStyle = '#ff5fa2'; ctx.shadowBlur = 28; ctx.shadowColor = '#ff00c8';\n  ctx.fillText('GAME OVER', W/2, 220);\n  ctx.shadowBlur = 0;\n\n  ctx.font = 'bold 32px \"Segoe UI\",sans-serif'; ctx.fillStyle = '#7df9ff';\n  ctx.fillText('Skor Akhir: ' + score, W/2, 320);\n  ctx.font = '22px \"Segoe UI\",sans-serif'; ctx.fillStyle = '#b8c8ff';\n  ctx.fillText('Kombo Terbaik: x' + bestCombo, W/2, 370);\n\n  drawButton(W/2-140, 500, 280, 64, 'MAIN LAGI', '#39ff9e', '#0a3a2a');\n\n  ctx.font = '14px \"Segoe UI\",sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.35)';\n  ctx.fillText('Built with AISYS HTML5 Engine', W/2, 660);\n  ctx.fillText('STIKOM YOS SUDARSO', W/2, 682);\n  ctx.restore();\n}\n\n// ===== MAIN LOOP =====\nlet last = performance.now();\nfunction loop(now){\n  const dt = Math.min(0.05, (now - last) / 1000);\n  last = now;\n  update(dt);\n\n  ctx.save();\n  if (shakeT > 0){\n    const s = shakeMag * (shakeT / 0.35);\n    ctx.translate((Math.random()-0.5)*s, (Math.random()-0.5)*s);\n  }\n\n  if (state === STATE.MENU){\n    drawMenu();\n  } else if (state === STATE.PLAY){\n    drawBackground();\n    drawHUD();\n    for (let i = 0; i < grid.length; i++) drawTile(grid[i], i);\n    drawParticles();\n    drawToast();\n    drawWatermark();\n  } else if (state === STATE.OVER){\n    drawOver();\n  }\n\n  ctx.restore();\n  requestAnimationFrame(loop);\n}\nrequestAnimationFrame(loop);\n</script>\n</body>\n</html>\n<!-- END_OF_GAME -->\n```"
+    }
+  ]
+}

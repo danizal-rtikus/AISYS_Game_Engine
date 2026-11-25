@@ -4,19 +4,17 @@ import {
   Square,
   Sparkles,
   Gamepad2,
-  Compass,
   Layers,
   AlertCircle,
   Code,
   ArrowRight,
-  Music,
   Target,
   Shield,
   Crosshair,
 } from 'lucide-react';
 import { Message } from '../types';
 import { MarkdownRenderer } from './MarkdownRenderer';
-import { MANIFEST_REGENERATE_REQUEST } from '../config/defaultSkill';
+import { GAME_REGENERATE_REQUEST } from '../config/defaultSkill';
 
 interface ChatPanelProps {
   messages: Message[];
@@ -28,42 +26,44 @@ interface ChatPanelProps {
   onSelectTab: (tab: 'preview' | 'code') => void;
 }
 
+// All 9 genres are buildable: Endless Runner via the engine manifest (stable), others via full HTML (Beta).
+// The remaining Beta genres (Rhythm, Idle / Tycoon, Dungeon Crawler) are listed in the welcome message.
 const QUICK_STARTERS = [
   {
+    title: 'Endless Runner',
+    desc: 'Stabil: lari, lompat, ambil item sesuai kategori.',
+    prompt: 'Saya ingin membuat game Endless Runner.',
+    icon: Sparkles,
+  },
+  {
     title: '2D Platformer',
-    desc: 'Lompat rintangan, gravitasi presisi & koin (Arcade / Edukasi).',
-    prompt: 'Saya ingin membuat game 2D Platformer. Mari kita diskusikan konsep dan temanya.',
+    desc: 'Beta: lompat presisi, platform, rintangan.',
+    prompt: 'Saya ingin membuat game 2D Platformer.',
     icon: Gamepad2,
   },
   {
+    title: 'Puzzle Grid',
+    desc: 'Beta: papan ubin, cocokkan, reaksi berantai.',
+    prompt: 'Saya ingin membuat game Puzzle Grid.',
+    icon: Layers,
+  },
+  {
     title: 'Top-Down Shooter',
-    desc: 'Navigasi 8 arah, tembak laser & wave survival (Aksi / Edukasi).',
-    prompt: 'Saya ingin membuat game Top-Down Shooter dengan kontrol WASD/Mouse dan gelombang musuh.',
+    desc: 'Beta: gerak 8 arah, bidik, gelombang musuh.',
+    prompt: 'Saya ingin membuat game Top-Down Shooter.',
     icon: Crosshair,
   },
   {
-    title: 'Physics / Slingshot',
-    desc: 'Ketapel tarik-lepas ala Angry Birds & fisika penghancuran balok.',
-    prompt: 'Saya ingin membuat game Physics / Slingshot dengan trayektori parabola dan rintangan balok.',
-    icon: Target,
-  },
-  {
     title: 'Tower Defense',
-    desc: 'Strategi penempatan menara penjaga & gelombang creeps.',
-    prompt: 'Saya ingin membuat game Tower Defense strategi penempatan menara dan rute musuh.',
+    desc: 'Beta: menara, jalur musuh, upgrade.',
+    prompt: 'Saya ingin membuat game Tower Defense.',
     icon: Shield,
   },
   {
-    title: 'Rhythm / Music',
-    desc: 'Sinkronisasi ketukan beat, not musik jatuh & tempo audio.',
-    prompt: 'Saya ingin membuat game Rhythm / Music berbasis ketukan ritme audio sintetis.',
-    icon: Music,
-  },
-  {
-    title: 'Puzzle Grid',
-    desc: 'Papan ubin logika warna, match-3 & kalkulasi reaksi berantai.',
-    prompt: 'Saya ingin membuat game Puzzle Grid berbasis giliran dengan reaksi berantai.',
-    icon: Layers,
+    title: 'Physics / Slingshot',
+    desc: 'Beta: ketapel, lintasan parabola, balok.',
+    prompt: 'Saya ingin membuat game Physics / Slingshot.',
+    icon: Target,
   },
 ];
 
@@ -285,7 +285,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                         ) : (
                           <button
                             onClick={() =>
-                              onSendMessage(MANIFEST_REGENERATE_REQUEST)
+                              onSendMessage(GAME_REGENERATE_REQUEST)
                             }
                             className="flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-medium bg-[#F6821F] hover:bg-[#E66E0A] text-white transition-colors flex-shrink-0 shadow-sm"
                           >

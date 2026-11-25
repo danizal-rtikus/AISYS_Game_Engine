@@ -1,0 +1,183 @@
+{
+  "id": "eko-mudah-1",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 180,
+        "prompt_tokens": 5970,
+        "total_tokens": 6150,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 5843,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: kebutuhan primer, sekunder, dan tersier.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 331,
+        "prompt_tokens": 6172,
+        "total_tokens": 6503,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 17739,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 205,
+        "prompt_tokens": 6507,
+        "total_tokens": 6712,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        },
+        "prompt_cache_hit_tokens": 5888,
+        "prompt_cache_miss_tokens": 619
+      },
+      "ms": 10772,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 124,
+        "prompt_tokens": 6716,
+        "total_tokens": 6840,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 6016
+        }
+      },
+      "ms": 5560,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 242,
+        "prompt_tokens": 6845,
+        "total_tokens": 7087,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        },
+        "prompt_cache_hit_tokens": 6400,
+        "prompt_cache_miss_tokens": 445
+      },
+      "ms": 9687,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 788,
+        "prompt_tokens": 7091,
+        "total_tokens": 7879,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 7638,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 1123,
+        "prompt_tokens": 7886,
+        "total_tokens": 9009,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 7040
+        }
+      },
+      "ms": 6872,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio! 🎮\n\nSenang sekali Anda ingin membuat game baru. Saat ini AISYS Engine Core membangun game bergenre **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. (Genre lain seperti Platformer, Puzzle, atau Rhythm sedang dalam pengembangan, segera hadir!)\n\nSebelum kita mulai merancang, saya perlu tahu arah game Anda:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks) atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: kebutuhan primer, sekunder, dan tersier."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang menarik! 🎯 Topik **kebutuhan primer, sekunder, dan tersier** sangat cocok dijadikan mekanik Endless Runner — pemain mengambil item yang sesuai dengan kategori target yang tampil.\n\nBerikut 3 opsi skema kategori. Setiap item sudah saya pastikan hanya masuk **satu** kategori saja:\n\n**Opsi A — Berdasarkan Sifat Pemenuhan Kebutuhan**\n- **Primer** (kebutuhan dasar/pokok): Beras, Air minum, Pakaian\n- **Sekunder** (kebutuhan pelengkap): Sepeda motor, Telepon seluler, Kulkas\n- **Tersier** (kebutuhan mewah/prestise): Perhiasan emas, Mobil mewah, Liburan ke luar negeri\n\n**Opsi B — Berdasarkan Tingkat Kepentingan (Sandang–Pangan–Papan)**\n- **Pangan**: Beras, Sayuran, Ikan\n- **Sandang**: Kemeja, Sepatu, Jaket\n- **Papan**: Rumah, Genteng, Semen\n\n**Opsi C — Berdasarkan Waktu Pemenuhan**\n- **Sekarang** (mendesak): Obat saat sakit, Air minum saat haus, Makanan saat lapar\n- **Masa Depan** (persiapan): Tabungan pendidikan, Asuransi kesehatan, Dana pensiun\n\nDari opsi di atas, mana yang paling Anda sukai (**A**, **B**, atau **C**)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang bagus! 🎯 Opsi A memberi kontras yang jelas antara kebutuhan pokok, pelengkap, dan mewah — sangat pas untuk mekanik pengambilan item.\n\nSekarang, mari tentukan gaya visualnya. AISYS menyediakan 4 preset tema:\n\n- **Opsi A, Clean Modern:** bersih dan serius, latar biru gelap — cocok untuk nuansa akademik dan bisnis.\n- **Opsi B, Neon:** latar gelap dengan pendaran cyan dan magenta — cocok untuk teknologi dan siber.\n- **Opsi C, Cartoon:** langit cerah, bukit hijau, outline tegas — cocok untuk anak, alam, dan lingkungan.\n- **Opsi D, Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (**A**, **B**, **C**, atau **D**)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan elegan! 🎨 Clean Modern akan memberi kesan rapi dan serius, cocok untuk materi ekonomi.\n\nSekarang tinggal tempo permainannya. Ada 3 tingkat kesulitan:\n\n- **Santai:** lari lebih lambat dan percepatan pelan — cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (**Santai**, **Normal**, atau **Menantang**)?"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Sempurna! ⚖️ Normal memberi tempo yang seimbang — menantang tapi tetap ramah untuk belajar.\n\nSekarang, bagian terpenting untuk game edukasi. Saya ingin menguji **miskonsepsi umum** tentang kebutuhan primer, sekunder, dan tersier lewat item jebakan. Berikut 3 miskonsepsi yang paling sering muncul:\n\n- **Opsi A:** \"Semua benda mahal otomatis termasuk kebutuhan tersier.\" (Padahal harga bukan penentu golongan — obat mahal tetap kebutuhan primer saat sakit.)\n- **Opsi B:** \"Pakaian selalu kebutuhan primer.\" (Padahal pakaian sehari-hari memang primer, tetapi pakaian pesta/desainer lebih tepat sekunder/tersier.)\n- **Opsi C:** \"Kebutuhan sekunder dan tersier itu sama saja, hanya beda nama.\" (Padahal keduanya berbeda: sekunder untuk pelengkap kenyamanan, tersier untuk prestise/mewah.)\n\nMiskonsepsi mana yang paling ingin Anda luruskan lewat game ini (**A**, **B**, atau **C**)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan tepat! 💡 Miskonsepsi \"mahal = tersier\" memang sangat umum dan cocok diluruskan lewat item jebakan.\n\nBaiklah, semua komponen sudah lengkap. Berikut rancangan lengkapnya:\n\n---\n\n**📋 GAME BLUEPRINT / PRD (Product Requirements Document)**\n\n**Identitas Game**\n- **Judul:** Kebutuhan Run\n- **Genre:** Endless Runner\n- **Tipe:** Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis dan melompat menghindari rintangan.\n- Di layar tampil **kategori target** (Primer / Sekunder / Tersier). Pemain mengambil item yang **cocok** dengan target untuk mencetak skor dan membangun combo.\n- Mengambil item yang salah mengurangi skor dan memunculkan penjelasan singkat.\n- Menabrak rintangan mengurangi nyawa. Game berakhir saat nyawa habis (3 nyawa).\n- Kecepatan meningkat bertahap setiap 15 detik.\n\n**2. Konten Belajar**\n- **Subjek:** Ekonomi\n- **Konsep:** Penggolongan kebutuhan manusia berdasarkan tingkat kepentingannya (primer, sekunder, tersier)\n- **Tujuan Pembelajaran:** Mengelompokkan benda/kebutuhan ke dalam kategori primer, sekunder, dan tersier dengan alasan yang tepat.\n- **Miskonsepsi yang diuji:** \"Semua benda mahal otomatis termasuk kebutuhan tersier.\" (Harga bukan penentu golongan.)\n\n**Kategori & Item:**\n\n*Primer (kebutuhan pokok/dasar):*\n- Beras — makanan pokok sehari-hari yang wajib dipenuhi.\n- Air minum — kebutuhan dasar tubuh yang tidak bisa ditunda.\n- Pakaian sehari-hari — melindungi tubuh; kebutuhan dasar sandang.\n- Obat saat sakit — kebutuhan mendesak untuk kesehatan (jebakan miskonsepsi: mahal tapi tetap primer).\n\n*Sekunder (kebutuhan pelengkap/kenyamanan):*\n- Sepeda motor — alat transportasi penunjang aktivitas.\n- Telepon seluler — alat komunikasi yang menambah kenyamanan.\n- Kulkas — membantu menyimpan makanan, bukan kebutuhan pokok.\n- Kipas angin — memberi kenyamanan, bukan kebutuhan dasar.\n\n*Tersier (kebutuhan mewah/prestise):*\n- Perhiasan emas — barang mewah untuk prestise, bukan kebutuhan pokok.\n- Mobil mewah — kendaraan mewah untuk gengsi.\n- Liburan ke luar negeri — rekreasi mewah, bukan kebutuhan dasar.\n- Jam tangan desainer — aksesori prestise bernilai tinggi.\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Clean Modern** (bersih, serius, latar biru gelap — cocok untuk materi akademik/ekonomi).\n\n**4. Tingkat Kesulitan**\n- **Normal** — tempo seimbang, 3 nyawa, kecepatan meningkat tiap 15 detik.\n\n---\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti kategori, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Berikut manifest game \"Kebutuhan Run\" — Endless Runner edukasi ekonomi dengan tema Clean Modern dan kesulitan Normal.\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"kebutuhan-run\", title: \"Kebutuhan Run\", seed: \"kebutuhan-01\",\n  theme: { preset: \"clean-modern\" },\n\n  learning: {\n    subject: \"Ekonomi\",\n    concept: \"Penggolongan kebutuhan primer, sekunder, dan tersier\",\n    objectives: [\"Mengelompokkan kebutuhan berdasarkan tingkat kepentingannya\"],\n    misconceptions: [\"Semua benda mahal otomatis termasuk kebutuhan tersier\"],\n    mode: \"category\",\n    categories: [\n      { id: \"primer\",   label: \"Primer\",   color: \"#2F80ED\" },\n      { id: \"sekunder\", label: \"Sekunder\", color: \"#3FA34D\" },\n      { id: \"tersier\",  label: \"Tersier\",  color: \"#E5484D\" }\n    ],\n    items: [\n      { id: \"beras\",        label: \"Beras\",             category: \"primer\",   explain: \"Makanan pokok sehari-hari yang wajib dipenuhi.\" },\n      { id: \"air-minum\",    label: \"Air minum\",         category: \"primer\",   explain: \"Kebutuhan dasar tubuh yang tidak bisa ditunda.\" },\n      { id: \"pakaian\",      label: \"Pakaian sehari-hari\", category: \"primer\", explain: \"Melindungi tubuh; kebutuhan dasar sandang.\" },\n      { id: \"obat\",         label: \"Obat saat sakit\",   category: \"primer\",   explain: \"Kebutuhan mendesak untuk kesehatan; mahal bukan berarti tersier.\" },\n      { id: \"sepeda-motor\", label: \"Sepeda motor\",      category: \"sekunder\", explain: \"Alat transportasi penunjang aktivitas, bukan kebutuhan pokok.\" },\n      { id: \"ponsel\",       label: \"Telepon seluler\",   category: \"sekunder\", explain: \"Alat komunikasi yang menambah kenyamanan.\" },\n      { id: \"kulkas\",       label: \"Kulkas\",            category: \"sekunder\", explain: \"Membantu menyimpan makanan; pelengkap, bukan pokok.\" },\n      { id: \"kipas\",        label: \"Kipas angin\",       category: \"sekunder\", explain: \"Memberi kenyamanan, bukan kebutuhan dasar.\" },\n      { id: \"perhiasan\",    label: \"Perhiasan emas\",    category: \"tersier\",  explain: \"Barang mewah untuk prestise, bukan kebutuhan pokok.\" },\n      { id: \"mobil-mewah\",  label: \"Mobil mewah\",       category: \"tersier\",  explain: \"Kendaraan mewah untuk gengsi, bukan kebutuhan dasar.\" },\n      { id: \"liburan\",      label: \"Liburan luar negeri\", category: \"tersier\", explain: \"Rekreasi mewah, bukan kebutuhan dasar.\" },\n      { id: \"jam-desainer\", label: \"Jam tangan desainer\", category: \"tersier\", explain: \"Aksesori prestise bernilai tinggi.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"batu\",     w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"genangan\", w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```\n\nGame ini mengajak pemain memilah kebutuhan primer, sekunder, dan tersier lewat item yang diambil sesuai target. Asumsi penting: item \"Obat saat sakit\" sengaja dimasukkan sebagai jebakan miskonsepsi \"mahal = tersier\", karena obat tetap kebutuhan primer saat dibutuhkan."
+    }
+  ]
+}

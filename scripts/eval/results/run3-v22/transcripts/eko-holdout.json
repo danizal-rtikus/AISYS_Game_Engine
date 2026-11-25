@@ -1,0 +1,210 @@
+{
+  "id": "eko-holdout",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 193,
+        "prompt_tokens": 5970,
+        "total_tokens": 6163,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        }
+      },
+      "ms": 9136,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: pelaku kegiatan ekonomi (rumah tangga konsumen, rumah tangga produsen, dan pemerintah).",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 398,
+        "prompt_tokens": 6196,
+        "total_tokens": 6594,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 8060,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 189,
+        "prompt_tokens": 6598,
+        "total_tokens": 6787,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        },
+        "input_tokens": 6598,
+        "input_tokens_details": {
+          "cached_tokens": 5888
+        },
+        "output_tokens": 189,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 5888,
+        "prompt_cache_miss_tokens": 710
+      },
+      "ms": 4492,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 118,
+        "prompt_tokens": 6792,
+        "total_tokens": 6910,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 6528
+        }
+      },
+      "ms": 4635,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 233,
+        "prompt_tokens": 6915,
+        "total_tokens": 7148,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        },
+        "prompt_cache_hit_tokens": 5888,
+        "prompt_cache_miss_tokens": 1027
+      },
+      "ms": 7817,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 85,
+        "prompt_tokens": 7152,
+        "total_tokens": 7237,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 9093,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 605,
+        "prompt_tokens": 7243,
+        "total_tokens": 7848,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 10109,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut, buat game sekarang.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 1095,
+        "prompt_tokens": 7860,
+        "total_tokens": 8955,
+        "prompt_tokens_details": {
+          "cached_tokens": 7168
+        }
+      },
+      "ms": 12505,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio 🎮 Senang sekali Anda ingin membuat game baru bersama kami.\n\nSebagai informasi singkat: AISYS Engine Core saat ini membangun game bergenre **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain (Platformer, Top-Down Shooter, Puzzle, dll.) sedang dalam pengembangan dan segera hadir.\n\nSebelum kita mulai merancang, saya perlu tahu arah game Anda:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks) atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: pelaku kegiatan ekonomi (rumah tangga konsumen, rumah tangga produsen, dan pemerintah)."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang bagus! Topik **Pelaku Kegiatan Ekonomi** sangat cocok dijadikan mekanik Endless Runner — pemain mengambil item yang sesuai dengan peran pelaku ekonomi yang menjadi target.\n\nBerikut 3 opsi skema kategori untuk topik ini. Setiap item hanya masuk **satu** kategori berdasarkan peran utamanya dalam kegiatan ekonomi:\n\n**Opsi A — Tiga Pelaku Ekonomi (peran utama)**\n- **Rumah Tangga Konsumen:** membeli barang di pasar, membayar listrik, menabung di bank\n- **Rumah Tangga Produsen:** memproduksi barang di pabrik, membayar upah karyawan, membuka usaha warung\n- **Pemerintah:** memungut pajak, membangun jalan raya, membayar gaji pegawai negeri\n\n**Opsi B — Kegiatan Ekonomi (konsumsi, produksi, distribusi)**\n- **Konsumsi:** memakai sepatu baru, makan di restoran, memakai listrik di rumah\n- **Produksi:** menanam padi di sawah, membuat roti di toko, merakit mobil di pabrik\n- **Distribusi:** mengantar barang ke toko, mengirim paket lewat kurir, menyalurkan beras ke pasar\n\n**Opsi C — Fokus Pemerintah vs Swasta**\n- **Pemerintah:** menarik pajak, membangun jembatan, membayar gaji PNS\n- **Rumah Tangga:** membeli kebutuhan pokok, menabung, membayar sewa rumah\n- **Perusahaan:** memproduksi barang, membayar upah, mencari keuntungan\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang tepat! **Opsi A — Tiga Pelaku Ekonomi** akan menjadi inti mekanik belajar game Anda.\n\nSekarang kita masuk ke tahap visual. AISYS menyediakan 4 preset tema yang bisa diterapkan:\n\n- **Opsi A, Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n- **Opsi B, Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n- **Opsi C, Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n- **Opsi D, Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang serasi! **Clean Modern** akan memberi kesan akademik yang rapi dan serius — cocok untuk materi ekonomi.\n\nSekarang kita tentukan tingkat kesulitannya:\n\n- **Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, **Normal** — tempo yang seimbang untuk pengalaman belajar yang nyaman.\n\nSekarang kita masuk ke fokus belajar. Berikut beberapa miskonsepsi umum tentang pelaku kegiatan ekonomi yang bisa diluruskan lewat item jebakan di game:\n\n- **Opsi A:** \"Pemerintah tidak termasuk pelaku ekonomi karena hanya mengatur, bukan melakukan kegiatan ekonomi.\" (Faktanya: pemerintah juga melakukan konsumsi dan produksi, misalnya membayar gaji dan membangun infrastruktur.)\n- **Opsi B:** \"Rumah tangga konsumen hanya berperan menghabiskan barang, tidak punya peran lain.\" (Faktanya: rumah tangga konsumen juga menyediakan faktor produksi seperti tenaga kerja.)\n- **Opsi C:** \"Rumah tangga produsen hanya memproduksi barang, tidak pernah mengonsumsi.\" (Faktanya: produsen juga mengonsumsi barang modal dan jasa untuk proses produksi.)\n\nMiskonsepsi mana yang paling ingin diluruskan lewat game ini (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, **Opsi A** — miskonsepsi bahwa pemerintah tidak termasuk pelaku ekonomi akan diluruskan lewat item jebakan yang menekankan peran pemerintah dalam konsumsi dan produksi.\n\nSebelum menyusun blueprint, saya perlu memastikan satu hal lagi: **judul game**-nya. Boleh saya beri nama, atau Anda punya judul sendiri?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, saya beri judul **\"Pelaku Ekonomi Run\"**. Berikut blueprint lengkapnya:\n\n**📋 GAME BLUEPRINT / PRD**\n\n**Identitas Game**\n- Judul: Pelaku Ekonomi Run\n- Genre: Endless Runner\n- Tipe: Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis dan melompat menghindari rintangan.\n- Target kategori tampil di layar (Rumah Tangga Konsumen / Produsen / Pemerintah). Ambil item yang cocok dengan target untuk skor; item salah mengurangi skor dan menampilkan penjelasan singkat.\n- Target berganti setelah beberapa item benar. Skor bertambah dari item benar dan jarak tempuh.\n- Kalah jika nyawa habis (3 nyawa) akibat menabrak rintangan.\n\n**2. Konten Belajar**\n- Subjek: Ekonomi\n- Konsep: Tiga pelaku kegiatan ekonomi dan perannya\n- Tujuan: Mengelompokkan kegiatan/aktivitas berdasarkan pelaku ekonomi yang tepat\n- Miskonsepsi yang diuji: \"Pemerintah tidak termasuk pelaku ekonomi karena hanya mengatur, bukan melakukan kegiatan ekonomi.\"\n\nKategori & item:\n- **Rumah Tangga Konsumen** — membeli barang di pasar (membeli untuk memenuhi kebutuhan), membayar listrik (membayar jasa untuk konsumsi rumah tangga), menabung di bank (menyisihkan pendapatan untuk konsumsi masa depan).\n- **Rumah Tangga Produsen** — memproduksi barang di pabrik (menghasilkan barang untuk dijual), membayar upah karyawan (balas jasa faktor produksi tenaga kerja), membuka usaha warung (menjalankan kegiatan produksi/berjualan).\n- **Pemerintah** — memungut pajak (sumber pendapatan negara), membangun jalan raya (menyediakan fasilitas publik), membayar gaji pegawai negeri (pemerintah sebagai pemberi kerja/pengonsumsi).\n\n**3. Arahan Visual (DKV)**\n- Preset tema: Clean Modern\n\n**4. Tingkat Kesulitan**\n- Normal\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti kategori, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut, buat game sekarang."
+    },
+    {
+      "role": "assistant",
+      "content": "```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"pelaku-ekonomi-run\", title: \"Pelaku Ekonomi Run\", seed: \"pelaku-ekonomi-01\",\n  theme: { preset: \"clean-modern\" },\n\n  learning: {\n    subject: \"Ekonomi\",\n    concept: \"Tiga pelaku kegiatan ekonomi: rumah tangga konsumen, rumah tangga produsen, dan pemerintah\",\n    objectives: [\n      \"Mengelompokkan kegiatan ekonomi berdasarkan pelaku yang tepat\",\n      \"Memahami bahwa pemerintah juga melakukan kegiatan konsumsi dan produksi\"\n    ],\n    misconceptions: [\n      \"Pemerintah tidak termasuk pelaku ekonomi karena hanya mengatur, bukan melakukan kegiatan ekonomi\"\n    ],\n    mode: \"category\",\n    categories: [\n      { id: \"konsumen\",  label: \"Rumah Tangga Konsumen\", color: \"#2F80ED\" },\n      { id: \"produsen\",  label: \"Rumah Tangga Produsen\", color: \"#3FA34D\" },\n      { id: \"pemerintah\", label: \"Pemerintah\",           color: \"#E5A100\" }\n    ],\n    items: [\n      { id: \"beli-pasar\",     label: \"Membeli barang di pasar\", category: \"konsumen\",   explain: \"Rumah tangga membeli barang untuk memenuhi kebutuhan konsumsi.\" },\n      { id: \"bayar-listrik\",  label: \"Membayar listrik\",        category: \"konsumen\",   explain: \"Membayar jasa untuk kebutuhan konsumsi rumah tangga.\" },\n      { id: \"menabung\",       label: \"Menabung di bank\",        category: \"konsumen\",   explain: \"Menyisihkan pendapatan untuk konsumsi masa depan.\" },\n      { id: \"produksi-pabrik\", label: \"Memproduksi barang di pabrik\", category: \"produsen\", explain: \"Menghasilkan barang untuk dijual kepada konsumen.\" },\n      { id: \"bayar-upah\",     label: \"Membayar upah karyawan\",  category: \"produsen\",   explain: \"Balas jasa atas faktor produksi tenaga kerja.\" },\n      { id: \"buka-warung\",    label: \"Membuka usaha warung\",    category: \"produsen\",   explain: \"Menjalankan kegiatan produksi dan penjualan barang.\" },\n      { id: \"pungut-pajak\",   label: \"Memungut pajak\",          category: \"pemerintah\", explain: \"Pajak adalah sumber pendapatan negara untuk membiayai pembangunan.\" },\n      { id: \"bangun-jalan\",   label: \"Membangun jalan raya\",    category: \"pemerintah\", explain: \"Pemerintah menyediakan fasilitas publik bagi masyarakat.\" },\n      { id: \"gaji-pns\",       label: \"Membayar gaji pegawai negeri\", category: \"pemerintah\", explain: \"Pemerintah bertindak sebagai pemberi kerja dan pengonsumsi.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"batu\",     w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"genangan\", w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```\n\nGame **Pelaku Ekonomi Run** adalah Endless Runner edukasi bertema Clean Modern dengan tiga kategori pelaku ekonomi. Asumsi penting: item jebakan \"Membayar gaji pegawai negeri\" sengaja masuk kategori Pemerintah untuk meluruskan miskonsepsi bahwa pemerintah hanya mengatur, bukan berperan ekonomi."
+    }
+  ]
+}

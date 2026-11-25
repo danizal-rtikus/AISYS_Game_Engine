@@ -1,0 +1,169 @@
+{
+  "id": "bio-holdout",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 356,
+        "prompt_tokens": 6712,
+        "total_tokens": 7068,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "ms": 6767,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Endless Runner",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 81,
+        "prompt_tokens": 7074,
+        "total_tokens": 7155,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 5687,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: organ tubuh manusia berdasarkan sistem pencernaan, pernapasan, dan peredaran darah.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 286,
+        "prompt_tokens": 7185,
+        "total_tokens": 7471,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 7185
+      },
+      "ms": 8592,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 132,
+        "prompt_tokens": 7475,
+        "total_tokens": 7607,
+        "prompt_tokens_details": {
+          "cached_tokens": 6912
+        }
+      },
+      "ms": 3833,
+      "reasoningChars": 0
+    },
+    {
+      "user": "C",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 52,
+        "prompt_tokens": 7611,
+        "total_tokens": 7663,
+        "prompt_tokens_details": {
+          "cached_tokens": 7424
+        }
+      },
+      "ms": 5264,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 635,
+        "prompt_tokens": 7667,
+        "total_tokens": 8302,
+        "prompt_tokens_details": {
+          "cached_tokens": 7424
+        }
+      },
+      "ms": 9586,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 1016,
+        "prompt_tokens": 8308,
+        "total_tokens": 9324,
+        "prompt_tokens_details": {
+          "cached_tokens": 7424
+        }
+      },
+      "ms": 10735,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Selamat datang di AISYS Game Studio 🎮\n\nSaya siap membantu Anda merancang game edukasi atau arcade yang seru. Berikut 9 genre resmi yang bisa kita bangun:\n\n**Mode Engine (stabil)**\n- **Endless Runner** — lari otomatis, lompati rintangan, ambil item sesuai kategori target. *(stabil)*\n\n**Mode HTML (Beta)**\n1. **2D Platformer** — lompat presisi, gravitasi, platform bergerak, rintangan, item.\n2. **Top-Down Shooter** — navigasi 8 arah, membidik dengan mouse/sentuh, gelombang musuh, proyektil.\n3. **Puzzle Grid** — papan ubin, pencocokan warna/simbol, reaksi berantai, kombo berbasis giliran.\n4. **Rhythm / Music** — ketukan tempo, not jatuh, akurasi Perfect/Good/Miss, audio sintesis.\n5. **Physics / Slingshot** — ketapel tarik-lepas, lintasan parabola, tumbukan dan penghancuran balok.\n6. **Tower Defense** — menara di sepanjang jalur musuh, upgrade, gelombang musuh.\n7. **Idle / Tycoon** — sumber daya bertingkat, generator pasif, otomatisasi produksi.\n8. **Dungeon Crawler** — eksplorasi labirin, kunci dan pintu, musuh berpatroli, inventori.\n\n**Genre mana yang ingin Anda bangun?**"
+    },
+    {
+      "role": "user",
+      "content": "Endless Runner"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, kita akan membangun **Endless Runner** — genre ini dibuat dalam **Mode Engine (stabil)**, jadi hasilnya akan berupa manifest data yang dijalankan oleh AISYS Engine Core.\n\n**Apakah game ini ingin dirancang sebagai Arcade Murni (hiburan skor dan refleks) atau Edukasi (sebutkan topiknya)?**"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: organ tubuh manusia berdasarkan sistem pencernaan, pernapasan, dan peredaran darah."
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, game edukasi **Endless Runner** dengan topik **organ tubuh manusia** (sistem pencernaan, pernapasan, dan peredaran darah).\n\nBerikut 3 opsi skema kategori untuk mekanik pengambilan item:\n\n**Opsi A — Kelompok Sistem Organ**\n- **Pencernaan:** lambung, usus halus, kerongkongan\n- **Pernapasan:** paru-paru, trakea, hidung\n- **Peredaran Darah:** jantung, pembuluh darah, arteri\n\n**Opsi B — Fungsi Utama Organ**\n- **Pencernaan Makanan:** lambung, usus halus, kerongkongan\n- **Pertukaran Gas:** paru-paru, trakea, alveolus\n- **Pompa Darah:** jantung, arteri, vena\n\n**Opsi C — Organ Berdasarkan Posisi & Peran**\n- **Saluran Makanan:** kerongkongan, lambung, usus halus\n- **Organ Pernapasan:** paru-paru, trakea, bronkus\n- **Organ Sirkulasi:** jantung, arteri, vena\n\n**Dari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?**"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, kita pakai **Opsi A — Kelompok Sistem Organ** (Pencernaan, Pernapasan, Peredaran Darah).\n\n**Gaya visual mana yang ingin diterapkan pada game Anda?**\n- **Opsi A, Clean Modern:** bersih dan serius, latar biru gelap.\n- **Opsi B, Neon:** latar gelap dengan pendaran cyan dan magenta.\n- **Opsi C, Cartoon:** langit cerah, bukit hijau, outline tegas.\n- **Opsi D, Retro Pixel:** nuansa arcade klasik kuning dan oranye."
+    },
+    {
+      "role": "user",
+      "content": "C"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, gaya visual **Cartoon** (langit cerah, bukit hijau, outline tegas) dipilih.\n\n**Tingkat kesulitan mana yang Anda inginkan: Santai, Normal, atau Menantang?**"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Baik, tingkat kesulitan **Normal** dipilih. Berikut Game Blueprint (PRD) kita:\n\n**📋 GAME BLUEPRINT / PRD**\n\n**Identitas Game**\n- **Judul:** Organ Run — Petualangan Sistem Tubuh\n- **Genre:** Endless Runner\n- **Mode:** Engine (stabil)\n- **Tipe:** Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis, melompati rintangan, dan mengambil item organ yang sesuai dengan **target sistem** yang ditampilkan di HUD.\n- Skor bertambah saat mengambil organ yang benar, berkurang saat salah, dan nyawa berkurang saat menabrak rintangan.\n- Target sistem berganti setelah beberapa jawaban benar. Game berakhir bila nyawa habis.\n\n**2. Konten Belajar**\n- **Subjek:** IPA — Organ Tubuh Manusia\n- **Konsep:** Pengelompokan organ berdasarkan sistem pencernaan, pernapasan, dan peredaran darah.\n- **Tujuan:** Siswa mampu mengelompokkan organ tubuh ke sistem yang tepat.\n- **Miskonsepsi yang diuji:** Menganggap **jantung** sebagai organ pencernaan karena letaknya di perut, atau **paru-paru** sebagai organ peredaran darah karena berhubungan dengan darah.\n- **Kategori & Item:**\n  - **Pencernaan** — lambung (mencerna makanan), usus halus (menyerap sari makanan), kerongkongan (saluran makanan).\n  - **Pernapasan** — paru-paru (pertukaran gas), trakea (saluran udara), hidung (menyaring udara).\n  - **Peredaran Darah** — jantung (memompa darah), pembuluh darah (mengalirkan darah), arteri (membawa darah dari jantung).\n\n**3. Arahan Visual (DKV)**\n- Gaya **Cartoon**: langit cerah, bukit hijau, outline tegas, karakter ramah.\n\n**4. Mekanik Teknis**\n- Kesulitan **Normal**: kecepatan awal 360, maksimal 720, akselerasi 6, nyawa 3, kesulitan naik tiap 15 detik.\n- Kontrol: lompat (spasi/panah atas/sentuh), HUD menampilkan skor, nyawa, kombo, dan target.\n\n**Silakan cermati Game Blueprint (PRD) di atas.**\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung membuat gamenya.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan.\n\n**Apakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?**"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Game Endless Runner edukasi tentang pengelompokan organ tubuh manusia berdasarkan sistem pencernaan, pernapasan, dan peredaran darah, dengan gaya visual Cartoon dan kesulitan Normal. Asumsi: item organ diambil dengan melompat, dan target sistem berganti setiap 5 jawaban benar.\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"organ-run\", title: \"Organ Run — Petualangan Sistem Tubuh\", seed: \"organ-run-01\",\n  theme: { preset: \"cartoon\" },\n\n  learning: {\n    subject: \"IPA — Organ Tubuh Manusia\",\n    concept: \"Pengelompokan organ berdasarkan sistem pencernaan, pernapasan, dan peredaran darah\",\n    objectives: [\"Mengelompokkan organ tubuh ke sistem yang tepat\"],\n    misconceptions: [\n      \"Jantung dianggap organ pencernaan karena letaknya di perut\",\n      \"Paru-paru dianggap organ peredaran darah karena berhubungan dengan darah\"\n    ],\n    mode: \"category\",\n    categories: [\n      { id: \"pencernaan\", label: \"Pencernaan\", color: \"#F2994A\" },\n      { id: \"pernapasan\", label: \"Pernapasan\", color: \"#2F80ED\" },\n      { id: \"peredaran\",  label: \"Peredaran Darah\", color: \"#E5484D\" }\n    ],\n    items: [\n      { id: \"lambung\",     label: \"Lambung\",        category: \"pencernaan\", explain: \"Mencerna makanan dengan enzim dan asam lambung.\" },\n      { id: \"usus-halus\",  label: \"Usus halus\",     category: \"pencernaan\", explain: \"Menyerap sari-sari makanan ke dalam tubuh.\" },\n      { id: \"kerongkongan\",label: \"Kerongkongan\",   category: \"pencernaan\", explain: \"Saluran yang mengantar makanan menuju lambung.\" },\n      { id: \"paru-paru\",   label: \"Paru-paru\",      category: \"pernapasan\", explain: \"Tempat pertukaran oksigen dan karbon dioksida.\" },\n      { id: \"trakea\",      label: \"Trakea\",         category: \"pernapasan\", explain: \"Saluran udara dari tenggorokan menuju paru-paru.\" },\n      { id: \"hidung\",      label: \"Hidung\",         category: \"pernapasan\", explain: \"Menyaring dan menghangatkan udara yang masuk.\" },\n      { id: \"jantung\",     label: \"Jantung\",        category: \"peredaran\",  explain: \"Memompa darah ke seluruh tubuh.\" },\n      { id: \"pembuluh\",    label: \"Pembuluh darah\", category: \"peredaran\",  explain: \"Saluran tempat darah mengalir ke seluruh tubuh.\" },\n      { id: \"arteri\",      label: \"Arteri\",         category: \"peredaran\",  explain: \"Pembuluh yang membawa darah keluar dari jantung.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"batu\",     w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"semak\",    w: 90, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```"
+    }
+  ]
+}

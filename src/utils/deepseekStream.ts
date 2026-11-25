@@ -299,6 +299,8 @@ export async function sendDeepSeekMessage(options: StreamOptions): Promise<void>
 
     // Fallback 2: If model returned completely empty response, auto-retry with standard flash
     if (!fullText.trim() && model === 'deepseek-v4-flash') {
+      // Not silent: this retry changes the model, so results no longer match the evaluated one
+      console.warn('[AISYS Engine] Respons kosong dari deepseek-v4-flash; mengulang dengan deepseek-flash.');
       return sendDeepSeekMessage({
         ...options,
         model: 'deepseek-flash',

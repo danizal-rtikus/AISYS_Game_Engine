@@ -1,0 +1,170 @@
+{
+  "id": "info-mudah-2",
+  "model": "deepseek-v4-flash",
+  "gen": {
+    "temperature": 0.4,
+    "max_tokens": 32768,
+    "reasoning_effort": "none"
+  },
+  "turns": [
+    {
+      "user": "Halo, saya ingin membuat game baru.",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 182,
+        "prompt_tokens": 5970,
+        "total_tokens": 6152,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "ms": 8349,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Edukasi, topik: perangkat jaringan komputer berdasarkan lapisan model OSI (fisik, data link, network).",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 300,
+        "prompt_tokens": 6183,
+        "total_tokens": 6483,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888
+        }
+      },
+      "ms": 8870,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 201,
+        "prompt_tokens": 6487,
+        "total_tokens": 6688,
+        "prompt_tokens_details": {
+          "cached_tokens": 6144
+        }
+      },
+      "ms": 4530,
+      "reasoningChars": 0
+    },
+    {
+      "user": "B",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 122,
+        "prompt_tokens": 6692,
+        "total_tokens": 6814,
+        "prompt_tokens_details": {
+          "cached_tokens": 6400
+        }
+      },
+      "ms": 3644,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Normal",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 225,
+        "prompt_tokens": 6818,
+        "total_tokens": 7043,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 5269,
+      "reasoningChars": 0
+    },
+    {
+      "user": "A",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 671,
+        "prompt_tokens": 7047,
+        "total_tokens": 7718,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        }
+      },
+      "ms": 9258,
+      "reasoningChars": 0
+    },
+    {
+      "user": "Lanjut",
+      "finishReason": "stop",
+      "usage": {
+        "completion_tokens": 985,
+        "prompt_tokens": 7724,
+        "total_tokens": 8709,
+        "prompt_tokens_details": {
+          "cached_tokens": 6912
+        }
+      },
+      "ms": 10744,
+      "reasoningChars": 0
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Halo, saya ingin membuat game baru."
+    },
+    {
+      "role": "assistant",
+      "content": "Halo! Senang sekali bisa mendampingi Anda merancang game baru di AISYS Game Studio. 🎮\n\nSaat ini AISYS Engine Core baru mendukung genre **Endless Runner** — pemain berlari otomatis, melompat menghindari rintangan, dan mengambil item. Genre lain (seperti Platformer, Puzzle, atau Top-Down Shooter) akan segera hadir, jadi kita mulai dari Endless Runner dulu ya.\n\nPertanyaan pertama saya:\n\nApakah game Endless Runner ini ingin dirancang sebagai **Arcade Murni** (hiburan skor dan refleks) atau **Edukasi** (sebutkan topiknya, misal: Pemilahan Sampah, Organel Sel, Perangkat Jaringan, Jenis Pajak, atau Tokoh Sejarah)?"
+    },
+    {
+      "role": "user",
+      "content": "Edukasi, topik: perangkat jaringan komputer berdasarkan lapisan model OSI (fisik, data link, network)."
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan yang bagus! Topik perangkat jaringan berdasarkan lapisan OSI sangat cocok dijadikan mekanik pengambilan item — pemain belajar mengelompokkan perangkat sesuai lapisannya. 🖧\n\nBerikut 3 opsi skema kategori. Setiap perangkat hanya masuk **satu** lapisan sesuai definisi baku di buku jaringan:\n\n**Opsi A — Tiga Lapisan Bawah OSI**\n- **Physical** (lapisan fisik): Hub, Repeater, Kabel UTP\n- **Data Link** (lapisan data link): Switch, Bridge, Kartu NIC\n- **Network** (lapisan network): Router, Modem, Access Point\n\n**Opsi B — Perangkat vs Media vs Pengalamatan**\n- **Perangkat Aktif** (memproses sinyal): Switch, Router, Hub\n- **Media Transmisi** (jalur fisik): Kabel UTP, Fiber Optik, Kabel Coaxial\n- **Pengalamatan/Logika**: IP Address, MAC Address, Subnet Mask\n\n**Opsi C — Fokus Network & Data Link**\n- **Network**: Router, Modem, Access Point\n- **Data Link**: Switch, Bridge, NIC\n- **Physical**: Hub, Repeater, Kabel UTP\n\nDari opsi di atas, mana yang paling Anda sukai (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan tepat! Opsi A memberi tiga lapisan OSI yang jelas dengan perangkat baku di tiap lapisan — bagus untuk meluruskan kebingungan umum soal \"di lapisan mana perangkat ini bekerja\". 👍\n\nSekarang masuk ke gaya visual. Ada 4 preset tema dari engine:\n\n- **Opsi A, Clean Modern:** bersih dan serius, latar biru gelap, cocok untuk akademik dan bisnis.\n- **Opsi B, Neon:** latar gelap dengan pendaran cyan dan magenta, cocok untuk teknologi dan siber.\n- **Opsi C, Cartoon:** langit cerah, bukit hijau, outline tegas, cocok untuk anak, alam, dan lingkungan.\n- **Opsi D, Retro Pixel:** nuansa arcade klasik dengan warna kuning dan oranye.\n\nGaya visual mana yang ingin diterapkan pada game Anda (A, B, C, atau D)?"
+    },
+    {
+      "role": "user",
+      "content": "B"
+    },
+    {
+      "role": "assistant",
+      "content": "Neon! Pilihan yang pas untuk topik jaringan komputer — nuansa siber dengan pendaran cyan dan magenta akan terasa seperti \"di dalam jaringan\". 🌐\n\nSekarang tingkat kesulitannya:\n\n- **Santai:** lari lebih lambat dan percepatan pelan, cocok untuk pemula atau anak.\n- **Normal:** tempo seimbang (bawaan).\n- **Menantang:** lari lebih cepat dan percepatan lebih tinggi.\n\nTingkat kesulitan mana yang Anda inginkan (Santai, Normal, atau Menantang)?"
+    },
+    {
+      "role": "user",
+      "content": "Normal"
+    },
+    {
+      "role": "assistant",
+      "content": "Normal — tempo seimbang, cocok untuk fokus belajar sambil tetap menantang refleks. ⚖️\n\nSekarang ke fokus belajar. Berikut beberapa miskonsepsi umum tentang perangkat jaringan yang bisa diluruskan lewat item jebakan:\n\n- **Opsi A:** \"Hub dan Switch itu sama saja\" — padahal Hub bekerja di lapisan Physical (meneruskan sinyal ke semua port), sedangkan Switch bekerja di Data Link (meneruskan frame berdasarkan MAC address).\n- **Opsi B:** \"Modem dan Router itu perangkat yang sama\" — padahal Modem mengubah sinyal (lapisan Physical), sedangkan Router mengarahkan paket antarjaringan (lapisan Network).\n- **Opsi C:** \"Access Point itu perangkat Network karena menghubungkan ke internet\" — padahal Access Point bekerja di lapisan Data Link untuk menghubungkan perangkat nirkabel ke jaringan lokal.\n\nMiskonsepsi mana yang paling ingin diluruskan lewat game ini (A, B, atau C)?"
+    },
+    {
+      "role": "user",
+      "content": "A"
+    },
+    {
+      "role": "assistant",
+      "content": "Pilihan bagus! Miskonsepsi \"Hub dan Switch itu sama saja\" memang sangat umum, dan game ini bisa meluruskan bahwa keduanya bekerja di lapisan OSI berbeda. 🔀\n\nBerikut dokumen rancangannya:\n\n**📋 GAME BLUEPRINT / PRD**\n\n**Identitas Game**\n- **Judul:** OSI Layer Runner\n- **Genre:** Endless Runner\n- **Tipe:** Edukasi\n\n**1. Gameplay Loop & Objektif**\n- Pemain berlari otomatis dan melompat menghindari rintangan (berupa \"gangguan jaringan\").\n- Di layar tampil **target lapisan** (Physical / Data Link / Network). Pemain mengambil item perangkat yang **cocok** dengan target untuk mencetak skor.\n- Item salah mengurangi skor dan memunculkan penjelasan singkat. Target berganti setelah beberapa item benar.\n- Kondisi kalah: nyawa habis (3 nyawa) akibat menabrak rintangan.\n\n**2. Konten Belajar**\n- **Subjek:** Jaringan Komputer\n- **Konsep:** Perangkat jaringan berdasarkan lapisan model OSI (Physical, Data Link, Network)\n- **Tujuan Pembelajaran:** Mengelompokkan perangkat jaringan sesuai lapisan OSI tempatnya bekerja.\n- **Miskonsepsi yang diuji:** \"Hub dan Switch itu sama saja\" — Hub bekerja di Physical, Switch di Data Link.\n\n**Kategori & Item:**\n- **Physical** (lapisan fisik, sinyal mentah):\n  - Hub — meneruskan sinyal ke semua port tanpa membaca alamat.\n  - Repeater — memperkuat dan memperpanjang sinyal.\n  - Kabel UTP — media transmisi fisik berupa kabel tembaga.\n- **Data Link** (lapisan data link, frame & MAC):\n  - Switch — meneruskan frame berdasarkan MAC address.\n  - Bridge — menghubungkan dua segmen jaringan berdasarkan MAC.\n  - Kartu NIC — antarmuka jaringan dengan alamat MAC.\n- **Network** (lapisan network, paket & IP):\n  - Router — mengarahkan paket antarjaringan berdasarkan IP.\n  - Modem — mengubah sinyal untuk akses jaringan.\n  - Access Point — menghubungkan perangkat nirkabel ke jaringan lokal.\n\n**3. Arahan Visual (DKV)**\n- Preset tema: **Neon** (latar gelap, pendaran cyan dan magenta).\n\n**4. Tingkat Kesulitan**\n- **Normal** (tempo seimbang, 3 nyawa).\n\nSilakan cermati Game Blueprint (PRD) di atas.\n- Jika sudah sesuai: ketik **'Lanjut'** (atau klik tombol **🚀 Buat Game**) agar saya langsung menyusun manifest game.\n- Jika ada yang ingin diubah: sebutkan bagian mana yang ingin disesuaikan (misal: ganti kategori, tambah item, atau ganti gaya visual).\n\nApakah blueprint ini sudah siap kita bangun, atau ada yang ingin disesuaikan?"
+    },
+    {
+      "role": "user",
+      "content": "Lanjut"
+    },
+    {
+      "role": "assistant",
+      "content": "Game edukasi Endless Runner \"OSI Layer Runner\" dengan tema Neon dan tiga lapisan OSI sebagai kategori target. Asumsi: Modem saya tempatkan di kategori Network sesuai definisi baku perangkat pengubah sinyal untuk akses jaringan, dan rintangan dibuat kecil agar mudah dilompati pada tempo Normal.\n\n```js\nAISYS.defineGame({\n  schema: 1, kit: \"endless-runner\",\n  id: \"osi-layer-runner\", title: \"OSI Layer Runner\", seed: \"osi-layer-01\",\n  theme: { preset: \"neon\" },\n\n  learning: {\n    subject: \"Jaringan Komputer\",\n    concept: \"Perangkat jaringan berdasarkan lapisan model OSI (Physical, Data Link, Network)\",\n    objectives: [\"Mengelompokkan perangkat jaringan sesuai lapisan OSI tempatnya bekerja\"],\n    misconceptions: [\"Hub dan Switch dianggap perangkat yang sama, padahal Hub bekerja di Physical dan Switch di Data Link\"],\n    mode: \"category\",\n    categories: [\n      { id: \"physical\",  label: \"Physical\",  color: \"#00E5FF\" },\n      { id: \"data-link\", label: \"Data Link\", color: \"#FF3DF2\" },\n      { id: \"network\",   label: \"Network\",   color: \"#FFD93D\" }\n    ],\n    items: [\n      { id: \"hub\",        label: \"Hub\",           category: \"physical\",  explain: \"Meneruskan sinyal ke semua port tanpa membaca alamat; bekerja di lapisan fisik.\" },\n      { id: \"repeater\",   label: \"Repeater\",      category: \"physical\",  explain: \"Memperkuat dan memperpanjang sinyal mentah di lapisan fisik.\" },\n      { id: \"kabel-utp\",  label: \"Kabel UTP\",     category: \"physical\",  explain: \"Media transmisi fisik berupa kabel tembaga penghantar sinyal.\" },\n      { id: \"switch\",     label: \"Switch\",        category: \"data-link\", explain: \"Meneruskan frame berdasarkan MAC address; bekerja di lapisan data link.\" },\n      { id: \"bridge\",     label: \"Bridge\",        category: \"data-link\", explain: \"Menghubungkan dua segmen jaringan berdasarkan alamat MAC.\" },\n      { id: \"nic\",        label: \"Kartu NIC\",     category: \"data-link\", explain: \"Antarmuka jaringan yang memiliki alamat MAC; bekerja di data link.\" },\n      { id: \"router\",     label: \"Router\",        category: \"network\",   explain: \"Mengarahkan paket antarjaringan berdasarkan alamat IP.\" },\n      { id: \"modem\",      label: \"Modem\",         category: \"network\",   explain: \"Mengubah sinyal untuk akses jaringan dan meneruskan paket data.\" },\n      { id: \"access-point\", label: \"Access Point\", category: \"network\",  explain: \"Menghubungkan perangkat nirkabel ke jaringan lokal.\" }\n    ],\n    target: { rotateAfterCorrect: 5, bias: 0.5 }\n  },\n\n  player: { x: 220, w: 44, h: 56, gravity: 2400, jumpVelocity: 900, lives: 3, invulnerableSec: 1.2 },\n  world:  { groundY: 600, speed: 360, maxSpeed: 720, accel: 6 },\n\n  spawner: {\n    interval: [0.9, 1.5],\n    table: [\n      { type: \"hazard\", id: \"gangguan\", w: 44, h: 48, weight: 3 },\n      { type: \"hazard\", id: \"noise\",    w: 80, h: 24, weight: 2 },\n      { type: \"item\", weight: 5, heights: [\"ground\", \"mid\", \"high\"] }\n    ]\n  },\n\n  rules: {\n    perSecond: 5,\n    correct: { score: 50, sfx: \"coin\" },\n    wrong:   { score: -20, sfx: \"hit\", showExplain: true },\n    hazard:  { lives: -1, sfx: \"hit\", shake: 8 },\n    combo:   { step: 5, max: 4 },\n    difficulty: { everySec: 15, speed: 25 }\n  }\n});\n// END_OF_MANIFEST\n```"
+    }
+  ]
+}

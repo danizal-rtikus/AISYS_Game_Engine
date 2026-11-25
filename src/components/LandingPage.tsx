@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
-  Gamepad2,
-  Sparkles,
   ArrowRight,
-  ShieldCheck,
-  Compass,
-  Layers,
-  Sun,
-  Moon,
-  Play,
-  Key,
-  Code2,
-  Volume2,
-  Smartphone,
+  Check,
+  ChevronDown,
+  FileCode2,
   GraduationCap,
+  Key,
+  Loader2,
+  Moon,
+  Palette,
+  ShieldCheck,
+  Sun,
+  X,
 } from 'lucide-react';
+import aisysRuntimeRaw from '../runtime/aisys-runtime.js?raw';
+import { DEMO_MANIFEST } from '../config/demoManifest';
 
 interface LandingPageProps {
   onEnterStudio: (presetPrompt?: string) => void;
@@ -25,40 +25,219 @@ interface LandingPageProps {
   onToggleTheme: () => void;
 }
 
-const PRESET_GENRES = [
+// ---------------------------------------------------------------- content
+
+const RUNNER_PROMPT = 'Saya ingin membuat game Endless Runner.';
+
+// Beta genres: the AI writes the full HTML game (prompt SESI 7B); no validator or automatic test yet
+const BETA_GENRES = [
+  { name: '2D Platformer', desc: 'Lompat presisi, platform, rintangan' },
+  { name: 'Top-Down Shooter', desc: 'Gerak 8 arah, bidik, gelombang musuh' },
+  { name: 'Puzzle Grid', desc: 'Papan ubin, cocokkan, reaksi berantai' },
+  { name: 'Rhythm / Music', desc: 'Ketukan tempo, not jatuh, akurasi' },
+  { name: 'Physics / Slingshot', desc: 'Ketapel, lintasan parabola, balok' },
+  { name: 'Tower Defense', desc: 'Menara, jalur musuh, upgrade' },
+  { name: 'Idle / Tycoon', desc: 'Sumber daya, generator, otomatisasi' },
+  { name: 'Dungeon Crawler', desc: 'Labirin, kunci, musuh berpatroli' },
+];
+
+const FEATURES = [
   {
-    id: 'platformer',
-    title: '2D Scrolling Platformer',
-    specs: 'Gravitasi Presisi • Rintangan • Koin',
-    controls: 'WASD / Panah + Spasi • Touch',
-    prompt: 'Saya ingin membuat game 2D Scrolling Platformer. Mari kita rancang mekanik dan temanya (bisa arcade atau bertema edukasi).',
-    icon: Gamepad2,
+    icon: FileCode2,
+    title: 'Satu berkas .html',
+    body: 'Hasil unduhan memuat engine dan game sekaligus. Buka langsung di browser lewat file://, tanpa server dan tanpa instalasi.',
   },
   {
-    id: 'shooter',
-    title: 'Top-Down Space Shooter',
-    specs: 'Navigasi 8-Arah • Wave Survival',
-    controls: 'WASD + Bidik Mouse / Sentuhan',
-    prompt: 'Saya ingin membuat game Top-Down Space Shooter dengan kontrol WASD/Mouse dan laser blaster.',
-    icon: Compass,
+    icon: ShieldCheck,
+    title: 'Rintangan dihitung agar bisa dilompati',
+    body: 'Validator menghitung tinggi dan lama lompatan untuk setiap rintangan. Bot uji memainkan game dengan 3 seed sebelum Anda memainkannya.',
   },
   {
-    id: 'puzzle',
-    title: 'Neon Puzzle Grid',
-    specs: 'Matriks Ubin 2D • Logika Giliran',
-    controls: 'Klik / Sentuh untuk Memilih',
-    prompt: 'Saya ingin membuat game Neon Puzzle Grid berbasis logika ubin dan kalkulasi combo.',
-    icon: Layers,
+    icon: GraduationCap,
+    title: 'Konsep menjadi mekanik',
+    body: 'Pemain mengambil item yang cocok dengan kategori target. Item salah memunculkan penjelasan singkat, dan hasil belajar bisa diekspor ke JSON.',
   },
   {
-    id: 'runner',
-    title: 'Endless Runner / Dodger',
-    specs: 'Refleks Cepat • Rintangan Eskalatif',
-    controls: 'Lompat / Menghindar • Sentuh / Spasi',
-    prompt: 'Saya ingin membuat game Endless Runner dengan refleks cepat dan rintangan dinamis.',
-    icon: Sparkles,
+    icon: Palette,
+    title: 'Empat gaya visual',
+    body: 'Clean Modern, Neon, Cartoon, dan Retro Pixel. Dipilih saat merancang, tanpa perlu menggambar aset.',
   },
 ];
+
+const STEPS = [
+  {
+    title: 'Jawab lima pertanyaan',
+    body: 'Studio menanyakan satu hal per langkah: genre, topik, inti mekanik, gaya visual, lalu tingkat kesulitan atau aksi spesial.',
+  },
+  {
+    title: 'Tinjau rancangannya',
+    body: 'Sebelum ada kode, Anda membaca blueprint lengkap: cara bermain, konten belajar, dan miskonsepsi yang diuji. Ubah yang belum pas.',
+  },
+  {
+    title: 'AI membuat game',
+    body: 'Endless Runner: sekitar 50 baris data yang dijalankan AISYS Engine, biasanya selesai dalam belasan detik. Genre Beta: AI menulis seluruh kode game.',
+  },
+  {
+    title: 'Mainkan dan unduh',
+    body: 'Mainkan di panel preview, lalu unduh satu berkas .html. Endless Runner juga divalidasi dan diuji otomatis oleh engine.',
+  },
+];
+
+const FAQS = [
+  {
+    q: 'Apakah saya perlu bisa coding?',
+    a: 'Tidak. Anda cukup menjawab pertanyaan dan meninjau rancangan. Manifest yang ditulis AI tetap bisa dibaca di tab Code bila ingin mempelajari strukturnya.',
+  },
+  {
+    q: 'Apakah game bisa dimainkan tanpa internet?',
+    a: 'Bisa. Berkas .html hasil unduhan memuat engine dan game sekaligus dan berjalan dengan dibuka langsung di browser. Game mendukung kontrol keyboard dan sentuh.',
+  },
+  {
+    q: 'Apakah materi pelajaran di dalam game pasti benar?',
+    a: 'Belum tentu. Materi disusun oleh AI dan bisa keliru. Periksa daftar item dan penjelasannya di rancangan sebelum game dibagikan. Setiap game edukasi sebaiknya ditinjau dosen atau pengajar.',
+  },
+  {
+    q: 'Apa bedanya genre Stabil dan Beta?',
+    a: 'Endless Runner (Stabil) dijalankan oleh AISYS Engine: AI hanya menulis data, lalu engine memvalidasi dan menguji game secara otomatis. Di genre Beta, AI menulis seluruh kode game; hasilnya bisa bervariasi dan belum diuji otomatis, jadi coba mainkan dulu sebelum dibagikan. Genre Beta naik menjadi Stabil setelah engine-nya selesai dan lulus pengujian yang sama.',
+  },
+  {
+    q: 'Data apa yang tercatat saat game dimainkan?',
+    a: 'Item yang diambil, benar atau salah, dan daftar kesalahan beserta penjelasannya. Saat dimainkan di Studio, data ini bisa diekspor ke JSON dari layar akhir. Data permainan tidak dikirim ke server.',
+  },
+];
+
+// Lines of the real demo manifest shown in the hero window
+const SNIPPET = [
+  'AISYS.defineGame({',
+  '  kit: "endless-runner",',
+  '  title: "EcoSort Run",',
+  '  theme: { preset: "cartoon" },',
+  '  learning: {',
+  '    categories: [',
+  '      { id: "organik", label: "Organik" },',
+  '      { id: "anorganik", label: "Anorganik" },',
+  '      { id: "b3", label: "B3" }',
+  '    ],',
+  '    items: [',
+  '      { label: "Baterai bekas", category: "b3",',
+  '        explain: "Mengandung logam berbahaya…" },',
+  '      …',
+  '    ]',
+  '  },',
+  '  world: { speed: 360, maxSpeed: 720 }',
+  '});',
+];
+
+const CHECK_LABELS: Record<string, string> = {
+  validate: 'validasi',
+  render: 'render',
+  jump: 'lompat',
+  progress: 'progres',
+  spawn: 'spawn',
+  numerik: 'numerik',
+  'bot adil': 'bot adil',
+  hooks: 'hooks',
+  belajar: 'belajar',
+};
+
+// ---------------------------------------------------------------- helpers
+
+const escapeInline = (s: string) => s.replace(/<\/script/gi, '<\\/script').replace(/<!--/g, '<\\!--');
+
+function buildDemoDoc(): string {
+  return `<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>html,body{margin:0;width:100%;height:100%;background:#60a5fa;overflow:hidden}</style>
+<script>${escapeInline(aisysRuntimeRaw)}</script>
+</head><body><canvas id="aisys-canvas"></canvas>
+<script>${escapeInline(DEMO_MANIFEST)}</script>
+<script>
+addEventListener('DOMContentLoaded', function () {
+  setTimeout(function () {
+    try { if (window.__AISYS_GAME__) AISYS.selfTest(window.__AISYS_GAME__.rawManifest); } catch (e) {}
+  }, 0);
+});
+</script>
+</body></html>`;
+}
+
+/** Minimal JS highlighting for the static snippet: strings and object keys. */
+function highlight(line: string, i: number) {
+  const parts: React.ReactNode[] = [];
+  const re = /("[^"]*")|(\b[a-zA-Z_]+)(?=:)/g;
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(line))) {
+    if (m.index > last) parts.push(line.slice(last, m.index));
+    parts.push(
+      m[1] ? (
+        <span key={m.index} className="text-emerald-700 dark:text-emerald-400">{m[1]}</span>
+      ) : (
+        <span key={m.index} className="text-sky-700 dark:text-sky-300">{m[2]}</span>
+      )
+    );
+    last = m.index + m[0].length;
+  }
+  if (last < line.length) parts.push(line.slice(last));
+  return <div key={i}>{parts.length ? parts : ' '}</div>;
+}
+
+type SelfTest = { ok: boolean; checks: { id: string; pass: boolean; status?: string }[] } | null;
+
+// ---------------------------------------------------------------- small pieces
+
+const Eyebrow: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-orange-700 dark:text-[#F6821F]">
+    {children}
+  </div>
+);
+
+const Section: React.FC<{ id?: string; band?: boolean; children: React.ReactNode }> = ({ id, band, children }) => (
+  <section
+    id={id}
+    className={`scroll-mt-16 px-5 sm:px-8 py-16 sm:py-24 ${
+      band ? 'bg-slate-50 dark:bg-[#101216] border-y border-slate-200/70 dark:border-[#1F2229]' : ''
+    }`}
+  >
+    <div className="max-w-6xl mx-auto">{children}</div>
+  </section>
+);
+
+type StepState = 'done' | 'running' | 'fail' | 'idle';
+
+const PipelineStep: React.FC<{ label: string; sub: string; state: StepState; last?: boolean }> = ({ label, sub, state, last }) => {
+  const tone =
+    state === 'done'
+      ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+      : state === 'running'
+      ? 'border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400'
+      : state === 'fail'
+      ? 'border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-400'
+      : 'border-slate-200 dark:border-[#2A2E37] bg-slate-50 dark:bg-[#171A20] text-slate-400';
+  return (
+    <div className="flex items-center gap-3 min-w-0 flex-1">
+      <div className={`w-9 h-9 shrink-0 rounded-lg border flex items-center justify-center ${tone}`}>
+        {state === 'done' ? (
+          <Check className="w-4 h-4" />
+        ) : state === 'running' ? (
+          <Loader2 className="w-4 h-4 animate-spin" />
+        ) : state === 'fail' ? (
+          <X className="w-4 h-4" />
+        ) : (
+          <ArrowRight className="w-4 h-4" />
+        )}
+      </div>
+      <div className="min-w-0">
+        <div className="font-mono text-[11px] font-medium text-slate-800 dark:text-slate-200">{label}</div>
+        <div className="font-mono text-[10px] text-slate-400 truncate">{sub}</div>
+      </div>
+      {!last && <div className="hidden md:block h-px flex-1 bg-slate-200 dark:bg-[#2A2E37]" />}
+    </div>
+  );
+};
+
+// ---------------------------------------------------------------- page
 
 export const LandingPage: React.FC<LandingPageProps> = ({
   onEnterStudio,
@@ -68,339 +247,374 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   theme,
   onToggleTheme,
 }) => {
-  const [fps, setFps] = useState(60);
+  const demoDoc = useMemo(buildDemoDoc, []);
+  const frameRef = useRef<HTMLIFrameElement>(null);
+  const [selfTest, setSelfTest] = useState<SelfTest>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
+  // Real selfTest result reported by the runtime running the demo game
   useEffect(() => {
-    const interval = setInterval(() => {
-      setFps(59 + Math.floor(Math.random() * 2));
-    }, 2000);
-    return () => clearInterval(interval);
+    const onMessage = (e: MessageEvent) => {
+      if (!frameRef.current || e.source !== frameRef.current.contentWindow) return;
+      if (e.data && e.data.type === 'aisys:selftest') {
+        setSelfTest({ ok: Boolean(e.data.ok), checks: Array.isArray(e.data.checks) ? e.data.checks : [] });
+      }
+    };
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
   }, []);
 
+  const passed = selfTest ? selfTest.checks.filter((c) => c.pass).length : 0;
+  const testState: StepState = !selfTest ? 'running' : selfTest.ok ? 'done' : 'fail';
+  const testSub = !selfTest ? 'berjalan…' : `${passed}/${selfTest.checks.length} lolos`;
+
   return (
-    <div className="min-h-screen w-full bg-white dark:bg-[#0B0C0E] text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-150 pt-13 sm:pt-14">
-      {/* 1. Fixed Header (Menempel di Atas, Proporsional 800px hingga 1920px) */}
-      <header className="fixed top-0 left-0 right-0 h-13 sm:h-14 border-b border-slate-200 dark:border-[#282B33] px-3 sm:px-6 lg:px-8 flex items-center justify-between bg-white/90 dark:bg-[#0B0C0E]/90 backdrop-blur-md z-50 transition-colors">
-        {/* Brand & Institution */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded bg-[#F6821F] text-white flex items-center justify-center font-bold text-xs tracking-wider shadow-sm flex-shrink-0">
-              AI
+    <div className="min-h-screen w-full bg-white dark:bg-[#0B0C0E] text-slate-900 dark:text-slate-100 font-sans antialiased">
+      {/* ------------------------------------------------ header */}
+      <header className="fixed top-0 inset-x-0 z-50 h-14 border-b border-slate-200/80 dark:border-[#1F2229] bg-white/85 dark:bg-[#0B0C0E]/85 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto h-full px-5 sm:px-8 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-md bg-[#F6821F] text-slate-950 flex items-center justify-center font-bold text-[11px] tracking-wider">
+                AI
+              </div>
+              <span className="font-mono text-[13px] font-semibold tracking-[0.12em]">AISYS</span>
             </div>
-            <div className="flex items-baseline gap-1">
-              <span className="font-bold text-xs sm:text-sm tracking-tight text-slate-900 dark:text-slate-100">
-                AISYS
-              </span>
-              <span className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-normal">
-                Game Studio
-              </span>
-            </div>
-          </div>
-
-          <div className="hidden sm:block h-3.5 w-px bg-slate-200 dark:bg-[#282B33]" />
-
-          <div className="hidden sm:flex items-center gap-1.5">
-            <img
-              src="https://i.ibb.co.com/kgV7WDhF/Logo-SYS.png"
-              alt="STIKOM Yos Sudarso"
-              className="h-4 sm:h-5 w-auto object-contain"
-              onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
-            />
-            <span className="text-[10px] sm:text-[11px] font-mono text-slate-500 dark:text-slate-400">
+            <span className="hidden md:block h-4 w-px bg-slate-200 dark:bg-[#2A2E37]" />
+            <span className="hidden md:block font-mono text-[11px] text-slate-500 dark:text-slate-400 truncate">
               STIKOM Yos Sudarso
             </span>
           </div>
-        </div>
 
-        {/* Actions */}
-        <div className="flex items-center gap-1.5 sm:gap-2 text-xs">
-          {/* Theme Toggle */}
-          <button
-            onClick={onToggleTheme}
-            className="p-1.5 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-[#1C1E24] transition-colors"
-            title={theme === 'dark' ? 'Mode Terang' : 'Mode Gelap'}
-          >
-            {theme === 'dark' ? (
-              <Sun className="w-3.5 h-3.5 text-amber-400" />
+          <nav className="hidden lg:flex items-center gap-7 font-mono text-[11px] uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400">
+            <a href="#fitur" className="hover:text-slate-900 dark:hover:text-slate-100 transition-colors">Fitur</a>
+            <a href="#cara-kerja" className="hover:text-slate-900 dark:hover:text-slate-100 transition-colors">Cara kerja</a>
+            <a href="#genre" className="hover:text-slate-900 dark:hover:text-slate-100 transition-colors">Genre</a>
+            <a href="#faq" className="hover:text-slate-900 dark:hover:text-slate-100 transition-colors">FAQ</a>
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onToggleTheme}
+              className="w-8 h-8 rounded-md flex items-center justify-center text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-[#171A20] transition-colors"
+              title={theme === 'dark' ? 'Mode terang' : 'Mode gelap'}
+              aria-label={theme === 'dark' ? 'Mode terang' : 'Mode gelap'}
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+            {isAdmin ? (
+              <button
+                onClick={onOpenSkillModal}
+                className="flex items-center gap-1.5 h-8 px-2.5 sm:px-3 rounded-md border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-mono text-[11px]"
+                aria-label="Kelola Skill"
+              >
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Kelola Skill</span>
+              </button>
             ) : (
-              <Moon className="w-3.5 h-3.5 text-slate-600" />
+              <button
+                onClick={onOpenAdminLogin}
+                className="flex items-center gap-1.5 h-8 px-2.5 sm:px-3 rounded-md border border-slate-200 dark:border-[#2A2E37] text-slate-600 dark:text-slate-300 hover:border-slate-300 dark:hover:border-[#3A3F4A] font-mono text-[11px] transition-colors"
+                title="Akses dosen / pengelola skill"
+                aria-label="Akses Dosen"
+              >
+                <Key className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Akses Dosen</span>
+              </button>
             )}
-          </button>
-
-          {/* Admin / Dosen Button */}
-          {isAdmin ? (
             <button
-              onClick={onOpenSkillModal}
-              className="flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-md border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono text-[11px] font-medium"
+              onClick={() => onEnterStudio()}
+              className="h-8 px-3.5 rounded-md bg-[#F6821F] hover:bg-[#FA8B28] text-slate-950 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] transition-colors"
             >
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Kelola Skill</span>
+              Buka Studio
             </button>
-          ) : (
-            <button
-              onClick={onOpenAdminLogin}
-              className="flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-md border border-slate-200 dark:border-[#282B33] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 font-mono text-[11px] transition-colors"
-              title="Akses Dosen / Pengelola Skill"
-            >
-              <Key className="w-3.5 h-3.5 text-[#F6821F]" />
-              <span className="hidden sm:inline">Akses Dosen</span>
-            </button>
-          )}
-
-          {/* Primary CTA */}
-          <button
-            onClick={() => onEnterStudio()}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#F6821F] hover:bg-[#E66E0A] text-white font-medium transition-colors shadow-sm text-xs"
-          >
-            <span>Mulai Praktik</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+          </div>
         </div>
       </header>
 
-      {/* 2. Hero Section: Responsive Asymmetric Grid (800x600 -> 1920x1080) */}
-      <section className="border-b border-slate-200 dark:border-[#282B33] px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-14 bg-slate-50/50 dark:bg-[#0B0C0E]">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
-          {/* Left Column (7 cols on lg, full on <= 1024px) */}
-          <div className="lg:col-span-7 space-y-3.5 sm:space-y-4 text-left">
-            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-slate-100 dark:bg-[#13151A] border border-slate-200 dark:border-[#282B33] text-[10px] sm:text-[11px] font-mono text-slate-700 dark:text-slate-300">
-              <span className="text-[#F6821F] font-semibold">AISYS Engine Core</span>
-              <span>•</span>
-              <span>Single-File HTML5 (file://)</span>
+      {/* ------------------------------------------------ hero */}
+      <section className="relative overflow-hidden px-5 sm:px-8 pt-28 sm:pt-36 pb-16 sm:pb-24">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-40 right-[-10%] w-[720px] h-[720px] rounded-full bg-[radial-gradient(closest-side,rgba(246,130,31,0.10),transparent)] dark:bg-[radial-gradient(closest-side,rgba(246,130,31,0.08),transparent)]"
+        />
+        <div className="relative max-w-6xl mx-auto">
+          <div className="inline-flex items-center gap-2 h-7 px-3 rounded-full border border-orange-600/25 dark:border-[#F6821F]/30 font-mono text-[11px] uppercase tracking-[0.14em] text-orange-700 dark:text-[#F6821F]">
+            9 genre · Endless Runner stabil
+          </div>
+
+          <h1 className="mt-6 max-w-3xl text-[40px] leading-[1.05] sm:text-[56px] font-bold tracking-[-0.035em]">
+            Rancang game edukasi.{' '}
+            <span className="text-orange-600 dark:text-[#F6821F]">Bagikan satu file.</span>
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-slate-600 dark:text-slate-400">
+            Ceritakan topik pelajaran Anda. AISYS menanyakan satu hal per langkah, menyusun rancangan untuk
+            Anda tinjau, lalu menghasilkan game HTML5 yang langsung jalan di browser, tanpa server.
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => onEnterStudio()}
+              className="h-12 px-6 rounded-xl bg-[#F6821F] hover:bg-[#FA8B28] text-slate-950 text-[15px] font-semibold flex items-center gap-2 transition-colors"
+            >
+              Mulai merancang
+              <ArrowRight className="w-4 h-4" />
+            </button>
+            <a
+              href="#cara-kerja"
+              className="h-12 px-6 rounded-xl border border-slate-200 dark:border-[#2A2E37] hover:border-slate-300 dark:hover:border-[#3A3F4A] text-[15px] font-semibold flex items-center transition-colors"
+            >
+              Lihat cara kerja
+            </a>
+          </div>
+
+          {/* Product window: real manifest + the same game running live */}
+          <div className="mt-14 rounded-2xl border border-slate-200 dark:border-[#1F2229] bg-white dark:bg-[#111318] shadow-[0_1px_0_rgba(15,23,42,0.04),0_24px_48px_-24px_rgba(15,23,42,0.18)] overflow-hidden">
+            <div className="h-11 px-4 border-b border-slate-200 dark:border-[#1F2229] flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="flex gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-[#2A2E37]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-[#2A2E37]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-[#2A2E37]" />
+                </div>
+                <span className="font-mono text-[11px] text-slate-500">ecosort-run.html</span>
+              </div>
+              <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-emerald-600 dark:text-emerald-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                Live
+              </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100 leading-tight">
-              Studio Pembuat Game Web <br />
-              <span className="text-[#F6821F]">HTML5 Mandiri</span>
-            </h1>
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+              <div className="min-w-0 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-[#1F2229] p-5">
+                <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-slate-400 mb-3">
+                  Manifest · ditulis AI
+                </div>
+                <pre className="font-mono text-[12px] leading-[1.7] text-slate-700 dark:text-slate-300 overflow-x-auto">
+                  {SNIPPET.map(highlight)}
+                </pre>
+              </div>
+              <div className="min-w-0 p-5 flex flex-col gap-3">
+                <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-slate-400">
+                  Game · dijalankan AISYS Engine
+                </div>
+                <div className="relative w-full aspect-video rounded-lg overflow-hidden border border-slate-200 dark:border-[#1F2229] bg-[#60a5fa]">
+                  <iframe
+                    ref={frameRef}
+                    srcDoc={demoDoc}
+                    title="Demo game EcoSort Run"
+                    sandbox="allow-scripts"
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full border-0"
+                  />
+                </div>
+                <p className="font-mono text-[11px] text-slate-500">
+                  Klik atau sentuh game untuk mulai. Spasi atau ketuk untuk melompat. Ambil item sesuai target.
+                </p>
+              </div>
+            </div>
 
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
-              Rancang game web lengkap dalam satu berkas tunggal yang langsung dapat dimainkan secara offline.
-              Mengintegrasikan rendering prosedural Canvas 2D, sintesis Web Audio API, dan kontrol sentuh smartphone tanpa instalasi server.
+            <div className="border-t border-slate-200 dark:border-[#1F2229] px-5 py-4 grid grid-cols-2 md:flex md:items-center gap-4">
+              <PipelineStep label="Diskusi" sub="Sesi 1-5" state="done" />
+              <PipelineStep label="Rancangan" sub="PRD ditinjau" state="done" />
+              <PipelineStep label="Manifest" sub={`${DEMO_MANIFEST.split('\n').length} baris`} state="done" />
+              <PipelineStep label="Uji otomatis" sub={testSub} state={testState} />
+              <PipelineStep label="Unduh" sub="1 berkas .html" state={selfTest?.ok ? 'done' : 'idle'} last />
+            </div>
+
+            {selfTest && (
+              <div className="border-t border-slate-200 dark:border-[#1F2229] px-5 py-3 flex flex-wrap gap-1.5">
+                {selfTest.checks.map((c) => (
+                  <span
+                    key={c.id}
+                    className={`font-mono text-[10px] px-2 py-0.5 rounded border ${
+                      c.pass
+                        ? 'border-emerald-500/25 text-emerald-700 dark:text-emerald-400'
+                        : 'border-red-500/30 text-red-600 dark:text-red-400'
+                    }`}
+                  >
+                    {c.pass ? '✓' : '✕'} {CHECK_LABELS[c.id] || c.id}
+                  </span>
+                ))}
+                <span className="font-mono text-[10px] px-1 py-0.5 text-slate-400">
+                  hasil selfTest sungguhan dari game di atas
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------ features */}
+      <Section id="fitur" band>
+        <Eyebrow>Yang Anda dapatkan</Eyebrow>
+        <h2 className="mt-3 text-[32px] sm:text-[40px] font-bold tracking-[-0.03em] leading-tight max-w-2xl">
+          Game yang benar-benar bisa dimainkan
+        </h2>
+        <div className="mt-10 grid sm:grid-cols-2 gap-4">
+          {FEATURES.map((f) => {
+            const Icon = f.icon;
+            return (
+              <div
+                key={f.title}
+                className="rounded-2xl border border-slate-200 dark:border-[#1F2229] bg-white dark:bg-[#111318] p-6"
+              >
+                <div className="w-10 h-10 rounded-lg bg-orange-500/10 text-orange-700 dark:text-[#F6821F] flex items-center justify-center">
+                  <Icon className="w-5 h-5" />
+                </div>
+                <h3 className="mt-5 text-[17px] font-semibold tracking-[-0.01em]">{f.title}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">{f.body}</p>
+              </div>
+            );
+          })}
+        </div>
+      </Section>
+
+      {/* ------------------------------------------------ how it works */}
+      <Section id="cara-kerja">
+        <Eyebrow>Cara kerja</Eyebrow>
+        <h2 className="mt-3 text-[32px] sm:text-[40px] font-bold tracking-[-0.03em] leading-tight max-w-2xl">
+          Dari ide ke berkas .html dalam satu percakapan
+        </h2>
+        <ol className="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+          {STEPS.map((s, i) => (
+            <li key={s.title} className="border-t border-slate-200 dark:border-[#2A2E37] pt-5">
+              <div className="font-mono text-[12px] text-orange-700 dark:text-[#F6821F]">
+                {String(i + 1).padStart(2, '0')}
+              </div>
+              <h3 className="mt-3 text-[17px] font-semibold tracking-[-0.01em]">{s.title}</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">{s.body}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      {/* ------------------------------------------------ genres */}
+      <Section id="genre" band>
+        <Eyebrow>Genre</Eyebrow>
+        <h2 className="mt-3 text-[32px] sm:text-[40px] font-bold tracking-[-0.03em] leading-tight max-w-2xl">
+          Sembilan genre, satu alur rancang
+        </h2>
+        <p className="mt-4 max-w-2xl text-[17px] leading-relaxed text-slate-600 dark:text-slate-400">
+          Endless Runner berjalan di AISYS Engine dan diuji otomatis. Delapan genre lain berstatus Beta: AI menulis
+          seluruh kode game, jadi coba mainkan dulu sebelum dibagikan.
+        </p>
+
+        <div className="mt-10 grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-4">
+          <button
+            onClick={() => onEnterStudio(RUNNER_PROMPT)}
+            className="group text-left rounded-2xl border border-orange-500/40 dark:border-[#F6821F]/40 bg-white dark:bg-[#111318] p-6 hover:border-orange-500 dark:hover:border-[#F6821F] transition-colors"
+          >
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] px-2 py-0.5 rounded border border-emerald-500/30 text-emerald-700 dark:text-emerald-400">
+                Stabil · diuji otomatis
+              </span>
+              <ArrowRight className="w-4 h-4 text-orange-700 dark:text-[#F6821F] group-hover:translate-x-0.5 transition-transform" />
+            </div>
+            <h3 className="mt-6 text-[22px] font-semibold tracking-[-0.02em]">Endless Runner</h3>
+            <p className="mt-2 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+              Pemain berlari otomatis, melompati rintangan, dan mengambil item yang cocok dengan kategori target.
+              Cocok untuk materi klasifikasi: jenis sampah, kelas hewan, perangkat komputer, jenis pajak.
             </p>
-
-            {/* Action Bar */}
-            <div className="pt-1.5 flex flex-wrap items-center gap-2.5 sm:gap-3">
-              <button
-                onClick={() => onEnterStudio()}
-                className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-md bg-[#F6821F] hover:bg-[#E66E0A] text-white font-semibold text-xs transition-colors shadow-sm flex items-center gap-2"
-              >
-                <Play className="w-3.5 h-3.5 fill-current" />
-                <span>Buka Game Studio</span>
-              </button>
-
-              <a
-                href="#genre-list"
-                className="px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-md border border-slate-200 dark:border-[#282B33] bg-white dark:bg-[#13151A] hover:bg-slate-100 dark:hover:bg-[#1C1E24] text-slate-700 dark:text-slate-300 font-medium text-xs transition-colors"
-              >
-                Pilihan Genre Praktik ↓
-              </a>
+            <div className="mt-6 font-mono text-[12px] font-semibold text-orange-700 dark:text-[#F6821F]">
+              Mulai rancang
             </div>
+          </button>
 
-            {/* Compact Technical Specs */}
-            <div className="pt-3 border-t border-slate-200 dark:border-[#282B33] grid grid-cols-3 gap-2 sm:gap-3 text-left">
-              <div>
-                <div className="text-[9px] sm:text-[10px] font-mono text-slate-400 uppercase">Format Output</div>
-                <div className="text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200 font-mono mt-0.5 truncate">
-                  Single-File .html
-                </div>
-              </div>
-              <div>
-                <div className="text-[9px] sm:text-[10px] font-mono text-slate-400 uppercase">Driver Grafis</div>
-                <div className="text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200 font-mono mt-0.5 truncate">
-                  Canvas 2D
-                </div>
-              </div>
-              <div>
-                <div className="text-[9px] sm:text-[10px] font-mono text-slate-400 uppercase">Driver Audio</div>
-                <div className="text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200 font-mono mt-0.5 truncate">
-                  Web Audio Synth
-                </div>
-              </div>
+          <div className="rounded-2xl border border-slate-200 dark:border-[#1F2229] bg-white dark:bg-[#111318] p-3 sm:p-4">
+            <div className="px-3 pt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-slate-400">
+              Beta · kode ditulis AI
             </div>
-          </div>
-
-          {/* Right Column (5 cols): Responsive Frame Simulator */}
-          <div className="lg:col-span-5 w-full">
-            <div className="rounded-lg border border-slate-200 dark:border-[#282B33] bg-white dark:bg-[#13151A] shadow-lg overflow-hidden text-left font-mono text-xs">
-              <div className="h-8 sm:h-9 px-3 border-b border-slate-200 dark:border-[#282B33] bg-slate-50 dark:bg-[#0B0C0E] flex items-center justify-between select-none">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700" />
-                  <span className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700" />
-                  <span className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700" />
-                  <span className="ml-2 text-[10px] sm:text-[11px] text-slate-400">preview-sandbox.html</span>
-                </div>
-                <span className="text-[10px] text-emerald-500 font-mono">{fps} FPS</span>
-              </div>
-
-              <div className="p-4 sm:p-5 bg-black text-slate-100 min-h-[180px] sm:min-h-[200px] flex flex-col justify-between relative overflow-hidden">
-                <div className="text-[10px] sm:text-[11px] text-slate-400 flex items-center justify-between border-b border-zinc-800 pb-1.5">
-                  <span className="text-emerald-400 font-mono">CANVAS 2D LOOP</span>
-                  <span className="text-[#F6821F] font-mono">DELTA-TIME</span>
-                </div>
-
-                <div className="py-4 flex flex-col items-center justify-center text-center space-y-1">
-                  <div className="w-7 h-7 border border-[#F6821F] rounded flex items-center justify-center text-[#F6821F] animate-pulse text-xs">
-                    ▲
-                  </div>
-                  <div className="text-xs font-bold text-white tracking-wider">
-                    ARCADE DEMO
-                  </div>
-                  <div className="text-[10px] text-slate-500">
-                    Web Audio Oscillator • Active
-                  </div>
-                </div>
-
-                <div className="pt-1.5 border-t border-zinc-800 flex items-center justify-between text-[9px] sm:text-[10px] text-slate-500">
-                  <span>STIKOM Yos Sudarso</span>
-                  <span className="text-slate-400">Built with AISYS HTML5 Engine</span>
-                </div>
-              </div>
-            </div>
+            <ul className="mt-2 grid grid-cols-1 sm:grid-cols-2">
+              {BETA_GENRES.map((g) => (
+                <li key={g.name}>
+                  <button
+                    onClick={() => onEnterStudio(`Saya ingin membuat game ${g.name}.`)}
+                    className="group w-full text-left rounded-lg px-3 py-3 hover:bg-slate-50 dark:hover:bg-[#171A20] transition-colors flex items-center justify-between gap-3"
+                  >
+                    <span className="min-w-0">
+                      <span className="block text-[15px] font-medium text-slate-800 dark:text-slate-200">{g.name}</span>
+                      <span className="block text-[13px] text-slate-500 dark:text-slate-400 truncate">{g.desc}</span>
+                    </span>
+                    <span className="shrink-0 flex items-center gap-2">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.12em] px-1.5 py-0.5 rounded border border-amber-500/30 text-amber-700 dark:text-amber-400">
+                        Beta
+                      </span>
+                      <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-orange-700 dark:group-hover:text-[#F6821F] group-hover:translate-x-0.5 transition-all" />
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </section>
+      </Section>
 
-      {/* 3. Section: 3 Langkah Alur Kerja Terarah */}
-      <section className="border-b border-slate-200 dark:border-[#282B33] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-4 pb-2 border-b border-slate-200 dark:border-[#282B33] flex items-center justify-between">
-            <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              Alur Perancangan Game
-            </h2>
-            <span className="text-xs text-[#F6821F] font-mono">3 Tahap Terarah</span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-200 dark:divide-[#282B33] border border-slate-200 dark:border-[#282B33] rounded-lg bg-white dark:bg-[#13151A] overflow-hidden">
-            <div className="p-4 sm:p-5 space-y-1.5">
-              <div className="text-xs font-mono font-bold text-[#F6821F]">01. KONSEP</div>
-              <h3 className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100">
-                Discovery Bertahap
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Panduan santai layaknya mentor studio untuk menentukan genre game, tema (arcade atau misi edukasi), dan variasi mekanik unik.
-              </p>
-            </div>
-
-            <div className="p-4 sm:p-5 space-y-1.5">
-              <div className="text-xs font-mono font-bold text-[#F6821F]">02. SINTESIS</div>
-              <h3 className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100">
-                Generasi Kode Mandiri
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Mesin menyusun loop animasi, sistem partikel, deteksi benturan, dan audio synthesizer secara utuh tanpa ada potongan kode yang hilang.
-              </p>
-            </div>
-
-            <div className="p-4 sm:p-5 space-y-1.5">
-              <div className="text-xs font-mono font-bold text-[#F6821F]">03. EKSPOR</div>
-              <h3 className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100">
-                Uji Coba & Unduh
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Mainkan langsung di panel sandbox, uji kontrol sentuh mobile, lalu unduh berkas <code className="text-xs font-mono">.html</code> siap jalan via <code className="text-xs font-mono">file://</code>.
-              </p>
-            </div>
-          </div>
+      {/* ------------------------------------------------ FAQ */}
+      <Section id="faq">
+        <div className="text-center">
+          <Eyebrow>FAQ</Eyebrow>
+          <h2 className="mt-3 text-[32px] sm:text-[40px] font-bold tracking-[-0.03em] leading-tight">
+            Pertanyaan yang sering diajukan
+          </h2>
         </div>
-      </section>
-
-      {/* 4. Section: Fitur Arsitektur Grid */}
-      <section className="border-b border-slate-200 dark:border-[#282B33] px-4 sm:px-6 lg:px-8 py-8 sm:py-10 bg-slate-50/50 dark:bg-[#0B0C0E]">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-4 pb-2 border-b border-slate-200 dark:border-[#282B33]">
-            <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              Pilar Teknis Mesin
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div className="p-4 rounded-lg border border-slate-200 dark:border-[#282B33] bg-white dark:bg-[#13151A] space-y-1.5">
-              <div className="flex items-center gap-2 text-slate-800 dark:text-slate-200 font-semibold text-xs">
-                <Code2 className="w-4 h-4 text-[#F6821F]" />
-                <span>Canvas 2D Prosedural</span>
-              </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                Bebas aset gambar lokal. Grafis dirender melalui Canvas API murni sehingga kebal terhadap masalah CORS saat dibuka tanpa server.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-lg border border-slate-200 dark:border-[#282B33] bg-white dark:bg-[#13151A] space-y-1.5">
-              <div className="flex items-center gap-2 text-slate-800 dark:text-slate-200 font-semibold text-xs">
-                <Volume2 className="w-4 h-4 text-[#F6821F]" />
-                <span>Web Audio API Sintetis</span>
-              </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                Efek suara lompat, tembakan, ledakan, dan koin dihasilkan secara prosedural via osilator gelombang tanpa file audio eksternal.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-lg border border-slate-200 dark:border-[#282B33] bg-white dark:bg-[#13151A] space-y-1.5">
-              <div className="flex items-center gap-2 text-slate-800 dark:text-slate-200 font-semibold text-xs">
-                <Smartphone className="w-4 h-4 text-[#F6821F]" />
-                <span>Desktop & Sentuh HP</span>
-              </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                Mendukung navigasi keyboard WASD/Panah serta tombol sentuh virtual responsif saat dimainkan di layar smartphone.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Section: Template Genre Praktik (2 columns on sm/md, 4 on lg) */}
-      <section id="genre-list" className="px-4 sm:px-6 lg:px-8 py-8 sm:py-10 scroll-mt-14">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-4 flex items-baseline justify-between pb-2 border-b border-slate-200 dark:border-[#282B33]">
-            <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              Template Genre Praktik
-            </h2>
-            <span className="text-[11px] text-slate-400 font-mono">Pilih untuk membuka Studio</span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {PRESET_GENRES.map((g) => {
-              const Icon = g.icon;
-              return (
+        <div className="mt-10 max-w-3xl mx-auto rounded-2xl border border-slate-200 dark:border-[#1F2229] bg-white dark:bg-[#111318] divide-y divide-slate-200 dark:divide-[#1F2229]">
+          {FAQS.map((f, i) => {
+            const open = openFaq === i;
+            return (
+              <div key={f.q}>
                 <button
-                  key={g.id}
-                  onClick={() => onEnterStudio(g.prompt)}
-                  className="p-3.5 sm:p-4 rounded-lg border border-slate-200 dark:border-[#282B33] bg-white dark:bg-[#13151A] hover:border-[#F6821F]/70 transition-all text-left flex flex-col justify-between group"
+                  onClick={() => setOpenFaq(open ? null : i)}
+                  aria-expanded={open}
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left text-[16px] font-medium"
                 >
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between">
-                      <Icon className="w-4 h-4 text-[#F6821F]" />
-                      <span className="text-[10px] font-mono text-slate-400">Ready</span>
-                    </div>
-                    <div className="font-semibold text-xs text-slate-900 dark:text-slate-100 group-hover:text-[#F6821F] transition-colors">
-                      {g.title}
-                    </div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">
-                      {g.specs}
-                    </div>
-                  </div>
-
-                  <div className="mt-3 pt-2 border-t border-slate-100 dark:border-[#1C1E24] flex items-center justify-between text-[11px] font-medium text-[#F6821F]">
-                    <span>Buka Template</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </div>
+                  {f.q}
+                  <ChevronDown className={`w-4 h-4 shrink-0 text-slate-400 transition-transform ${open ? 'rotate-180' : ''}`} />
                 </button>
-              );
-            })}
+                {open && (
+                  <p className="px-6 pb-5 -mt-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">{f.a}</p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </Section>
+
+      {/* ------------------------------------------------ CTA */}
+      <section className="px-5 sm:px-8 pb-20 sm:pb-28">
+        <div className="max-w-6xl mx-auto rounded-2xl bg-slate-950 dark:bg-[#111318] dark:border dark:border-[#1F2229] px-6 sm:px-12 py-12 sm:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+          <div>
+            <h2 className="text-[28px] sm:text-[36px] font-bold tracking-[-0.03em] leading-tight text-white">
+              Siap merancang game pertama?
+            </h2>
+            <p className="mt-3 text-[16px] text-slate-400">Satu percakapan, satu berkas .html.</p>
           </div>
+          <button
+            onClick={() => onEnterStudio()}
+            className="h-12 px-6 rounded-xl bg-[#F6821F] hover:bg-[#FA8B28] text-slate-950 text-[15px] font-semibold flex items-center gap-2 self-start md:self-auto transition-colors"
+          >
+            Buka Studio
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
       </section>
 
-      {/* 6. Footer Minimalis */}
-      <footer className="border-t border-slate-200 dark:border-[#282B33] px-4 sm:px-6 lg:px-8 py-4 sm:py-5 bg-white dark:bg-[#0B0C0E] text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-2">
-        <div className="flex items-center gap-2 text-xs">
-          <span className="font-medium text-slate-700 dark:text-slate-300">AISYS HTML5 Game Studio</span>
-          <span>•</span>
-          <span>STIKOM Yos Sudarso</span>
-        </div>
-
-        <div className="text-[10px] sm:text-[11px] font-mono text-slate-400">
-          Laboratorium Rekayasa Game Web • Single-File HTML5
+      {/* ------------------------------------------------ footer */}
+      <footer className="border-t border-slate-200 dark:border-[#1F2229] px-5 sm:px-8 py-8">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-mono text-[11px] text-slate-500">
+          <div className="flex items-center gap-3">
+            <img
+              src="https://i.ibb.co.com/kgV7WDhF/Logo-SYS.png"
+              alt="STIKOM Yos Sudarso"
+              className="h-5 w-auto object-contain"
+              onError={(e) => {
+                (e.target as HTMLElement).style.display = 'none';
+              }}
+            />
+            <span>AISYS Game Studio · STIKOM Yos Sudarso</span>
+          </div>
+          <span>Built with AISYS HTML5 Engine</span>
         </div>
       </footer>
     </div>
